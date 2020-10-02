@@ -1,10 +1,10 @@
 """LoginGoAccount: Login using a pre-supplied GoReg token from the
 registry, e.g. a DMC 'blue' token."""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed.MsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginBase
+from . import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 
 
@@ -72,7 +72,7 @@ class LoginGoAccount(LoginBase.LoginBase):
         properties in-game, for instance when we enable chat.
         """
         return
-    
+
     def requestPwdReminder(self, email=None, acctName=None):
         """
         Request a password-reminder email, given an email address OR

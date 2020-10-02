@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPGlobals
@@ -13,7 +13,7 @@ class FriendManager(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.__init__(self, cr)
 
         self.__available = 0
-        
+
         # used for flexible request processing
         # in toontown we are keeping a queue of friends requests and processing them
         # once the avatar is available again
@@ -36,14 +36,14 @@ class FriendManager(DistributedObject.DistributedObject):
 
     def getAvailable(self):
         return self.__available
-        
+
     def setGameSpecificFunction(self, function):
         self.gameSpecificFunction = function
-        
+
     def executeGameSpecificFunction(self):
         if self.__available and self.gameSpecificFunction:
             self.gameSpecificFunction()
-        
+
 
 
     ### DistributedObject methods ###
@@ -248,7 +248,7 @@ class FriendManager(DistributedObject.DistributedObject):
         Sent by the client to the AI to request a new "secret" for the
         user.
         """
-        self.notify.warning("Sending Request")        
+        self.notify.warning("Sending Request")
         self.sendUpdate('requestSecret', [])
 
     def requestSecretResponse(self, result, secret):
@@ -285,6 +285,5 @@ class FriendManager(DistributedObject.DistributedObject):
 
         """
         messenger.send('submitSecretResponse', [result, avId])
-        
-    # Be invited by another avatar to be their friend.
 
+    # Be invited by another avatar to be their friend.

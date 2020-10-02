@@ -1,24 +1,24 @@
 import math
 import bisect
-import cPickle as pickle
+import pickle as pickle
 import string
 import time
 import os
-import StringIO
+import io
 
 # File I/O stuff
 import direct
-from pandac.PandaModules import VirtualFileSystem
-from pandac.PandaModules import Filename
-from pandac.PandaModules import DSearchPath
+from otp.otpbase.OTPModules import VirtualFileSystem
+from otp.otpbase.OTPModules import Filename
+from otp.otpbase.OTPModules import DSearchPath
 
 # Visualization stuff
-from pandac.PandaModules import GeomVertexFormat
-from pandac.PandaModules import GeomVertexData
-from pandac.PandaModules import GeomVertexWriter
-from pandac.PandaModules import GeomLinestrips
-from pandac.PandaModules import Geom
-from pandac.PandaModules import GeomNode
+from otp.otpbase.OTPModules import GeomVertexFormat
+from otp.otpbase.OTPModules import GeomVertexData
+from otp.otpbase.OTPModules import GeomVertexWriter
+from otp.otpbase.OTPModules import GeomLinestrips
+from otp.otpbase.OTPModules import Geom
+from otp.otpbase.OTPModules import GeomNode
 
 from otp.navigation.NavUtil import PriQueue
 from otp.navigation.NavUtil import FIFOCache
@@ -26,25 +26,25 @@ from otp.navigation.NavUtil import FIFOCache
 from libotp import PathTable
 
 # Node locator collision stuff
-from pandac.PandaModules import BitMask32
-from pandac.PandaModules import CollisionSphere
-from pandac.PandaModules import CollisionPolygon
-from pandac.PandaModules import CollisionRay
-from pandac.PandaModules import CollisionNode
-from pandac.PandaModules import CollisionHandlerQueue
-from pandac.PandaModules import CollisionTraverser
+from otp.otpbase.OTPModules import BitMask32
+from otp.otpbase.OTPModules import CollisionSphere
+from otp.otpbase.OTPModules import CollisionPolygon
+from otp.otpbase.OTPModules import CollisionRay
+from otp.otpbase.OTPModules import CollisionNode
+from otp.otpbase.OTPModules import CollisionHandlerQueue
+from otp.otpbase.OTPModules import CollisionTraverser
 
 from otp.otpbase import OTPGlobals
 
 class NavMesh(object):
 
     notify = directNotify.newCategory("NavMesh")
-    
+
     def __init__(self, filepath=None, filename=None):
         if filename is not None:
             self._initFromFilename(filepath,filename)
-        
-    
+
+
     def initFromPolyData(self, polyToVerts, vertToPolys, polyToAngles, vertexCoords, environmentHash):
         '''
         Initialize the mesh from a set of polygons.
@@ -62,10 +62,10 @@ class NavMesh(object):
         self.environmentHash = environmentHash
 
         self.connectionLookup = {}
-        
+
         self.connections = []
 
-        self._discoverInitialConnectivity()        
+        self._discoverInitialConnectivity()
 
         self.optimizeMesh()
 
@@ -82,7 +82,7 @@ class NavMesh(object):
         vertToWriterIndex = {}
         currIndex = 0
 
-        for v in self.vertexCoords.keys():
+        for v in list(self.vertexCoords.keys()):
             vertToWriterIndex[v] = currIndex
             x = self.vertexCoords[v][0]
             y = self.vertexCoords[v][1]
@@ -97,7 +97,7 @@ class NavMesh(object):
             currIndex += 1
 
         pathOffsetIntoIndex = currIndex
-        
+
         for v in pathVerts:
             self.visVertexWriter.addData3f(v[0],v[1],v[2]+0.5)
             self.visVertexColorWriter.addData4f(0.0, 1.0, 0.0, 1.0)
@@ -105,14 +105,14 @@ class NavMesh(object):
 
         lines = GeomLinestrips(Geom.UHStatic)
 
-        for p in self.polyToVerts.keys():
+        for p in list(self.polyToVerts.keys()):
             for v in self.polyToVerts[p]:
                 lines.addVertex(vertToWriterIndex[v])
             lines.addVertex(vertToWriterIndex[self.polyToVerts[p][0]])
             lines.closePrimitive()
 
         if len(pathVerts) > 0:
-            for i in xrange(len(pathVerts)):
+            for i in range(len(pathVerts)):
                 lines.addVertex(pathOffsetIntoIndex+i)
             lines.closePrimitive()
 
@@ -125,12 +125,12 @@ class NavMesh(object):
         self.visNodePath = parentNodePath.attachNewNode(self.visGN)
 
         self.visNodePath.setTwoSided(True)
-        
+
 
 
     def _discoverInitialConnectivity(self):
-        print "Building initial connectivity graph..."
-        for pId in self.polyToVerts.keys():
+        print("Building initial connectivity graph...")
+        for pId in list(self.polyToVerts.keys()):
             verts = self.polyToVerts[pId]
 
             numVerts = len(verts)
@@ -140,7 +140,7 @@ class NavMesh(object):
             for v in verts:
                 candidates += [p for p in self.vertToPolys[v] if (p not in candidates) and (p != pId)]
 
-            for vNum in xrange(numVerts):
+            for vNum in range(numVerts):
                 neighbor = [p for p in candidates if ((verts[vNum] in self.polyToVerts[p]) and \
                                                       (verts[(vNum+1)%numVerts] in self.polyToVerts[p]))]
                 if len(neighbor) == 0:
@@ -159,7 +159,7 @@ class NavMesh(object):
         newVerts = []
         newAngles = []
         newConnections = []
-        
+
         vertsA = self.polyToVerts[polyA]
         vertsB = self.polyToVerts[polyB]
 
@@ -168,7 +168,7 @@ class NavMesh(object):
 
         anglesA = self.polyToAngles[polyA]
         anglesB = self.polyToAngles[polyB]
-        
+
 
         sharedVerts = [v for v in vertsA if (v in vertsB)]
 
@@ -242,10 +242,10 @@ class NavMesh(object):
         neighbor = self.connectionLookup[polyB][locB]
         newConnections.append(neighbor)
         if neighbor is not None:
-            for i in xrange(len(self.connectionLookup[neighbor])):
+            for i in range(len(self.connectionLookup[neighbor])):
                 if self.connectionLookup[neighbor][i] == polyB:
                     self.connectionLookup[neighbor][i] = polyA
-        
+
         locB = (locB + 1) % lenB
 
         while vertsB[locB] != CWmost:
@@ -254,9 +254,9 @@ class NavMesh(object):
             neighbor = self.connectionLookup[polyB][locB]
             newConnections.append(neighbor)
             if neighbor is not None:
-                for i in xrange(len(self.connectionLookup[neighbor])):
+                for i in range(len(self.connectionLookup[neighbor])):
                     if self.connectionLookup[neighbor][i] == polyB:
-                        self.connectionLookup[neighbor][i] = polyA            
+                        self.connectionLookup[neighbor][i] = polyA
             locB = (locB + 1) % lenB
 
         # We've added every vertex, its proper angle, and connectivity info
@@ -295,8 +295,8 @@ class NavMesh(object):
 
     def _growEachPolyOnce(self):
         grewAtLeastOne = False
-        
-        for pId in self.connectionLookup.keys():
+
+        for pId in list(self.connectionLookup.keys()):
             if self._attemptToGrowPoly(pId):
                 grewAtLeastOne = True
 
@@ -331,7 +331,7 @@ class NavMesh(object):
                 biggest = len(self.polyToVerts[p])
                 biggestPoly = p
 
-        print "Most verts in a single poly: ", biggest
+        print("Most verts in a single poly: ", biggest)
         assert biggest < 256
 
 
@@ -345,7 +345,7 @@ class NavMesh(object):
         newAngles = []
         newNeighbors = []
 
-        for i in xrange(numVerts):
+        for i in range(numVerts):
             if (angles[i] != 180) or \
                (len(self.vertToPolys.get(verts[i],[])) > 2) or \
                (neighbors[i] != neighbors[(i-1)%numVerts]):
@@ -364,18 +364,18 @@ class NavMesh(object):
             self.connectionLookup[polyId] = newNeighbors
 
         assert len(newVerts) < 256
-        
+
 
     def _pruneExtraVerts(self):
-        print "Pruning extra vertices..."
-        print "Starting verts: %s" % len(self.vertToPolys)
-        for polyId in self.connectionLookup.keys():
+        print("Pruning extra vertices...")
+        print("Starting verts: %s" % len(self.vertToPolys))
+        for polyId in list(self.connectionLookup.keys()):
             self._cleanPoly(polyId)
-        print "Ending verts: %s" % len(self.vertToPolys)
+        print("Ending verts: %s" % len(self.vertToPolys))
 
 
     def _compactPolyIds(self):
-        polyList = self.polyToVerts.keys()
+        polyList = list(self.polyToVerts.keys())
         polyList.sort()
 
         oldToNewId = {None:None}
@@ -395,7 +395,7 @@ class NavMesh(object):
             newPolyToVerts[oldToNewId[oldId]] = self.polyToVerts[oldId]
             newPolyToAngles[oldToNewId[oldId]] = self.polyToAngles[oldId]
             #self.connections[oldToNewId[oldId]] = []
-            for edgeNum in xrange(len(self.connectionLookup[oldId])):
+            for edgeNum in range(len(self.connectionLookup[oldId])):
                 self.connections[oldToNewId[oldId]].append( oldToNewId[self.connectionLookup[oldId][edgeNum]] )
 
         self.polyToVerts = newPolyToVerts
@@ -477,14 +477,14 @@ class NavMesh(object):
                 ((CWmostCoords[0] + CCWmostCoords[0])/2.0,
                  (CWmostCoords[1] + CCWmostCoords[1])/2.0,
                  (CWmostCoords[2] + CCWmostCoords[2])/2.0))
-        
+
 
 ##     def _remakePath(self,walkBack,currNode):
 ##         if currNode in walkBack:
 ##             p = self._remakePath(walkBack,walkBack[currNode])
 ##             return p + [currNode,]
 ##         return [currNode,]
-        
+
 
 ##     def findRoute(self, startNode, goalNode):
 ##         '''
@@ -502,7 +502,7 @@ class NavMesh(object):
 ##         nodeToG[startNode] = 0
 ##         nodeToH[startNode] = self._estimateDistanceBetweenPolys(startNode,goalNode)
 ##         nodeToF[startNode] = nodeToG[startNode] + nodeToH[startNode]
-        
+
 ##         closedSet = {}
 ##         openSet = {}
 ##         openQueue = PriQueue() # Priority = F score
@@ -517,7 +517,7 @@ class NavMesh(object):
 ##             del openSet[currNode]
 
 ##             self.aStarWasHere[currNode] = 1
-            
+
 ##             if currNode == goalNode:
 ##                 return self._remakePath(walkBack,currNode)
 
@@ -532,7 +532,7 @@ class NavMesh(object):
 ##                                                          (newEntryPoint[1] - currPoint[1])**2 + \
 ##                                                          (newEntryPoint[2] - currPoint[2])**2)
 ##                     gotHereFasterThanBefore = False
-                    
+
 ##                     if neighbor not in openSet:
 ##                         openSet[neighbor] = 1
 ##                         gotHereFasterThanBefore = True
@@ -551,24 +551,24 @@ class NavMesh(object):
 ##                         openQueue.push((nodeToF[neighbor],neighbor))
 
 ##         raise "No path found!  D:"
-                        
+
 
     def _findAllRoutesToGoal(self, goalNode):
         '''
         Find the shortest path from ALL start nodes to the given goal node.  (Djikstra)
-        
+
         After running, self.pathData[startNode][goalNode] == outgoing edge from startNode to the next node
         for the given value of goalNode and ALL values of startNode.
         '''
         nodeToG = {}
-        
+
         walkBack = {}
 
         nodeDeparturePoint = {}
         nodeDeparturePoint[goalNode] = self._findCentroid(goalNode)
 
         nodeToG[goalNode] = 0
-        
+
         closedSet = {}
         openSet = {}
         openQueue = PriQueue()
@@ -593,7 +593,7 @@ class NavMesh(object):
                                                          (newPoint[1] - currPoint[1])**2 + \
                                                          (newPoint[2] - currPoint[2])**2)
                     gotHereFasterThanBefore = False
-                    
+
                     if neighbor not in openSet:
                         openSet[neighbor] = 1
                         gotHereFasterThanBefore = True
@@ -608,7 +608,7 @@ class NavMesh(object):
                         openQueue.push((nodeToG[neighbor],neighbor))
 
 
-        for startNode in xrange(len(self.connections)):
+        for startNode in range(len(self.connections)):
             departingEdge = walkBack[startNode][0]
 
             assert self.pathData[startNode][goalNode] is None
@@ -631,7 +631,7 @@ class NavMesh(object):
 
         self.initPathData()
 
-        for goalNode in xrange(rowRange[0],rowRange[1]):
+        for goalNode in range(rowRange[0],rowRange[1]):
             self._findAllRoutesToGoal(goalNode)
 
 
@@ -651,11 +651,11 @@ class NavMesh(object):
         self.pathData = []
 
         # Run-Length Encode the whole thing!
-        for start in xrange(self.numNodes):
+        for start in range(self.numNodes):
             row = []
             lastVal = None
             nodesInRow = 0
-            for goal in xrange(self.numNodes):
+            for goal in range(self.numNodes):
                 val = shortestPathLookup[start][goal]
                 if val != lastVal:
                     row.append([goal,val])
@@ -674,15 +674,15 @@ class NavMesh(object):
                 assert item[1] < 256
 
                 stringsRow.append(chr(item[0]/256) + chr(item[0]%256) + chr(item[1]))
-                
+
                 assert len(stringsRow[-1]) == 3
 
             rowString = string.join(stringsRow,"")
-                
+
             self.pathData.append(rowString)
 
         self.pathTable = PathTable(self.pathData, self.connections)
-            
+
 
     def printPathData(self):
         '''
@@ -690,18 +690,18 @@ class NavMesh(object):
         '''
         import sys
         sys.stdout.write(pickle.dumps(self.pathData,protocol=0))
-        
+
 
     def initPathData(self):
         self.pathData = []
 
-        for i in xrange(self.numNodes):
+        for i in range(self.numNodes):
             self.pathData.append([None,]*self.numNodes)
 
-        
+
     def addPaths(self, partialData):
-        for i in xrange(len(partialData)):
-            for j in xrange(len(partialData[i])):
+        for i in range(len(partialData)):
+            for j in range(len(partialData[i])):
                 if partialData[i][j] is not None:
                     assert self.pathData[i][j] is None
                     self.pathData[i][j] = partialData[i][j]
@@ -724,7 +724,7 @@ class NavMesh(object):
 
 ##         pos -= 3
 
-##         return ord(str[pos+2])            
+##         return ord(str[pos+2])
 
 
     def findRoute(self, startNode, goalNode):
@@ -732,7 +732,7 @@ class NavMesh(object):
         Returns the node-by-node route from startNode to goalNode.
         '''
         return self.pathTable.findRoute(startNode, goalNode)
-    
+
 
     def makeNodeLocator(self, environment):
         meshNode = CollisionNode("NavMeshNodeLocator")
@@ -763,11 +763,11 @@ class NavMesh(object):
                 verts.append((self.vertexCoords[self.polyToVerts[pId][vert]][0],
                               self.vertexCoords[self.polyToVerts[pId][vert]][1],
                               0))
-                
+
 
             #import pdb
             #pdb.set_trace()
-            
+
             poly = CollisionPolygon(verts[0], verts[1], verts[2], verts[3])
 
             assert poly not in self.polyHashToPID
@@ -810,12 +810,12 @@ class NavMesh(object):
         assert e.hasInto()
         if not e.hasInto():
             self.notify.warning("No into found for collision %s" % (e))
-            
+
 
         pId = self.polyHashToPID[e.getInto()]
 
         return pId
-        
+
 
     # --------- Begin long-term storage code ---------
 
@@ -829,7 +829,7 @@ class NavMesh(object):
 
         if storePathTable and not self.pathData:
             raise "Attempted to write empty pathData.  Call NavMesh.generatePathTable() first!"
-        
+
         f = open(filename,'wb')
 
         if storePathTable:
@@ -852,9 +852,9 @@ class NavMesh(object):
                          None],
                         f,
                         protocol=2)
-            f.close()            
+            f.close()
 
-        print "Successfully wrote to file %s." % filename
+        print("Successfully wrote to file %s." % filename)
 
 
     def _initFromString(self, str):
@@ -872,7 +872,7 @@ class NavMesh(object):
             self.pathData = None
 
         self.numNodes = len(self.connections)
-        
+
 
     def _initFromFilename(self, filepath, filename):
         vfs = VirtualFileSystem.getGlobalPtr()
@@ -887,7 +887,7 @@ class NavMesh(object):
         found = vfs.resolveFilename(filename,searchPath)
 
         if not found:
-            raise IOError, "File not found!"
+            raise IOError("File not found!")
 
         str = vfs.readFile(filename,1)
 
@@ -901,5 +901,3 @@ class NavMesh(object):
         In either case, whoever generated this instance should discard it and create a new mesh from scratch.
         '''
         return envHash == self.environmentHash
-
-

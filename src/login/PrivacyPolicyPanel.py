@@ -1,8 +1,8 @@
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase.OTPGlobals import *
 from direct.gui.DirectGui import *
-from MultiPageTextFrame import *
+from .MultiPageTextFrame import *
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPLocalizer
 from otp.otpgui import OTPDialog
@@ -197,7 +197,7 @@ class PrivacyPolicyPanel(getGlobalDialogClass()):
                 textList=textList)
         self.chatPrivacyPolicy.show()
         self.acceptOnce('privacyPolicyTextDone', self.__privacyPolicyTextDone)
-        
+
     def exitPrivacyPolicy(self):
         assert self.notify.debugStateCall(self)
         self.ignore('privacyPolicyTextDone')

@@ -3,14 +3,14 @@ from otp.otpbase import OTPGlobals
 import sys
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase import OTPLocalizer
 from direct.task import Task
 from otp.chat.ChatInputTyped import ChatInputTyped
 
 class ChatInputWhiteList(FSM.FSM, DirectEntry):
     notify = DirectNotifyGlobal.directNotify.newCategory("ChatInputWhiteList")
-    
+
     # This will hold the local namespace we evaluate '>chat' messages
     # within.
     ExecNamespace = None
@@ -53,10 +53,10 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         self.historyIndex = 0
 
         self.whiteList = None
-        
+
         self.active = 0
         self.autoOff = 0
-        
+
         self.alwaysSubmit = False
 
         from direct.gui import DirectGuiGlobals
@@ -84,7 +84,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         the PChatInputSpeedChat.
         """
         self.request(mode, *args)
-        
+
     def defaultFilter(self, request, *args):
         if request == 'AllChat':
             #if not base.chatAssistant.checkOpenSpeedChat():
@@ -100,16 +100,16 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
                 messenger.send("Chat-Failed avatar typed chat test")
                 return None
         return FSM.FSM.defaultFilter(self, request, *args)
-        
 
-        
+
+
 
     def enterOff(self):
         self.deactivate()
 
     def exitOff(self):
         self.activate()
-    
+
     def enterAllChat(self):
         self['focus'] = 1
         self.show()
@@ -127,7 +127,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
     def enterCrewChat(self):
         self['focus'] = 1
         self.show()
-    
+
     def exitCrewChat(self):
         pass
 
@@ -166,7 +166,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         if self.wantHistory:
             self.accept('arrow_up-up', self.getPrevHistory)
             self.accept('arrow_down-up', self.getNextHistory)
-        
+
     def deactivate(self):
         self.ignore('uber-escape')
         self.set("")
@@ -175,10 +175,10 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         self.active = 0
         self.ignore('arrow_up-up')
         self.ignore('arrow_down-up')
-        
+
     def handleEscape(self):
         localAvatar.chatMgr.deactivateChat()
-        
+
     def isActive(self):
         return self.active
 
@@ -191,12 +191,12 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
             return False
         else:
             return True
-    
+
     def sendChat(self, text, overflow = False):
         """
         Send the text from the entry
         """
-    
+
         text = self.get(plain=True)
         #print text
         # Filter out empty string
@@ -220,7 +220,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
                     return
                 else:
                     localAvatar.chatMgr.deactivateChat()
-     
+
             # If slash command, execute it instead of sending chat
             elif base.config.GetBool("want-slash-commands", 1) and (text[0] == '/'):
                 base.talkAssistant.executeSlashCommand(text)
@@ -233,13 +233,13 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
                 self.addToHistory(text)
         else:
             localAvatar.chatMgr.deactivateChat()
-        
+
         if not overflow:
             self.hide()
             if self.autoOff:
                 self.requestMode('Off')
             localAvatar.chatMgr.messageSent()
-            
+
 
     def sendChatByMode(self, text):
         state = self.getCurrentOrNextState()
@@ -266,8 +266,8 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         # Also let them submit if they try again--we'll stomp on any violating words
         self.applyFilter(keyArgs=None,strict=False)
         self.guiItem.setAcceptEnabled(True)
-        
-    
+
+
     def chatOverflow(self, overflowText):
         """
         When the user types too many lines of text, an event gets thrown
@@ -275,7 +275,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         as if you hit return to complete the sentence.
         """
         self.sendChat(self.get(plain=True), overflow = True)
-   
+
 
     ####################################
     # History functions
@@ -288,7 +288,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         self.historyIndex += 1
         self.historyIndex %= len(self.history)
         self.setCursorPosition(len(self.get()))
-        
+
     def getNextHistory(self):
         self.set(self.history[self.historyIndex])
         self.historyIndex -= 1
@@ -303,13 +303,13 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
         # useful variables into the chat namespace for developer
         # access.
         pass
-    
+
     def __execMessage(self, message):
-        print ("_execMessage %s" % (message))
+        print(("_execMessage %s" % (message)))
         if not ChatInputTyped.ExecNamespace:
             # Import some useful variables into the ExecNamespace initially.
             ChatInputTyped.ExecNamespace = { }
-            exec 'from pandac.PandaModules import *' in globals(), self.ExecNamespace
+            exec('from otp.otpbase.OTPModules import *', globals(), self.ExecNamespace)
             self.importExecNamespace()
 
         # Now try to evaluate the expression using ChatInputTyped.ExecNamespace as
@@ -322,7 +322,7 @@ class ChatInputWhiteList(FSM.FSM, DirectEntry):
             # "import math".  These aren't expressions, so eval()
             # fails, but they can be exec'ed.
             try:
-                exec message in globals(), ChatInputTyped.ExecNamespace
+                exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except:
                 exception = sys.exc_info()[0]

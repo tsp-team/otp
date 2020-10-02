@@ -1,12 +1,12 @@
 import math
 import direct
 
-from pandac.PandaModules import BitMask32
-from pandac.PandaModules import CollisionSphere
-from pandac.PandaModules import CollisionRay
-from pandac.PandaModules import CollisionNode
-from pandac.PandaModules import CollisionHandlerQueue
-from pandac.PandaModules import CollisionTraverser
+from otp.otpbase.OTPModules import BitMask32
+from otp.otpbase.OTPModules import CollisionSphere
+from otp.otpbase.OTPModules import CollisionRay
+from otp.otpbase.OTPModules import CollisionNode
+from otp.otpbase.OTPModules import CollisionHandlerQueue
+from otp.otpbase.OTPModules import CollisionTraverser
 
 from otp.otpbase import OTPGlobals
 
@@ -81,7 +81,7 @@ class AreaMapper(object):
 
         self.csNodePath.removeNode()
         self.floorRayNodePath.removeNode()
-        
+
 
 ##     def _unstashEnvironment(self):
 ##         # Would be nice if we could just do this  :(
@@ -146,12 +146,12 @@ class AreaMapper(object):
                 highestZ = z
 
         return highestZ
-    
+
 
     def isSphereBlocked(self,x,y,z):
         if z < self.csHeight:
             return True
-    
+
         self.csNodePath.setPos(self.environment,x,y,z)
 
         self.chq.clearEntries()
@@ -164,7 +164,7 @@ class AreaMapper(object):
             if entry.hasInto():
                 if entry.getInto().isTangible():
                     return True
-            
+
         return False
 
 
@@ -190,11 +190,11 @@ class AreaMapper(object):
 
     def _exploreFrontier(self):
         if len(self.frontierSquaresQueue) == 0:
-            assert len(self.frontierSquares.keys()) == 0
+            assert len(list(self.frontierSquares.keys())) == 0
             return 0
         else:
             qlen = len(self.frontierSquaresQueue)
-            for i in xrange(qlen):
+            for i in range(qlen):
                 p = self.frontierSquaresQueue.pop(0)
                 del self.frontierSquares[p]
                 self._explore(p)
@@ -203,7 +203,7 @@ class AreaMapper(object):
 
 
     def runDiscovery(self,maxSquares):
-        print "Discovering walkable space (this will take 30-60 seconds)..."
+        print("Discovering walkable space (this will take 30-60 seconds)...")
         #self._unstashEnvironment()
         squaresExplored = 1
 
@@ -211,7 +211,7 @@ class AreaMapper(object):
 
         while (squaresExplored < maxSquares) and (len(self.frontierSquaresQueue) > 0):
             squaresExplored += self._exploreFrontier()
-    
+
 
 ##     def visualize(self):
 ##         gFormat = GeomVertexFormat.getV3cp()
@@ -254,7 +254,7 @@ class AreaMapper(object):
 ##             self.pointVis.addVertex(i*4)
 ##             self.pointVis.closePrimitive()
 
-        
+
 ##         self.visGeom = Geom(self.vertexData)
 ##         self.visGeom.addPrimitive(self.pointVis)
 
@@ -280,7 +280,7 @@ class AreaMapper(object):
 ##             self.vertexCounter += 1
 
 ##             self.gridCoordToVertexId[(x,y)] = vId
-            
+
 ##             x1 = self.startX + self.squareSize*x - (0.5 * self.squareSize)
 ##             y1 = self.startY + self.squareSize*y - (0.5 * self.squareSize)
 ##             z1 = self.findFloor(x1,y1)
@@ -310,7 +310,7 @@ class AreaMapper(object):
 ##         if left:
 ##             self.triToVertices[self.triCounter] = [a,b,d]
 ##             self.triToAngles[self.triCounter] = [90,45,45]
-        
+
 ##             self.triToVertices[self.triCounter+1] = [b,c,d]
 ##             self.triToAngles[self.triCounter+1] = [45,90,45]
 
@@ -323,7 +323,7 @@ class AreaMapper(object):
 ##         else:
 ##             self.triToVertices[self.triCounter] = [a,b,c]
 ##             self.triToAngles[self.triCounter] = [45,90,45]
-        
+
 ##             self.triToVertices[self.triCounter+1] = [a,c,d]
 ##             self.triToAngles[self.triCounter+1] = [45,45,90]
 
@@ -335,8 +335,8 @@ class AreaMapper(object):
 ##             self.vertexToTris[d].append(self.triCounter+1)
 
 ##         self.triCounter += 2
-    
-    
+
+
 ##     def countCruft(self):
 ##         count = 0
 ##         for s in self.squares:
@@ -376,7 +376,7 @@ class AreaMapper(object):
             self.vertexCounter += 1
 
             self.gridCoordToVertexId[(x,y)] = vId
-            
+
             x1 = self.startX + self.squareSize*x - (0.5 * self.squareSize)
             y1 = self.startY + self.squareSize*y - (0.5 * self.squareSize)
             z1 = self.findFloor(x1,y1)
@@ -386,7 +386,7 @@ class AreaMapper(object):
 
         return self.gridCoordToVertexId[(x,y)]
 
-    
+
     def _addOpenSquare(self, gridX1, gridY1, gridX2, gridY2):
         curSpot = [gridX1,gridY1]
 
@@ -434,10 +434,10 @@ class AreaMapper(object):
         self.polyToAngles[self.polyCounter] = angles
         self.polyCounter += 1
 
-        
+
 
     def _subdivide(self):
-        print "Growing squares..."
+        print("Growing squares...")
         self.vertexCounter = 0
         self.polyCounter = 0
 

@@ -1,4 +1,4 @@
-from pandac.PandaModules import Vec4
+from otp.otpbase.OTPModules import Vec4
 
 from direct.gui.DirectGui import DirectFrame, DGG
 from direct.task import Task
@@ -13,13 +13,13 @@ class OTPTimer(DirectFrame):
 
     ClockImage = None
     TimerId = 0
-    
+
     def __init__(self, useImage=True, highlightNearEnd=True):
         if useImage:
             image = self.getImage()
         else:
             image = None
-            
+
         DirectFrame.__init__(self,
                              state = DGG.DISABLED,
                              relief = None,
@@ -33,20 +33,20 @@ class OTPTimer(DirectFrame):
                              text_scale = 0.35,
                              )
         self.initialiseoptions(OTPTimer)
-        
+
         self.timerId = OTPTimer.TimerId
         OTPTimer.TimerId += 1
-        
+
         self.highlightNearEnd = highlightNearEnd
         self.countdownTask = None
         self.currentTime = 0
         self.taskTime = 0.0
-        
+
         self.setFontColor(Vec4(0, 0, 0, 1))
-        
+
     def setFontColor(self, vColor):
         self.vFontColor = vColor
-        
+
     def getImage(self):
         """
         Returns the image suitable for rendering the clock face.  This
@@ -63,13 +63,13 @@ class OTPTimer(DirectFrame):
 
     def posInTopRightCorner(self):
         self.setPos(1.16, 0, 0.83)
-        
+
     def posBelowTopRightCorner(self):
         self.setPos(1.16, 0, 0.58)
 
     def posAboveShtikerBook(self):
         self.setPos(1.16, 0, -.63)
-        
+
     def setTime(self, time):
         """
         Sets the timer's current time.
@@ -106,10 +106,10 @@ class OTPTimer(DirectFrame):
         self["text_scale"] = scale
         self["text_pos"] = pos
         self["text"] = timeStr
-        
+
     def getElapsedTime(self):
         return self.taskTime
-    
+
     def _timerTask(self, task):
         """
         Task function called every frame to implement the timer
@@ -140,7 +140,7 @@ class OTPTimer(DirectFrame):
         self.countdownTask.duration = duration
         self.countdownTask.callback = callback
         taskMgr.remove("timerTask%s" % self.timerId)
-        
+
         return taskMgr.add(self.countdownTask, "timerTask%s" % self.timerId)
 
     def timerExpired(self):
@@ -148,7 +148,7 @@ class OTPTimer(DirectFrame):
         Add show elements here
         """
         return
-    
+
     def stop(self):
         """
         Stops the timer countdown. It gets rid of any countdowns.
@@ -159,12 +159,12 @@ class OTPTimer(DirectFrame):
     def reset(self):
         """
         Resets the timer. It geta rid of any countdowns and reset the clock to 0
-        """        
+        """
         self.stop()
         self.setTime(0)
         taskMgr.remove("timerTask%s" % self.timerId)
         self.taskTime = 0.0
-        
+
     def destroy(self):
         self.reset()
         self.countdownTask = None
@@ -173,4 +173,3 @@ class OTPTimer(DirectFrame):
     def cleanup(self):
         self.destroy()
         self.notify.warning("Call destroy, not cleanup")
-    

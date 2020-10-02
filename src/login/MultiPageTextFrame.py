@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.gui.DirectGui import *
 from otp.otpbase import OTPLocalizer
 
@@ -22,7 +22,7 @@ class MultiPageTextFrame(DirectFrame):
         # half-width, half-height
         hWidth = width/2.
         hHeight = height/2.
-        
+
         optiondefs = (
             ('relief',        DGG.SUNKEN,                             None),
             ('frameSize',     (-hWidth,hWidth, -hHeight,hHeight), None),
@@ -37,7 +37,7 @@ class MultiPageTextFrame(DirectFrame):
         # Merge keyword options with default options
         self.defineoptions(kw, optiondefs)
         DirectFrame.__init__(self, parent)
-        self.initialiseoptions(MultiPageTextFrame)        
+        self.initialiseoptions(MultiPageTextFrame)
 
         guiButton = loader.loadModel("phase_3/models/gui/quit_button")
 

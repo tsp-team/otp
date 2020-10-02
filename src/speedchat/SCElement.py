@@ -1,10 +1,10 @@
 """SCElement.py: contains the SCElement class"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.gui.DirectGui import *
 from direct.task import Task
-from SCConstants import *
-from SCObject import SCObject
+from .SCConstants import *
+from .SCObject import SCObject
 from direct.showbase.PythonUtil import boolEqual
 from otp.otpbase import OTPGlobals
 
@@ -70,7 +70,7 @@ class SCElement(SCObject, NodePath):
         """ the mouse has just entered this entity """
         if self.parentMenu is not None:
             self.parentMenu.memberGainedInputFocus(self)
-        
+
     def onMouseLeave(self, event):
         """ the mouse has just left this entity """
         if self.parentMenu is not None:
@@ -186,9 +186,9 @@ class SCElement(SCObject, NodePath):
         """
         if not self.isDirty():
             return
-        
+
         SCObject.finalize(self)
-        
+
         if hasattr(self, 'button'):
             self.button.destroy()
             del self.button
@@ -198,7 +198,7 @@ class SCElement(SCObject, NodePath):
         # if we're given a 'center' value for the text alignment,
         # calculate the appropriate text X position
         textX = 0
-        if dbArgs.has_key('text_align'):
+        if 'text_align' in dbArgs:
             if dbArgs['text_align'] == TextNode.ACenter:
                 textX = self.width/2.
 
@@ -257,4 +257,3 @@ class SCElement(SCObject, NodePath):
 
     def __str__(self):
         return '%s: %s' % (self.__class__.__name__, self.getDisplayText())
-    

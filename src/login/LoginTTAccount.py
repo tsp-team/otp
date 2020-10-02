@@ -1,11 +1,11 @@
 """LoginTTAccount: Login using the Toontown Account Manager server"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed.MsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginBase
-import TTAccount
-from TTAccount import TTAccountException
+from . import LoginBase
+from . import TTAccount
+from .TTAccount import TTAccountException
 from direct.distributed.PyDatagram import PyDatagram
 
 
@@ -100,7 +100,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
         # resendPlayToken().
         if self.useTTSpecificLogin:
             # also known as TOKEN_TYPE_KIM_S in otp_server
-            datagram.addInt32(CLIENT_LOGIN_3_DISL_TOKEN) 
+            datagram.addInt32(CLIENT_LOGIN_3_DISL_TOKEN)
         else:
             if self.playTokenIsEncrypted:
                 datagram.addInt32(CLIENT_LOGIN_2_PLAY_TOKEN)
@@ -109,7 +109,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
                 #datagram.addInt32(CLIENT_LOGIN_2_PLAY_TOKEN_PLAIN)
                 # Yes, this makes this if statement useless.
                 datagram.addInt32(CLIENT_LOGIN_2_PLAY_TOKEN)
-        
+
 
     # result-getters
     # these override default implementations in LoginBase
@@ -143,7 +143,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
 
                 # some other error, pass it back
                 return (0, errorMsg)
-            except TTAccountException, e:
+            except TTAccountException as e:
                 # connection error, bad response, etc.
                 # pass it back
                 return (0, str(e))
@@ -163,10 +163,10 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
 
                         # some other error, pass it back
                     return (0, errorMsg)
-                except TTAccountException, e:
+                except TTAccountException as e:
                     # connection error, bad response, etc.
                     # pass it back
-                    return (0, str(e))                
+                    return (0, str(e))
             else:
                 # old login_2 style just call to base clase
                 return TTAccount.TTAccount.authenticateParentPassword(self, loginName,
@@ -193,7 +193,7 @@ class LoginTTAccount(LoginBase.LoginBase, TTAccount.TTAccount):
 
                 # some other error, pass it back
                 return (0, errorMsg)
-            except TTAccountException, e:
+            except TTAccountException as e:
                 # connection error, bad response, etc.
                 # pass it back
                 return (0, str(e))

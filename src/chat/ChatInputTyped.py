@@ -4,7 +4,7 @@ from direct.showbase import DirectObject
 from otp.otpbase import OTPGlobals
 import sys
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase import OTPLocalizer
 
 class ChatInputTyped(DirectObject.DirectObject):
@@ -16,7 +16,7 @@ class ChatInputTyped(DirectObject.DirectObject):
     ExecNamespace = None
 
     # special methods
-    def __init__(self, mainEntry = 0):        
+    def __init__(self, mainEntry = 0):
         self.whisperName = None
         self.whisperId = None
         self.toPlayer = 0
@@ -48,13 +48,13 @@ class ChatInputTyped(DirectObject.DirectObject):
         del self.chatEntry
         del self.whisperLabel
         del self.chatMgr
-        
+
 
     def show(self, whisperId = None, toPlayer = 0):
         self.toPlayer = toPlayer
         self.whisperId = whisperId
         self.whisperName = None
-        
+
         if self.whisperId:
             self.whisperName = base.talkAssistant.findName(whisperId, toPlayer)
             if hasattr(self, "whisperPos"):
@@ -66,7 +66,7 @@ class ChatInputTyped(DirectObject.DirectObject):
             if hasattr(self, "normalPos"):
                 self.chatFrame.setPos(self.normalPos)
             self.whisperLabel.hide()
-            
+
         self.chatEntry['focus'] = 1
         self.chatEntry.set("")
         self.chatFrame.show()
@@ -91,7 +91,7 @@ class ChatInputTyped(DirectObject.DirectObject):
         #base.win.closeIme()
         self.ignore('arrow_up-up')
         self.ignore('arrow_down-up')
-        
+
     def activate(self):
         self.chatEntry.set("")
         self.chatEntry['focus'] = 1
@@ -107,17 +107,17 @@ class ChatInputTyped(DirectObject.DirectObject):
                     messenger.send("Chat-Failed player typed chat test")
                     self.deactivate()
             else:
-                if not base.talkAssistant.checkWhisperTypedChatAvatar(self.whisperId):   
+                if not base.talkAssistant.checkWhisperTypedChatAvatar(self.whisperId):
                     messenger.send("Chat-Failed avatar typed chat test")
                     self.deactivate()
         else:
             if not base.talkAssistant.checkOpenTypedChat():
                 messenger.send("Chat-Failed open typed chat test")
                 self.deactivate()
-             
 
-            
-        
+
+
+
     def deactivate(self):
         self.chatEntry.set("")
         self.chatEntry['focus'] = 0
@@ -126,9 +126,9 @@ class ChatInputTyped(DirectObject.DirectObject):
         self.cancelButton.hide()
         self.typedChatButton.show()
         self.typedChatBar.show()
-        
-        
-    
+
+
+
     def sendChat(self, text):
         """
         Send the text from the entry
@@ -147,7 +147,7 @@ class ChatInputTyped(DirectObject.DirectObject):
                     #self.whisperId = None
                     #self.toPlayer = 0
                     pass
-                    
+
             elif self.whisperId:
                 #base.chatAssistant.sendAvatarWhisperTypedChat(text, self.whisperId)
                 #self.whisperName = None
@@ -178,7 +178,7 @@ class ChatInputTyped(DirectObject.DirectObject):
         if not ChatInputTyped.ExecNamespace:
             # Import some useful variables into the ExecNamespace initially.
             ChatInputTyped.ExecNamespace = { }
-            exec 'from pandac.PandaModules import *' in globals(), self.ExecNamespace
+            exec('from otp.otpbase.OTPModules import *', globals(), self.ExecNamespace)
             self.importExecNamespace()
 
         # Now try to evaluate the expression using ChatInputTyped.ExecNamespace as
@@ -191,7 +191,7 @@ class ChatInputTyped(DirectObject.DirectObject):
             # "import math".  These aren't expressions, so eval()
             # fails, but they can be exec'ed.
             try:
-                exec message in globals(), ChatInputTyped.ExecNamespace
+                exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except:
                 exception = sys.exc_info()[0]
@@ -216,7 +216,7 @@ class ChatInputTyped(DirectObject.DirectObject):
 
     def chatButtonPressed(self):
         self.sendChat(self.chatEntry.get())
-    
+
     def importExecNamespace(self):
         # Derived classes should take advantage of this hook to import
         # useful variables into the chat namespace for developer
@@ -231,10 +231,8 @@ class ChatInputTyped(DirectObject.DirectObject):
         self.chatEntry.set(self.history[self.historyIndex])
         self.historyIndex += 1
         self.historyIndex %= len(self.history)
-        
+
     def getNextHistory(self):
         self.chatEntry.set(self.history[self.historyIndex])
         self.historyIndex -= 1
         self.historyIndex %= len(self.history)
-
-    

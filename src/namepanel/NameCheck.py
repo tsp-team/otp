@@ -3,8 +3,8 @@
 import string
 from otp.otpbase import OTPLocalizer
 from direct.directnotify import DirectNotifyGlobal
-from pandac.PandaModules import NSError
-from pandac.PandaModules import TextEncoder, TextNode
+from otp.otpbase.OTPModules import NSError
+from otp.otpbase.OTPModules import TextEncoder, TextNode
 
 notify = DirectNotifyGlobal.directNotify.newCategory('NameCheck')
 
@@ -58,7 +58,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
         if name.strip() == '':
             notify.info('name is empty')
             return OTPLocalizer.NCTooShort
-        
+
     def printableChars(name):
         for char in name:
             # If it is an extended character, we cannot test it for printability here (but
@@ -75,7 +75,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
         if c.isalpha() or c.isspace():
             return True
         return False
-        
+
     def badCharacters(name, _validCharacter=_validCharacter):
         for char in name:
             if not _validCharacter(char):
@@ -86,7 +86,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
                     notify.info('name contains bad char: %s' % TextEncoder().encodeWtext(char))
                     return OTPLocalizer.NCBadCharacter % TextEncoder().encodeWtext(char)
 
-    def fontHasCharacters(name, font=font): 
+    def fontHasCharacters(name, font=font):
         if font:
             tn = TextNode('NameCheck')
             tn.setFont(font)
@@ -117,7 +117,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
             for char in word:
                 if ord(char) >= 0x80:
                     return None
-                
+
             letters = filterString(word, string.letters)
             # things like 'MD' are ok without periods
             if len(letters) > 2:
@@ -170,7 +170,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
                 notify.info('name makes invalid use of dashes')
                 return OTPLocalizer.NCDashUsage
             i += 1
-        
+
     def checkCommas(name):
         def validComma(index, name=name):
             # if the comma is at the beginning or the end, fail
@@ -192,7 +192,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
                 notify.info('name makes invalid use of commas')
                 return problem
             i += 1
-        
+
     def checkPeriods(name):
         """ periods are allowed at the end of words, or in two-letter
         words, like 'J.T.' """
@@ -239,12 +239,12 @@ def checkName(name, otherCheckFuncs=[], font=None):
         if numApos > 3:
             notify.info('name has too many apostrophes.')
             return OTPLocalizer.NCApostrophes
-        
+
     def tooManyWords(name):
         if len(wordList(name)) > 4:
             notify.info('name has too many words')
             return OTPLocalizer.NCTooManyWords
-        
+
     def allCaps(name):
         # MICKEY MOUSE
         letters = justLetters(name)
@@ -254,7 +254,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
                 TextEncoder.upper(
                 TextEncoder().encodeWtext(letters)))
             # some unicode characters can't be capitalized
-            for i in xrange(len(upperLetters)):
+            for i in range(len(upperLetters)):
                 if not upperLetters[0].isupper():
                     # at least one letter is not upper-case
                     # name is not all-caps
@@ -280,11 +280,11 @@ def checkName(name, otherCheckFuncs=[], font=None):
         # but, allows not ASCII and kanji(CJK) characters for a name
         # All Japanese characters are three-byte-encoded utf-8 characters from unicode
         # Reference: http://unicode.org/charts/
-        asciiSpace = range(0x20, 0x21)
-        asciiDigits = range(0x30, 0x40)
-        hiragana = range(0x3041, 0x30A0)
-        katakana = range(0x30A1, 0x3100)
-        halfwidthKatakana = range(0xFF65, 0xFFA0)
+        asciiSpace = list(range(0x20, 0x21))
+        asciiDigits = list(range(0x30, 0x40))
+        hiragana = list(range(0x3041, 0x30A0))
+        katakana = list(range(0x30A1, 0x3100))
+        halfwidthKatakana = list(range(0xFF65, 0xFFA0))
         halfwidthCharacter = set(asciiSpace + halfwidthKatakana)
         allowedUtf8 = set(asciiSpace + hiragana + katakana + halfwidthKatakana)
         te = TextEncoder()
@@ -299,10 +299,10 @@ def checkName(name, otherCheckFuncs=[], font=None):
                     return OTPLocalizer.NCNoDigits
                 else:
                     notify.info('name contains not allowed utf8 char: 0x%04x' % char)
-                    return OTPLocalizer.NCBadCharacter % te.encodeWtext(unichr(char))
+                    return OTPLocalizer.NCBadCharacter % te.encodeWtext(chr(char))
             else:
                 # Restrict the number of characters, if three-byte-encoded utf-8 character
-                # The full-width characters would fit into a single display cell, 
+                # The full-width characters would fit into a single display cell,
                 # and the half-width characters would fit two to a display cell
                 if char in halfwidthCharacter:
                     dc += 0.5
@@ -325,7 +325,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
         while i < len(name):
             char = name[i]
             i += 1
-            
+
             if char == lastChar:
                 # character is repeating
                 count += 1
@@ -373,7 +373,7 @@ def checkName(name, otherCheckFuncs=[], font=None):
             nName = name[:]
             bName.reverse()
             problem = check(bName)
-            print "problem = %s" % (problem)
+            print("problem = %s" % (problem))
 
         if problem:
             return problem
@@ -392,11 +392,11 @@ assert not checkName('Jo')
 # empty name
 assert     checkName('')
 assert     checkName('\t')
-assert     checkName(TextEncoder().encodeWtext(u'\xa0'))
-assert     checkName(TextEncoder().encodeWtext(u'\u1680'))
-assert     checkName(TextEncoder().encodeWtext(u'\u2001'))
+assert     checkName(TextEncoder().encodeWtext('\xa0'))
+assert     checkName(TextEncoder().encodeWtext('\u1680'))
+assert     checkName(TextEncoder().encodeWtext('\u2001'))
 # printable chars
-for i in xrange(32):
+for i in range(32):
     assert checkName(chr(i))
 assert     checkName(chr(0x7f))
 # bad characters
@@ -412,7 +412,7 @@ assert not checkName('MD')
 # mono letter
 assert     checkName('Eeee')
 assert     checkName('Jjj')
-assert     checkName(TextEncoder().encodeWtext(u'\u30a1\u30a1\u30a1'))
+assert     checkName(TextEncoder().encodeWtext('\u30a1\u30a1\u30a1'))
 # dashes
 assert     checkName('-Conqueror')
 assert     checkName('Conqueror-')

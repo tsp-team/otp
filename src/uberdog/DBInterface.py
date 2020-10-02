@@ -1,8 +1,8 @@
 import direct
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 
 class DBInterface:
-    
+
     @classmethod
     def processDBName(cls, dbString):
         if __dev__:
@@ -13,11 +13,10 @@ class DBInterface:
                 pass
             pass
         return dbString
-                
+
     def getErrorCode(self, exception):
         # returns error code from MySQL exception
         errStr = str(exception)
         commaIndex = errStr.index(',')
         codeStr = errStr[1:commaIndex]
         return int(codeStr)
-    

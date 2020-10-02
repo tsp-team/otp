@@ -1,11 +1,11 @@
 """LoginGSAccount: Login using the original Game Server method"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed.MsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginTTAccount
+from . import LoginTTAccount
 from direct.distributed.PyDatagram import PyDatagram
-from TTAccount import TTAccountException
+from .TTAccount import TTAccountException
 
 class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     """This is a login that is meant to work only on a developer's local setup.
@@ -13,7 +13,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     This relies on the prebuilt otp_server.exe, at least version 1.319
     """
     notify = DirectNotifyGlobal.directNotify.newCategory("LoginTTSpecificDevAccount")
-    
+
     def __init__(self, cr):
         LoginTTAccount.LoginTTAccount.__init__(self, cr)
 
@@ -76,20 +76,20 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         # this is what roger expects the token to be:
         """
         TOONTOWN_ACCESS = NONE / VELVET_ROPE / FULL
-        TOONTOWN_GAME_KEY = 
+        TOONTOWN_GAME_KEY =
         WL_CHAT_ENABLED = Yes / No
         OPEN_CHAT_ENABLED = Yes /No
         CREATE_FRIENDS_WITH_CHAT=No/Code / Yes
         CHAT_CODE_CREATION_RULE=No/Parent/Yes s
         ACCOUNT_NUMBER = INT
         ACCOUNT_NAME = STRING (*may be temp, may change)
-        ACCOUNT_NAME_APPROVED = BOOL  
+        ACCOUNT_NAME_APPROVED = BOOL
         FAMILY_NUMBER=
-        
+
         Deployment = same as old usage ß not sure you need this ..
         """
         cr=self.cr
-        
+
         tokenString = ''
         # parse toontown access
         access = base.config.GetString('force-paid-status', '')
@@ -125,9 +125,9 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         # this looks like secret chat
         createFriendsWithChat = 'NO'
         if cr.allowSecretChat:
-            createFriendsWithChat = 'CODE'        
+            createFriendsWithChat = 'CODE'
         tokenString += 'CREATE_FRIENDS_WITH_CHAT=%s&' % createFriendsWithChat
-        
+
         chatCodeCreationRule = 'No'
         if cr.allowSecretChat:
             if base.config.GetBool("secret-chat-needs-parent-password", 0):
@@ -141,7 +141,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         if not DISLID:
             NameStringId = ("DISLID_%s" % (self.loginName))
             DISLID = config.GetInt(NameStringId, 0)
-        
+
         tokenString += 'ACCOUNT_NUMBER=%d&' % DISLID # base.config.GetInt('new-account-number',100000002)
 
         # we do know username
@@ -154,7 +154,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         #what the heck is family number
         tokenString += 'FAMILY_NUMBER=&'
         # assume us for now
-        tokenString += 'Deployment=US&'        
+        tokenString += 'Deployment=US&'
         # flag if it's an account with a parent account
         withParentAccount = base.config.GetBool('dev-with-parent-account',0)
         if withParentAccount:
@@ -165,7 +165,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         tokenString += 'valid=true'
 
         #tokenString = base.config.GetString('faketoken','')
-        
+
         self.notify.info("tokenString=\n%s" % tokenString)
 
         #import pdb; pdb.set_trace()
@@ -177,12 +177,12 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         datagram = PyDatagram()
         # Add message type
         datagram.addUint16(CLIENT_LOGIN_TOONTOWN )
-        
+
 
         # with no encryption, just use tokenstring
         playToken = tokenString
-        
-        
+
+
         # Add token
         datagram.addString(playToken)
 
@@ -204,7 +204,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
 
 ##         datagram.addString(self.loginName)
 ##         # Add our IP address
-        
+
 ##         if cr.connectMethod != cr.CM_HTTP:
 ##             datagram.addUint32(cr.tcpConn.getAddress().getIp())
 ##         else:
@@ -215,7 +215,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
 ##         datagram.addUint16(5150)
 ##         # Add the Server Version ID
 ##         datagram.addString(cr.serverVersion)
-        
+
 ##         # Add password
 ##         datagram.addString(self.password)
 ##         # Add create flag
@@ -229,7 +229,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
 ##         # Whether or not to enable OTP_WHITELIST
 ##         datagram.addString(config.GetString('otp-whitelist',"YES"))
 
-        
+
         # Send the message
         cr.send(datagram)
 
@@ -242,7 +242,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         # Here in the old login system, we don't bother to implement
         # this.
         return
-    
+
     def requestPwdReminder(self, email=None, acctName=None):
         """
         Request a password-reminder email, given an email address OR
@@ -297,5 +297,3 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     def needToSetParentPassword(self):
         """Hack to be able to login derived from LoginTTAccount."""
         return False
-
-

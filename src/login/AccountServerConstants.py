@@ -1,10 +1,10 @@
 """AccountServerConstants.py: contains the AccountServerConstants class """
 
-from pandac.PandaModules import *
-from RemoteValueSet import *
+from otp.otpbase.OTPModules import *
+from .RemoteValueSet import *
 from direct.directnotify import DirectNotifyGlobal
-import TTAccount
-import HTTPUtil
+from . import TTAccount
+from . import HTTPUtil
 
 class AccountServerConstants(RemoteValueSet):
     notify = \
@@ -62,7 +62,7 @@ class AccountServerConstants(RemoteValueSet):
             # some constants need to be something more specific
             self.dict.update(self.defaults)
             return
-        
+
         url = URLSpec(AccountServerConstants.getServer())
         url.setPath('/constants.php')
         self.notify.debug('grabbing account server constants from %s' %

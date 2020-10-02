@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase import GarbageReport, ContainerReport, MessengerLeakDetector
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
@@ -75,7 +75,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
     def doMagicWord(self, word, avId, zoneId):
         wordIs = self.getWordIs(word)
 
-        print word
+        print(word)
         if wordIs("~oobe"):
             base.oobe()
         elif wordIs("~oobeCull"):
@@ -180,7 +180,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
         elif wordIs("~badname"):
             # ~badname with an argument becomes ~for ... ~badname
             word = "~for %s ~badname" % (word[9:])
-            print "word is %s" % (word)
+            print("word is %s" % (word))
             self.forAnother(word, avId, zoneId)
 
         elif wordIs('~avId'):
@@ -209,7 +209,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
         #elif wordIs('~addCameraPosition'):
         #    base.localAvatar.addCameraPosition()
-            
+
         #elif wordIs('~removeCameraPosition'):
         #    base.localAvatar.removeCameraPosition()
 
@@ -219,7 +219,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
         #elif wordIs('~printCameraPositions'):
         #    base.localAvatar.printCameraPositions()
-                
+
         elif wordIs("~exec"):
             # Enable execChat.
             from otp.chat import ChatManager
@@ -253,7 +253,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             # there from before.  If a second parameter is supplied,
             # it is a number of seconds of temporary extra skew to
             # apply; the default is 0.
-            
+
             tm = self.cr.timeManager
             if tm == None:
                 response = "No TimeManager."
@@ -270,7 +270,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             # Reset the period timer to expire in the indicated number
             # of seconds, or with no parameter, report the number of
             # seconds remaining.
-            
+
             timeout = string.strip(word[7:])
             if timeout != "":
                 seconds = int(timeout)
@@ -281,7 +281,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             # Now report the number of seconds remaining.
             if self.cr.periodTimerExpired:
                 response = "Period timer has expired."
-                
+
             elif self.cr.periodTimerStarted:
                 elapsed = globalClock.getFrameTime() - self.cr.periodTimerStarted
                 secondsRemaining = self.cr.periodTimerSecondsRemaining - elapsed
@@ -312,7 +312,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             else:
                 direct.enable()
             self.setMagicWordResponse("Enabled DIRECT")
-            
+
         elif wordIs("~TT"):
             if not direct:
                 return
@@ -405,7 +405,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
         elif wordIs("~fps"):
             self.doFps(word, avId, zoneId)
-                
+
         elif wordIs("~sleep"):
             args = word.split()
             if len(args) > 1:
@@ -448,11 +448,11 @@ class MagicWordManager(DistributedObject.DistributedObject):
                 type2count.setdefault(tn, 0)
                 type2count[tn] += 1
             count2type = invertDictLossless(type2count)
-            counts = count2type.keys()
+            counts = list(count2type.keys())
             counts.sort()
             counts.reverse()
             for count in counts:
-                print '%s: %s' % (count, count2type[count])
+                print('%s: %s' % (count, count2type[count]))
             self.setMagicWordResponse('~aiobjecthg complete')
 
         elif wordIs('~containers'):
@@ -589,11 +589,11 @@ class MagicWordManager(DistributedObject.DistributedObject):
             self.setMagicWordResponse('logging client distributed object count...')
 
         elif wordIs('~taskmgr'):
-            print taskMgr
+            print(taskMgr)
             self.setMagicWordResponse('logging client taskMgr...')
 
         elif wordIs('~jobmgr'):
-            print jobMgr
+            print(jobMgr)
             self.setMagicWordResponse('logging client jobMgr...')
 
         elif wordIs('~jobtime'):
@@ -636,7 +636,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             self.setMagicWordResponse(response)
 
         elif wordIs('~messenger'):
-            print messenger
+            print(messenger)
             self.setMagicWordResponse('logging client messenger...')
 
         elif wordIs('~clientcrash'):
@@ -653,14 +653,14 @@ class MagicWordManager(DistributedObject.DistributedObject):
             # we must delay the call because magicWordMgr is in a big try/except block
             DelayedCall(Functor(base.cr.deleteObjectLocation, ScratchPad(doId=doId), 1, 1))
             self.setMagicWordResponse('doing bad delete')
-            
+
         elif wordIs("~idTags"):
             messenger.send('nameTagShowAvId', [])
             base.idTags = 1
-            
+
         elif wordIs("~nameTags"):
             messenger.send('nameTagShowName', [])
-            base.idTags = 0            
+            base.idTags = 0
 
         elif wordIs("~hideNames"):
             # note do ~hideNames before ~hideGui if you want both off
@@ -673,7 +673,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             if aspect2d.isHidden():
                 aspect2d.show()
             else:
-                aspect2d.hide()                   
+                aspect2d.hide()
 
         elif wordIs('~flush'):
             base.cr.doDataCache.flush()
@@ -689,7 +689,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             ##############
 
             ts = time.time()
-            for i in xrange(1000000):
+            for i in range(1000000):
 
                 ### code to be timed ###
                 p.set(1,2,3)
@@ -698,7 +698,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             tf = time.time()
             dt = tf - ts
             response = 'prof(%s): %s secs' % (name, dt)
-            print response
+            print(response)
             self.setMagicWordResponse(response)
 
         elif wordIs('~gptc'):
@@ -757,10 +757,10 @@ class MagicWordManager(DistributedObject.DistributedObject):
                 errorCode = 12 # 12 = general python exception
                 if len(args) > 1:
                     errorCode = int(args[1])
-                
+
                 self.notify.info("Simulating client crash: exit error = %s" % (errorCode))
                 base.exitShow(errorCode)
-            
+
             self.setMagicWord(magicWord, avId, zoneId)
 
 
@@ -815,7 +815,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
         result = []
         lowerName = string.lower(name)
 
-        for obj in self.cr.doId2do.values():
+        for obj in list(self.cr.doId2do.values()):
             className = obj.__class__.__name__
             try:
                 name = obj.getName()
@@ -832,7 +832,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
     def doTex(self, word):
         """ Toggles texturing (with no parameters) or shows the named
         texture (with a parameter). """
-        
+
         args = word.split()
         if len(args) <= 1:
             # No parameters: clean up the old texture viewer.
@@ -854,7 +854,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
         if not tex:
             # Try it with stars on both ends.
             tex = TexturePool.findTexture('*%s*' % (args[1]))
-        
+
         if not tex:
             # Couldn't find that texture.
             self.setMagicWordResponse("Unknown texture: %s" % (args[1]))
@@ -905,7 +905,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
                     # might not be an integer. Is there a better way
                     # to check?
                     bitmask |= BitMask32.bit(int(w))
-                    print bitmask
+                    print(bitmask)
                 except ValueError:
                     invalid += " " + w
         if invalid:
@@ -982,7 +982,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
     def hideShadowCollisions(self):
         base.shadowTrav.hideCollisions()
-            
+
     def showCollisions(self):
         try:
             base.cTrav.showCollisions(render)
@@ -991,7 +991,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
 
     def hideCollisions(self):
         base.cTrav.hideCollisions()
-            
+
     def showCameraCollisions(self):
         try:
             localAvatar.ccTrav.showCollisions(render)
@@ -1054,7 +1054,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             except:
                 fps = None
             if fps != None:
-                # ~fps <x>: force a particular frame rate. 
+                # ~fps <x>: force a particular frame rate.
                 globalClock.setMode(ClockObject.MForced)
                 globalClock.setDt(1.0/fps)
                 response = "Frame rate forced to %s fps." % (fps)
@@ -1067,7 +1067,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             # value for display the fps meter.  This might have been
             # set too high by the client-fps mechanism.
             globalClock.setAverageFrameRateInterval(ConfigVariableDouble('average-frame-rate-interval').getValue())
-            
+
         if response != None:
             self.setMagicWordResponse(response)
 
@@ -1112,5 +1112,5 @@ class MagicWordManager(DistributedObject.DistributedObject):
 def magicWord(mw):
     messenger.send('magicWord', [mw])
 
-import __builtin__
-__builtin__.magicWord = magicWord
+import builtins
+builtins.magicWord = magicWord

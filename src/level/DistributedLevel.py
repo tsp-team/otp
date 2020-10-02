@@ -1,20 +1,20 @@
 """DistributedLevel.py: contains the DistributedLevel class"""
 
 from direct.distributed.ClockDelta import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase.PythonUtil import Functor, sameElements, list2dict, uniqueElements
 from direct.interval.IntervalGlobal import *
 from toontown.distributed.ToontownMsgTypes import *
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.distributed import DistributedObject
-import Level
-import LevelConstants
+from . import Level
+from . import LevelConstants
 from direct.directnotify import DirectNotifyGlobal
-import EntityCreator
+from . import EntityCreator
 from direct.gui import OnscreenText
 from direct.task import Task
-import LevelUtil
+from . import LevelUtil
 import random
 
 class DistributedLevel(DistributedObject.DistributedObject,
@@ -169,14 +169,14 @@ class DistributedLevel(DistributedObject.DistributedObject,
 
         def setSpecDeny(self, reason):
             DistributedLevel.notify.error(reason)
-            
+
         def setSpecSenderDoId(self, doId):
             DistributedLevel.notify.debug('setSpecSenderDoId: %s' % doId)
             blobSender = base.cr.doId2do[doId]
 
             def setSpecBlob(specBlob, blobSender=blobSender, self=self):
                 blobSender.sendAck()
-                from LevelSpec import LevelSpec
+                from .LevelSpec import LevelSpec
                 spec = eval(specBlob)
                 if spec is None:
                     spec = self.candidateSpec
@@ -205,7 +205,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # make sure the zoneNums from the model match the zoneNums from
         # the zone entities
         modelZoneNums = self.zoneNums
-        specZoneNums = self.zoneNum2zoneId.keys()
+        specZoneNums = list(self.zoneNum2zoneId.keys())
         if not sameElements(modelZoneNums, specZoneNums):
             self.reportModelSpecSyncError(
                 'model zone nums (%s) do not match spec zone nums (%s)' %
@@ -281,7 +281,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # find the zones in the model and fix them up
         self.zoneNum2node = LevelUtil.getZoneNum2Node(self.geom)
 
-        self.zoneNums = self.zoneNum2node.keys()
+        self.zoneNums = list(self.zoneNum2node.keys())
         self.zoneNums.sort()
         self.zoneNumDict = list2dict(self.zoneNums)
         DistributedLevel.notify.debug('zones from model: %s' % self.zoneNums)
@@ -289,11 +289,11 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # give the level a chance to muck with the model before the entities
         # get placed
         self.fixupLevelModel()
-        
+
     def fixupLevelModel(self):
         # fix up the floor collisions for walkable zones *before*
         # any entities get put under the model
-        for zoneNum,zoneNode in self.zoneNum2node.items():
+        for zoneNum,zoneNode in list(self.zoneNum2node.items()):
             # don't do this to the uberzone
             if zoneNum == LevelConstants.UberZoneEntId:
                 continue
@@ -339,7 +339,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
     def getFloorOuchLevel(self):
         # override this to make dangerous ground do more damage
         return 1
-    
+
     def announceGenerate(self):
         DistributedLevel.notify.debug('announceGenerate')
         DistributedObject.DistributedObject.announceGenerate(self)
@@ -372,7 +372,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         DistributedObject.DistributedObject.delete(self)
         # make sure the ouch task is stopped
         self.stopOuch()
-        
+
     def requestReparent(self, entity, parentId, wrt=False):
         if __debug__:
             # some things (like cogs) are not actually entities yet;
@@ -396,12 +396,12 @@ class DistributedLevel(DistributedObject.DistributedObject,
 
             # if this parent doesn't already have another child pending,
             # do some setup
-            if not self.parent2pendingChildren.has_key(parentId):
+            if parentId not in self.parent2pendingChildren:
                 self.parent2pendingChildren[parentId] = []
 
                 # do the reparent(s) once the parent is initialized
                 def doReparent(parentId=parentId, self=self, wrt=wrt):
-                    assert self.parent2pendingChildren.has_key(parentId)
+                    assert parentId in self.parent2pendingChildren
                     parent=self.getEntity(parentId)
                     for child in self.parent2pendingChildren[parentId]:
                         DistributedLevel.notify.debug(
@@ -413,11 +413,11 @@ class DistributedLevel(DistributedObject.DistributedObject,
                             child.reparentTo(parent.getNodePath())
                     del self.parent2pendingChildren[parentId]
                     self.ignore(self.getEntityCreateEvent(parentId))
-                    
+
                 self.accept(self.getEntityCreateEvent(parentId), doReparent)
 
             self.parent2pendingChildren[parentId].append(entity)
-    
+
     def getZoneNode(self, zoneEntId):
         return self.zoneNum2node.get(zoneEntId)
 
@@ -508,7 +508,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         """
         zoneNum is an int.
         ouchLevel is a ??.
-        
+
         The avatar (and not necessarily the camera) has entered
         a zone.
         See camEnterZone()
@@ -523,7 +523,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
     def camEnterZone(self, zoneNum):
         """
         zoneNum is an int.
-        
+
         The camera (and not necessarily the avatar) has entered
         a zone.
         See toonEnterZone()
@@ -563,14 +563,14 @@ class DistributedLevel(DistributedObject.DistributedObject,
         else:
             del self.lockVizZone
             self.updateVisibility()
-            
+
 
     def enterZone(self, zoneNum):
         DistributedLevel.notify.debug("entering zone %s" % zoneNum)
 
         if not DistributedLevel.WantVisibility:
             return
-        
+
         if zoneNum == self.curZoneNum:
             return
 
@@ -590,7 +590,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
                 return
         if hasattr(self, 'lockVizZone'):
             zoneNum = self.lockVizZone
-            
+
         zoneEnt = self.getEntity(zoneNum)
         # use dicts to efficiently ensure that there are no duplicates
         visibleZoneNums = list2dict([zoneNum])
@@ -624,7 +624,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         removedZoneNums = []
         allVZ = dict(visibleZoneNums)
         allVZ.update(self.curVisibleZoneNums)
-        for vz,dummy in allVZ.items():
+        for vz,dummy in list(allVZ.items()):
             new = vz in visibleZoneNums
             old = vz in self.curVisibleZoneNums
             if new and old:
@@ -653,7 +653,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # frame, whether or not the visibility is different from what
         # we already have
         if vizZonesChanged or self.fForceSetZoneThisFrame:
-            self.setVisibility(visibleZoneNums.keys())
+            self.setVisibility(list(visibleZoneNums.keys()))
             self.fForceSetZoneThisFrame = 0
 
         self.curZoneNum = zoneNum
@@ -688,7 +688,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # zones' viz lists
         del self.curVisibleZoneNums[LevelConstants.UberZoneEntId]
         # Make sure every zone is visible
-        for vz,dummy in self.curVisibleZoneNums.items():
+        for vz,dummy in list(self.curVisibleZoneNums.items()):
             self.showZone(vz)
         # Redo visibility using current zone num
         self.updateVisibility()
@@ -761,8 +761,8 @@ class DistributedLevel(DistributedObject.DistributedObject,
             else:
                 seq = smallTitleSeq
             taskMgr.add(seq, self.uniqueName("titleText"))
-            
-            
+
+
     def showInfoText(self, text = "hello world"):
         description = text
         if description and description != '':
@@ -795,7 +795,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
             if titleSeq:
                 seq = Task.sequence(titleSeq)
             taskMgr.add(seq, self.uniqueName("titleText"))
-        
+
     def showTitleTextTask(self, task):
         assert DistributedLevel.notify.debug("hideTitleTextTask()")
         self.titleText.show()
@@ -814,7 +814,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         # show the small title
         self.smallTitleText.show()
         return Task.done
-    
+
     def hideSmallTitleTextTask(self, task):
         assert DistributedLevel.notify.debug("hideTitleTextTask()")
         if self.smallTitleText:
@@ -856,7 +856,7 @@ class DistributedLevel(DistributedObject.DistributedObject,
         self.notify.debug('b_setOuch %s' % penalty)
         av = base.localAvatar
 
-        # play the stun track (flashing toon) 
+        # play the stun track (flashing toon)
         if not av.isStunned:
             self.d_setOuch(penalty)
             self.setOuch(penalty, anim)
@@ -871,10 +871,10 @@ class DistributedLevel(DistributedObject.DistributedObject,
         elif anim == "Fall":
             if base.cr.playGame.getPlace():
                 base.cr.playGame.getPlace().fsm.request('fallDown')
-            
+
         av = base.localAvatar
         av.stunToon()
         av.playDialogueForString("!")
-        
+
     def complexVis(self):
         return 1

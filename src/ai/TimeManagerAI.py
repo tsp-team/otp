@@ -1,5 +1,5 @@
-from AIBaseGlobal import *
-from pandac.PandaModules import *
+from .AIBaseGlobal import *
+from otp.otpbase.OTPModules import *
 from direct.distributed.ClockDelta import *
 from direct.task import Task
 from direct.distributed import DistributedObjectAI
@@ -32,7 +32,7 @@ class TimeManagerAI(DistributedObjectAI.DistributedObjectAI):
         timeOfDay = int(time.time())
         self.sendUpdateToAvatarId(requesterId, "serverTime",
                                   [context, timestamp, timeOfDay])
-        
+
     def setDisconnectReason(self, disconnectCode):
         """setDisconnectReason(self, uint8 disconnectCode)
 
@@ -52,7 +52,7 @@ class TimeManagerAI(DistributedObjectAI.DistributedObjectAI):
         else:
             self.air.writeServerEvent(
                 'suspicious', requesterId, 'invalid disconnect reason: %s' % disconnectCode)
-        
+
     def setExceptionInfo(self, info):
         """setExceptionInfo(self, string info)
 
@@ -92,7 +92,7 @@ class TimeManagerAI(DistributedObjectAI.DistributedObjectAI):
         the detailed CPU information to the server for logging.
         """
         requesterId = self.air.getAvatarIdFromSender()
-        
+
         self.notify.info('client-cpu %s|%s' % (requesterId, info))
         self.air.writeServerEvent('client-cpu', requesterId, info)
         # We call this cacheStatus, but really it's the mac address or

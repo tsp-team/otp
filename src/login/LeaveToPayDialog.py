@@ -7,7 +7,7 @@ from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLauncherGlobals
 from otp.otpbase import OTPLocalizer
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 import os
 
 class LeaveToPayDialog:
@@ -45,7 +45,7 @@ class LeaveToPayDialog:
             directFrameText = OTPLocalizer.LeaveToPay
             directButtonYesText = OTPLocalizer.LeaveToPayYes
             directButtonNoText = OTPLocalizer.LeaveToPayNo
-            
+
         if self.dialog == None:
             buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (buttons.find('**/ChtBx_OKBtn_UP'),

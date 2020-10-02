@@ -4,7 +4,7 @@ multipart actors with a simple class
 """
 
 #import whrandom
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.directnotify.DirectNotifyGlobal import *
 import random
 from direct.distributed.PyDatagram import PyDatagram
@@ -26,7 +26,7 @@ class AvatarDNA:
 
     """
     # special methods
-    
+
     def __str__(self):
         """
         Avatar DNA print method
@@ -41,10 +41,10 @@ class AvatarDNA:
         string = self.makeNetString()
         dg = PyDatagram(string)
         dg.dumpHex(ostream)
-    
+
     def makeFromNetString(self, string):
         notify.error("called makeFromNetString on avatarDNA parent class")
-    
+
     # dna methods
 
     def getType(self):

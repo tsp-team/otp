@@ -1,11 +1,11 @@
 import direct
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 
 class SimpleRenderBuffer:
 
     """ Opens an offscreen buffer for simple, lightweight rendering
     without adversely impacting other code (much). """
-    
+
     def __init__(self, xsize, ysize):
         # Get the graphics pipe.
         selection = GraphicsPipeSelection.getGlobalPtr()
@@ -23,7 +23,7 @@ class SimpleRenderBuffer:
 
         if not self.pipe:
             self.pipe = selection.makeDefaultPipe()
-            
+
         assert self.pipe
 
         # Create a GraphicsEngine to manage rendering.  It might be
@@ -46,7 +46,7 @@ class SimpleRenderBuffer:
 
         # Require all the textures to be available now.
         self.buffer.getGsg().setIncompleteRender(False)
-        
+
         # Now create a scene, and a camera, and a DisplayRegion.
         self.render = NodePath('render')
         self.camera = self.render.attachNewNode('camera')
@@ -63,4 +63,3 @@ class SimpleRenderBuffer:
 
     def cleanup(self):
         self.graphicsEngine.removeWindow(self.buffer)
-        

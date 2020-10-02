@@ -105,8 +105,8 @@ WhisperToFormat = "To %s %s"
 WhisperToFormatName = "To %s"
 WhisperFromFormatName = "%sからのひそひそ話"
 
-from pandac.PandaModules import TextProperties
-from pandac.PandaModules import TextPropertiesManager
+from otp.otpbase.OTPModules import TextProperties
+from otp.otpbase.OTPModules import TextPropertiesManager
 
 shadow = TextProperties()
 shadow.setShadow(-0.025, -0.025)
@@ -1418,7 +1418,7 @@ SpeedChatStaticText = {
     3190 : "Retrouve-moi sur les pistes !",
     3110 : "Retrouvons-nous près du magasin des karts !",
     3130 :  "Où va-t-on se retrouver ?",
-    
+
     #Races
     3200 : "Où veux-tu faire la course ?",
     3201 : "Choisissons une autre course.",
@@ -1534,7 +1534,7 @@ SpeedChatStaticText = {
     5103 : "Let's go to the C.E.O. Battle.",
     5104 : "Let's go to the Sellbot Battle.",
     5105 : "Let's go to the Front Entrance.",
-    5106 : "Let's go to the Back Entrance.",    
+    5106 : "Let's go to the Back Entrance.",
     5107 : "Let's go to the Coin Mint.",
     5108 : "Let's go to the Dollar Mint.",
     5109 : "Let's go to the Bullion Mint.",
@@ -1552,7 +1552,7 @@ SpeedChatStaticText = {
     5203 : "We're going to the C.E.O. Battle.",
     5204 : "We're going to the Sellbot Battle.",
     5205 : "We're going to the Front Entrance.",
-    5206 : "We're going to the Back Entrance.",    
+    5206 : "We're going to the Back Entrance.",
     5207 : "We're going to the Coin Mint.",
     5208 : "We're going to the Dollar Mint.",
     5209 : "We're going to the Bullion Mint.",
@@ -1587,7 +1587,7 @@ SpeedChatStaticText = {
     5319 : "I wish I could eat this cake!",
     5320 : "These fireworks are beautiful!",
     5321 : "No cogs allowed!",
-    
+
     # Promotional Considerations
     10000 : "A toi de choisir !",
     10001 : "Tu votes pour qui ?",
@@ -2024,7 +2024,7 @@ SpeedChatStaticText = {
     50108 : "Accroche-toi à l'épave !",
     50109 : "Viens par là !",
     50110 : "Les morts ne mentent pas...",
-    
+
 
     # EXPRESSIONS - GREETINGS
     50700 : "Ahoy!",
@@ -2111,11 +2111,11 @@ SpeedChatStaticText = {
     51510 : "Let's sail to Cutthroat.",
     51511 : "Let's sail to Rumrunner's Isle.",
     51512 : "Let's sail to Isla Cangrejos.",
-    
+
     # PLACES - LETS HEAD TO...
     51600 : "Let's head into town.",
     51601 : "Let's go to the docks.",
-    51602 : "Let's head to the tavern.",    
+    51602 : "Let's head to the tavern.",
 
     # PLACES - LETS HEAD TO... - PORT ROYAL
     51800 : "Let's go to Fort Charles.",
@@ -2297,7 +2297,7 @@ Emotes_General = "General"
 Emotes_Music = "Music"
 Emotes_Expressions = "Emotions"
 Emote_ShipDenied = "Cannot emote while sailing."
-Emote_MoveDenied = "Cannot emote while moving." 
+Emote_MoveDenied = "Cannot emote while moving."
 Emote_CombatDenied = "Cannot emote while in combat."
 Emote_CannonDenied = "Cannot emote while using a cannon."
 Emote_SwimDenied = "Cannot emote while swimming."

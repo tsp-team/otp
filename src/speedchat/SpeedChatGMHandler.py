@@ -1,7 +1,7 @@
 """SpeedChatGMHandler.py: Handles the GM menu for speed chats"""
 
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase import DirectObject
 from otp.otpbase import OTPLocalizer
 
@@ -9,7 +9,7 @@ class SpeedChatGMHandler(DirectObject.DirectObject):
 
     scStructure = None
     scList = {}
-    
+
     def __init__(self):
         if SpeedChatGMHandler.scStructure is None:
             self.generateSCStructure()

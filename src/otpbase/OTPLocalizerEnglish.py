@@ -108,8 +108,8 @@ WhisperFromFormatName = "%s whispers"
 ThoughtOtherFormatName = "%s thinks"
 ThoughtSelfFormatName = "You think"
 
-from pandac.PandaModules import TextProperties
-from pandac.PandaModules import TextPropertiesManager
+from otp.otpbase.OTPModules import TextProperties
+from otp.otpbase.OTPModules import TextPropertiesManager
 
 shadow = TextProperties()
 shadow.setShadow(-0.025, -0.025)
@@ -210,7 +210,7 @@ become True Friends, one of them must request a new True Friend Code from the Se
 
 True Friends communicate with one another in a free-form interactive open chat.  The content of this chat is directly entered by the participating member and is processed through the Service, which is operated by the Walt Disney Internet Group ("WDIG"), 500 S. Buena Vista St., Burbank, CA 91521-7691.  While we advise members not to exchange personal information such as first and last names, e-mail addresses, postal addresses, or phone numbers while using Open Chat with True Friends, we cannot guarantee that such exchanges of personal information will not happen. Although the True Friends chat is automatically filtered for most bad words, Open Chat with True Friends may be moderated, and Disney reserves the right to moderate any part of the Service that Disney,
 ""","""
-in its sole and absolute discretion, deems necessary. However, because Open Chat with True Friends will not always be moderated, if the Parent Account allows a child to use his or her account with the Open Chat with True Friends feature enabled, we strongly encourage parents to supervise their child or children while they play in the Service. By enabling the Open Chat with True Friends feature, the Parent Account acknowledges that there are some risks inherent in the Open Chat with True Friends feature and that the Parent Account has been informed of, and agrees to accept, any such risks, whether foreseeable or otherwise. 
+in its sole and absolute discretion, deems necessary. However, because Open Chat with True Friends will not always be moderated, if the Parent Account allows a child to use his or her account with the Open Chat with True Friends feature enabled, we strongly encourage parents to supervise their child or children while they play in the Service. By enabling the Open Chat with True Friends feature, the Parent Account acknowledges that there are some risks inherent in the Open Chat with True Friends feature and that the Parent Account has been informed of, and agrees to accept, any such risks, whether foreseeable or otherwise.
 
 WDIG does not use the content of True Friends chat for any purpose other than communicating that content to the member's true friend, and does not disclose that content to any third party except: (1) if required by law, for example, to comply with a court order or subpoena; (2) to enforce the Terms of Use
 ""","""
@@ -1149,7 +1149,7 @@ SpeedChatStaticText = {
     816 : "I can't get on the elevator now.",
     817 : "Sorry, I'm busy golfing!",
     818 : "Sorry, my Friends List is full.",
-    
+
     # Stinky
     900 : "Hey!",
     901 : "Please go away!",
@@ -1445,7 +1445,7 @@ SpeedChatStaticText = {
     2220 : "I have a bonus weight of 9.",
     2221 : "I have a bonus weight of 10.",
     2222 : "I have a bonus weight of 11.",
-    2223 : "I have a bonus weight of 12.",    
+    2223 : "I have a bonus weight of 12.",
 
     # CEO battle
     2300 : "You feed the Cogs on the left.",
@@ -1466,8 +1466,8 @@ SpeedChatStaticText = {
     2315 : "Hurry, your cog is hungry!",
     2316 : "Please save the snacks for sadder toons.",
     2317 : "Take the snacks before they fall.",
-    
-    
+
+
     #Kart Racing Phrases
     #IMPORTANT: if you change numbers or add/subtract lines here than be
     # sure to adjust the kart racing menu guid dict below
@@ -1598,7 +1598,7 @@ SpeedChatStaticText = {
     5004 : "Leave your Boarding Group.",
     5005 : "We are boarding now.",
     5006 : "Where are we going?",
-    5007 : "Are we ready?",    
+    5007 : "Are we ready?",
     5008 : "Let's Go!",
     5009 : "Don't leave this area or you will leave the Boarding Group.",
 
@@ -1609,7 +1609,7 @@ SpeedChatStaticText = {
     5103 : "Let's go to the C.E.O. Battle.",
     5104 : "Let's go to the Senior V.P Battle.",
     5105 : "Let's go to the Front Entrance.",
-    5106 : "Let's go to the Side Entrance.",    
+    5106 : "Let's go to the Side Entrance.",
     5107 : "Let's go to the Coin Mint.",
     5108 : "Let's go to the Dollar Mint.",
     5109 : "Let's go to the Bullion Mint.",
@@ -1627,7 +1627,7 @@ SpeedChatStaticText = {
     5203 : "We're going to the C.E.O. Battle.",
     5204 : "We're going to the Senior V.P Battle.",
     5205 : "We're going to the Front Entrance.",
-    5206 : "We're going to the Side Entrance.",    
+    5206 : "We're going to the Side Entrance.",
     5207 : "We're going to the Coin Mint.",
     5208 : "We're going to the Dollar Mint.",
     5209 : "We're going to the Bullion Mint.",
@@ -1658,12 +1658,12 @@ SpeedChatStaticText = {
     5315 : "Let's play Catch!",
     5316 : "Let's dance!",
     5317 : "To the dance floor!",
-    5318 : "Let's play Tug of War!",    
+    5318 : "Let's play Tug of War!",
     5319 : "Start the fireworks!",
     5320 : "These fireworks are beautiful!",
     5321 : "Nice decorations.",
-    5322 : "I wish I could eat this cake!",    
-        
+    5322 : "I wish I could eat this cake!",
+
     # Promotional Considerations
     10000 : "The choice is yours!",
     10001 : "Who are you voting for?",
@@ -2098,7 +2098,7 @@ SpeedChatStaticText = {
     50106 : "Salty as a Kraken's kiss.",
     50107 : "Treasure be the measure of our pleasure!",
     50108 : "I don't fear death - I attune it.",
-    
+
 
     # EXPRESSIONS - GREETINGS
     50700 : "Ahoy!",
@@ -2185,11 +2185,11 @@ SpeedChatStaticText = {
     51510 : "Let's sail to Cutthroat.",
     51511 : "Let's sail to Rumrunner's Isle.",
     51512 : "Let's sail to Isla Cangrejos.",
-    
+
     # PLACES - LETS HEAD TO...
     51600 : "Let's head into town.",
     51601 : "Let's go to the docks.",
-    51602 : "Let's head to the tavern.",    
+    51602 : "Let's head to the tavern.",
 
     # PLACES - LETS HEAD TO... - PORT ROYAL
     51800 : "Let's go to Fort Charles.",
@@ -2289,7 +2289,7 @@ SpeedChatStaticText = {
     53166 : "I'll do it!",
     53167 : "Keep it up, this ship won't repair itself!",
     53168 : "Great job repairing the ship!",
-    
+
     # Invitations
     52100 : "Want to group up?",
     52101 : "Join me crew?",
@@ -2434,8 +2434,8 @@ SpeedChatStaticText = {
     60675 : "Do you have a map?  I just keep getting lost in your eyes.",
 
     65000 : "Yes",
-    65001 : "No",    
-    
+    65001 : "No",
+
     # Phrases for April Toon's week
     60100 : "Happy April Toons' Week!",
     60101 : "Welcome to my April Toons' Week party!",
@@ -2458,7 +2458,7 @@ SpeedChatStaticText = {
     60133 : "Did your Doodle just talk?",
     60140 : "Things sure are silly around here!",
     60141 : "How sillier could things get?",
-    
+
     # Phrases for caroling
     60200 : "Deck the halls... ",
     60201 : "Load some pies...",
@@ -2466,14 +2466,14 @@ SpeedChatStaticText = {
     60203 : "Snowman heads...",
     60204 : "Toontown's merry...",
     60205 : "Lure good cheer...",
-    
+
     60220 : "Deck the halls with seltzer spray!\nHappy Winter Holiday!",
     60221 : "Load some pies into your sleigh!\nHappy Winter Holiday!",
     60222 : "Joyful toons bring Cogs dismay!\nHappy Winter Holiday!",
     60223 : "Snowman heads are hot today!\nHappy Winter Holiday!",
     60224 : "Toontown's merry, come what may!\nHappy Winter Holiday!",
     60225 : "Lure good cheer the Toontown way!\nHappy Winter Holiday!",
-    
+
     # Phrases for Silly Story
     60301 : "Have you seen the Silly Meter?",
     60302 : "The Silly Meter is in Toon Hall.",
@@ -2483,7 +2483,7 @@ SpeedChatStaticText = {
     60306 : "Have you been to Flippy's new office?",
     60307 : "I caused a Silly Surge in battle!",
     60308 : "Let's defeat some Cogs to make Toontown sillier!",
-    
+
     60309 : "The Silly Meter is bigger and crazier than ever!",
     60310 : "Lots of hydrants have come alive!",
     60311 : "I saw a mail box moving!",
@@ -2493,7 +2493,7 @@ SpeedChatStaticText = {
     60315 : "Something silly, I bet!",
     60316 : "Have you caused a Silly Surge yet?",
     60317 : "Let's defeat some Cogs to make Toontown sillier!",
-    
+
     60318 : "Cog Invasion!",
     60319 : "Incoming!",
     60320 : "Let\'s stop those Cogs!",
@@ -2504,20 +2504,20 @@ SpeedChatStaticText = {
     60325 : "My favorites are the fire hydrants!",
     60326 : "My favorites are the mailboxes!",
     60327 : "My favorites are the trash cans!",
-    
+
     60328 : "Hooray! We stopped the Cog invasions!",
     60329 : "A hydrant helped me in battle!",
     60330 : "A hydrant boosted my Squirt Gags!",
     60331 : "A trash can boosted my Toon-Up Gags!",
     60332 : "A mailbox helped my Throw Gags!",
-    
+
     # Phrases for Victory Parties (warning 60400 is in use)
     60350 : "Welcome to my Victory Party!",
     60351 : "This is a great Victory Party!",
     60352 : "We showed those Cogs who's boss!",
     60353 : "Good job helping end the Cog invasions!",
     60354 : "I bet this is driving the Cogs crazy!",
-    
+
     60355 : "Let's play Cog-O-War!",
     60356 : "My team won at Cog-O-War!",
     60357 : "It's nice to have fire hydrants, trash cans, and mailboxes here!",
@@ -2525,7 +2525,7 @@ SpeedChatStaticText = {
     60359 : "I like the balloon of the Cog covered in ice cream!",
     60360 : "I like the wavy Cog that flaps his arms!",
     60361 : "I jumped on a Cog's face!",
-    
+
     # Phrases for Singing
 ##    9000 : 'Middle ' + 'G1',
 ##    9001 : 'Middle ' + 'A',
@@ -2544,7 +2544,7 @@ Emotes_General = "General"
 Emotes_Music = "Music"
 Emotes_Expressions = "Emotions"
 Emote_ShipDenied = "Cannot emote while sailing."
-Emote_MoveDenied = "Cannot emote while moving." 
+Emote_MoveDenied = "Cannot emote while moving."
 Emote_CombatDenied = "Cannot emote while in combat."
 Emote_CannonDenied = "Cannot emote while using a cannon."
 Emote_SwimDenied = "Cannot emote while swimming."
@@ -3297,5 +3297,3 @@ def timeElapsedString(timeDelta):
             return "1 minute ago"
         else:
             return "%s minutes ago" % (timeDelta.seconds / 60)
-
-

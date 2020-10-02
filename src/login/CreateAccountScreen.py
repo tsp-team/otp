@@ -1,16 +1,16 @@
 """CreateAccountScreen module: contains the CreateAccountScreen class"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.fsm import StateData
 from otp.otpgui import OTPDialog
 from direct.fsm import ClassicFSM
 from direct.fsm import State
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPLocalizer
-import TTAccount
-import GuiScreen
+from . import TTAccount
+from . import GuiScreen
 from otp.otpbase import OTPGlobals
 from direct.distributed.MsgTypes import *
 
@@ -65,7 +65,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
     def load(self):
         self.notify.debug('load')
         masterScale = 0.8
-        
+
         textScale = 0.1*masterScale
         entryScale = 0.08*masterScale
         lineHeight = 0.21*masterScale
@@ -165,7 +165,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.submitButton = DirectButton(
             parent = self.frame,
             relief = DGG.RAISED,
-            borderWidth = (0.01,0.01),            
+            borderWidth = (0.01,0.01),
             pos = (0,0,linePos),
             scale = buttonScale,
             text = OTPLocalizer.CreateAccountScreenSubmit,
@@ -178,7 +178,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.cancelButton = DirectButton(
             parent = self.frame,
             relief = DGG.RAISED,
-            borderWidth = (0.01,0.01),            
+            borderWidth = (0.01,0.01),
             pos = (0,0,linePos),
             scale = buttonScale,
             text = OTPLocalizer.CreateAccountScreenCancel,
@@ -213,7 +213,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.__firstTime = 1
         self.frame.show()
         self.fsm.request("create")
-        
+
     def exit(self):
         self.ignore(self.dialogDoneEvent)
         self.fsm.requestFinalState()
@@ -240,8 +240,8 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.__firstTime = 0
 
         self.focusList = [
-            self.nameEntry, 
-            self.passwordEntry, 
+            self.nameEntry,
+            self.passwordEntry,
             self.passwordConfirmEntry,
             ]
         # override the Enter-press behavior for the last focus item,
@@ -278,7 +278,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
 
         minNameLength = self.cr.accountServerConstants.getInt('minNameLength')
         minPwdLength = self.cr.accountServerConstants.getInt('minPwLength')
-        
+
         if (self.userName == ''):
             self.dialog.setMessage(OTPLocalizer.CreateAccountScreenNoAccountName)
             self.dialog.show()
@@ -336,7 +336,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
             error=self.loginInterface.createAccount(self.userName,
                                                     self.password,
                                                     data)
-        except TTAccount.TTAccountException, e:
+        except TTAccount.TTAccountException as e:
             # show the error message, and back out of account creation
             error = str(e)
             self.notify.info(error)
@@ -346,7 +346,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
             self.acceptOnce(self.dialogDoneEvent,
                             self.__handleConnectionErrorAck)
             return
-            
+
         if error:
             self.notify.info(error)
             self.dialog.setMessage(error)

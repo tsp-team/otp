@@ -2,7 +2,7 @@
 from direct.task import Task
 from otp.otpbase import OTPLocalizer
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase.DirectObject import DirectObject
 
 class DownloadWatcher(DirectObject):
@@ -36,7 +36,7 @@ class DownloadWatcher(DirectObject):
             text_align = TextNode.ACenter,
             text_pos = (0,-0.05),
             )
-        
+
         self.accept("launcherPercentPhaseComplete", self.update)
 
     def update(self, phase, percent, reqByteRate, actualByteRate):
@@ -44,7 +44,7 @@ class DownloadWatcher(DirectObject):
         self.text['text'] = (OTPLocalizer.DownloadWatcherUpdate % (phaseName))
         self.bar['text'] = ("%s %%" % (percent))
         self.bar['value'] = percent
-        
+
     def cleanup(self):
         self.text.destroy()
         self.bar.destroy()

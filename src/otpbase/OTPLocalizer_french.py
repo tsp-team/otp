@@ -86,8 +86,8 @@ ChangeSecretFriendsOptions = "Changer les options d' amis secrets"
 ChangeSecretFriendsOptionsWarning = "\nMerci d'entrer le mot de passe \"parent\" pour changer les options d' \"amis secrets\"."
 ActivateChatTitle = "Options amis secrets"
 
-from pandac.PandaModules import TextProperties
-from pandac.PandaModules import TextPropertiesManager
+from otp.otpbase.OTPModules import TextProperties
+from otp.otpbase.OTPModules import TextPropertiesManager
 
 shadow = TextProperties()
 shadow.setShadow(-0.025, -0.025)
@@ -1229,7 +1229,7 @@ SpeedChatStaticText = {
     3190 : "Retrouve-moi sur les pistes !",
     3110 : "Retrouvons-nous près du magasin des karts !",
     3130 :  "Où va-t-on se retrouver ?",
-    
+
     #Races
     3200 : "Où veux-tu faire la course ?",
     3201 : "Choisissons une autre course.",
@@ -2434,6 +2434,3 @@ TTAccountIntractibleError = "Une erreur s'est produite."
 # OTPGLobals stuff
 def getSignFontLocale():
     return getSignFont()
-
-
-

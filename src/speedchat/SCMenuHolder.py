@@ -1,10 +1,10 @@
 """SCMenuHolder.py: contains the SCMenuHolder class"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.gui.DirectGui import *
-from SCObject import SCObject
-from SCElement import SCElement
-from SCMenu import SCMenu
+from .SCObject import SCObject
+from .SCElement import SCElement
+from .SCMenu import SCMenu
 import types
 
 class SCMenuHolder(SCElement):
@@ -230,4 +230,3 @@ class SCMenuHolder(SCElement):
         SCObject.finalizeAll(self)
         if self.menu is not None:
             self.menu.finalizeAll()
-

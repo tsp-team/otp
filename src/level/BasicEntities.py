@@ -1,8 +1,8 @@
 """BasicEntities module: contains fundamental entity types and base classes"""
 
-import Entity
-import DistributedEntity
-from pandac.PandaModules import NodePath
+from . import Entity
+from . import DistributedEntity
+from otp.otpbase.OTPModules import NodePath
 
 # base class for entities that support NodePath attributes
 # *** Don't derive directly from this class; derive from the appropriate
@@ -62,7 +62,7 @@ class NodePathAndAttribs(NodePathEntityBase, NodePath):
 
     def getNodePath(self):
         return self
-        
+
 # Entities that already derive from Entity, and do not derive from NodePath,
 # but HAVE a NodePath that they want to represent them, should derive from
 # this. They must define getNodePath(), which should return their 'proxy'
@@ -90,7 +90,7 @@ class NodePathAttribsProxy(NodePathEntityBase):
     def setSx(self, *args): self.getNodePath().setSx(*args)
     def setSy(self, *args): self.getNodePath().setSy(*args)
     def setSz(self, *args): self.getNodePath().setSz(*args)
-    
+
     def reparentTo(self, *args): self.getNodePath().reparentTo(*args)
 
 # This is an entity that represents a NodePath on the client.

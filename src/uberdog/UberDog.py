@@ -10,7 +10,7 @@ from otp.distributed import OtpDoGlobals
 from otp.distributed.OtpDoGlobals import *
 from otp.ai.AIRepository import AIRepository
 from otp.ai import TimeManagerAI
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.uberdog.AccountDetailRecord import AccountDetailRecord, SubDetailRecord
 
 from otp.ai.AIMsgTypes import *
@@ -82,7 +82,7 @@ class UberDog(AIRepository):
         if obj is not None:
             assert obj.__class__.__name__ == (dclassName + self.dcSuffix)
             method = getattr(obj, fieldName)
-            apply(method, args)
+            method(*args)
         else:
             self.sendUpdateToDoId(dclassName, fieldName, doId, args, channelId)
 
@@ -93,7 +93,7 @@ class UberDog(AIRepository):
         if obj is not None:
             assert obj.__class__.__name__ == dclassName
             method = getattr(obj, fieldName)
-            apply(method, args)
+            method(*args)
         else:
             self.sendUpdateToGlobalDoId(dclassName, fieldName, doId, args)
 
@@ -127,7 +127,7 @@ class UberDog(AIRepository):
         accountDetailRecord.familyMembers = []
         for i in range(accountDetailRecord.numFamilyMembers):
             accountDetailRecord.familyMembers.append(di.getInt32())
-            
+
         logoutReason = di.getInt32()
 
         # Now retrieve the subscription information
@@ -156,14 +156,14 @@ class UberDog(AIRepository):
 
         # How many avatar slots total do you get in this game?
         accountDetailRecord.maxAvatarSlots = di.getInt8()
-            
+
         assert self.notify.debug("accountDetailRecord: %s" % accountDetailRecord)
 
         if priorAccount:
             # Send any previous account offline
             self.accountOffline(priorAccount)
             pass
-        
+
         if newAccount:
             # Set up the new guy
             self.accountOnline(newAccount, accountDetailRecord)
@@ -201,12 +201,12 @@ class UberDog(AIRepository):
             openChatEnabled = 1
         else:
             openChatEnabled = 0
-            
+
         if priorAvatar:
             # Send any previous avatar offline
             self.avatarOffline(accountId, priorAvatar)
             pass
-        
+
         if newAvatar:
             # Set up the new guy
             self.avatarOnline(newAvatar, newAvatarType,
@@ -218,8 +218,8 @@ class UberDog(AIRepository):
                               chatCodeCreation)
             pass
         pass
-    
-        
+
+
 
     @report(types = ['args'], dConfigParam = 'avatarmgr')
     def accountOnline(self, accountId, accountDetailRecord):
@@ -227,7 +227,7 @@ class UberDog(AIRepository):
         self.onlineAccountDetails[accountId] = accountDetailRecord
         messenger.send('accountOnline', [accountId])
         pass
-    
+
     @report(types = ['args'], dConfigParam = 'avatarmgr')
     def accountOffline(self, accountId):
         self.writeServerEvent('accountOffline', accountId, '')
@@ -289,7 +289,7 @@ class UberDog(AIRepository):
                     openChatEnabled,
                     createFriendsWithChat,
                     chatCodeCreation]
-        
+
         # necessary for local UD manager objects
         messenger.send("avatarOnline", simpleInfo)
         messenger.send("avatarOnlinePlusAccountInfo", fullInfo)
@@ -305,13 +305,13 @@ class UberDog(AIRepository):
         # necessary for local UD manager objects
         messenger.send("avatarOffline", [avatarId])
         pass
-        
+
     ###################################
     # Assumed Obsolete as of 6/29/09
     #
     # If you're reading this and there
     # haven't been any strange UD crashes
-    # here lately, you can probably delete 
+    # here lately, you can probably delete
     # the next few functions.
     ###################################
     def _addObject(self, context, distributedObject):
@@ -321,8 +321,8 @@ class UberDog(AIRepository):
         """
         assert False, 'JCW: Testing for obsolete functions. If this crashes, let Josh know'
         doId=distributedObject.getDoId()
-        assert not self.doId2doCache.has_key(doId)
-        if not self.doId2doCache.has_key(doId):
+        assert doId not in self.doId2doCache
+        if doId not in self.doId2doCache:
             self.doId2doCache[doId]=distributedObject
             self.handleGotDo(distributedObject)
 
@@ -335,12 +335,12 @@ class UberDog(AIRepository):
         will also remove the handled calls from the pending set.
         """
         assert False, 'JCW: Testing for obsolete functions. If this crashes, let Josh know'
-        assert self.doId2doCache.has_key(doId)
+        assert doId in self.doId2doCache
         pending=self.pending.get(doId)
         if pending is not None:
             del self.pending[doId]
             for i in pending:
-                apply(i[0], i[2])
+                i[0](*i[2])
 
     def deleteObject(self, doId):
         """
@@ -355,7 +355,7 @@ class UberDog(AIRepository):
         #HACK:
         self.unregisterForChannel(doId)
         AIRepository.deleteObject(self.doId)
-        
+
     def uniqueName(self, desc):
         return desc
 
@@ -365,16 +365,15 @@ class UberDog(AIRepository):
         """
         def deleteObjects(self):
             assert 0
-    
+
         def createDistrict(self, districtId, districtName):
             assert 0
-    
+
         def deleteDistrict(self, districtId):
             assert 0
-    
+
         def enterDistrictReset(self):
             assert 0
-    
+
         def exitDistrictReset(self):
             assert 0
-    

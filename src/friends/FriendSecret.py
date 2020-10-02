@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.gui.DirectGui import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import StateData
@@ -83,18 +83,18 @@ def unloadFriendSecret():
     if globalFriendSecret != None:
         globalFriendSecret.unload()
         globalFriendSecret = None
-    
+
 
 class FriendSecretNeedsParentLogin(StateData.StateData):
-    
+
     notify = DirectNotifyGlobal.directNotify.newCategory("FriendSecretNeedsParentLogin")
-    
+
     def __init__(self, secretType):
         assert self.notify.debugCall()
         StateData.StateData.__init__(self, "friend-secret-needs-parent-login-done")
         self.dialog = None
         self.secretType = secretType
-        
+
     def enter(self):
         assert self.notify.debugCall()
         StateData.StateData.enter(self)
@@ -127,11 +127,11 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
             if withParentAccount:
                 okPos = (-0.22, 0.0, -0.5)
                 textPos = (0, 0.25)
-                okCommand = self.__handleOKWithParentAccount  
+                okCommand = self.__handleOKWithParentAccount
             elif base.cr.productName != "Terra-DMC":
                 okPos = (-0.22, 0.0, -0.5)
                 textPos = (0, 0.25)
-                okCommand = self.__oldHandleOK                
+                okCommand = self.__oldHandleOK
             else:
                 self.passwordEntry = None
                 okPos = (0, 0, -0.35)
@@ -165,7 +165,7 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
             DirectLabel(
                 parent = self.dialog,
                 relief = None,
-                pos = (0, 0, 0.35), 
+                pos = (0, 0, 0.35),
                 text = OTPLocalizer.FriendSecretNeedsPasswordWarningTitle,
                 textMayChange = 0,
                 text_scale = 0.08)
@@ -230,7 +230,7 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
                     self.usernameEntry.enterText('')
                     self.usernameEntry['focus'] = 1
                     self.passwordEntry.enterText('')
-                    
+
                 else:
                     self.usernameEntry.hide()
                     self.usernameLabel.hide()
@@ -248,7 +248,7 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
             elif self.passwordEntry:
                 self.passwordEntry['focus'] = 1
                 self.passwordEntry.enterText('')
-            
+
         self.dialog.show()
 
     def exit(self):
@@ -274,7 +274,7 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
         password = self.passwordEntry.get()
         # we need to store these in base.cr for __enterSecret
         base.cr.parentUsername = username
-        base.cr.parentPassword = password        
+        base.cr.parentPassword = password
         tt = base.cr.loginInterface
         try:
             DISLIdFromLogin = base.cr.DISLIdFromLogin
@@ -300,15 +300,15 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
             self.dialog['text'] = OTPLocalizer.FriendSecretNeedsPasswordWarningWrongPassword
             self.passwordEntry['focus'] = 1
             self.passwordEntry.enterText('')
-        
-        
+
+
     def __oldHandleOK(self, *args):
         assert self.notify.debugCall()
         username = self.usernameEntry.get()
         password = self.passwordEntry.get()
         # we need to store these in base.cr for __enterSecret
         base.cr.parentUsername = username
-        base.cr.parentPassword = password        
+        base.cr.parentPassword = password
         tt = base.cr.loginInterface
         okflag, message = tt.authenticateParentPassword(base.cr.userName, base.cr.password, password)
         if okflag:
@@ -394,8 +394,8 @@ class FriendSecret(DirectFrame, StateData.StateData):
         # what type of secret friend has the user chosen
         self.requestedSecretType = secretType
         self.notify.debug("### requestedSecretType = %s" % self.requestedSecretType)
-        
-        
+
+
     def unload(self):
         assert self.notify.debugCall()
         if self.isLoaded == 0:
@@ -566,13 +566,13 @@ class FriendSecret(DirectFrame, StateData.StateData):
 
         # moved into it's own method to make overloading easier
         self.makeFriendTypeButtons()
-        
+
         self.accept('clientCleanup', self.__handleCleanup)
         self.accept('walkDone', self.__handleStop)
-        
+
     def __handleStop(self, message):
         self.exit()
-        
+
     def __handleCleanup(self):
         self.unload()
 
@@ -634,7 +634,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
             )
         accountText.reparentTo(self.accountButton.stateNodePath[2])
         self.accountButton.hide()
-        
+
         buttons.removeNode()
 
     def enter(self):
@@ -719,7 +719,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
     def __handleCancel(self):
         assert self.notify.debugCall()
         self.exit()
-            
+
     def __getSecret(self):
         assert self.notify.debugCall()
         self.__cleanupFirstPage()
@@ -775,7 +775,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
         assert self.notify.debugCall()
         self.ignore(OTPGlobals.PlayerFriendNewSecretEvent)
         self.ignore(OTPGlobals.PlayerFriendRejectNewSecretEvent)
-        
+
         self.nextText['text'] = OTPLocalizer.FriendSecretGotSecret
         self.nextText.setPos(0, 0, 0.47)
         # for now Account friends (i.e. XD Friends) have no unique prefix
@@ -788,7 +788,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
 
     def __rejectAccountSecret(self, reason):
         assert self.notify.debugCall()
-        print "## rejectAccountSecret: reason = ", reason
+        print("## rejectAccountSecret: reason = ", reason)
         self.ignore(OTPGlobals.PlayerFriendNewSecretEvent)
         self.ignore(OTPGlobals.PlayerFriendRejectNewSecretEvent)
         # TODO: handle more reasons
@@ -811,7 +811,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
             # the dialog.
             self.exit()
             return
-        
+
         # If we don't have a FriendManager, something's badly wrong.
         # Most likely we're running in a development environment
         # without an AI client.
@@ -819,7 +819,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
             self.notify.warning("No FriendManager available.")
             self.exit()
             return
-            
+
         self.__cleanupFirstPage()
 
         # The client can now prepend a product prefix to all secrets - strip this off if present
@@ -853,7 +853,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
         if result == 1:
             # We made it!
             handle = base.cr.identifyAvatar(avId)
-            if handle != None:            
+            if handle != None:
                 self.nextText['text'] = OTPLocalizer.FriendSecretEnteredSecretSuccess % (handle.getName())
             else:
                 # Shoot.  We just made friends with someone, but we
@@ -873,7 +873,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
         elif result == 2:
             # Friends list full.
             handle = base.cr.identifyAvatar(avId)
-            if handle != None:            
+            if handle != None:
                 self.nextText['text'] = OTPLocalizer.FriendSecretEnteredSecretFull % (handle.getName())
             else:
                 self.nextText['text'] = OTPLocalizer.FriendSecretEnteredSecretFullNoName
@@ -901,7 +901,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
 
     def __rejectUseAccountSecret(self, reason):
         assert self.notify.debugCall("reason = %s" % reason)
-        print "## rejectUseAccountSecret: reason = ", reason
+        print("## rejectUseAccountSecret: reason = ", reason)
         self.ignore(OTPGlobals.PlayerFriendUpdateEvent)
         self.ignore(OTPGlobals.PlayerFriendRejectUseSecretEvent)
 
@@ -919,11 +919,11 @@ class FriendSecret(DirectFrame, StateData.StateData):
         # transaction has completed.  This will be called only if the
         # client didn't know the identity of the friend at the time,
         # but it should know now.
-        
+
         self.ignore('friendsMapComplete')
 
         handle = base.cr.identifyAvatar(avId)
-        if handle != None:            
+        if handle != None:
             self.nextText['text'] = OTPLocalizer.FriendSecretNowFriends % (handle.getName())
         else:
             # This really shouldn't be possible.
@@ -963,7 +963,4 @@ class FriendSecret(DirectFrame, StateData.StateData):
         self.enterSecret.hide()
 
         # Restore the background focus on the chat entry.
-        base.localAvatar.chatMgr.fsm.request("mainMenu")        
-
-        
-
+        base.localAvatar.chatMgr.fsm.request("mainMenu")

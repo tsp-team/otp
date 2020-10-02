@@ -105,8 +105,8 @@ WhisperToFormat = "Para %s %s"
 WhisperToFormatName = "Para %s"
 WhisperFromFormatName = "%s cochicha"
 
-from pandac.PandaModules import TextProperties
-from pandac.PandaModules import TextPropertiesManager
+from otp.otpbase.OTPModules import TextProperties
+from otp.otpbase.OTPModules import TextPropertiesManager
 
 shadow = TextProperties()
 shadow.setShadow(-0.025, -0.025)
@@ -220,7 +220,7 @@ CRBootedReasons = {
     125: "Os arquivos da Toontown que você tem instalados parecem ser inválidos. Use o botão Jogar, no site da web oficial da Toontown, para executar a Toontown.",
     126: "Você não está autorizado a usar privilégios administrativos.",
     151: "O administrador responsável pelos servidores de Toontown fez logout na sua conta.",
-    152: "Foi relatada uma violação dos nossos termos de uso, com relação a '%(name)s'. Por segurança, colocamos uma restrição temporária na conta. Para obter mais detalhes, leia a mensagem enviada ao endereço de e-mail associado a '%(name)s'.", 
+    152: "Foi relatada uma violação dos nossos termos de uso, com relação a '%(name)s'. Por segurança, colocamos uma restrição temporária na conta. Para obter mais detalhes, leia a mensagem enviada ao endereço de e-mail associado a '%(name)s'.",
     153: "A região de Toontown em que você estava jogando foi reiniciada. Todas as pessoas que estavam jogando nesta região foram desconectadas. Entretanto, você poderá conectar-se novamente e voltar direto ao jogo.",
     288: "Sinto muito, mas você usou todos os seus minutos disponíveis deste mês na Toontown.",
     349: "Sinto muito, mas você usou todos os seus minutos disponíveis deste mês na Toontown.",
@@ -1375,8 +1375,8 @@ SpeedChatStaticText = {
     2315 : "Depressa, seu Cog está com fome!",
     2316 : "Reserve os lanches para Toons mais tristes.",
     2317 : "Pegue os lanches antes que eles caiam.",
- 
- 
+
+
     #Kart Racing Phrases
     #IMPORTANT: if you change numbers or add/subtract lines here than be
     # sure to adjust the kart racing menu guid dict below
@@ -1505,7 +1505,7 @@ SpeedChatStaticText = {
     5004 : "Leave your Boarding Group.",
     5005 : "We are boarding now.",
     5006 : "Where are we going?",
-    5007 : "Are we ready?",    
+    5007 : "Are we ready?",
     5008 : "Let's Go!",
     5009 : "Don't leave this area or you will leave the Boarding Group.",
 
@@ -1516,7 +1516,7 @@ SpeedChatStaticText = {
     5103 : "Let's go to the C.E.O. Battle.",
     5104 : "Let's go to the Senior V.P Battle.",
     5105 : "Let's go to the Front Entrance.",
-    5106 : "Let's go to the Side Entrance.",    
+    5106 : "Let's go to the Side Entrance.",
     5107 : "Let's go to the Coin Mint.",
     5108 : "Let's go to the Dollar Mint.",
     5109 : "Let's go to the Bullion Mint.",
@@ -1534,7 +1534,7 @@ SpeedChatStaticText = {
     5203 : "We're going to the C.E.O. Battle.",
     5204 : "We're going to the Senior V.P Battle.",
     5205 : "We're going to the Front Entrance.",
-    5206 : "We're going to the Side Entrance.",    
+    5206 : "We're going to the Side Entrance.",
     5207 : "We're going to the Coin Mint.",
     5208 : "We're going to the Dollar Mint.",
     5209 : "We're going to the Bullion Mint.",
@@ -1565,12 +1565,12 @@ SpeedChatStaticText = {
     5315 : "Let's play Catch!",
     5316 : "Let's dance!",
     5317 : "To the dance floor!",
-    5318 : "Let's play Tug of War!",    
+    5318 : "Let's play Tug of War!",
     5319 : "Start the fireworks!",
     5320 : "These fireworks are beautiful!",
     5321 : "Nice decorations.",
     5322 : "I wish I could eat this cake!",
-        
+
     # Promotional Considerations
     10000 : "A escolha é sua!",
     10001 : "Você vai votar em quem?",
@@ -2095,11 +2095,11 @@ SpeedChatStaticText = {
     51510 : "Let's sail to Cutthroat.",
     51511 : "Let's sail to Rumrunner's Isle.",
     51512 : "Let's sail to Isla Cangrejos.",
-    
+
     # PLACES - LETS HEAD TO...
     51600 : "Let's head into town.",
     51601 : "Let's go to the docks.",
-    51602 : "Let's go to the bar.",    
+    51602 : "Let's go to the bar.",
 
     # PLACES - LETS HEAD TO... - PORT ROYAL
     51800 : "Let's go to Fort Charles.",
@@ -2284,8 +2284,8 @@ SpeedChatStaticText = {
 
     65000 : "Yes",
     65001 : "No",
-    
-    # Phrases for April Toon's week    
+
+    # Phrases for April Toon's week
     60100 : "Happy April Toons' Day!",
     60101 : "Happy April Toons' Week!",
     60102 : "Welcome to my April Toons' Day party!",
@@ -2316,7 +2316,7 @@ Emotes_General = "General"
 Emotes_Music = "Music"
 Emotes_Expressions = "Emotions"
 Emote_ShipDenied = "Cannot emote while sailing."
-Emote_MoveDenied = "Cannot emote while moving." 
+Emote_MoveDenied = "Cannot emote while moving."
 Emote_CombatDenied = "Cannot emote while in combat."
 Emote_CannonDenied = "Cannot emote while using a cannon."
 Emote_SwimDenied = "Cannot emote while swimming."

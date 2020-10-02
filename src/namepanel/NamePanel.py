@@ -1,9 +1,9 @@
 ##################################################################
 # NAME PANEL CLASS
-# Creates the Panel for PickAName and TypeAName 
+# Creates the Panel for PickAName and TypeAName
 ##################################################################
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 
 from otp.avatar import Avatar
 from direct.fsm import ClassicFSM
@@ -35,10 +35,10 @@ MAX_NAME_WIDTH = 8
 ###########################################
 class NamePanel(StateData.StateData):
     """NamePanel class"""
-    
+
     def __init__(self, listOfNames, doneEvent, usedNames):
         StateData.StateData.__init__(self, doneEvent)
-            
+
         self.listOfNames = listOfNames
         self.doneEvent = doneEvent
         self.avId = -1
@@ -47,12 +47,12 @@ class NamePanel(StateData.StateData):
 
         # Keep Track of Used Names
         self.usedNames = usedNames
-        
+
         # Get Appropriate Font
         self.interfaceFont = OTPGlobals.getInterfaceFont()
         self.signFont = OTPGlobals.getSignFont()
         self.nameEntryFont = OTPGlobals.getInterfaceFont()
-          
+
         # Stores the Current Name String
         self.name = ""
         self.nameIsChecked = 0
@@ -62,7 +62,7 @@ class NamePanel(StateData.StateData):
         # 1 = PickAName Mode
         # 2 = TypeAName Mode
         self.nameAction = 0
-        
+
         # Add an fsm to NameShop to handle PayState, PickAName, TypeAName,
         #   NameAccepted, NameRejected, and NameCouncil
         self.fsm = ClassicFSM.ClassicFSM(
@@ -104,31 +104,31 @@ class NamePanel(StateData.StateData):
         # Enforces Pick-A-Name's name Format
         self.accept("CheckTumblerPriority", self.__checkPriority)
         self.accept("CheckTumblerLinkage", self.__checkLinkage)
-        
+
         # Handle Done Events
         self.accept("updateNameResult", self.__updateNameResult)
 
         # Enter Initial State
         self.fsm.enterInitialState()
         self.fsm.request("PickAName")
-             
+
     # Exit Shop and Send to...
     def exit(self):
         self.ignore("CheckTumblerPriority")
         self.ignore("CheckTumblerLinkage")
-            
+
         # Ignore Done Events
         self.ignore("updateNameResult")
         self.ignore("rejectDone")
-        
+
         # Unload the Room
         self.unloadInterfaceGUI()
-        
-        
+
+
     #---------------------------------------#
     # Load Interface GUI
     #---------------------------------------#
-    
+
     # Loads the NameShop Specific GUI Objects
     def loadInterfaceGUI(self):
         # Create Dummy Frame to Hold Everything
@@ -159,14 +159,14 @@ class NamePanel(StateData.StateData):
             pos = (0, 0, 0),
             )
         self.TypeAName.reparentTo(self.interface)
-        
+
         # set-up name selector
         nameBalloon = loader.loadModel("phase_3/models/props/chatbox_input")
         guiButton = loader.loadModel("phase_3/models/gui/quit_button")
-      
+
         gui = loader.loadModel("phase_3/models/gui/nameshop_gui")
         typePanel = gui.find("**/typeNamePanel")
-        
+
         # Random Button
         self.randomButton = DirectButton(
             parent = aspect2d,
@@ -184,7 +184,7 @@ class NamePanel(StateData.StateData):
             command = self.randomName,
             )
         self.randomButton.reparentTo(self.PickAName)
-          
+
         # Button for Type-A-Name
         self.typeANameButton = DirectButton(
             parent = aspect2d,
@@ -202,7 +202,7 @@ class NamePanel(StateData.StateData):
             command = self.toggleNameMode,
             )
         self.typeANameButton.reparentTo(self.interface)
-        
+
         # Displays Current Name Combo
         self.nameResult = DirectLabel(
             parent = aspect2d,
@@ -215,7 +215,7 @@ class NamePanel(StateData.StateData):
             text_wordwrap = MAX_NAME_WIDTH,
             )
         self.nameResult.reparentTo(self.PickAName)
-        
+
         # Create 4 scrolled lists with different colors
         for i in range(len(self.listOfNames)):
             tPos = (i*0.4) - ((len(self.listOfNames)/2.0)*0.4) + 0.8
@@ -225,22 +225,22 @@ class NamePanel(StateData.StateData):
                 self.listOfNames[i][3], (1,0.80,0.80,1))
             self.tumblerList[i].tumbler.reparentTo(self.PickAName)
             self.tumblerList.setPos(tPos, 0, -0.1)
-            
-        #### GUI Elements for TypeAName ####      
+
+        #### GUI Elements for TypeAName ####
         self.nameLabel = OnscreenText.OnscreenText(
             OTPLocalizer.PleaseTypeName,
             parent = aspect2d,
             style = OnscreenText.ScreenPrompt,
             pos = (0, 0.53))
         self.nameLabel.reparentTo(self.TypeAName)
-        
+
         self.typeNotification = OnscreenText.OnscreenText(
             OTPLocalizer.AllNewNames,
             parent = aspect2d,
             style = OnscreenText.ScreenPrompt,
             pos = (0, 0.15))
         self.typeNotification.reparentTo(self.TypeAName)
-        
+
         self.nameEntry = DirectEntry(
             parent = aspect2d,
             relief = None,
@@ -255,7 +255,7 @@ class NamePanel(StateData.StateData):
             command = self.toggleNameMode,
             )
         self.nameEntry.reparentTo(self.TypeAName)
-        
+
         self.submitButton = DirectButton(
             parent = aspect2d,
             relief = None,
@@ -271,14 +271,14 @@ class NamePanel(StateData.StateData):
             command = self.submitName,
             )
         self.submitButton.reparentTo(self.TypeAName)
-        
+
         # Remove GUI Node
         gui.removeNode()
         nameBalloon.removeNode()
-        
+
         # Start with a Random Name
         self.randomName()
-        
+
     def unloadInterfaceGUI(self):
         for i in range(len(self.tumblerList)):
             self.tumblerList[i].unloadTumblerGUI()
@@ -303,7 +303,7 @@ class NamePanel(StateData.StateData):
         del self.TypeAName
         self.interface.destroy()
         del self.interface
-               
+
     # Toggles TypeAName Mode and PickAName Mode
     def toggleNameMode(self):
         if self.fsm.getCurrentState().getName() == 'TypeAName':
@@ -313,7 +313,7 @@ class NamePanel(StateData.StateData):
             self.typeANameButton['text'] = OTPLocalizer.PickANameButton
             self.fsm.request("TypeAName")
 
-   
+
     #---------------------------------------#
     # Get Random Name Function
     #---------------------------------------#
@@ -323,11 +323,11 @@ class NamePanel(StateData.StateData):
         # Randomize Each Tumbler
         for i in range(len(self.tumblerList)):
             self.tumblerList[i].getRandomResult()
-        
+
         # Update NameResult
         self.__updateNameResult()
 
-        
+
     #---------------------------------------#
     # Update Name Result
     #---------------------------------------#
@@ -345,7 +345,7 @@ class NamePanel(StateData.StateData):
                self.nameResult['text'] += " "
         self.name = self.nameResult['text']
 
-    
+
     #---------------------------------------#
     # Enforce Name Format in Pick-a-Name
     #---------------------------------------#
@@ -377,7 +377,7 @@ class NamePanel(StateData.StateData):
                 linkageValue = self.tumblerList[i].linkage
                 isActive = self.tumblerList[i].isActive
 
-        # Activate or Deactivate the Linked Tumblerlist 
+        # Activate or Deactivate the Linked Tumblerlist
         for i in self.tumblerList:
             if (self.tumblerList[i].linkage == linkageValue):
                 if isActive:
@@ -385,7 +385,7 @@ class NamePanel(StateData.StateData):
                 else:
                     self.tumblerList[i].deactivateTumbler()
 
-        
+
     #---------------------------------------#
     # Type-A-Name Functions
     #---------------------------------------#
@@ -394,7 +394,7 @@ class NamePanel(StateData.StateData):
         self.notify.debug('__submitName')
         self.nameEntry['focus'] = 0
         self.nameIsChecked = 1
-        
+
         # strip leading/trailing whitespace
         name = self.nameEntry.get()
         # make sure we're able to recognize unicode whitespace
@@ -416,7 +416,7 @@ class NamePanel(StateData.StateData):
             self.checkNameTyped()
 
 
-    # Checks to see if Submitted Name is ok Locally    
+    # Checks to see if Submitted Name is ok Locally
     def nameIsValid(self, name):
         """nameIsValid(self, string name)
         Checks the name for legitimacy according to our various
@@ -435,11 +435,11 @@ class NamePanel(StateData.StateData):
         # name has passed local checks
         return None
 
-    
+
     #---------------------------------------#
     # Reject Name Functions
     #---------------------------------------#
-    
+
     def rejectName(self, str):
         self.notify.debug('rejectName')
         self.name = ""
@@ -457,11 +457,11 @@ class NamePanel(StateData.StateData):
         self.rejectDialog.cleanup()
         self.nameEntry['focus'] = 1
 
-        
+
     #---------------------------------------#
     # Define FSM
     #---------------------------------------#
-    
+
     # Specific State functions
     ##### Init state #####
     def enterInit(self):
@@ -470,7 +470,7 @@ class NamePanel(StateData.StateData):
         self.PickAName.hide()
     def exitInit(self):
         pass
-    
+
     ##### PickAName state #####
     def enterPickANameState(self):
         self.notify.debug('enterPickANameState')
@@ -480,17 +480,17 @@ class NamePanel(StateData.StateData):
 
     def exitPickANameState(self):
         self.PickAName.hide()
-        
-    ##### TypeAName state ##### 
+
+    ##### TypeAName state #####
     def enterTypeANameState(self):
         self.notify.debug('enterTypeANameState')
         self.TypeAName.show()
         self.nameEntry.set("")
         self.nameEntry['focus'] = 1
-        
+
     def exitTypeANameState(self):
         self.TypeAName.hide()
-        
+
     ##### Done state #####
     def enterDone(self):
         self.notify.debug('enterDone')

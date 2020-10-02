@@ -6,13 +6,13 @@ from otp.ai import AIMsgTypes
 from direct.directnotify.DirectNotifyGlobal import directNotify
 
 from direct.task import Task
-import Queue
+import queue
 from direct.distributed.AsyncRequest import AsyncRequest
-from pandac.PandaModules import Thread
+from otp.otpbase.OTPModules import Thread
 
 notify = directNotify.newCategory('SnapshotRendererUD')
 
-       
+
 #--------------------------------------------------
 
 class AvatarDNARequest(AsyncRequest):
@@ -43,7 +43,7 @@ class AvatarDNARequest(AsyncRequest):
             self.air.snapshotRenderer.errorFetchingAvatar(self.jobId,self.avatarId)
         else:
             self.air.snapshotRenderer.renderSnapshot(self.jobId,self.avatarId,av.dna,self.writeToFile)
-        
+
         self.delete()
 
 #--------------------------------------------------
@@ -63,7 +63,7 @@ class SnapshotRendererUD(DistributedObjectGlobalUD):
 
         self.dispatcherLoc = OtpDoGlobals.OTP_DO_ID_SNAPSHOT_DISPATCHER
         self.myLoc = 0
-        
+
 
     def announceGenerate(self):
         assert self.notify.debugCall()
@@ -84,7 +84,7 @@ class SnapshotRendererUD(DistributedObjectGlobalUD):
     # -- Internal methods --
 
     def renderSnapshot(self,jobId,avatarId,avatarDNA,writeToFile):
-        print "OTP-level renderSnapshot method called!  You should override this!"
+        print("OTP-level renderSnapshot method called!  You should override this!")
 
     def errorFetchingAvatar(self,jobId,avatarId):
         """
@@ -113,8 +113,8 @@ class SnapshotRendererUD(DistributedObjectGlobalUD):
         self.notify.debug("Successfully rendered avatar %d to %s" % (avatarId,writeToFile))
         self.air.sendUpdateToGlobalDoId("SnapshotDispatcherUD","renderSuccessful",self.dispatcherLoc,[self.myLoc,jobId])
         self.startAskingForWork()
-        
-        
+
+
 
     # -- Distributed Methods --
 
@@ -146,4 +146,3 @@ class SnapshotRendererUD(DistributedObjectGlobalUD):
         # query the dispatcher for work
         self.air.sendUpdateToGlobalDoId("SnapshotDispatcherUD","requestNewWork",self.dispatcherLoc,[self.myLoc])
         return Task.again
-

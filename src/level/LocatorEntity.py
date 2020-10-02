@@ -1,5 +1,5 @@
-import Entity, BasicEntities
-from pandac.PandaModules import NodePath
+from . import Entity, BasicEntities
+from otp.otpbase.OTPModules import NodePath
 from direct.directnotify import DirectNotifyGlobal
 
 class LocatorEntity(Entity.Entity, NodePath):

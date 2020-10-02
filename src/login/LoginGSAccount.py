@@ -1,15 +1,15 @@
 """LoginGSAccount: Login using the original Game Server method"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed.MsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginBase
+from . import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 
 
 class LoginGSAccount(LoginBase.LoginBase):
     """This is the really old way toontown devs get into their local toontown environment."""
-    
+
     def __init__(self, cr):
         LoginBase.LoginBase.__init__(self, cr)
 
@@ -68,12 +68,12 @@ class LoginGSAccount(LoginBase.LoginBase):
         """
         Send a message to the server with our loginName
         """
-        
+
         DISLID = config.GetInt('fake-DISL-PlayerAccountId',0)
         if not DISLID:
             NameStringId = ("DISLID_%s" % (self.loginName))
             DISLID = config.GetInt(NameStringId, 0)
-        
+
         cr=self.cr
         # Time to send a login message
         datagram = PyDatagram()
@@ -82,7 +82,7 @@ class LoginGSAccount(LoginBase.LoginBase):
         # Add login name
         datagram.addString(self.loginName)
         # Add our IP address
-        
+
         if cr.connectMethod != cr.CM_HTTP:
             datagram.addUint32(cr.tcpConn.getAddress().getIp())
         else:
@@ -107,7 +107,7 @@ class LoginGSAccount(LoginBase.LoginBase):
         datagram.addUint32(DISLID)
         # Whether or not to enable OTP_WHITELIST
         datagram.addString(config.GetString('otp-whitelist',"YES"))
-        
+
         # Send the message
         cr.send(datagram)
 
@@ -120,7 +120,7 @@ class LoginGSAccount(LoginBase.LoginBase):
         # Here in the old login system, we don't bother to implement
         # this.
         return
-    
+
     def requestPwdReminder(self, email=None, acctName=None):
         """
         Request a password-reminder email, given an email address OR
@@ -156,7 +156,7 @@ class LoginGSAccount(LoginBase.LoginBase):
         try to authenticate the parent password
         """
         # This is just a stub that matches the user account password only.
-        return ((password == parentPassword), None)    
+        return ((password == parentPassword), None)
 
     def supportsAuthenticateDelete(self):
         """ Returns true if authenticateDelete is implemented

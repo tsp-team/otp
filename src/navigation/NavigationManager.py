@@ -1,14 +1,14 @@
 import string
 import md5
 import subprocess
-import cPickle as pickle
+import pickle as pickle
 import time
 import os
 
 from otp.navigation.AreaMapper import AreaMapper
 from otp.navigation.NavMesh import NavMesh
 from otp.otpbase import OTPGlobals
-from pandac.PandaModules import BitMask32
+from otp.otpbase.OTPModules import BitMask32
 from direct.directnotify import DirectNotifyGlobal
 
 
@@ -40,7 +40,7 @@ class NavigationManager(object):
       not be properly explored--only the uppermost floor is found.
     * NavMesh itself is not impacted by Z-axis overlap, so if you want to use this pathfinding system
       with your 20-story building, just figure out how to write an AreaMapper for it!
-    
+
     '''
     def __init__(self, navFilePath, envIdToFilename):
         self.navFilePath = navFilePath
@@ -75,17 +75,17 @@ class NavigationManager(object):
             #monsterData.append( str(np.getTransform(env)) )
             #monsterData.append( str(np.getCollideMask()) )
             monsterData.append("cn")
-            
+
             node = np.node()
 
             if node.getIntoCollideMask() & OTPGlobals.WallBitmask != BitMask32.allOff():
-                for i in xrange(node.getNumSolids()):
+                for i in range(node.getNumSolids()):
                     s = node.getSolid(i)
-                    
+
                     monsterData.append( str(s) )
-                    
+
         monsterData = string.join(monsterData, "")
-    
+
         hash = md5.new(monsterData)
 
         return hash.digest()
@@ -154,7 +154,7 @@ class NavigationManager(object):
 
                 assert self.notify.debug("Farming rows out to %s slaves:" % numProcs)
 
-                for i in xrange(numProcs):
+                for i in range(numProcs):
                     if rowsLeft < rowsPerProc*2:
                         assert i == numProcs-1
                         todo = rowsLeft
@@ -162,7 +162,7 @@ class NavigationManager(object):
                         todo = rowsPerProc
 
                     rowsLeft -= todo
-                    
+
                     args = pickle.dumps([self.navFilePath,
                                          self.envIdToFilename[id]+".msh",
                                          i*rowsPerProc,
@@ -195,9 +195,9 @@ class NavigationManager(object):
                 newMesh.generatePathData()
 
             newMesh.createPathTable()
-                
+
             t2 = time.time()
-                
+
             assert self.notify.debug("Done!  Pathfinding time: %0.3f seconds" % (t2-t1))
 
             assert self.notify.debug("Total preprocessing time: %0.3f seconds" % (t2-t0))
@@ -206,17 +206,17 @@ class NavigationManager(object):
 
             if not newMesh.checkHash(hash):
                 raise "Hash check still failed after we regenerated the NavMesh!  Something is seriously wrong!"
-            
+
         # Mesh is now accurate, we're good to go.
         self.meshes[id] = newMesh
-        
+
 
 def gogogo():
-    from pandac.PandaModules import Filename
+    from otp.otpbase.OTPModules import Filename
     from pirates.world.LocationConstants import LocationIds
 
     navpath = os.path.expandvars(config.GetString("navdata-path","$OTP/src/navigation/"))
-    
+
     simbase.nm = NavigationManager(navpath,
                                    {LocationIds.PORT_ROYAL_ISLAND:'port_royal'})
     pr = simbase.air.doFind("Port Royal")
@@ -225,13 +225,13 @@ def gogogo():
 def randomlookups():
     import random
     import time
-    mesh = simbase.air.navMgr.meshes.values()[0]
+    mesh = list(simbase.air.navMgr.meshes.values())[0]
 
     assert self.notify.debug("Timing lookups...")
 
     routeList = []
 
-    for i in xrange(1000000):
+    for i in range(1000000):
         routeList.append((random.randint(0,mesh.numNodes-1),random.randint(0,mesh.numNodes-1)))
 
     t1 = time.time()
@@ -252,15 +252,15 @@ def randomlookups():
 
 def routelookups():
     import time
-    mesh = simbase.nm.meshes.values()[0]
+    mesh = list(simbase.nm.meshes.values())[0]
     assert self.notify.debug("Timing lookups...")
 
     t1 = time.time()
 
     i = 0
 
-    for i in xrange(mesh.numNodes):
-        for j in xrange(mesh.numNodes):
+    for i in range(mesh.numNodes):
+        for j in range(mesh.numNodes):
             route = mesh.pathTable.findRoute(i,j)
 
     t2 = time.time()
@@ -277,21 +277,21 @@ def intersectiontest():
     s = set()
     t = set()
 
-    for i in xrange(0,2500):
+    for i in range(0,2500):
         s.add(i)
-    for i in xrange(2000,4000):
+    for i in range(2000,4000):
         t.add(i)
 
     t1 = time.time()
 
-    for i in xrange(1000000):
+    for i in range(1000000):
         s.intersection(t)
 
     t2 = time.time()
 
     assert self.notify.debug("Intersection time: %0.3f" % (t2-t1))
     assert self.notify.debug("Intersects per second: %0.1f" % (1000000 / (t2-t1)))
-    
+
 
 def addtest():
     import time
@@ -300,26 +300,26 @@ def addtest():
 
     t1 = time.time()
 
-    for i in xrange(1000000):
+    for i in range(1000000):
         s.add(i)
 
     t2 = time.time()
 
     assert self.notify.debug("Add time: %0.3f" % (t2-t1))
     assert self.notify.debug("Adds per second: %0.1f" % (1000000 / (t2-t1)))
-    
+
 
 def findNodeTest():
     import time
 
-    mesh = simbase.nm.meshes.values()[0]
+    mesh = list(simbase.nm.meshes.values())[0]
     pr = simbase.air.doFind("Port Royal")
 
     mesh.makeNodeLocator(pr)
 
     t1 = time.time()
 
-    for i in xrange(10000):
+    for i in range(10000):
         pId = mesh.findNodeFromPos(pr, 0.5, 0.5)
 
     t2 = time.time()

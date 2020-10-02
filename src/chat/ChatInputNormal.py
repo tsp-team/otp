@@ -4,7 +4,7 @@ from direct.showbase import DirectObject
 from otp.otpbase import OTPGlobals
 import sys
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase import OTPLocalizer
 
 class ChatInputNormal(DirectObject.DirectObject):
@@ -21,7 +21,7 @@ class ChatInputNormal(DirectObject.DirectObject):
 
         self.normalPos = Vec3(-1.083, 0, 0.804)
         self.whisperPos = Vec3(0.0, 0, 0.71)
-        
+
         self.whisperAvatarName = None
         self.whisperAvatarId = None
         self.toPlayer = 0
@@ -80,12 +80,12 @@ class ChatInputNormal(DirectObject.DirectObject):
         base.win.closeIme()
         self.ignore('arrow_up-up')
         self.ignore('arrow_down-up')
-        
+
     def checkForOverRide(self):
         #ChatInputNormal likes to intercept other direct entries
         #too much was hard wired to the chatManagar so I'm adding a final stage override - JML
         return False
-    
+
     def sendChat(self, text):
         """
         Send the text from the entry
@@ -106,7 +106,7 @@ class ChatInputNormal(DirectObject.DirectObject):
                     self.whisperAvatarName = None
                     self.whisperAvatarId = None
                     self.toPlayer = 0
-                    
+
             elif self.whisperAvatarId:
                 self.chatMgr.sendWhisperString(text, self.whisperAvatarId)
                 self.whisperAvatarName = None
@@ -136,7 +136,7 @@ class ChatInputNormal(DirectObject.DirectObject):
         if not ChatInputNormal.ExecNamespace:
             # Import some useful variables into the ExecNamespace initially.
             ChatInputNormal.ExecNamespace = { }
-            exec 'from pandac.PandaModules import *' in globals(), self.ExecNamespace
+            exec('from otp.otpbase.OTPModules import *', globals(), self.ExecNamespace)
             self.importExecNamespace()
 
         # Now try to evaluate the expression using ChatInputNormal.ExecNamespace as
@@ -149,7 +149,7 @@ class ChatInputNormal(DirectObject.DirectObject):
             # "import math".  These aren't expressions, so eval()
             # fails, but they can be exec'ed.
             try:
-                exec message in globals(), ChatInputNormal.ExecNamespace
+                exec(message, globals(), ChatInputNormal.ExecNamespace)
                 return 'ok'
             except:
                 exception = sys.exc_info()[0]
@@ -173,7 +173,7 @@ class ChatInputNormal(DirectObject.DirectObject):
 
     def chatButtonPressed(self):
         self.sendChat(self.chatEntry.get())
-    
+
     def importExecNamespace(self):
         # Derived classes should take advantage of this hook to import
         # useful variables into the chat namespace for developer
@@ -188,17 +188,14 @@ class ChatInputNormal(DirectObject.DirectObject):
         self.chatEntry.set(self.history[self.historyIndex])
         self.historyIndex += 1
         self.historyIndex %= len(self.history)
-        
+
     def getNextHistory(self):
         self.chatEntry.set(self.history[self.historyIndex])
         self.historyIndex -= 1
         self.historyIndex %= len(self.history)
-        
+
     def setPos(self, posX, posY = None, posZ = None):
         if posX and posY and posZ:
             self.chatFrame.setPos(posX,posY,posZ)
         else:
             self.chatFrame.setPos(posX)
-            
-
-    

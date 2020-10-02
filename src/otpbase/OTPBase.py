@@ -3,8 +3,8 @@ OTPBase module: contains the OTPBase class
 """
 
 from direct.showbase.ShowBase import ShowBase
-from pandac.PandaModules import Camera, TPLow, VBase4, ColorWriteAttrib, Filename, getModelPath, NodePath
-import OTPRender
+from otp.otpbase.OTPModules import Camera, TPLow, VBase4, ColorWriteAttrib, Filename, getModelPath, NodePath
+from . import OTPRender
 import time
 import math
 import re
@@ -20,6 +20,7 @@ class OTPBase(ShowBase):
             self.errorAccumulatorBuffer = ''
             taskMgr.add(self.delayedErrorCheck, "delayedErrorCheck", priority = 10000)
 
+       self.dataUnused = NodePath("dataUnused")
 
        # Turn nametags on and off for video capture
        self.wantNametags = self.config.GetBool('want-nametags', 1)
@@ -56,6 +57,11 @@ class OTPBase(ShowBase):
                base.cam.node().setCameraMask(OTPRender.MainCameraBitmask | OTPRender.EnviroCameraBitmask)
 
        taskMgr.setupTaskChain('net')
+
+    def isMainWindowOpen(self):
+        if self.win != None:
+            return self.win.isValid()
+        return 0
 
     def setTaskChainNetThreaded(self):
         """ If want-threaded-network is true, move the network tasks
@@ -133,7 +139,7 @@ class OTPBase(ShowBase):
 
         if not self.enviroCam:
             self.enviroCam = self.cam.attachNewNode(Camera('enviroCam'))
-            
+
 
         mainDR = self.camNode.getDisplayRegion(0)
         if self.stereoEnabled:
@@ -149,7 +155,7 @@ class OTPBase(ShowBase):
                 self.win.removeDisplayRegion(mainDR)
                 mainDR = self.win.makeStereoDisplayRegion()
                 mainDR.setCamera(self.cam)
-            
+
             ml = mainDR.getLeftEye()
             mr = mainDR.getRightEye()
             el = self.enviroDR.getLeftEye()
@@ -172,7 +178,7 @@ class OTPBase(ShowBase):
                 mainDR.setCamera(self.cam)
 
             self.enviroDR.setSort(-10)
-            
+
         self.enviroDR.setClearColor(clearColor)
         self.win.setClearColor(clearColor)
         self.enviroDR.setCamera(self.enviroCam)
@@ -192,7 +198,7 @@ class OTPBase(ShowBase):
             # If we want pixel zoom, enable it for the new display
             # region.
             self.setupAutoPixelZoom()
-            
+
 
     def setupAutoPixelZoom(self):
         """ Sets up the system to zoom the pixel resolution of the
@@ -221,7 +227,7 @@ class OTPBase(ShowBase):
             self.win.setClearColorActive(True)
             self.win.setClearDepthActive(True)
             self.backgroundDrawable = self.win
-        
+
         self.pixelZoomSetup = True
         self.targetPixelZoom = 1.0
         self.pixelZoomTask = None
@@ -248,7 +254,7 @@ class OTPBase(ShowBase):
         hardware accelerated rendering, but since it checks for the
         presence of a hardware renderer and does nothing in this case,
         it is always safe to call this method. """
-        
+
         if not self.backgroundDrawable.supportsPixelZoom():
             flag = False
 
@@ -282,7 +288,7 @@ class OTPBase(ShowBase):
 
         # Now set the pixel zoom according to the average feet per
         # second the camera has moved over the past history seconds.
-        dist = sum(map(lambda pair: pair[1], self.pixelZoomCamMovedList))
+        dist = sum([pair[1] for pair in self.pixelZoomCamMovedList])
         speed = dist / self.pixelZoomCamHistory
 
         if speed < 5:
@@ -307,7 +313,7 @@ class OTPBase(ShowBase):
          # returns (low, mid, high)
          # override if desired
          return 300, 600, 1200
-     
+
     def setLocationCode(self, locationCode):
         if locationCode != self.locationCode:
             self.locationCode = locationCode
@@ -342,7 +348,7 @@ class OTPBase(ShowBase):
                 return
             else:
                 self.errorAccumulatorBuffer += "file not in phase (%s, %s)\n"%(file,path)
-                return        
+                return
 
         basePhase = float(match.groups()[0])
         if(not launcher.getPhaseComplete(basePhase)):

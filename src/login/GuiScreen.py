@@ -1,6 +1,6 @@
 """GuiScreen"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase import OTPGlobals
 from direct.gui.DirectGui import *
 from otp.otpgui import OTPDialog
@@ -29,7 +29,7 @@ class GuiScreen:
         # when we set the focus explicitly, we don't want to play
         # the click sound
         self.suppressClickSound = 0
-        
+
     def startFocusMgmt(self,
                        startFocus=0,
                        enterPressBehavior=DGG.ENTERPRESS_ADVANCE_IFNOTEMPTY,
@@ -38,7 +38,7 @@ class GuiScreen:
         """
         Sets up handlers to handle management of input focus
         For now, you must set self.focusList before calling startFocusMgmt.
-        
+
         GuiScreen hooks into the callbacks of DirectEntrys. Thus, GuiScreen
         is automatically notified when a DirectEntry focus item gains the
         input focus through a mouse click. The same is true for
@@ -102,7 +102,7 @@ class GuiScreen:
         # Note that we still need to listen for DirectEntry focus events,
         # in case the user clicks on a DirectEntry.
         self.focusHandlerAbsorbCounts = {}
-        for i in xrange(len(self.focusList)):
+        for i in range(len(self.focusList)):
             item = self.focusList[i]
             if isinstance(item, DirectEntry):
                 self.focusHandlerAbsorbCounts[item] = 0
@@ -111,7 +111,7 @@ class GuiScreen:
         self.userFocusHandlers = {}
         self.userCommandHandlers = {}
 
-        for i in xrange(len(self.focusList)):
+        for i in range(len(self.focusList)):
             item = self.focusList[i]
             if isinstance(item, DirectEntry):
                 # store the old focus handler so that we can chain to it
@@ -130,7 +130,7 @@ class GuiScreen:
                 item['command'] = None
                 # this has to be a list (not a tuple)
                 item['extraArgs'] = []
-                
+
             elif isinstance(item, DirectScrolledList):
                 # for DirectScrolledLists, 'command' is invoked whenever
                 # the up/down controls are pressed; hook into that to
@@ -146,12 +146,12 @@ class GuiScreen:
 
         # set up the Enter-press handlers
         self.enterPressHandlers = {}
-        for i in xrange(len(self.focusList)):
+        for i in range(len(self.focusList)):
             item = self.focusList[i]
 
             # pick an enter-press behavior
             behavior = enterPressBehavior
-            if overrides.has_key(item):
+            if item in overrides:
                 behavior = overrides[item]
 
             if callable(behavior):
@@ -233,7 +233,7 @@ class GuiScreen:
         less than zero, it will be wrapped.
         """
         #GuiScreen.notify.spam('setFocus: %s' % arg)
-        
+
         if type(arg) == type(0):
             index = arg
         else:
@@ -320,16 +320,16 @@ class GuiScreen:
         if userHandler:
             if isinstance(item, DirectEntry):
                 enteredText = item.get()
-                apply(userHandler, [enteredText] + userHandlerArgs)
+                userHandler(*[enteredText] + userHandlerArgs)
             elif isinstance(item, DirectScrolledList):
-                apply(userHandler, userHandlerArgs)
+                userHandler(*userHandlerArgs)
 
     def __chainToUserFocusHandler(self, item):
         # call the user focus handler, if any
         if isinstance(item, DirectEntry):
             userHandler, userHandlerArgs = self.userFocusHandlers[item]
             if userHandler:
-                apply(userHandler, userHandlerArgs)
+                userHandler(*userHandlerArgs)
 
     ### TAB key handlers ##########
 
@@ -409,7 +409,7 @@ class GuiScreen:
         self.__focusChangedThisFrame = 0
         self.frameStartTaskName = 'GuiScreenFrameStart'
         taskMgr.add(self.__handleFrameStart, self.frameStartTaskName, -100)
-        
+
     def __stopFrameStartTask(self):
         taskMgr.remove(self.frameStartTaskName)
         del self.frameStartTaskName

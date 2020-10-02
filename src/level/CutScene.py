@@ -3,10 +3,10 @@
 
 from direct.showbase import DirectObject
 from direct.directnotify import DirectNotifyGlobal
-import BasicEntities
+from . import BasicEntities
 
-from pandac.PandaModules import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
+from otp.otpbase.OTPModules import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
 
@@ -106,13 +106,13 @@ def doorUnlock(self, track, subjectNodePath, duration):
 
 class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('CutScene')
-    
+
     effects={
         "nothing": nothing,
         "irisInOut": irisInOut,
         "letterBox": letterBox,
     }
-    
+
     motions={
         "foo1": foo1,
         "doorUnlock": doorUnlock,
@@ -138,24 +138,24 @@ class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
         self.startStopEvent = None
         BasicEntities.NodePathEntity.destroy(self)
         #DirectObject.DirectObject.destroy(self)
-    
+
     def setEffect(self, effect):
         assert self.debugPrint("setEffect(effect=%s)"%(effect,))
         self.effect=effect
         assert self.effects[effect]
         self.getEffect=self.effects[effect]
-    
+
     def setMotion(self, motion):
         assert self.debugPrint("setMotion(motion=%s)"%(motion,))
         self.motionType=motion
         assert self.motions[motion]
         self.getMotion=self.motions[motion]
-    
+
     def setSubjectNodePath(self, subjectNodePath):
         assert self.debugPrint(
             "setSubjectNodePath(subjectNodePath=%s)"%(subjectNodePath,))
         self.subjectNodePath=subjectNodePath
-    
+
     def startOrStop(self, start):
         assert self.debugPrint("startOrStop(start=%s)"%(start,))
         trackName = "cutSceneTrack-%d" % (id(self),)
@@ -175,7 +175,7 @@ class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
                 self.track.pause()
                 self.track = None
                 base.localAvatar.startUpdateSmartCamera()
-    
+
     def setStartStop(self, event):
         assert self.debugPrint("setStartStop(event=%s)"%(event,))
         if self.startStopEvent:
@@ -183,7 +183,7 @@ class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
         self.startStopEvent = self.getOutputEventName(event)
         if self.startStopEvent:
             self.accept(self.startStopEvent, self.startOrStop)
-    
+
     def getName(self):
         #return "CutScene-%s"%(self.entId,)
         return "switch-%s"%(self.entId,)

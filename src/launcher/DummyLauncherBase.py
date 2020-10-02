@@ -2,7 +2,7 @@
 # It's important to import PandaModules first, in particular before
 # importing Task, because once PandaModules is imported, Task.py can
 # find pandac.pandaexpressModules.
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 
 import string
 from direct.showbase.MessengerGlobal import *
@@ -50,7 +50,7 @@ class DummyLauncherBase:
     def setPhaseComplete(self, phase, percent):
         # again, for testing
         self.phaseComplete[phase] = percent
-        
+
     def getPhaseComplete(self, phase):
         return (self.phaseComplete[phase] >= 100)
 
@@ -69,17 +69,17 @@ class DummyLauncherBase:
     def setDisconnectDetailsNormal(self):
         self.disconnectCode = 0
         self.disconnectMsg = 'normal'
-        
+
     def setDisconnectDetails(self, newCode, newMsg):
         self.disconnectCode = newCode
         self.disconnectMsg = newMsg
-        
+
     def setServerVersion(self, version):
         """
         Set the server version.
         """
         self.ServerVersion = version
-        
+
     def getServerVersion(self):
         return self.ServerVersion
 
@@ -111,7 +111,7 @@ class DummyLauncherBase:
 
     def getDeployment(self):
         """
-        Get the language version 
+        Get the language version
         """
         return 'US'
 
@@ -136,7 +136,7 @@ class DummyLauncherBase:
         self.setPhaseComplete(task.phase, percentComplete)
         messenger.send("launcherPercentPhaseComplete", [task.phase, percentComplete, 0, 0])
         if (percentComplete >= 100.0):
-            messenger.send('phaseComplete-' + `task.phase`)
+            messenger.send('phaseComplete-' + repr(task.phase))
             return Task.done
         else:
             return Task.cont

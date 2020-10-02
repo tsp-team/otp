@@ -1,8 +1,8 @@
 """LoginTTAccount: Login using an Account Manager server"""
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.directnotify import DirectNotifyGlobal
-import LoginTTAccount
+from . import LoginTTAccount
 
 
 class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
@@ -25,7 +25,7 @@ class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
         self.playTokenIsEncrypted=1
         self.freeTimeExpires=-1
         self.cr.freeTimeExpiresAt=self.freeTimeExpires
-    
+
     def createBilling(self, loginName, password, data):
         pass
 
@@ -36,15 +36,15 @@ class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
         return 1
 
     # from TTAccount: def authenticateParentPassword(self, loginName, password, parentPassword):
-    
+
     # from TTAccount: def enableSecretFriends(self, loginName, password, parentPassword, enable=1):
-    
+
     def changePassword(self, loginName, password, newPassword):
         pass
 
     def requestPwdReminder(self, email=None, acctName=None):
         pass
-    
+
     def cancelAccount(self, loginName, password):
         pass
 
@@ -52,7 +52,7 @@ class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
         pass
 
     def getErrorCode(self):
-        if not self.has_key("response"):
+        if "response" not in self:
             return 0
         return self.response.getInt('errorCode', 0)
 

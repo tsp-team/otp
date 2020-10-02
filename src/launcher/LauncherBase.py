@@ -9,8 +9,8 @@ import sys
 import os
 import time
 import string
-import __builtin__
-from pandac.libpandaexpressModules import *
+import builtins
+from panda3d.core import *
 # Import DIRECT files
 from direct.showbase.MessengerGlobal import *
 from direct.showbase.DirectObject import DirectObject
@@ -138,7 +138,7 @@ class LauncherBase(DirectObject):
 
         # This line is to ensure that Python is running in opt mode -OO.
         if __debug__:
-            print "WARNING: Client should run Python optimized -OO"
+            print("WARNING: Client should run Python optimized -OO")
 
         self.taskMgrStarted = False
 
@@ -189,23 +189,23 @@ class LauncherBase(DirectObject):
 
         if sys.platform == "darwin":
             # On OSX, we want to get the system profile into the log.
-            os.system('/usr/sbin/system_profiler >>' + logfile)    
+            os.system('/usr/sbin/system_profiler >>' + logfile)
         elif sys.platform == "linux2":
-            os.system('cat /proc/cpuinfo >>' + logfile) 
-            os.system('cat /proc/meminfo >>' + logfile) 
-            os.system('/sbin/ifconfig -a >>' + logfile) 
+            os.system('cat /proc/cpuinfo >>' + logfile)
+            os.system('cat /proc/meminfo >>' + logfile)
+            os.system('/sbin/ifconfig -a >>' + logfile)
 
         # Write to the log
-        print "\n\nStarting %s..." % self.GameName
-        print ("Current time: " + time.asctime(time.localtime(time.time()))
-               + " " + time.tzname[0])
-        print "sys.path = ", sys.path
-        print "sys.argv = ", sys.argv
-        print "os.environ = ", os.environ
+        print("\n\nStarting %s..." % self.GameName)
+        print(("Current time: " + time.asctime(time.localtime(time.time()))
+               + " " + time.tzname[0]))
+        print("sys.path = ", sys.path)
+        print("sys.argv = ", sys.argv)
+        print("os.environ = ", os.environ)
 
         if(len(sys.argv)>=self.ArgCount):
             Configrc_args = sys.argv[self.ArgCount-1]
-            print("generating configrc using: '" + Configrc_args + "'")
+            print(("generating configrc using: '" + Configrc_args + "'"))
         else:
             Configrc_args = ""
             print("generating standard configrc")
@@ -216,9 +216,9 @@ class LauncherBase(DirectObject):
         # arguments to pass to Configrc.exe, but the use of Configrc.exe
         # itself is a stopgap until we can replace that system with the newer
         # signed prc file system.
-        if os.environ.has_key("PRC_EXECUTABLE_ARGS"):
-            print "PRC_EXECUTABLE_ARGS is set to: " + os.environ["PRC_EXECUTABLE_ARGS"]
-            print "Resetting PRC_EXECUTABLE_ARGS"
+        if "PRC_EXECUTABLE_ARGS" in os.environ:
+            print("PRC_EXECUTABLE_ARGS is set to: " + os.environ["PRC_EXECUTABLE_ARGS"])
+            print("Resetting PRC_EXECUTABLE_ARGS")
 
         # Cannot assign to os.environ here; we have to use
         # ExecutionEnvironment to make the low-level prc respect it.
@@ -227,9 +227,9 @@ class LauncherBase(DirectObject):
 
         # Actually, we still have to set CONFIG_CONFIG too, since Configrc.exe
         # itself expects that.
-        if os.environ.has_key("CONFIG_CONFIG"):
-            print "CONFIG_CONFIG is set to: " + os.environ["CONFIG_CONFIG"]
-            print "Resetting CONFIG_CONFIG"
+        if "CONFIG_CONFIG" in os.environ:
+            print("CONFIG_CONFIG is set to: " + os.environ["CONFIG_CONFIG"])
+            print("Resetting CONFIG_CONFIG")
         os.environ["CONFIG_CONFIG"] = ":_:configdir_.:configpath_:configname_Configrc.exe:configexe_1:configargs_-stdout " + Configrc_args
 
         # Now reload the Configrc file.  We've actually already run it
@@ -239,7 +239,7 @@ class LauncherBase(DirectObject):
 
         # This is our config object until we get the show running
         launcherConfig = getConfigExpress()
-        __builtin__.config = launcherConfig
+        builtins.config = launcherConfig
 
         # We'll need a MiniTaskManager to manage our download tasks
         # before we've downloaded enough to start the real one.
@@ -363,7 +363,7 @@ class LauncherBase(DirectObject):
             self.fromCD = 0
         else:
             self.fromCD = tmpVal
-        self.notify.info('patch directory is ' + `self.fromCD`)
+        self.notify.info('patch directory is ' + repr(self.fromCD))
 
         assert self.notify.debug("init: Launcher found install dir: " + self.topDir.cStr())
 
@@ -424,7 +424,7 @@ class LauncherBase(DirectObject):
         phaseIdx = 0
         for phase in self.LauncherPhases:
             # Clear the registry on each phase's percentage completion
-            percentPhaseCompleteKey = "PERCENT_PHASE_COMPLETE_" + `phase`
+            percentPhaseCompleteKey = "PERCENT_PHASE_COMPLETE_" + repr(phase)
             self.setRegistry(percentPhaseCompleteKey, 0)
             # Initialize
             self.phaseComplete[phase] = 0
@@ -871,7 +871,7 @@ class LauncherBase(DirectObject):
             assert self.notify.debug('downloadMultifile: already done')
             callback()
             return
-        
+
         self.launcherMessage(self.Localizer.LauncherDownloadFile %
                              {"name": self.currentPhaseName,
                               "current": self.currentPhaseIndex,
@@ -883,7 +883,7 @@ class LauncherBase(DirectObject):
         task.callback = callback
         task.callbackProgress = callbackProgress
         task.lastUpdate = 0
-        
+
         self.httpChannel.getHeader(DocumentSpec(task.mfURL))
         if self.httpChannel.isFileSizeKnown():
             task.totalSize = self.httpChannel.getFileSize()
@@ -901,7 +901,7 @@ class LauncherBase(DirectObject):
                 self.notify.info('already have full file! Skipping download.')
                 callback()
                 return
-            
+
             self.httpChannel.beginGetSubdocument(DocumentSpec(task.mfURL), currentSize, task.totalSize)
             self.httpChannel.downloadToFile(task.localFilename, True)
         else:
@@ -936,7 +936,7 @@ class LauncherBase(DirectObject):
         # We still need to decompress and extract it too
         #self.notify.info('^^^^^download so far = ' + `bytesWritten` + ' $' + `self.patchDownloadSoFar`)
         percentPatchComplete = self.getPercentPatchComplete(bytesWritten)
-            
+
         # Set the percent done in the phase map for phase_3 only
         # NOTE: this assumes one multifile per phase, that is, the progress
         # through this single multifile represents the progress through the
@@ -994,7 +994,7 @@ class LauncherBase(DirectObject):
                 percentComplete = 0
                 if task.totalSize != 0:
                     percentComplete = int(round( 100.0 * bytesWritten / float(task.totalSize)))
-                
+
                 # We need this feedback if we are on the updating page
                 self.launcherMessage(self.Localizer.LauncherDownloadFilePercent %
                                      {"name": self.currentPhaseName,
@@ -1035,7 +1035,7 @@ class LauncherBase(DirectObject):
                 startingByte = self.httpChannel.getFirstByteDelivered()
                 bytesDownloaded = self.httpChannel.getBytesDownloaded()
                 bytesWritten = startingByte + bytesDownloaded
-                
+
                 self.notify.info('Connection lost while downloading; got %s bytes.  Reconnecting.' % (bytesDownloaded))
                 self.downloadMultifile(task.serverFilename, task.localFilename,
                                        task.mfname,
@@ -1049,7 +1049,7 @@ class LauncherBase(DirectObject):
                                        task.mfname,
                                        task.callback, task.totalSize,
                                        0, task.callbackProgress)
-                
+
             else:
                 # 404 not found or some such nonsense.
                 if self.httpChannel.isValid():
@@ -1436,14 +1436,14 @@ class LauncherBase(DirectObject):
             return task.done
 
     #============================================================
-    # Overall progress meter functions 
+    # Overall progress meter functions
     #============================================================
 
-    def getProgressSum(self, phase):         
+    def getProgressSum(self, phase):
 
         # given the phase lookup its sum
         sum = 0
-        for i in xrange(0,len(self.linesInProgress)):
+        for i in range(0,len(self.linesInProgress)):
             # search for phase and sum the sizes for each
             if self.linesInProgress[i].find(phase) > -1:
                 #split it, find the size, add to the sum
@@ -1467,14 +1467,14 @@ class LauncherBase(DirectObject):
 
             # remove the file it is no longer needed
             localFilename.unlink()
-            
+
         self.progressSum = 0
         token = 'phase_'
 
         self.progressSum = self.getProgressSum(token)
         # deduct phase_2 files, I don't think this is downloaded
         self.progressSum -= self.getProgressSum(token + '2')
-        self.notify.info('total phases to be downloaded = ' + `self.progressSum`)
+        self.notify.info('total phases to be downloaded = ' + repr(self.progressSum))
         # done reading the file, now carry on with client download
         self.checkClientDbExists()
 
@@ -1509,9 +1509,9 @@ class LauncherBase(DirectObject):
         # the launcherFileDb contents to pass its hash to the server
         # on login.
 
-        self.notify.info('Downloading launcherFileDb') 
+        self.notify.info('Downloading launcherFileDb')
         self.downloadRam(self.launcherFileDbFilename, self.downloadLauncherFileDbDone)
-        
+
     def downloadLauncherFileDbDone(self):
         self.launcherFileDbHash = HashVal()
         self.launcherFileDbHash.hashRamfile(self.ramfile)
@@ -1544,7 +1544,7 @@ class LauncherBase(DirectObject):
         self.notify.info(string)
         self.setPandaErrorCode(15)
         sys.exit()
-            
+
     def downloadServerDbFile(self):
         self.notify.info('Downloading server db file')
         self.launcherMessage(self.Localizer.LauncherDownloadServerFileList)
@@ -1553,7 +1553,7 @@ class LauncherBase(DirectObject):
     def downloadServerDbFileDone(self):
         self.serverDbFileHash = HashVal()
         self.serverDbFileHash.hashRamfile(self.ramfile)
-        
+
         # Now check to see if we have the client db
         self.readProgressFile()
         #self.checkClientDbExists()
@@ -1621,7 +1621,7 @@ class LauncherBase(DirectObject):
             # Go into the background now since Panda will be fired up shortly
             self.background()
             # Put ourselves in the global dict
-            __builtin__.launcher = self
+            builtins.launcher = self
             # Start the show
             self.startGame()
 
@@ -1703,7 +1703,7 @@ class LauncherBase(DirectObject):
             sys.exit()
 
     def updatePhase(self, phase):
-        self.notify.info('Updating multifiles in phase: ' + `phase`)
+        self.notify.info('Updating multifiles in phase: ' + repr(phase))
         # Phase may need downloading, clear the percentage to 0
         self.setPercentPhaseComplete(self.currentPhase, 0)
         assert(self.dldb)
@@ -1732,7 +1732,7 @@ class LauncherBase(DirectObject):
                 for i in range(self.dldb.getServerNumMultifiles()):
                     mfname = self.dldb.getServerMultifileName(i)
                     phase = self.dldb.getServerMultifilePhase(mfname)
-                    print i, mfname, phase
+                    print(i, mfname, phase)
                 # This will exit
                 self.handleGenericMultifileError()
 
@@ -1758,14 +1758,14 @@ class LauncherBase(DirectObject):
             # Phase all done, now set the percent to really be 100
             self.setPercentPhaseComplete(self.currentPhase, 100)
             # Now we are done updating all the multifiles for this phase
-            self.notify.info('Done updating multifiles in phase: ' + `self.currentPhase`)
+            self.notify.info('Done updating multifiles in phase: ' + repr(self.currentPhase))
             # Also update the overall progress bar
             self.progressSoFar += int(round(self.phaseOverallMap[self.currentPhase]*100))
-            self.notify.info('progress so far ' + `self.progressSoFar`)
+            self.notify.info('progress so far ' + repr(self.progressSoFar))
             #self.forceSleep()
-            
+
             # Send the phase complete event in case anybody cares
-            messenger.send('phaseComplete-' + `self.currentPhase`)
+            messenger.send('phaseComplete-' + repr(self.currentPhase))
             if nextIndex < len(self.LauncherPhases):
                 # go to the next phase
                 self.currentPhase = self.LauncherPhases[nextIndex]
@@ -1830,7 +1830,7 @@ class LauncherBase(DirectObject):
                 # version (or at least some recognized version).
                 # Someone else must have downloaded it for us, swell.
                 # We can move on to patching it.
-                
+
                 self.notify.info('Decompressed multifile is already on disk and correct: %s (version %s)' % (mfname, clientVer))
                 self.dldb.setClientMultifileComplete(mfname)
                 self.dldb.setClientMultifileDecompressed(mfname)
@@ -1852,7 +1852,7 @@ class LauncherBase(DirectObject):
                 if extractedOk:
                     self.notify.info('Multifile appears to have been extracted already.')
                     self.dldb.setClientMultifileExtracted(mfname)
-                    
+
 
         # If the multifile is not complete, finish downloading it
         if (not self.dldb.clientMultifileComplete(mfname) or
@@ -1864,7 +1864,7 @@ class LauncherBase(DirectObject):
             if not localFilename.exists():
                 currentSize = 0
             else:
-                currentSize = min(currentSize, localFilename.getFileSize())                
+                currentSize = min(currentSize, localFilename.getFileSize())
 
             if (currentSize == 0):
                 self.notify.info('Multifile has not been started, ' +
@@ -1908,7 +1908,7 @@ class LauncherBase(DirectObject):
                         self.dldb.setClientMultifileIncomplete(self.currentMfname)
                         self.dldb.setClientMultifileSize(self.currentMfname, 0)
                         self.dldb.setClientMultifileHash(self.currentMfname, serverHash)
-                        
+
                         # Ok, now try getting the file
                         self.getMultifile(self.currentMfname)
                     else:
@@ -1995,7 +1995,7 @@ class LauncherBase(DirectObject):
                     if extractedOk:
                         self.notify.info('Multifile appears to have been extracted already.')
                         self.dldb.setClientMultifileExtracted(mfname)
-                    
+
 
         # If the multifile is not complete, finish downloading it
         if (not self.dldb.clientMultifileComplete(mfname) or
@@ -2050,7 +2050,7 @@ class LauncherBase(DirectObject):
                         self.dldb.setClientMultifileSize(self.currentMfname, 0)
                         if self.DecompressMultifiles:
                             self.dldb.setClientMultifileHash(self.currentMfname, serverHash)
-                        
+
                         # Ok, now try getting the file
                         self.getMultifile(self.currentMfname)
                     else:
@@ -2123,7 +2123,7 @@ class LauncherBase(DirectObject):
         # Example:
         # fname = foo.rgb.v1
         # patch = foo.rgb.v1.pch
-        return (fname + '.v' + `currentVersion` + '.' + self.patchExtension)
+        return (fname + '.v' + repr(currentVersion) + '.' + self.patchExtension)
 
     #============================================================
     #  Patching functions
@@ -2155,7 +2155,7 @@ class LauncherBase(DirectObject):
         else:
             # Now we are done applying all patches for this multifile
             self.notify.info('applyNextPatch: Done patching multifile: '
-                              + `self.currentPhase`)
+                              + repr(self.currentPhase))
             # Ok, we are done patching. Lets run through the patchAndHash step
             # again to make sure we are all clean. If it decides we are, it will
             # move on to the next multifile
@@ -2173,7 +2173,7 @@ class LauncherBase(DirectObject):
 
     def decompressPatchDone(self):
         self.notify.info('decompressPatchDone: Patching file: ' + self.currentPatchee
-                         + ' from ver: ' + `self.currentPatchVersion`)
+                         + ' from ver: ' + repr(self.currentPatchVersion))
         # Determine the filenames
         patchFile = Filename(self.patchDir, Filename(self.currentPatch))
         patchFile.setBinary()
@@ -2199,7 +2199,7 @@ class LauncherBase(DirectObject):
 
     def startReextractingFiles(self):
         # See if there are any files to patch
-        self.notify.info('startReextractingFiles: Reextracting ' + `len(self.reextractList)`
+        self.notify.info('startReextractingFiles: Reextracting ' + repr(len(self.reextractList))
                          + ' files for multifile: ' + self.currentMfname)
         self.launcherMessage(self.Localizer.LauncherRecoverFiles)
         # read in the multifile
@@ -2221,7 +2221,7 @@ class LauncherBase(DirectObject):
                     failure = 1
             else:
                 self.notify.warning('reextractNextFile: File not found in multifile: '
-                                    + `currentReextractFile`)
+                                    + repr(currentReextractFile))
                 failure = 1
 
         if failure:
@@ -2230,7 +2230,7 @@ class LauncherBase(DirectObject):
 
         # Now we are done extracting files for this multifile
         self.notify.info('reextractNextFile: Done reextracting files for multifile: '
-                         + `self.currentPhase`)
+                         + repr(self.currentPhase))
         # Ok, now move on to the next multifile
         del self.currentMfile
         self.updateMultifileDone()
@@ -2280,7 +2280,7 @@ class LauncherBase(DirectObject):
 
         elif (clientVer > 1):
             self.notify.info('patchMultifile: Old version for multifile: ' +
-                             self.currentMfname + ' Client ver: ' + `clientVer`)
+                             self.currentMfname + ' Client ver: ' + repr(clientVer))
             self.maybeStartGame()
             self.totalPatchDownload = 0
             self.patchDownloadSoFar = 0
@@ -2292,7 +2292,7 @@ class LauncherBase(DirectObject):
                 # sum the file size to totalPatchDownload (phase_3 only)
                 if (self.currentPhase == 3):
                     self.totalPatchDownload += self.getProgressSum(patch)
-            self.notify.info('total patch to be downloaded = ' + `self.totalPatchDownload`)
+            self.notify.info('total patch to be downloaded = ' + repr(self.totalPatchDownload))
             self.downloadPatches()
             return
 
@@ -2425,18 +2425,18 @@ class LauncherBase(DirectObject):
         self.notify.info("Setting Disconnect Details normal")
         self.disconnectCode = 0
         self.disconnectMsg = 'normal'
-        
+
     def setDisconnectDetails(self, newCode, newMsg):
         self.notify.info("New Disconnect Details: %s - %s " % (newCode,newMsg))
         self.disconnectCode = newCode
         self.disconnectMsg = newMsg
-        
+
     def setServerVersion(self, version):
         """
         Set the server version.
         """
         self.ServerVersion = version
-        
+
     def getServerVersion(self):
         return self.ServerVersion
 
@@ -2486,7 +2486,7 @@ class LauncherBase(DirectObject):
         return self.getValue(self.ReferrerKey, None)
 
     def getPhaseComplete(self, phase):
-        assert(self.phaseComplete.has_key(phase))
+        assert(phase in self.phaseComplete)
         percentDone = self.phaseComplete[phase]
         return (percentDone == 100)
 
@@ -2501,7 +2501,7 @@ class LauncherBase(DirectObject):
             messenger.send("launcherPercentPhaseComplete",
                            [phase, percent, self.getBandwidth(), self.byteRate])
             # Also set the value in the registry
-            percentPhaseCompleteKey = "PERCENT_PHASE_COMPLETE_" + `phase`
+            percentPhaseCompleteKey = "PERCENT_PHASE_COMPLETE_" + repr(phase)
             self.setRegistry(percentPhaseCompleteKey, percent)
 
             # now calculate an overall percenatage
@@ -2614,7 +2614,7 @@ class LauncherBase(DirectObject):
         # if we have a long way to go.
         self.bandwidthIndex += 1
         assert self.notify.debug('increaseBandwidth: Increasing bandwidth to: '
-                                 + `self.getBandwidth()`)
+                                 + repr(self.getBandwidth()))
         self.everIncreasedBandwidth = 1
         self.setBandwidth()
         return 1
@@ -2661,7 +2661,7 @@ class LauncherBase(DirectObject):
                     self.bandwidthIndex -= 1
 
             assert self.notify.debug('decreaseBandwidth: Decreasing bandwidth to: '
-                                     + `self.getBandwidth()`)
+                                     + repr(self.getBandwidth()))
             self.setBandwidth()
             return 1
 
@@ -2775,7 +2775,7 @@ class LauncherBase(DirectObject):
         # if we have a long way to go.
         self.bandwidthIndex += 1
         assert self.notify.debug('increaseBandwidth: Increasing bandwidth to: '
-                                 + `self.getBandwidth()`)
+                                 + repr(self.getBandwidth()))
         self.everIncreasedBandwidth = 1
         self.setBandwidth()
         return 1
@@ -2822,7 +2822,7 @@ class LauncherBase(DirectObject):
                     self.bandwidthIndex -= 1
 
             assert self.notify.debug('decreaseBandwidth: Decreasing bandwidth to: '
-                                     + `self.getBandwidth()`)
+                                     + repr(self.getBandwidth()))
             self.setBandwidth()
             return 1
 
@@ -2876,7 +2876,7 @@ class LauncherBase(DirectObject):
     def scanForHacks(self):
         if not self.WIN32:
             return
-        import _winreg
+        import winreg
         hacksInstalled = {}
         hacksRunning = {}
         hackName = [
@@ -2889,26 +2889,26 @@ class LauncherBase(DirectObject):
         #
         knownHacksRegistryKeys = {
           hackName[0]:[
-            [_winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Run\\!xSpeed'],
-            [_winreg.HKEY_CURRENT_USER,'Software\\!xSpeednethy'],
-            [_winreg.HKEY_CURRENT_USER,'Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MenuOrder\\Start Menu\\Programs\\!xSpeednet'],
-            [_winreg.HKEY_LOCAL_MACHINE,'Software\\Gentee\\Paths\\!xSpeednet'],
-            [_winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\!xSpeed.net 2.0'],
+            [winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Run\\!xSpeed'],
+            [winreg.HKEY_CURRENT_USER,'Software\\!xSpeednethy'],
+            [winreg.HKEY_CURRENT_USER,'Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MenuOrder\\Start Menu\\Programs\\!xSpeednet'],
+            [winreg.HKEY_LOCAL_MACHINE,'Software\\Gentee\\Paths\\!xSpeednet'],
+            [winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\!xSpeed.net 2.0'],
           ],
           hackName[1]:[
-            [_winreg.HKEY_CURRENT_USER,'Software\\aspeeder'],
-            [_winreg.HKEY_LOCAL_MACHINE,'Software\\aspeeder'],
-            [_winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\aspeeder'],
+            [winreg.HKEY_CURRENT_USER,'Software\\aspeeder'],
+            [winreg.HKEY_LOCAL_MACHINE,'Software\\aspeeder'],
+            [winreg.HKEY_LOCAL_MACHINE,'Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\aspeeder'],
           ],
         }
         try:
-            for prog in knownHacksRegistryKeys.keys():
+            for prog in list(knownHacksRegistryKeys.keys()):
                 for key in knownHacksRegistryKeys[prog]:
                     try:
-                        h = _winreg.OpenKey(key[0], key[1])
+                        h = winreg.OpenKey(key[0], key[1])
                         #print 'found %s in registry %s' % (prog,key[1])
                         hacksInstalled[prog] = 1
-                        _winreg.CloseKey(h)
+                        winreg.CloseKey(h)
                         break                       # next program when any registry entry found
                     except:
                         pass
@@ -2926,9 +2926,9 @@ class LauncherBase(DirectObject):
         }
         i = 0
         try:
-            rh = _winreg.OpenKey(_winreg.HKEY_CURRENT_USER, 'Software\\Microsoft\\Windows\\ShellNoRoam\\MUICache')
+            rh = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 'Software\\Microsoft\\Windows\\ShellNoRoam\\MUICache')
             while 1:
-                name,value,type = _winreg.EnumValue(rh, i)
+                name,value,type = winreg.EnumValue(rh, i)
                 i += 1
                 if type == 1:
                     val = value.lower()
@@ -2937,7 +2937,7 @@ class LauncherBase(DirectObject):
                             #print "found %s in MUICache:%s" % (knownHacksMUI[hackprog], val.encode('utf-8'))
                             hacksInstalled[knownHacksMUI[hackprog]] = 1
                             break
-            _winreg.CloseKey(rh)
+            winreg.CloseKey(rh)
         except:
             #print "%s: stopped at %d" % (sys.exc_info()[0], i)
             pass
@@ -2959,19 +2959,19 @@ class LauncherBase(DirectObject):
             try:
                 for p in procapi.getProcessList():
                     pname = p.name
-                    if knownHacksExe.has_key(pname):
+                    if pname in knownHacksExe:
                         hacksRunning[knownHacksExe[pname]] = 1
             except:
                 pass
 
         if len(hacksInstalled) > 0:
             self.notify.info('Third party programs installed:')
-            for hack in hacksInstalled.keys():
+            for hack in list(hacksInstalled.keys()):
                 self.notify.info(hack)
 
         if len(hacksRunning) > 0:
             self.notify.info('Third party programs running:')
-            for hack in hacksRunning.keys():
+            for hack in list(hacksRunning.keys()):
                 self.notify.info(hack)
             # quit out because 3rd party program hack detected and is running
             self.setPandaErrorCode(8)

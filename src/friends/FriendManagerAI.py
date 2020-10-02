@@ -1,5 +1,5 @@
 ## from otp.ai.AIBaseGlobal import *
-## from pandac.PandaModules import *
+## from otp.otpbase.OTPModules import *
 from direct.distributed import DistributedObjectAI
 ## from direct.directnotify import DirectNotifyGlobal
 ## from otp.avatar import DistributedAvatarAI
@@ -85,10 +85,10 @@ class FriendManagerAI(DistributedObjectAI.DistributedObjectAI):
 ##         invitee = self.air.doId2do.get(inviteeId)
 
 ##         # see if the inviteeId is valid
-##         if not invitee: 
+##         if not invitee:
 ##             self.air.writeServerEvent('suspicious', inviteeId, 'FriendManagerAI.friendQuery not on list')
 ##             return
-        
+
 ##         self.notify.debug("AI: friendQuery(%d, %d)" % (inviterId, inviteeId))
 ##         self.newInvite(inviterId, inviteeId)
 

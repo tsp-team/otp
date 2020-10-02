@@ -14,7 +14,7 @@ from otp.otpbase import OTPLocalizer
 from direct.directnotify import DirectNotifyGlobal
 from otp.login import LeaveToPayDialog
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 #from ChatInputSpeedChat import ChatInputSpeedChat
 
 # other systems can listen for these events if they
@@ -40,7 +40,7 @@ ThoughtPrefix = '.'
 def isThought(message):
     """
     message is a string.
-    
+
     Return 1 if the given string contains the thought prefix,
     Return 0 otherwise
     """
@@ -56,7 +56,7 @@ def isThought(message):
 def removeThoughtPrefix(message):
     """
     message is a string.
-    
+
     Return the string with the thought prefix removed
     """
     if (isThought(message)):
@@ -98,7 +98,7 @@ class ChatManager(DirectObject.DirectObject):
         self.secretChatActivated = None
         self.problemActivatingChat = None
         self.leaveToPayDialog = None
-        
+
         self.fsm = ClassicFSM.ClassicFSM(
             'chatManager', [
                 State.State("off",
@@ -142,7 +142,7 @@ class ChatManager(DirectObject.DirectObject):
                             self.exitNoSecretChatAtAll),
                 State.State("noSecretChatAtAllAndNoWhitelist",
                             self.enterNoSecretChatAtAllAndNoWhitelist,
-                            self.exitNoSecretChatAtAllAndNoWhitelist),                
+                            self.exitNoSecretChatAtAllAndNoWhitelist),
                 State.State("noSecretChatWarning",
                             self.enterNoSecretChatWarning,
                             self.exitNoSecretChatWarning),
@@ -178,7 +178,7 @@ class ChatManager(DirectObject.DirectObject):
                             self.exitWhiteListPlayerChat),
                 State.State("trueFriendTeaserPanel",
                             self.enterTrueFriendTeaserPanel,
-                            self.exitTrueFriendTeaserPanel),                
+                            self.exitTrueFriendTeaserPanel),
                 ],
                 "off",
                 "off",
@@ -211,7 +211,7 @@ class ChatManager(DirectObject.DirectObject):
             self.noSecretChatAtAll = None
         if self.noSecretChatAtAllAndNoWhitelist:
             self.noSecretChatAtAllAndNoWhitelist.destroy()
-            self.noSecretChatAtAllAndNoWhitelist = None            
+            self.noSecretChatAtAllAndNoWhitelist = None
         if self.noSecretChatWarning:
             self.noSecretChatWarning.destroy()
             self.noSecretChatWarning = None
@@ -252,7 +252,7 @@ class ChatManager(DirectObject.DirectObject):
         assert self.notify.debugStateCall(self)
         self.fsm.request("off")
         self.ignoreAll()
-        
+
     def start(self):
         assert self.notify.debugStateCall(self)
         self.fsm.request("mainMenu")
@@ -269,7 +269,7 @@ class ChatManager(DirectObject.DirectObject):
     def sendChatString(self, message):
         """
         message is a string.
-        
+
         Send chat message update
         """
         assert self.notify.debugStateCall(self)
@@ -277,7 +277,7 @@ class ChatManager(DirectObject.DirectObject):
 
         if base.cr.wantSwitchboardHacks:
             from otp.switchboard import badwordpy
-            badwordpy.init("","") 
+            badwordpy.init("","")
             message = badwordpy.scrub(message)
 
         if isThought(message):
@@ -285,7 +285,7 @@ class ChatManager(DirectObject.DirectObject):
             # one.  This means we don't include a timeout.
             message = removeThoughtPrefix(message)
             chatFlags = CFThought
-            
+
         #messenger.send("chatUpdate", [message, chatFlags])
         #base.chatAssistant.sendAvatarOpenTypedChat(message)
 
@@ -303,7 +303,7 @@ class ChatManager(DirectObject.DirectObject):
         #     # one.  This means we don't include a timeout.
         #     message = removeThoughtPrefix(message)
         #     chatFlags = CFThought
-            
+
         #messenger.send("whisperUpdate", [message, whisperAvatarId])
         #base.chatAssistant.sendAvatarWhisperTypedChat(message, whisperAvatarId)
 
@@ -392,14 +392,14 @@ class ChatManager(DirectObject.DirectObject):
             # until somebody hits a key. When it does, it throws its
             # typeEvent.
             self.acceptOnce('enterNormalChat', self.fsm.request, ['normalChat'])
-            
+
     def checkObscurred(self):
         if not self.__scObscured:
             self.scButton.show()
         if not self.__normalObscured:
             self.normalButton.show()
-        
-        
+
+
     def exitMainMenu(self):
         assert self.notify.debugStateCall(self)
         self.scButton.hide()
@@ -423,36 +423,36 @@ class ChatManager(DirectObject.DirectObject):
         """
         assert self.notify.debugStateCall(self)
         self.fsm.request("mainMenu")
-        
+
     def handleWhiteListSelect(self):
         self.fsm.request("whiteListOpenChat")
-        
-        
+
+
     def enterWhiteListOpenChat(self):
         assert self.notify.debugStateCall(self)
         self.checkObscurred()
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         base.localAvatar.chatMgr.chatInputWhiteList.activateByData()
-        
+
     def exitWhiteListOpenChat(self):
         pass
-        
+
     def enterWhiteListAvatarChat(self, receiverId):
         assert self.notify.debugStateCall(self)
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         base.localAvatar.chatMgr.chatInputWhiteList.activateByData(receiverId, 0)
-        
+
     def exitWhiteListAvatarChat(self):
         pass
-        
+
     def enterWhiteListPlayerChat(self, receiverId):
         assert self.notify.debugStateCall(self)
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         base.localAvatar.chatMgr.chatInputWhiteList.activateByData(receiverId, 1)
-        
+
     def exitWhiteListPlayerChat(self):
         pass
 
@@ -460,18 +460,18 @@ class ChatManager(DirectObject.DirectObject):
         assert self.notify.debugStateCall(self)
         self.whisperScButton['extraArgs'] = [avatarName, avatarId, playerId]
         self.whisperButton['extraArgs'] = [avatarName, avatarId, playerId]
-      
+
         playerName = None
         chatToToon = 1 #set to 0 to chat to player
-        
+
         online = 0
-        if self.cr.doId2do.has_key(avatarId):
+        if avatarId in self.cr.doId2do:
             # The avatar is online, and in fact, nearby.
             online = 1
         elif self.cr.isFriend(avatarId):
             # The avatar is a friend of ours.  Is she online?
             online = self.cr.isFriendOnline(avatarId)
-            
+
         hasManager = hasattr(base.cr, "playerFriendsManager")
         if hasManager:
             if base.cr.playerFriendsManager.askAvatarOnline(avatarId):
@@ -491,27 +491,27 @@ class ChatManager(DirectObject.DirectObject):
         ## could send unfiltered whispers to other players!
 
         ## This is less true now, but still possible.
-          
+
         if playerId:
-            if base.cr.playerFriendsManager.playerId2Info.has_key(playerId):
+            if playerId in base.cr.playerFriendsManager.playerId2Info:
                 playerInfo = base.cr.playerFriendsManager.playerId2Info.get(playerId)
                 playerName = playerInfo.playerName
                 online = 1
                 playerUnderstandable = playerInfo.understandableYesNo
                 if playerUnderstandable or (not avatarId):
                     chatToToon = 0
-            
+
         if chatToToon:
             chatName = avatarName
         else:
             chatName = playerName
-            
+
         normalButtonObscured, scButtonObscured = self.isObscured()
-        
+
         if (avatarUnderstandable or playerUnderstandable) and online and not normalButtonObscured:
             self.whisperButton['state'] = 'normal'
             self.enablewhisperButton()
-        else:        
+        else:
             self.whisperButton['state'] = 'inactive'
             self.disablewhisperButton()
 
@@ -521,7 +521,7 @@ class ChatManager(DirectObject.DirectObject):
             #self.whisperFrame["text"] = (
             #    OTPLocalizer.ChatManagerWhisperToName % (chatName))
             #import pdb; pdb.set_trace()
-            
+
         else:
             self.whisperScButton['state'] = 'inactive'
             self.changeFrameText(OTPLocalizer.ChatManagerWhisperOffline % (chatName))
@@ -530,9 +530,9 @@ class ChatManager(DirectObject.DirectObject):
 
         self.whisperFrame.show()
         self.refreshWhisperFrame()
-        
+
         # NOT SURE THIS NEXT PART DOES ANYTHING
-        
+
         if (avatarUnderstandable or playerUnderstandable):
         # sending to a player outside the game
             if playerId and (not chatToToon):
@@ -558,31 +558,31 @@ class ChatManager(DirectObject.DirectObject):
         if base.cr.config.GetBool('force-typed-whisper-enabled',0):
             self.whisperButton['state'] = 'normal'
             self.enablewhisperButton()
-                    
+
     def disablewhisperButton(self):
         pass
 
     def enablewhisperButton(self):
         pass
-    
+
     def refreshWhisperFrame(self):
         pass
-        
+
 
     def changeFrameText(self, newText):
         """
-        using this to abstract out the message so 
+        using this to abstract out the message so
         that other gui structures can be supported
         """
         self.whisperFrame["text"] = newText
-        
+
     def exitWhisper(self):
         assert self.notify.debugStateCall(self)
         self.whisperFrame.hide()
         self.ignore('enterNormalChat')
         self.chatInputNormal.chatEntry['backgroundFocus'] = 0
 
-        
+
     def enterWhisperSpeedChat(self, avatarId):
         assert self.notify.debugStateCall(self)
         #print("enterWhisperSpeedChat %s" % (avatarId))
@@ -590,12 +590,12 @@ class ChatManager(DirectObject.DirectObject):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         self.chatInputSpeedChat.show(avatarId)
-        
+
     def exitWhisperSpeedChat(self):
         assert self.notify.debugStateCall(self)
         self.whisperFrame.hide()
         self.chatInputSpeedChat.hide()
-        
+
     def enterWhisperSpeedChatPlayer(self, playerId):
         assert self.notify.debugStateCall(self)
         #print("enterWhisperSpeedChatPlayer %s" % (playerId))
@@ -603,22 +603,22 @@ class ChatManager(DirectObject.DirectObject):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         self.chatInputSpeedChat.show(playerId, 1)
-        
+
     def exitWhisperSpeedChatPlayer(self):
         assert self.notify.debugStateCall(self)
         self.whisperFrame.hide()
         self.chatInputSpeedChat.hide()
-        
+
     def enterWhisperChat(self, avatarName, avatarId):
         assert self.notify.debugStateCall(self)
         #print("enterWhisperChat %s %s" % (avatarName, avatarId))
         result = self.chatInputNormal.activateByData(avatarId)
         return result
-        
+
     def exitWhisperChat(self):
         assert self.notify.debugStateCall(self)
         self.chatInputNormal.deactivate()
-        
+
     def enterWhisperChatPlayer(self, avatarName, playerId):
         assert self.notify.debugStateCall(self)
         #print("enterWhisperChatPlayer %s %s" % (avatarName, playerId))
@@ -627,12 +627,12 @@ class ChatManager(DirectObject.DirectObject):
             avatarName = playerInfo.playerName
         result = self.chatInputNormal.activateByData(playerId, 1)
         return result
-        
+
     def exitWhisperChatPlayer(self):
         assert self.notify.debugStateCall(self)
         self.chatInputNormal.deactivate()
 
-        
+
     def enterSpeedChat(self):
         assert self.notify.debugStateCall(self)
         messenger.send('enterSpeedChat')
@@ -643,18 +643,18 @@ class ChatManager(DirectObject.DirectObject):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
         self.chatInputSpeedChat.show()
-        
+
     def exitSpeedChat(self):
         assert self.notify.debugStateCall(self)
         self.scButton.hide()
         self.normalButton.hide()
         self.chatInputSpeedChat.hide()
-        
+
     def enterNormalChat(self):
         assert self.notify.debugStateCall(self)
         result = self.chatInputNormal.activateByData()
         return result
-        
+
     def exitNormalChat(self):
         assert self.notify.debugStateCall(self)
         self.chatInputNormal.deactivate()
@@ -662,7 +662,7 @@ class ChatManager(DirectObject.DirectObject):
     def enterOpenChatWarning(self):
         self.notify.error("called enterOpenChatWarning() on parent class")
         pass
-        
+
     def exitOpenChatWarning(self):
         self.notify.error("called exitOpenChatWarning() on parent class")
         pass
@@ -696,7 +696,7 @@ class ChatManager(DirectObject.DirectObject):
     def enterNoSecretChatAtAll(self):
         self.notify.error("called enterNoSecretChatAtAll() on parent class")
         pass
-        
+
     def exitNoSecretChatAtAll(self):
         self.notify.error("called exitNoSecretChatAtAll() on parent class")
         pass
@@ -707,21 +707,21 @@ class ChatManager(DirectObject.DirectObject):
 
     def exitNoSecretChatAtAllAndNoWhitelist(self):
         self.notify.error("called exitNoSecretChatAtAllAndNoWhitelist() on parent class")
-        pass    
+        pass
 
 
     def enterNoSecretChatWarning(self):
         self.notify.error("called enterNoSecretChatWarning() on parent class")
         pass
-        
+
     def exitNoSecretChatWarning(self):
         self.notify.error("called exitNoSecretChatWarning() on parent class")
         pass
-        
+
     def enterNoFriendsWarning(self):
         self.notify.error("called enterNoFriendsWarning() on parent class")
         pass
-        
+
     def exitNoFriendsWarning(self):
         self.notify.error("called exitNoFriendsWarning() on parent class")
         pass
@@ -729,14 +729,14 @@ class ChatManager(DirectObject.DirectObject):
     def enterActivateChat(self):
         self.notify.error("called enterActivateChat() on parent class")
         pass
-        
+
     def exitActivateChat(self):
         self.notify.error("called exitActivateChat() on parent class")
         pass
-        
+
     def enterOtherDialog(self):
         assert self.notify.debugStateCall(self)
-        
+
     def exitOtherDialog(self):
         assert self.notify.debugStateCall(self)
 
@@ -744,13 +744,13 @@ class ChatManager(DirectObject.DirectObject):
         assert self.notify.debugStateCall(self)
         # A dialog with lots of information about what it means to
         # enable secret friends.
-        
+
         if self.chatMoreInfo == None:
             self.chatMoreInfo = SecretFriendsInfoPanel.SecretFriendsInfoPanel(
                 'secretFriendsInfoDone')
         self.chatMoreInfo.show()
         self.accept('secretFriendsInfoDone', self.__secretFriendsInfoDone)
-        
+
     def exitChatMoreInfo(self):
         assert self.notify.debugStateCall(self)
         self.chatMoreInfo.hide()
@@ -760,12 +760,12 @@ class ChatManager(DirectObject.DirectObject):
         assert self.notify.debugStateCall(self)
         # A dialog with lots of information about what it means to
         # enable secret friends.
-        
+
         if self.chatPrivacyPolicy == None:
             self.chatPrivacyPolicy = PrivacyPolicyPanel.PrivacyPolicyPanel('privacyPolicyDone')
         self.chatPrivacyPolicy.show()
         self.accept('privacyPolicyDone', self.__privacyPolicyDone)
-        
+
     def exitChatPrivacyPolicy(self):
         assert self.notify.debugStateCall(self)
         cleanupDialog("privacyPolicyDialog")
@@ -775,7 +775,7 @@ class ChatManager(DirectObject.DirectObject):
     def enterSecretChatActivated(self):
         self.notify.error("called enterSecretChatActivated() on parent class")
         pass
-        
+
     def exitSecretChatActivated(self):
         self.notify.error("called exitSecretChatActivated() on parent class")
         pass
@@ -783,7 +783,7 @@ class ChatManager(DirectObject.DirectObject):
     def enterProblemActivatingChat(self):
         self.notify.error("called enterProblemActivatingChat() on parent class")
         pass
-        
+
     def exitProblemActivatingChat(self):
         self.notify.error("called exitProblemActivatingChat() on parent class")
         pass
@@ -791,15 +791,15 @@ class ChatManager(DirectObject.DirectObject):
     def enterTrueFriendTeaserPanel(self):
         self.notify.error("called enterTrueFriendTeaserPanel () on parent class")
         pass
-        
+
     def exitTrueFriendTeaserPanel(self):
         self.notify.error("called exitTrueFriendTeaserPanel () on parent class")
-        pass    
+        pass
 
     def __handleLeaveToPayCancel(self):
         assert self.notify.debugStateCall(self)
         self.fsm.request("mainMenu")
-    
+
     def __secretFriendsInfoDone(self):
         assert self.notify.debugStateCall(self)
         self.fsm.request("activateChat")

@@ -3,7 +3,7 @@
 # Creates a GUI Object which displays a List of Names for Selection
 ##################################################################
 
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase import DirectObject
 #import whrandom
 import random
@@ -35,20 +35,20 @@ class NameTumbler(DirectFrame):
         self.nameList.sort()
         self.category = category
         self.tumblerColor = Vec4(1, 1, 1, 1)
-        
+
         # Add Spaces for ScrollList Top & Bottom blank Entries
         self.displayList = [" "] + [" "] + self.nameList + [" "] + [" "]
-        
+
         # Marks Current Choice of Tumbler List
         self.nameIndex = -1
-        
+
         # Tumbler is Active and Not Greyed-Out
         self.isActive = 1
-        
+
         # Activate GUI
         self.loadTumblerGUI()
-        
-        
+
+
     #---------------------------------------#
     # Load Tumbler GUI Function
     #---------------------------------------#
@@ -58,7 +58,7 @@ class NameTumbler(DirectFrame):
         self.background = 'src/maps/NameTumbler.tif'
         self.upArrow = 'src/maps/NameTumblerUpArrow.tif'
         self.downArrow = 'src/maps/NameTumblerDownArrow.tif'
-        
+
         # Create the Scrolling List of Names
         self.tumblerscrollList = self.makeScrollList(
             self.displayList, \
@@ -66,21 +66,21 @@ class NameTumbler(DirectFrame):
             [TextNode.ACenter, 'title'])
         self.tumblerscrollList['command'] = self.listsChanged
         self.tumblerscrollList.reparentTo(self)
-                
+
         # Mark Selected Entry with Hilight
         self.hilight = self.makeHighlight((0, 0, -0.15))
         self.hilight.reparentTo(self.tumblerscrollList)
-        
+
         # Add check box to Disable Tumbler
         if (self.category != ""):
             self.check = self.makeCheckBox(
                 (-0.617, 0, 0.374), self.category,
                 (0,0.25,0.5,1), self.toggleTumbler)
             self.check.reparentTo(self)
-        
+
         # Get Random Starting Value
         self.getRandomResult()
-        
+
     def unloadTumblerGUI(self):
         if (self.category != ""):
             self.check.destroy()
@@ -89,11 +89,11 @@ class NameTumbler(DirectFrame):
         del self.tumblerscrollList
         self.hilight.destroy()
         del self.hilight
-        
+
     #---------------------------------------#
     # Toggles Tumbler On/Off (Grey-out)
     #---------------------------------------#
-    def toggleTumbler(self, value):     
+    def toggleTumbler(self, value):
         # Alter Tumbler's Display Accordingly
         if self.isActive:
             # If permitted by NamePanel
@@ -113,7 +113,7 @@ class NameTumbler(DirectFrame):
             self.tumblerscrollList.refresh()
 
         self.updateCheckBoxes()
-        
+
     #---------------------------------------#
     # Tumbler GUI Update Functions
     #---------------------------------------#
@@ -126,8 +126,8 @@ class NameTumbler(DirectFrame):
 
     def updateLists(self):
         self.tumblerscrollList.scrollTo(self.nameIndex-2)
-        messenger.send("updateNameResult")   
-        
+        messenger.send("updateNameResult")
+
     def updateCheckBoxes(self):
         if (self.category != ""):
             if self.isActive:
@@ -149,16 +149,16 @@ class NameTumbler(DirectFrame):
         self.hilight.show()
         self.isActive = 1
         self.tumblerscrollList.itemFrame['frameColor'] = self.tumblerColor
- 
+
     def deactivateTumbler(self):
         self.hilight.hide()
-        self.isActive = 0      
-        self.tumblerscrollList.itemFrame['frameColor'] = (0.7,0.7,0.7,1)   
-        
+        self.isActive = 0
+        self.tumblerscrollList.itemFrame['frameColor'] = (0.7,0.7,0.7,1)
+
     #---------------------------------------#
     # Returns Current Name
     #---------------------------------------#
-    
+
     def getName(self):
         # If Tumbler is Active
         if self.isActive:
@@ -166,17 +166,17 @@ class NameTumbler(DirectFrame):
         else:
             name = ""
         return name
-    
+
     #---------------------------------------#
     # Methods to Create Individual GUI parts
     #---------------------------------------#
-    
+
     def makeLabel(self, te, index, others):
         """
         Used to create the frames for names in all scrolled lists
         """
         alig = others[0]
-        
+
         if alig == TextNode.ARight:
             newpos = (.44,0,0)
         elif alig == TextNode.ALeft:
@@ -194,7 +194,7 @@ class NameTumbler(DirectFrame):
             )
         df.bind(DGG.B1PRESS, lambda x, df = df: self.nameClickedOn(index))
         return df
-    
+
     def makeScrollList(self, nitems, nitemMakeFunction, nitemMakeExtraArgs):
         """
         Creates a scrolled list at position ipos and with color mcolor
@@ -209,7 +209,7 @@ class NameTumbler(DirectFrame):
             command = None,
             scale = (.6),
             pad = (0.1, 0.1),
-            
+
             # inc and dec are DirectButtons
             incButton_image = (self.downArrow,
                                self.upArrow,
@@ -219,7 +219,7 @@ class NameTumbler(DirectFrame):
             incButton_relief = None,
             incButton_scale = (0.2,0.05,0.05),
             incButton_pos = (0,0,-0.58),
-            
+
             decButton_image = (self.upArrow,
                                self.downArrow,
                                self.circle,
@@ -228,7 +228,7 @@ class NameTumbler(DirectFrame):
             decButton_relief = None,
             decButton_scale = (0.2,0.05,0.05),
             decButton_pos = (0,0,.23),
-            
+
             # itemFrame is a DirectFrame used to hold all the items
             itemFrame_pos = (-.2,0,0.028),
             itemFrame_scale = 1.0,
@@ -242,7 +242,7 @@ class NameTumbler(DirectFrame):
             )
         ds.setTransparency(1)
         return ds
-    
+
     def makeCheckBox(self, npos, ntex, ntexcolor, comm):
         dcf = DirectCheckButton(
             parent = aspect2d,
@@ -270,7 +270,7 @@ class NameTumbler(DirectFrame):
             parent = aspect2d,
             relief = 'flat',
             state = 'disabled',
-            frameSize = (-0.25,0.26,-0.05,0.05), 
+            frameSize = (-0.25,0.26,-0.05,0.05),
             borderWidth = (0.01, 0.01),
             pos = npos,
             frameColor = (1,0,1,.4),
@@ -280,7 +280,7 @@ class NameTumbler(DirectFrame):
     #---------------------------------------#
     # Get Random Result Function
     #---------------------------------------#
-        
+
     def getRandomResult(self):
         # Get Random Name from NameList, as long as it is not blank
         randomName = random.choice(self.nameList)
@@ -290,6 +290,3 @@ class NameTumbler(DirectFrame):
 
         self.updateCheckBoxes()
         self.updateLists()
-
-        
-    

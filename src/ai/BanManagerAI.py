@@ -3,9 +3,9 @@
 # Purpose: Module to ban avatars while inside the game and kick
 #          them out of the game
 #################################################################
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import os
-from pandac.PandaModules import HTTPClient, Ramfile
+from otp.otpbase.OTPModules import HTTPClient, Ramfile
 from direct.directnotify import DirectNotifyGlobal
 
 class BanManagerAI:
@@ -22,7 +22,7 @@ class BanManagerAI:
     App = simbase.config.GetString("ban-app-name", "TTWorldAI")
     Product = simbase.config.GetString("ban-product", "Toontown")
     EventName = simbase.config.GetString("ban-event-name", "tthackattempt")
-    
+
     def __init__(self):
         """Construct and initialize members."""
         self.curBanRequestNum = 0
@@ -31,7 +31,7 @@ class BanManagerAI:
 
     def ban(self, avatarId, dislid, comment):
         """Ban the player"""
-        
+
         parameters = ""
         parameters += "app=%s" % self.App
         parameters += "&product=%s" % self.Product
@@ -39,7 +39,7 @@ class BanManagerAI:
         parameters += "&event_name=%s" % self.EventName
         commentWithAvatarId = "avId-%s " % avatarId
         commentWithAvatarId += comment
-        parameters += "&comments=%s" % urllib.quote(str(commentWithAvatarId))
+        parameters += "&comments=%s" % urllib.parse.quote(str(commentWithAvatarId))
 
         # get the base ban url from the environment variable first
         baseUrlToUse = self.BanUrl
@@ -47,11 +47,11 @@ class BanManagerAI:
         if osBaseUrl:
             baseUrlToUse  = osBaseUrl
         fullUrl = baseUrlToUse + "?" + parameters
-        
+
         self.notify.info ("ban request %s dislid=%s comment=%s fullUrl=%s" % (self.curBanRequestNum, dislid, comment, fullUrl))
         simbase.air.writeServerEvent('ban_request', avatarId, "%s|%s|%s" % (dislid, comment, fullUrl))
 
-        if simbase.config.GetBool('do-actual-ban',False):            
+        if simbase.config.GetBool('do-actual-ban',False):
             newTaskName = "ban-task-%d" % self.curBanRequestNum
             newTask = taskMgr.add(self.doBanUrlTask, newTaskName)
             newTask.banRequestNum = self.curBanRequestNum
@@ -63,7 +63,7 @@ class BanManagerAI:
 
             channel.beginGetDocument(fullUrl)
             channel.downloadToRam(rf)
-        
+
         self.curBanRequestNum += 1
 
     def cleanupBanReq(self, banReq):

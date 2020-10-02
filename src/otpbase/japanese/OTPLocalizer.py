@@ -105,8 +105,8 @@ WhisperToFormat = "To %s %s"
 WhisperToFormatName = "To %s"
 WhisperFromFormatName = "%sからのひそひそ話"
 
-from pandac.PandaModules import TextProperties
-from pandac.PandaModules import TextPropertiesManager
+from otp.otpbase.OTPModules import TextProperties
+from otp.otpbase.OTPModules import TextPropertiesManager
 
 shadow = TextProperties()
 shadow.setShadow(-0.025, -0.025)
@@ -1157,7 +1157,7 @@ SpeedChatStaticText = {
     1122 : "ロウボットＨＱへ行こう！",
     1123 : "サイバンチョーと戦いに行こう！",
     1124 : "ケンサツキョクに行こう！",
-    1125 : "%sに行こう！" % lOutdoorZone,    
+    1125 : "%sに行こう！" % lOutdoorZone,
     1126 : "%sに行こう！" % lGolfZone,
     1127 : "ボスボット本部に行こう！",
     1128 : "CEOとたたかおう!",
@@ -1397,7 +1397,7 @@ SpeedChatStaticText = {
     2221 : "１０ボーナスウエイトを持ってるよ。",
     2222 : "１１ボーナスウエイトを持ってるよ。",
     2223 : "１２ボーナスウエイトを持ってるよ。",
-    
+
     # CEO battle
     2300 : "左側のコグたちにはこんでくれる？",
     2301 : "左側のコグたちにはこぶね。",
@@ -1417,8 +1417,8 @@ SpeedChatStaticText = {
     2315 : "いそごう、コグがハラペコだ～！",
     2316 : "ゲラがひくいナカマにスナックをとっておこう。",
     2317 : "落っこちちゃう前にスナックをとっておこう。",
-    
-    
+
+
     #Kart Racing Phrases
     #IMPORTANT: if you change numbers or add/subtract lines here than be
     # sure to adjust the kart racing menu guid dict below
@@ -1439,12 +1439,12 @@ SpeedChatStaticText = {
     3190 : "レース場に集まろう！",
     3110 : "カートショップに集まろう！",
     3130 : "どこで集まろうか？",
-    
+
     #Races
     3200 : "どこでレースがしたい？",
     3201 : "違うレースを選ぼう！",
     3210 : "練習のレースをしょう！" ,
-    3211 : "さあ、バトルレースのはじまり！", 
+    3211 : "さあ、バトルレースのはじまり！",
     3220 : "スクリュースタジアムのレースがいいなぁ。",
     3221 : "さびさびレースウェイのレースがいいなぁ。",
     3222 : "やっぱシティーサーキットでレースでしょ。",
@@ -1453,12 +1453,12 @@ SpeedChatStaticText = {
     3225 : "ブリザード・ブルバードが好き!",
     3230 : "スクリュースタジアムでレースしよう！",
     3231 : "さびさびレースウェイでレースしよう！",
-    3232 : "シティーサーキットでレースしよう！",    
+    3232 : "シティーサーキットでレースしよう！",
     3233 : "きりもみコロシアムでレースしよう!",
     3234 : "エアボーン・エーカースでレースしよう!",
-    3235 : "ブリザード・ブルバードでレースしよう!",    
-    
-    #Tracks    
+    3235 : "ブリザード・ブルバードでレースしよう!",
+
+    #Tracks
     3600 : "どのトラックでレースしたい？",
     3601 : "トラックを選んで！",
     3602 : "違うトラックでレースできる？",
@@ -1470,8 +1470,8 @@ SpeedChatStaticText = {
     3660 : "１番トラックではレースしたくないな。",
     3661 : "２番トラックではレースしたくないな。",
     3662 : "３番トラックではレースしたくないな。",
-    3663 : "４番トラックではレースしたくないな。",            
-    
+    3663 : "４番トラックではレースしたくないな。",
+
     #Compliments
     3300 : "ワオ！キミって速いねー！",
     3301 : "キミの速さにはかなわないや！",
@@ -1538,8 +1538,8 @@ SpeedChatStaticText = {
     4305 : "ふぁ～～～っ！！",
     4306 : "お静かにねがいます。",
     4307 : "いい試合だったね☆",
-    
-    
+
+
     # Promotional Considerations
     10000 : "キミの一票が大事さ！",
     10001 : "だれに投票しているの？",
@@ -1976,7 +1976,7 @@ SpeedChatStaticText = {
     50108 : "度胸あるな！",#Walk the plank!
     50109 : "かかってこい！",#Come about!
     50110 : "死人に口なし…",
-    
+
 
     # EXPRESSIONS - GREETINGS
     50700 : "Ahoy!",
@@ -2063,11 +2063,11 @@ SpeedChatStaticText = {
     51510 : "Let's sail to Cutthroat.",
     51511 : "Let's sail to Rumrunner's Isle.",
     51512 : "Let's sail to Isla Cangrejos.",
-    
+
     # PLACES - LETS HEAD TO...
     51600 : "Let's head into town.",
     51601 : "Let's go to the docks.",
-    51602 : "Let's head to the tavern.",    
+    51602 : "Let's head to the tavern.",
 
     # PLACES - LETS HEAD TO... - PORT ROYAL
     51800 : "Let's go to Fort Charles.",
@@ -2249,7 +2249,7 @@ Emotes_General = "General"
 Emotes_Music = "Music"
 Emotes_Expressions = "Emotions"
 Emote_ShipDenied = "Cannot emote while sailing."
-Emote_MoveDenied = "Cannot emote while moving." 
+Emote_MoveDenied = "Cannot emote while moving."
 Emote_CombatDenied = "Cannot emote while in combat."
 Emote_CannonDenied = "Cannot emote while using a cannon."
 Emote_SwimDenied = "Cannot emote while swimming."
@@ -2296,7 +2296,7 @@ CustomSCStrings = {
     120 : "すごい!",
     130 : "マジで～！？",
     140 : "心配ないよ。",
-    150 : "グルルルルル～!",    
+    150 : "グルルルルル～!",
     160 : "なんか新しいものない？",
     170 : "おおっとお！",
     180 : "またあしたね。",

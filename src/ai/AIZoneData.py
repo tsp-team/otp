@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.distributed import ParentMgr
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from direct.task import Task
@@ -50,12 +50,12 @@ class AIZoneDataObj:
         output += '\n'
         totalColliders = 0
         totalTraversers = 0
-        for currCollTrav in self._collTravs.values():
+        for currCollTrav in list(self._collTravs.values()):
             totalTraversers += 1
             totalColliders += currCollTrav.getNumColliders()
         output += 'Num traversers: %s  Num total colliders: %s'%(totalTraversers,totalColliders)
         return output
-        
+
     def _incRefCount(self):
         self._refCount += 1
     def _decRefCount(self):
@@ -94,7 +94,7 @@ class AIZoneDataObj:
             if config.GetBool('leak-scene-graph', 0):
                 self._renderLeakDetector = LeakDetectors.SceneGraphLeakDetector(self._render)
         return self._render
-    
+
     def getNonCollidableParent(self):
         # this is a node for things that can't be collided against, so that that collision traverser
         # only has to check once against this node. It's up to the show code to make sure that
@@ -119,7 +119,7 @@ class AIZoneDataObj:
         if name is None:
             name = AIZoneDataObj.DefaultCTravName
         return name in self._collTravs
-    
+
     def getCollTrav(self, name=None):
         #assert self.notify.debug('getCollTrav(%s, %s)' % (self._parentId, self._zoneId))
         if name is None:
@@ -128,7 +128,7 @@ class AIZoneDataObj:
             self._collTravs[name] = CollisionTraverser('cTrav-%s-%s-%s' % (name, self._parentId, self._zoneId))
         return self._collTravs[name]
     def removeCollTrav(self, name):
-        if (self._collTravs.has_key(name)):
+        if (name in self._collTravs):
             del self._collTravs[name]
 
     def _getCTravTaskName(self, name=None):
@@ -139,7 +139,7 @@ class AIZoneDataObj:
     def _doCollisions(self, task=None, topNode=None, cTravName=None):
         render = self.getRender()
         curTime = globalClock.getFrameTime()
-        render.setTag('lastTraverseTime', str(curTime))        
+        render.setTag('lastTraverseTime', str(curTime))
         if topNode is not None:
             # make sure the topNode for collision traversal is a descendant of our render node
             if not render.isAncestorOf(topNode):
@@ -207,7 +207,7 @@ class AIZoneDataObj:
         if cTravName is None:
             cTravName = AIZoneDataObj.DefaultCTravName
         return self._collTravs[cTravName].getRespectPrevTransform()
-    
+
 class AIZoneDataStore:
     """This class holds all of the AIZoneDataObj objects for a district."""
     notify = directNotify.newCategory('AIZoneDataStore')
@@ -216,7 +216,7 @@ class AIZoneDataStore:
         # table of (parentId, zoneId) -> AIZoneDataObj
         self._zone2data = {}
     def destroy(self):
-        for zone, data in self._zone2data.items():
+        for zone, data in list(self._zone2data.items()):
             data.destroy()
         del self._zone2data
     def hasDataForZone(self, parentId, zoneId):
@@ -242,4 +242,3 @@ class AIZoneDataStore:
             self.printStats()
     def printStats(self):
         self.notify.debug('%s zones have zone data allocated' % len(self._zone2data))
-        

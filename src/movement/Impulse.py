@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from direct.showbase import DirectObject
 
 class Impulse(DirectObject.DirectObject):

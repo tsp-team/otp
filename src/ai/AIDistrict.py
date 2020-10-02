@@ -1,6 +1,6 @@
-from pandac.PandaModules import *
+from otp.otpbase.OTPModules import *
 from otp.otpbase import OTPGlobals
-from AIMsgTypes import *
+from .AIMsgTypes import *
 from direct.showbase.PythonUtil import Functor, randUint32
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM
@@ -26,12 +26,12 @@ class AIDistrict(AIRepository):
             districtId, districtName, districtType, serverId,
             minChannel, maxChannel, dcSuffix = 'AI'):
         assert self.notify.debugStateCall(self)
-        
+
         # Save the district Id (needed for calculations in AIRepository code)
         self.districtId = districtId
         self.districtName = districtName
         self.districtType = districtType
-        
+
         AIRepository.__init__(
             self, mdip, mdport, esip, esport, dcFileNames,
             serverId,
@@ -157,7 +157,7 @@ class AIDistrict(AIRepository):
             from otp.distributed import DistributedTestObjectAI
             self.testObject = DistributedTestObjectAI.DistributedTestObjectAI(self)
             self.testObject.generateOtpObject(self.getGameDoId(), 3)
-        
+
         taskMgr.doMethodLater(300, self.printPopulationToLog, self.uniqueName("printPopulationTask"))
 
 
@@ -275,14 +275,14 @@ class AIDistrict(AIRepository):
 
         try:
             return AIRepository.readerPollUntilEmpty(self, task)
-        except Exception, e:
+        except Exception as e:
             appendStr(e, '\nSENDER ID: %s' % self.getAvatarIdFromSender())
             raise
 
     def handleReaderOverflow(self):
         # may as well delete the shard at this point
         self.deleteDistrict(self.districtId)
-        raise StandardError, ("incoming-datagram buffer overflowed, "
+        raise Exception("incoming-datagram buffer overflowed, "
                               "aborting AI process")
 
     ##### General Purpose functions #####
@@ -386,11 +386,11 @@ class AIDistrict(AIRepository):
         datagram.addChannel(self.ourChannel)
         # schedule for execution on socket close
         self.addPostSocketClose(datagram)
-            
+
     def sendSetZone(self, distobj, zoneId):
         datagram = PyDatagram()
         datagram.addServerHeader(
-            distobj.doId, self.ourChannel, STATESERVER_OBJECT_SET_ZONE)        
+            distobj.doId, self.ourChannel, STATESERVER_OBJECT_SET_ZONE)
         # Add the zone parent id
         # HACK:
         parentId = oldParentId = self.districtId
@@ -427,8 +427,8 @@ class AIDistrict(AIRepository):
         """
         datagram = PyDatagram()
         datagram.addServerHeader(
-            DBSERVER_ID, self.ourChannel, DBSERVER_MAKE_FRIENDS)        
-        
+            DBSERVER_ID, self.ourChannel, DBSERVER_MAKE_FRIENDS)
+
         # Indicate the two avatars who are making friends
         datagram.addUint32(avatarAId)
         datagram.addUint32(avatarBId)
@@ -450,8 +450,8 @@ class AIDistrict(AIRepository):
         """
         datagram = PyDatagram()
         datagram.addServerHeader(
-            DBSERVER_ID,self.ourChannel,DBSERVER_REQUEST_SECRET)        
-        
+            DBSERVER_ID,self.ourChannel,DBSERVER_REQUEST_SECRET)
+
         # Indicate the number we want to associate with the new secret.
         datagram.addUint32(requesterId)
         # Send it off!
