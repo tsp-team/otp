@@ -1,7 +1,7 @@
 #define BUILD_DIRECTORY $[HAVE_OPENSSL]
 
 #define OTHER_LIBS \
-    dtoolutil:c dtoolbase:c dtool:m
+    p3dtoolutil:c p3dtoolbase:c p3dtool:m
 
 #define WIN_SYS_LIBS advapi32.lib user32.lib gdi32.lib
 #define USE_PACKAGES openssl
@@ -32,8 +32,6 @@
 #defer ODIR Opt$[OPTIMIZE]-$[PLATFORM]$[ODIR_SUFFIX]
 
 #begin bin_target
-
-  #define OTHER_LIBS $[OTHER_LIBS] pystub
 
 #if $[or $[eq $[PLATFORM], Cygwin], $[eq $[PLATFORM],Win32]]
 // UPX writes 'UPX' in the exe, but it's better than nothing until I can find a better encrypter
