@@ -13,6 +13,8 @@
 #include "openssl/ssl.h"
 #include "openssl/md5.h"
 
+using namespace std;
+
 // Windows may define this macro inappropriately.
 #ifdef X509_NAME
 #undef X509_NAME
@@ -96,7 +98,7 @@ filesearch(string rootpath, string pattern, bool bRecursive, bool bSearchForDirs
     WIN32_FIND_DATA current_file;
 
     // first find all the files in the rootpath dir that match the pattern
-    string searchpathpattern = rootpath + "\\" + pattern;
+    std::string searchpathpattern = rootpath + "\\" + pattern;
     HANDLE searcher = FindFirstFile(searchpathpattern.c_str(), &current_file);
     if ( searcher == INVALID_HANDLE_VALUE)
         return;
@@ -131,7 +133,7 @@ filesearch(string rootpath, string pattern, bool bRecursive, bool bSearchForDirs
 
     if (bRecursive) {
         // then call yourself recursively on all dirs in the rootpath
-        string newsearchpath = rootpath + "\\*";
+        std::string newsearchpath = rootpath + "\\*";
         HANDLE searcher = FindFirstFile(newsearchpath.c_str(), &current_file);
         if ( searcher == INVALID_HANDLE_VALUE)
             return;
@@ -257,130 +259,130 @@ __asm {
 }
 #endif
 
-static void write_const(ostream& os) {
+static void write_const(std::ostream& os) {
   // write out the stuff that we always want in the configfile
-  os << "#" << endl << "# constant config settings" << endl << "#" << endl
-     << endl;
-  os << "chan-config-sanity-check #f" << endl;
-  os << "window-title Toontown" << endl;
+  os << "#" << std::endl << "# constant config settings" << std::endl << "#" << std::endl
+     << std::endl;
+  os << "chan-config-sanity-check #f" << std::endl;
+  os << "window-title Toontown" << std::endl;
 
   // We want to detect when a window does not open, and handle it in
   // ToonBase.py. Thus we don't want ShowBase to raise an exception if
   // the window fails to open.
-  os << "require-window 0" << endl;
+  os << "require-window 0" << std::endl;
 
   // Set the language
 #if defined(USE_ENGLISH)
-  os << "language english" << endl;
-//  os << "product-name DisneyOnline-US" << endl;
+  os << "language english" << std::endl;
+//  os << "product-name DisneyOnline-US" << std::endl;
 #elif defined(USE_CASTILLIAN)
-  os << "language castillian" << endl;
-  os << "product-name ES" << endl;
+  os << "language castillian" << std::endl;
+  os << "product-name ES" << std::endl;
 #elif defined(USE_JAPANESE)
-  os << "language japanese" << endl;
-  os << "product-name JP" << endl;
+  os << "language japanese" << std::endl;
+  os << "product-name JP" << std::endl;
 #elif defined(USE_GERMAN)
-  os << "language german" << endl;
-  os << "product-name T-Online" << endl;
+  os << "language german" << std::endl;
+  os << "product-name T-Online" << std::endl;
 #elif defined(USE_PORTUGUESE)
-  os << "language portuguese" << endl;
-  os << "product-name BR" << endl;
+  os << "language portuguese" << std::endl;
+  os << "product-name BR" << std::endl;
 #elif defined(USE_FRENCH)
-  os << "language french" << endl;
-  os << "product-name FR" << endl;
+  os << "language french" << std::endl;
+  os << "product-name FR" << std::endl;
 #else
 #error Unrecognized language defined
 #endif // language
 #ifdef IS_OSX
-  os << "icon-filename toontown_mac_icon.rgb" << endl;
+  os << "icon-filename toontown_mac_icon.rgb" << std::endl;
 #else
-  os << "icon-filename toontown.ico" << endl;
+  os << "icon-filename toontown.ico" << std::endl;
 #endif  // IS_OSX
 
-  os << endl;
-  os << "cull-bin shadow 15 fixed" << endl;
-  os << "cull-bin ground 14 fixed" << endl;
-  os << "cull-bin gui-popup 60 unsorted" << endl;
-  os << "default-model-extension .bam" << endl;
-  os << "plugin-path ." << endl;
+  os << std::endl;
+  os << "cull-bin shadow 15 fixed" << std::endl;
+  os << "cull-bin ground 14 fixed" << std::endl;
+  os << "cull-bin gui-popup 60 unsorted" << std::endl;
+  os << "default-model-extension .bam" << std::endl;
+  os << "plugin-path ." << std::endl;
 
-  os << "# downloader settings" << endl;
-  os << "decompressor-buffer-size 32768" << endl;
-  os << "extractor-buffer-size 32768" << endl;
-  os << "patcher-buffer-size 512000" << endl;
-  os << "downloader-timeout 15" << endl;
-  os << "downloader-timeout-retries 4" << endl;
-  os << "downloader-disk-write-frequency 4" << endl;
+  os << "# downloader settings" << std::endl;
+  os << "decompressor-buffer-size 32768" << std::endl;
+  os << "extractor-buffer-size 32768" << std::endl;
+  os << "patcher-buffer-size 512000" << std::endl;
+  os << "downloader-timeout 15" << std::endl;
+  os << "downloader-timeout-retries 4" << std::endl;
+  os << "downloader-disk-write-frequency 4" << std::endl;
   // Assume we are fast until we are told otherwise
-  os << "downloader-byte-rate 125000" << endl;
-  os << "downloader-frequency 0.1" << endl;
-  os << "want-render2dp 1" << endl;
+  os << "downloader-byte-rate 125000" << std::endl;
+  os << "downloader-frequency 0.1" << std::endl;
+  os << "want-render2dp 1" << std::endl;
 
-  os << endl;
-  os << "# texture settings" << endl;
+  os << std::endl;
+  os << "# texture settings" << std::endl;
   // this setting forces a panda scale-down for all textures
   // it really should be up to the gsg to make the determination
   // if the HW can support that tex size, so comment this out for now
-  // os << "max-texture-dimension 256" << endl;
+  // os << "max-texture-dimension 256" << std::endl;
 
   // leaving this in for the benefit of screen shots, which
   // will not be pow2 when saved
-  os << "textures-power-2 down" << endl;
+  os << "textures-power-2 down" << std::endl;
 
-  os << endl;
-  os << "# loader settings" << endl;
-  os << "load-file-type toontown" << endl;
-  os << "dc-file phase_3/etc/toon.dc" << endl;
-  os << "dc-file phase_3/etc/otp.dc" << endl;
+  os << std::endl;
+  os << "# loader settings" << std::endl;
+  os << "load-file-type toontown" << std::endl;
+  os << "dc-file phase_3/etc/toon.dc" << std::endl;
+  os << "dc-file phase_3/etc/otp.dc" << std::endl;
 #ifdef WIN32
-  os << "aux-display pandadx9" << endl;
-  os << "aux-display pandadx8" << endl;
+  os << "aux-display pandadx9" << std::endl;
+  os << "aux-display pandadx8" << std::endl;
 #endif
-  os << "aux-display pandagl" << endl;
-  os << "aux-display tinydisplay" << endl;
-  os << "compress-channels #t" << endl;
-  os << "display-lists 0" << endl;
-  os << "text-encoding utf8" << endl;
+  os << "aux-display pandagl" << std::endl;
+  os << "aux-display tinydisplay" << std::endl;
+  os << "compress-channels #t" << std::endl;
+  os << "display-lists 0" << std::endl;
+  os << "text-encoding utf8" << std::endl;
 
   // We don't want DirectEntries to return unicode strings for now.
-  os << "direct-wtext 0" << endl;
+  os << "direct-wtext 0" << std::endl;
 
-  os << "text-never-break-before ,.-:?!;。？！、" << endl;
-  os << endl;
-  os << "early-random-seed 1" << endl;
+  os << "text-never-break-before ,.-:?!;。？！、" << std::endl;
+  os << std::endl;
+  os << "early-random-seed 1" << std::endl;
 
-  os << "verify-ssl 0" << endl;
+  os << "verify-ssl 0" << std::endl;
 
-  os << "http-preapproved-server-certificate-filename ttown4.online.disney.com:46667 gameserver.txt" << endl;
+  os << "http-preapproved-server-certificate-filename ttown4.online.disney.com:46667 gameserver.txt" << std::endl;
 
   // For now, restrict SSL communications to the cheaper RC4-MD5
   // cipher.  This should lighten the CPU load on the gameserver.
-  os << "ssl-cipher-list RC4-MD5" << endl;
-  os << "paranoid-clock 1" << endl;
-  os << "lock-to-one-cpu 1" << endl;
-  os << "collect-tcp 1" << endl;
-  os << "collect-tcp-interval 0.2" << endl;
-  os << "respect-prev-transform 1" << endl;
-  os << endl;
-  os << "# notify settings" << endl;
-  // os << "notify-level-downloader debug" << endl;
-  //  os << "notify-level-DistributedBattleBldg debug" << endl;
-  // os << "notify-level-express debug" << endl;
+  os << "ssl-cipher-list RC4-MD5" << std::endl;
+  os << "paranoid-clock 1" << std::endl;
+  os << "lock-to-one-cpu 1" << std::endl;
+  os << "collect-tcp 1" << std::endl;
+  os << "collect-tcp-interval 0.2" << std::endl;
+  os << "respect-prev-transform 1" << std::endl;
+  os << std::endl;
+  os << "# notify settings" << std::endl;
+  // os << "notify-level-downloader debug" << std::endl;
+  //  os << "notify-level-DistributedBattleBldg debug" << std::endl;
+  // os << "notify-level-express debug" << std::endl;
   // Turn off spam from some noisy notify cats
-  os << "notify-level-collide warning" << endl;
-  os << "notify-level-chan warning" << endl;
-  os << "notify-level-gobj warning" << endl;
-  os << "notify-level-loader warning" << endl;
-  os << "notify-timestamp #t" << endl;
-  os << endl;
+  os << "notify-level-collide warning" << std::endl;
+  os << "notify-level-chan warning" << std::endl;
+  os << "notify-level-gobj warning" << std::endl;
+  os << "notify-level-loader warning" << std::endl;
+  os << "notify-timestamp #t" << std::endl;
+  os << std::endl;
 
   // Give the decompressor and extractor plenty of timeslices before
   // we get the window open.
-  os << "decompressor-step-time 0.5" << endl;
-  os << "extractor-step-time 0.5" << endl;
-  os << endl;
+  os << "decompressor-step-time 0.5" << std::endl;
+  os << "extractor-step-time 0.5" << std::endl;
+  os << std::endl;
 
-  os << "# Server version" << endl;
+  os << "# Server version" << std::endl;
 
   // default settings for ENGLISH
   // sv1.0.40.25.test
@@ -407,67 +409,67 @@ static void write_const(ostream& os) {
   build = 0;
   loginType = "playToken";
 #endif
-  os << "server-version sv1." << lang << ".40." << build << ".test" << endl;
-  //os << "server-version dev" << endl;
+  os << "server-version sv1." << lang << ".40." << build << ".test" << std::endl;
+  //os << "server-version dev" << std::endl;
 
 #ifdef IS_OSX
-  os << "server-version-suffix .osx" << endl;
+  os << "server-version-suffix .osx" << std::endl;
 #else
-  os << "server-version-suffix " << endl;
+  os << "server-version-suffix " << std::endl;
 #endif
 
-  os << "required-login " << loginType << endl;
+  os << "required-login " << loginType << std::endl;
 
-  os << "server-failover 80 443" << endl;
-  os << "want-fog #t" << endl;
-  os << "dx-use-rangebased-fog #t" << endl;
-  os << "aspect-ratio 1.333333" << endl;
+  os << "server-failover 80 443" << std::endl;
+  os << "want-fog #t" << std::endl;
+  os << "dx-use-rangebased-fog #t" << std::endl;
+  os << "aspect-ratio 1.333333" << std::endl;
   // make OnScreenDebug use a font that we're already downloading
-  os << "on-screen-debug-font phase_3/models/fonts/ImpressBT.ttf" << endl;
+  os << "on-screen-debug-font phase_3/models/fonts/ImpressBT.ttf" << std::endl;
 
   // The current Toontown code now supports temp-hpr-fix.
   // Welcome to the future.
-  os << "temp-hpr-fix 1" << endl;
+  os << "temp-hpr-fix 1" << std::endl;
 
   // Japanese, Korean, and Chinese clients will like to have these
   // features enabled.
-  os << "ime-aware 1" << endl;
-  os << "ime-hide 1" << endl;
+  os << "ime-aware 1" << std::endl;
+  os << "ime-hide 1" << std::endl;
 
   // There appears to be some performance issues with using vertex
   // buffers on nvidia drivers in DX8.  Probably I've screwed
   // something up in there.  For now, turn it off; we don't really
   // need (nor can Toontown take advantage of) the potential
   // performance gains anyway.
-  os << "vertex-buffers 0" << endl;
-  os << "dx-broken-max-index 1" << endl;
+  os << "vertex-buffers 0" << std::endl;
+  os << "dx-broken-max-index 1" << std::endl;
 
   // Temporarily disable the use of D3DPOOL_DEFAULT until we can be
   // confident it is working properly.
-  os << "dx-management 1" << endl;
+  os << "dx-management 1" << std::endl;
 
   // setting to determine if new login API from new website is used or not
-  os << "tt-specific-login 0" << endl;
+  os << "tt-specific-login 0" << std::endl;
 
   // We don't need Toontown to be case-sensitive on the client end.
   // Clients are sometimes known to rename their system directories
   // without regard to case.
-  os << "vfs-case-sensitive 0" << endl;
+  os << "vfs-case-sensitive 0" << std::endl;
 
   // This is designed to prevent people from wedging something on a
   // keyboard button or something in an attempt to defeat the sleep
   // timeout.  After this amount of time, with no changes in keyboard
   // state, all the keys are "released".
-  os << "inactivity-timeout 180" << endl;
+  os << "inactivity-timeout 180" << std::endl;
 
   // Need to turn on this option to support our broken door triggers.
-  os << "early-event-sphere 1" << endl;
+  os << "early-event-sphere 1" << std::endl;
 
   // This keeps the joint hierarchies for the different LOD's of an
   // Actor separate.  Seems to be necessary for the Toons--some of the
   // naked Toons seem to have slightly different skeletons for the
   // different LOD's.
-  os << "merge-lod-bundles 0" << endl;
+  os << "merge-lod-bundles 0" << std::endl;
 
   // Keep the frame rate from going too ridiculously high.  This is
   // mainly an issue when the video driver doesn't support video sync.
@@ -475,82 +477,82 @@ static void write_const(ostream& os) {
   // that you get with a too-high frame rate (some of our trigger
   // planes require a certain amount of interpenetration to be
   // triggered), and is also just a polite thing to do in general.
-  os << "clock-mode limited" << endl
-     << "clock-frame-rate 120" << endl;
+  os << "clock-mode limited" << std::endl
+     << "clock-frame-rate 120" << std::endl;
 
   // Not using parasite_buffer to speed things up in places where
   // creating this buffer seems to cause frame rate issues such
   // as the Photo Fun game.
-  os << "prefer-parasite-buffer 0" << endl;
+  os << "prefer-parasite-buffer 0" << std::endl;
 
   // This turns on In Game News
-  os << "want-news-page 1" << endl;
+  os << "want-news-page 1" << std::endl;
 
   // Temporarily turn off IGN over HTTP due to crash
-  // os << "news-over-http 0" << endl;
-  // os << "news-base-dir phase_3.5/models/news/" << endl;
-  // os << "news-index-filename news_index.txt" << endl;
+  // os << "news-over-http 0" << std::endl;
+  // os << "news-base-dir phase_3.5/models/news/" << std::endl;
+  // os << "news-index-filename news_index.txt" << std::endl;
 
-  os << "news-over-http 1" << endl;
-  // os << "in-game-news-url http://download.test.toontown.com/news/" << endl;
-  os << "news-base-dir /httpNews" << endl;
-  os << "news-index-filename http_news_index.txt" << endl;
+  os << "news-over-http 1" << std::endl;
+  // os << "in-game-news-url http://download.test.toontown.com/news/" << std::endl;
+  os << "news-base-dir /httpNews" << std::endl;
+  os << "news-index-filename http_news_index.txt" << std::endl;
 
   // This should now be on by default
-  // os << "want-new-toonhall 1" << endl;
+  // os << "want-new-toonhall 1" << std::endl;
 
   // need to specify audio library to use, such as Miles or FMOD etc
-  os << "audio-library-name miles_audio" << endl;
+  os << "audio-library-name miles_audio" << std::endl;
 }
 
-static void write_audio(ostream& os, bool sfx_active, bool music_active, float sfx_vol,
+static void write_audio(std::ostream& os, bool sfx_active, bool music_active, float sfx_vol,
                  float music_vol) {
-  os << "#" << endl << "# audio related options" << endl << "#" << endl
-     << endl;
-  os << "# load the loaders" << endl;
-  os << "audio-loader mp3" << endl;
-  os << "audio-loader midi" << endl;
-  os << "audio-loader wav" << endl;
+  os << "#" << std::endl << "# audio related options" << std::endl << "#" << std::endl
+     << std::endl;
+  os << "# load the loaders" << std::endl;
+  os << "audio-loader mp3" << std::endl;
+  os << "audio-loader midi" << std::endl;
+  os << "audio-loader wav" << std::endl;
 
 
   // This just seems like a good idea.  It doesn't appear to cost too
   // much CPU, and hardware support of midi seems to be spotty.
 
   // but some HW midi sounds better than the SW midi, so allow it to be configured
-  os << "audio-software-midi #" << (Settings::get_force_sw_midi() ? "t" : "f") << endl;
+  os << "audio-software-midi #" << (Settings::get_force_sw_midi() ? "t" : "f") << std::endl;
 
-  os << endl;
+  os << std::endl;
   if (sfx_active)
-    os << "# turn sfx on" << endl << "audio-sfx-active #t" << endl;
+    os << "# turn sfx on" << std::endl << "audio-sfx-active #t" << std::endl;
   else
-    os << "# turn sfx off" << endl << "audio-sfx-active #f" << endl;
+    os << "# turn sfx off" << std::endl << "audio-sfx-active #f" << std::endl;
   if (music_active)
-    os << "# turn music on" << endl << "audio-music-active #t" << endl;
+    os << "# turn music on" << std::endl << "audio-music-active #t" << std::endl;
   else
-    os << "# turn music off" << endl << "audio-music-active #f" << endl;
-  os << endl;
-  os << "audio-master-sfx-volume " << sfx_vol << endl;
-  os << "audio-master-music-volume " << music_vol << endl;
+    os << "# turn music off" << std::endl << "audio-music-active #f" << std::endl;
+  os << std::endl;
+  os << "audio-master-sfx-volume " << sfx_vol << std::endl;
+  os << "audio-master-music-volume " << music_vol << std::endl;
 }
 
-static void write_res(ostream& os, unsigned int x, unsigned int y) {
+static void write_res(std::ostream& os, unsigned int x, unsigned int y) {
   os << "#\n# display resolution\n#\n\n";
-  os << "win-size " << x << " " << y << endl;
+  os << "win-size " << x << " " << y << std::endl;
 }
 
-static void write_prod(ostream& os) {
-  os << "#" << endl << "# server type" << endl << "#" << endl << endl;
-  os << "server-type prod" << endl;
+static void write_prod(std::ostream& os) {
+  os << "#" << std::endl << "# server type" << std::endl << "#" << std::endl << std::endl;
+  os << "server-type prod" << std::endl;
 }
 
-static void write_dev(ostream& os) {
-  os << "#" << endl << "# server type" << endl << "#" << endl << endl;
-  os << "server-type dev" << endl;
+static void write_dev(std::ostream& os) {
+  os << "#" << std::endl << "# server type" << std::endl << "#" << std::endl << std::endl;
+  os << "server-type dev" << std::endl;
 }
 
-static void write_debug(ostream& os) {
-  os << "#" << endl << "# server type" << endl << "#" << endl << endl;
-  os << "server-type debug" << endl;
+static void write_debug(std::ostream& os) {
+  os << "#" << std::endl << "# server type" << std::endl << "#" << std::endl << std::endl;
+  os << "server-type debug" << std::endl;
 }
 
 // stricmp() isn't standard ANSI, although it should be.  We'll use
@@ -558,9 +560,9 @@ static void write_debug(ostream& os) {
 // duplicated from string_utils.cxx, which we can't link with because
 // of the whole Configrc-dtool linking thing.
 static int
-cmp_nocase(const string &s, const string &s2) {
-  string::const_iterator p = s.begin();
-  string::const_iterator p2 = s2.begin();
+cmp_nocase(const std::string &s, const std::string &s2) {
+  std::string::const_iterator p = s.begin();
+  std::string::const_iterator p2 = s2.begin();
 
   while (p != s.end() && p2 != s2.end()) {
     if (toupper(*p) != toupper(*p2)) {
@@ -575,7 +577,7 @@ cmp_nocase(const string &s, const string &s2) {
 }
 
 static void
-read_file(string &result, const Filename &filename) {
+read_file(std::string &result, const Filename &filename) {
   pifstream file;
   if (!filename.open_read(file)) {
     return;
@@ -600,7 +602,7 @@ read_file(string &result, const Filename &filename) {
 static void
 output_overrides(ostream &os) {
   Filename override_filename =
-    Filename::binary_filename(configrc_override_filename);
+    Filename::binary_filename(std::string(configrc_override_filename));
   if (!override_filename.exists()) {
     return;
   }
@@ -773,11 +775,11 @@ int main(int argc, char*argv[]) {
         } else if(cmp_nocase(pArgStr,"pickbestres")==0) {
           bPickBestRes=true;
         } else {
-          cerr << "Invalid argument: " << argv[a] << endl;
+          cerr << "Invalid argument: " << argv[a] << std::endl;
           bPrintHelp=true;
         }
     } else {
-       cerr << "Invalid argument: " << argv[a] << endl;
+       cerr << "Invalid argument: " << argv[a] << std::endl;
        bPrintHelp=true;
     }
   }
@@ -882,16 +884,16 @@ int main(int argc, char*argv[]) {
   output_overrides(os);
 
   write_const(os);
-  os << endl;
+  os << std::endl;
 
   if(Settings::want_custom_mouse_cursor()) {
-    os << "cursor-filename toonmono.cur" << endl << endl;
+    os << "cursor-filename toonmono.cur" << std::endl << std::endl;
     //  not using 256 color cursors right now due to common driver probs
-    //  os << "win32-color-cursor phase_3/models/gui/toon.cur" << endl;
+    //  os << "win32-color-cursor phase_3/models/gui/toon.cur" << std::endl;
   }
 
   if(Settings::get_show_fpsmeter()) {
-    os << "show-frame-rate-meter #t" << endl << endl;
+    os << "show-frame-rate-meter #t" << std::endl << std::endl;
   }
 
 #if 0  // This seems to crash on dual-core CPU's, and it's not worth the trouble of fixing it.
@@ -913,7 +915,7 @@ int main(int argc, char*argv[]) {
         lod_stress_factor=0.3f;
      else lod_stress_factor=0.25f;
 
-     os << "lod-stress-factor " << lod_stress_factor << endl << endl;
+     os << "lod-stress-factor " << lod_stress_factor << std::endl << std::endl;
   #endif
 #endif  // 0
 
@@ -922,26 +924,26 @@ int main(int argc, char*argv[]) {
       case Settings::DX7:
       case Settings::DX8:
 #ifdef WIN32
-        os << "load-display pandadx8" << endl;
+        os << "load-display pandadx8" << std::endl;
         break;
 #endif  // fall through on non-Windows case
 
       case Settings::DX9:
       case Settings::D_DEFAULT:
 #ifdef WIN32
-        os << "load-display pandadx9" << endl;
+        os << "load-display pandadx9" << std::endl;
         break;
 #endif  // fall through on non-Windows case
 
       case Settings::GL:
-        os << "load-display pandagl" << endl;
+        os << "load-display pandagl" << std::endl;
         break;
 
       default:
         // this is an error, it must be one of the above.
         break;
   }
-  os << endl;
+  os << std::endl;
 
   char fs_str[2];
   fs_str[0]=(Settings::get_windowed_mode() ? 'f' : 't');
@@ -950,12 +952,12 @@ int main(int argc, char*argv[]) {
 
   write_audio(os, Settings::get_sfx(), Settings::get_music(),
               Settings::get_sfx_volume(), Settings::get_music_volume());
-  os << endl;
+  os << std::endl;
 
   unsigned int xsize,ysize;
   Settings::get_resolution_sizes(Settings::get_resolution(),xsize,ysize);
   write_res(os,xsize,ysize);
-  os << endl;
+  os << std::endl;
 
   if(bPickBestRes && !bDoSavedSettingsExist) {
       // right now pickbestres only works for dx9, so in case we switch to dx8/ogl we need to write
@@ -1057,7 +1059,7 @@ static HWND CreateOpenGLWindow(char* title, int pixfmtnum, PIXELFORMATDESCRIPTOR
     if (!hInstance) {
         hInstance = GetModuleHandle(NULL);
         if (!hInstance) {
-            cerr <<  "GetModuleHandle() failed, err=" << GetLastError() <<endl;
+            cerr <<  "GetModuleHandle() failed, err=" << GetLastError() <<std::endl;
         }
 
         wc.style         = CS_OWNDC;
@@ -1072,7 +1074,7 @@ static HWND CreateOpenGLWindow(char* title, int pixfmtnum, PIXELFORMATDESCRIPTOR
         wc.lpszClassName = pOGLWinClassName;
 
         if (!RegisterClass(&wc)) {
-            cerr << "OGL RegisterClass failed, err=" << GetLastError() <<endl;
+            cerr << "OGL RegisterClass failed, err=" << GetLastError() <<std::endl;
             // MessageBox(NULL, "RegisterClass() failed: Cannot register window class.", "Error", MB_OK);
             return NULL;
         }
@@ -1083,7 +1085,7 @@ static HWND CreateOpenGLWindow(char* title, int pixfmtnum, PIXELFORMATDESCRIPTOR
             x, y, width, height, NULL, NULL, hInstance, NULL);
 
     if(hWnd == NULL) {
-        cerr <<  "CreateWindow failed, err=" << GetLastError() <<endl;
+        cerr <<  "CreateWindow failed, err=" << GetLastError() <<std::endl;
         return NULL;
     }
 
@@ -1099,7 +1101,7 @@ static HWND CreateOpenGLWindow(char* title, int pixfmtnum, PIXELFORMATDESCRIPTOR
     SetLastError(0);
     pf = ChoosePixelFormat(hDC, &pfd);
     if (pf == 0) {
-        cerr << "ChoosePixelFormat(" << pf <<") failed, err=" << GetLastError() << endl;
+        cerr << "ChoosePixelFormat(" << pf <<") failed, err=" << GetLastError() << std::endl;
         cerr << "trying with Pixelformat 1!\n";
         pf = 1;
     }
@@ -1107,7 +1109,7 @@ static HWND CreateOpenGLWindow(char* title, int pixfmtnum, PIXELFORMATDESCRIPTOR
 
     SetLastError(0);
     if (SetPixelFormat(*pHDC, pixfmtnum, pPFD) == FALSE) {
-        cerr << "OGL SetPixelFormat(" << pixfmtnum <<") failed, err=" << GetLastError() << endl;
+        cerr << "OGL SetPixelFormat(" << pixfmtnum <<") failed, err=" << GetLastError() << std::endl;
     }
     /*
     else {
@@ -1134,7 +1136,7 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
     // doing a LoadLibrary for the extent of this test *should* be the same as linking statically, I hope
     HINSTANCE hOGL = LoadLibrary("opengl32.dll");
     if(!hOGL) {
-      cerr << "LoadLib ogl32.dll failed, err=" << GetLastError() << endl;
+      cerr << "LoadLib ogl32.dll failed, err=" << GetLastError() << std::endl;
       return;
     }
 
@@ -1142,7 +1144,7 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
 
     HDC winDC = GetDC(hWnd);  // will this fail if not administrator, since we're getting whole desktop DC?
     if(winDC==NULL) {
-      cerr << "failed to get desktop DC!, err=" << GetLastError() << endl;
+      cerr << "failed to get desktop DC!, err=" << GetLastError() << std::endl;
       return;
     }
 
@@ -1161,7 +1163,7 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
          // with opengl32.lib because no gl* fns were called in code (or were eliminated by optimizer)
          // make sure gl[something] is called somewhere
          cerr << "ERROR_MOD_NOT_FOUND\n";
-     } else cerr << errnum << endl;
+     } else cerr << errnum << std::endl;
     }
 
     // look for an ICD/MCD pixfmt
@@ -1170,7 +1172,7 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
 
         if((pfd.dwFlags & PFD_GENERIC_FORMAT)!=0) {
             // drvtype = Software;
-            // cerr << "skipping GL pixfmt[" << pfnum << "] due to SW fmt" << endl;
+            // cerr << "skipping GL pixfmt[" << pfnum << "] due to SW fmt" << std::endl;
             continue;
         }
 
@@ -1179,25 +1181,25 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
         else drvtype = ICD;*/
 
         if(pfd.iPixelType == PFD_TYPE_COLORINDEX) {
-          // cerr << "skipping GL pixfmt[" << pfnum << "] due to colorindex" << endl;
+          // cerr << "skipping GL pixfmt[" << pfnum << "] due to colorindex" << std::endl;
           continue;
         }
 
         if(pfd.cColorBits<=8) {
-           // cerr << "skipping GL pixfmt[" << pfnum << "] due to cColorBits<8" << endl;
+           // cerr << "skipping GL pixfmt[" << pfnum << "] due to cColorBits<8" << std::endl;
            continue;
         }
 
         // need z buffer for TT (but not stencil)
         if(pfd.cDepthBits==0) {
-           // cerr << "skipping GL pixfmt[" << pfnum << "] due to depthbits==0" << endl;
+           // cerr << "skipping GL pixfmt[" << pfnum << "] due to depthbits==0" << std::endl;
            continue;
         }
 
         DWORD dwReqFlags=(PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW | PFD_DOUBLEBUFFER);
 
         if((pfd.dwFlags & dwReqFlags)!=dwReqFlags) {
-           // cerr << "skipping GL pixfmt[" << pfnum << "] due to missing flags, pfd.flags=0x" << (void*)pfd.dwFlags<< endl;
+           // cerr << "skipping GL pixfmt[" << pfnum << "] due to missing flags, pfd.flags=0x" << (void*)pfd.dwFlags<< std::endl;
            continue;
         }
 
@@ -1237,28 +1239,28 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
     const char *pWGLCCStr="wglCreateContext";
     WGLCREATECONTEXTPROC pWglCreateContext = (WGLCREATECONTEXTPROC) GetProcAddress(hOGL, pWGLCCStr);
     if (NULL == pWglCreateContext) {
-        cerr << "Error: GetProcAddr failed for " << pWGLCCStr << ", err=" << GetLastError() << endl;
+        cerr << "Error: GetProcAddr failed for " << pWGLCCStr << ", err=" << GetLastError() << std::endl;
         goto _cleanup;
     }
     typedef BOOL (WINAPI *WGLDELETECONTEXTPROC)(HGLRC);
     const char *pWGLDelCStr="wglDeleteContext";
     WGLDELETECONTEXTPROC pWglDeleteContext = (WGLDELETECONTEXTPROC) GetProcAddress(hOGL, pWGLDelCStr);
     if (NULL == pWglDeleteContext) {
-        cerr << "Error: GetProcAddr failed for " << pWGLDelCStr << ", err=" << GetLastError() << endl;
+        cerr << "Error: GetProcAddr failed for " << pWGLDelCStr << ", err=" << GetLastError() << std::endl;
         goto _cleanup;
     }
     typedef BOOL  (WINAPI *WGLMAKECURRENTPROC)(HDC, HGLRC);
     const char *pWGLMakeCurStr="wglMakeCurrent";
     WGLMAKECURRENTPROC pWglMakeCurrent = (WGLMAKECURRENTPROC) GetProcAddress(hOGL, pWGLMakeCurStr);
     if (NULL == pWglMakeCurrent) {
-        cerr << "Error: GetProcAddr failed for " << pWGLMakeCurStr << ", err=" << GetLastError() << endl;
+        cerr << "Error: GetProcAddr failed for " << pWGLMakeCurStr << ", err=" << GetLastError() << std::endl;
         goto _cleanup;
     }
     typedef const GLubyte * (WINAPI *GLGETSTRINGPROC)(GLenum name);
     const char *pGLGetStr="glGetString";
     GLGETSTRINGPROC pGlGetString = (GLGETSTRINGPROC) GetProcAddress(hOGL, pGLGetStr);
     if (NULL == pGlGetString) {
-        cerr << "Error: GetProcAddr failed for " << pGLGetStr << ", err=" << GetLastError() << endl;
+        cerr << "Error: GetProcAddr failed for " << pGLGetStr << ", err=" << GetLastError() << std::endl;
         goto _cleanup;
     }
 
@@ -1273,12 +1275,12 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
 
     HGLRC hRC = (*pWglCreateContext)(hOGLWinDC);
     if(hRC==NULL) {
-        cerr << "Error: wglCreateContext failed, err=" << GetLastError() << endl;
+        cerr << "Error: wglCreateContext failed, err=" << GetLastError() << std::endl;
         goto _wndcleanup;
     }
     BOOL ret=(*pWglMakeCurrent)(hOGLWinDC, hRC);
     if(!ret) {
-        cerr << "Error: wglMakeCurrent failed, err=" << GetLastError() << endl;
+        cerr << "Error: wglMakeCurrent failed, err=" << GetLastError() << std::endl;
         goto _wndcleanup;
     }
 
@@ -1297,7 +1299,7 @@ void write_opengl_hardware_info(HKEY hKeyToontown) {
     /*
     cerr << "GL_VENDOR: "     << _OGLVendorNameStr
       << ", GL_RENDERER: " << _OGLRendererNameStr
-      << ", GL_VERSION: "  << _OGLVerStr << endl;
+      << ", GL_VERSION: "  << _OGLVerStr << std::endl;
     */
 
     _wndcleanup:

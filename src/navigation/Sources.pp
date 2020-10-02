@@ -8,15 +8,13 @@
 #begin lib_target
   #define TARGET navigation
 
-  #define SOURCES \
-    pathTable.h pathTable.I
-
-  #define COMPOSITE_SOURCES \
-    pathTable.cxx
-
   #define INSTALL_HEADERS \
     pathTable.h pathTable.I
 
   #define IGATESCAN all
+  #define IGATEEXT \
+    pathTable.cxx \
+    pathTable.h \
+    pathTable.I
 
 #end lib_target

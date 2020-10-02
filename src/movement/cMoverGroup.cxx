@@ -18,7 +18,7 @@ CMoverGroup()
 CMoverGroup::
 ~CMoverGroup() {
   while (!_movers.empty()) {
-    cerr << "removing C++ movers: " << (*_movers.begin()).first << endl;
+    cerr << "removing C++ movers: " << (*_movers.begin()).first << std::endl;
     remove_c_mover((*_movers.begin()).first);
   }
 }

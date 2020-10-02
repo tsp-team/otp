@@ -33,18 +33,18 @@ findRoute(unsigned short startNode, unsigned short goalNode) {
   PyObject *num;
   unsigned short currNode = startNode;
 
-  num = PyInt_FromLong((long)startNode);
+  num = PyLong_FromLong((long)startNode);
 
   PyList_Append(route,num);
   Py_DECREF(num);
-  
+
   while(currNode != goalNode) {
     currNode = _connectionData[currNode][nextStepLookup(currNode,goalNode)];
 
     assert(currNode != 65535);
 
-    num = PyInt_FromLong((long)currNode);
-  
+    num = PyLong_FromLong((long)currNode);
+
     PyList_Append(route,num);
     Py_DECREF(num);
   }

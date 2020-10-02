@@ -313,7 +313,7 @@ set_chat(const string &chat, int chat_flags, int page_number) {
     _chat_pages.clear();
     _chat_flags = 0;
 
-  } 
+  }
   else {
     _chat_pages.clear();
     _chat_stomp_accum++;
@@ -328,10 +328,10 @@ set_chat(const string &chat, int chat_flags, int page_number) {
       _chat_pages.clear();
       _chat_flags = 0;
     }
-    
+
   }
 
-  
+
 
   if (((_chat_flags & CF_timeout) != 0) && (_chat_timeblock < now)) {
     // If we requested a timeout, determine when that will happen.
@@ -464,7 +464,7 @@ display_as_active() const {
 ////////////////////////////////////////////////////////////////////
 NodePath NametagGroup::
 copy_name_to(const NodePath &dest) const {
-  nassertr(_name_geom != (PandaNode *)NULL, (PandaNode *)NULL);
+  nassertr(_name_geom != (PandaNode *)NULL, NodePath());
   PT(PandaNode) copy =
     _name_geom->copy_subgraph();
   return dest.attach_new_node(copy);
@@ -494,8 +494,8 @@ update_regions() {
   if((_chat_timeblock < now) && _chat_stomp_accum > 1){
       _chat_stomp_accum = 0;
       set_chat(_chat_block_hold, _chat_flags_hold, _page_number);
-  }      
-  
+  }
+
   if ((_chat_flags & CF_timeout) != 0) {
     if (now >= _chat_timeout) {
       clear_chat();

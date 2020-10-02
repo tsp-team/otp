@@ -13,5 +13,6 @@
 #include "pandabase.h"
 #include "otpsymbols.h"
 
-#endif
+using namespace std;
 
+#endif

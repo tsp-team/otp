@@ -60,7 +60,7 @@ ChatBalloon::
 ////////////////////////////////////////////////////////////////////
 PT(PandaNode) ChatBalloon::
 generate(const string &text, TextFont *font, float wordwrap,
-         const Colorf &text_color, const Colorf &balloon_color,
+         const LColorf &text_color, const LColorf &balloon_color,
          bool for_3d, bool has_draw_order, int draw_order,
          const NodePath &page_button, bool space_for_button,
          bool reversed, NodePath &new_button) {

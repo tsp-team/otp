@@ -24,7 +24,7 @@ CMover(NodePath &objNodePath, float fwd_speed, float rot_speed) :
 CMover::
 ~CMover() {
   while (!_impulses.empty()) {
-    cerr << "removing C++ impulse: " << (*_impulses.begin()).first << endl;
+    cerr << "removing C++ impulse: " << (*_impulses.begin()).first << std::endl;
     remove_c_impulse((*_impulses.begin()).first);
   }
 }
@@ -79,11 +79,11 @@ integrate() {
   float dt2 = _dt*_dt;
 
   // (self.vel * dt) + (self.acc * dt2 * .5) + (self._shove * dt)
-  _node_path.set_fluid_pos(_node_path, 
+  _node_path.set_fluid_pos(_node_path,
                            (_vel * _dt) +
                            (_acc * dt2 * .5) +
                            (_shove * _dt));
-  
+
   // (self.rotVel * dt) + (self.rotAcc * dt2 * .5) + (self._rotShove * dt)
   _node_path.set_hpr(_node_path,
                      (_rot_vel * _dt) +

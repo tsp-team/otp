@@ -11,7 +11,7 @@
 #include "dconfig.h"
 
 Configure(config_movement);
-NotifyCategoryDef(movement, "");
+//NotifyCategoryDef(movement, "");
 
 ConfigureFn(config_movement) {
   init_libmovement();

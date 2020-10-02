@@ -3,3 +3,5 @@ __init__.py
 Makefile
 pp.dep
 built
+**/Opt*-*
+*.o

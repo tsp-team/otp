@@ -143,7 +143,7 @@ get_color_code() const {
 //               messages from this avatar.
 ////////////////////////////////////////////////////////////////////
 INLINE void NametagGroup::
-set_qt_color(const Colorf &color) {
+set_qt_color(const LColorf &color) {
   _qt_color = color;
 }
 
@@ -153,7 +153,7 @@ set_qt_color(const Colorf &color) {
 //  Description: Returns the background color set for quicktalker
 //               (SpeedChat) messages from this avatar.
 ////////////////////////////////////////////////////////////////////
-INLINE const Colorf &NametagGroup::
+INLINE const LColorf &NametagGroup::
 get_qt_color() const {
   return _qt_color;
 }
@@ -163,7 +163,7 @@ get_qt_color() const {
 //       Access: Published
 //  Description: Returns the balloon modulation color.
 ////////////////////////////////////////////////////////////////////
-INLINE const Colorf &NametagGroup::
+INLINE const LColorf &NametagGroup::
 get_balloon_modulation_color() const {
   return _balloon_modulation_color;
 }

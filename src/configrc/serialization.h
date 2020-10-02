@@ -17,9 +17,11 @@
 
 #include "dtoolbase.h"
 
+using namespace std;
+
 namespace Serialize {
 
-typedef string ConfigString;
+typedef std::string ConfigString;
 
 template <class X>
 class StdIns {
@@ -47,7 +49,7 @@ INLINE int Length(X c) {
    return c.length();
 }
 
-template <class Collection, class Inserter = StdIns<TYPENAME Collection::value_type> >
+template <class Collection, class Inserter = StdIns<typename Collection::value_type> >
 class Serializer {
    private:
       ConfigString _result;
@@ -77,7 +79,7 @@ Serializer<Collection, Inserter>::SerializeToString(const Collection& C,
    ConfigString ret;
    Inserter in;
 
-   for (TYPENAME Collection::const_iterator i=C.begin(); i!=C.end(); ++i) {
+   for (typename Collection::const_iterator i=C.begin(); i!=C.end(); ++i) {
       if (i != C.begin())
          ret += Delim;
       ret += in(*i);
@@ -85,7 +87,7 @@ Serializer<Collection, Inserter>::SerializeToString(const Collection& C,
    return ret;
 }
 
-template <class Collection, class Extractor = StdExt<TYPENAME Collection::value_type> >
+template <class Collection, class Extractor = StdExt<typename Collection::value_type> >
 class Deserializer {
    private:
       Collection _result;

@@ -20,6 +20,8 @@
     #define OTHER_LIBS $[OTHER_LIBS] p3pnmtext:c
   #endif
 
+  #define BUILDING_DLL BUILDING_OTP
+
   #define SOURCES \
     chatBalloon.I chatBalloon.h \
     chatFlags.h \

@@ -216,14 +216,14 @@ inline void write_byte(ostream& os, unsigned char b) {
 
 void Settings::ns_write_settings(void) {
   pofstream ofs;
-    
+
   string path = get_config_path();
   DSearchPath setting_search(path);
   string dir = setting_search.get_directory(0);
   Filename f2 = dir + "/" + configrc_settings_filename;
   f2.set_binary();
 
-  //cerr << "Settings Path " << configrc_settings_filename << " " << _fname << endl;
+  //cerr << "Settings Path " << configrc_settings_filename << " " << _fname << std::endl;
   int canWrite = 0;
 
   if (f2.open_write(ofs)) {
@@ -236,7 +236,7 @@ void Settings::ns_write_settings(void) {
   }
   if (canWrite == 0){
       cerr << "could not open '" << _fname << "' or '" << f2 << "' for writing"
-           << endl;
+           << std::endl;
       return;
   }
   // to add new fields, increment version number, write backward-compatible read_settings (so field
@@ -245,20 +245,20 @@ void Settings::ns_write_settings(void) {
 
   // header
   ofs << "UserSettings";
-  //  cerr << "wrote 'UserSettings'" << endl;
+  //  cerr << "wrote 'UserSettings'" << std::endl;
   // major version
   ofs << (unsigned char)CONFIGRC_MAJOR_VERSION;
-  //  cerr << "wrote 0x01" << endl;
+  //  cerr << "wrote 0x01" << std::endl;
   // minor version
   ofs << (unsigned char)CONFIGRC_MINOR_VERSION;
-  //  cerr << "wrote 0x00" << endl;
+  //  cerr << "wrote 0x00" << std::endl;
   // data
   ofs << (_sfx?((unsigned char)1):((unsigned char)0)) ;
-  //  cerr << "wrote 0x" << (_sfx?"01":"00") << endl;
+  //  cerr << "wrote 0x" << (_sfx?"01":"00") << std::endl;
   ofs << (_music?((unsigned char)1):((unsigned char)0)) ;
-  //  cerr << "wrote 0x" << (_music?"01":"00") << endl;
+  //  cerr << "wrote 0x" << (_music?"01":"00") << std::endl;
   ofs << (_chat?((unsigned char)1):((unsigned char)0)) ;
-  //  cerr << "wrote 0x" << (_chat?"01":"00") << endl;
+  //  cerr << "wrote 0x" << (_chat?"01":"00") << std::endl;
   unsigned char* b;
   float ftmp = _sfx_vol;
   unsigned int cnt = sizeof(float);
@@ -269,7 +269,7 @@ void Settings::ns_write_settings(void) {
     ofs << (unsigned char)(*b);
     //    write_byte(cerr, *b);
   }
-  //  cerr << endl;
+  //  cerr << std::endl;
   ftmp = _music_vol;
   //  cerr << "wrote 0x";
   for (unsigned int j=0; j<cnt; ++j) {
@@ -278,19 +278,19 @@ void Settings::ns_write_settings(void) {
     ofs << (unsigned char)(*b);
     //    write_byte(cerr, *b);
   }
-  //  cerr << endl;
+  //  cerr << std::endl;
   ofs << (unsigned char)_driver;
   //  cerr << "wrote 0x";
   //  write_byte(cerr, (unsigned char)_driver);
-  //  cerr << endl;
+  //  cerr << std::endl;
   ofs << (unsigned char)_res;
   //  cerr << "wrote 0x";
   //  write_byte(cerr, (unsigned char)_res);
-  //  cerr << endl;
+  //  cerr << std::endl;
   ofs << (unsigned char)_stype;
   //  cerr << "wrote 0x";
   //  write_byte(cerr, (unsigned char)_stype);
-  //  cerr << endl;
+  //  cerr << std::endl;
 
   ofs << (unsigned char)_custom_mousecursor_enabled;
   ofs << (unsigned char)_bUseWindowedMode;
@@ -304,7 +304,7 @@ void Settings::ns_write_settings(void) {
 
 void Settings::ns_read_settings(void) {
     Filename userSettings = configrc_settings_filename;
-    userSettings.set_binary(); 
+    userSettings.set_binary();
     read_file(userSettings);
 }
 
@@ -313,17 +313,17 @@ void Settings::read_file(Filename fname) {
   pofstream ofs;
   Filename outname = configrc_debug_filename;
   outname.set_binary();
-    
+
   if (outname.open_write(ofs))
   {
-      ofs << "Trying to read standard file: " << fname << endl;
+      ofs << "Trying to read standard file: " << fname << std::endl;
   }
 
   int readOkay = 0;
-  //  cerr << "*** in read_file ***" << endl;
+  //  cerr << "*** in read_file ***" << std::endl;
   if (fname.open_read(ifs)){
       readOkay = 1;
-      ofs << "opened standard file for reading: " << fname << endl;
+      ofs << "opened standard file for reading: " << fname << std::endl;
   }
   else
   {
@@ -333,22 +333,22 @@ void Settings::read_file(Filename fname) {
     Filename f2 = dir + "/" + configrc_settings_filename;
     cerr << "f2 = " << f2 << "\n";
     f2.set_binary();
-    ofs << "Trying to read auxiliary file: " << f2 << endl;
+    ofs << "Trying to read auxiliary file: " << f2 << std::endl;
     if (f2.open_read(ifs)){
         readOkay = 1;
-        ofs << "opened auxiliary file for reading: " << fname << endl;
+        ofs << "opened auxiliary file for reading: " << fname << std::endl;
     }
     else
     {
-        ofs << "no file could be read" << endl;
+        ofs << "no file could be read" << std::endl;
     }
-      
+
   }
   if (readOkay == 1)   {
     unsigned char b;
     string header;
     int i;
-    
+
 
     _fname = fname;
     for (i=0; i<12; ++i) {
@@ -358,8 +358,8 @@ void Settings::read_file(Filename fname) {
     if (!(header == "UserSettings")) {
       // set some defaults, most of these will generate error messages in the
       // output
-      //      cerr << "header ('" << header << "') != 'User Settings'" << endl;
-      ofs << "Invalid Header: " << header << endl;
+      //      cerr << "header ('" << header << "') != 'User Settings'" << std::endl;
+      ofs << "Invalid Header: " << header << std::endl;
       _sfx = true;
       _music = true;
       _chat = true;
@@ -370,62 +370,62 @@ void Settings::read_file(Filename fname) {
       _stype = S_NONE;
       return;
     }
-    //    cerr << "read '" << header << "'" << endl;
+    //    cerr << "read '" << header << "'" << std::endl;
     int major, minor;
     ifs >> b;
     //    cerr << "read 0x";
     //    write_byte(cerr, b);
-    //    cerr << endl;
+    //    cerr << std::endl;
     major = b;
-    ofs << "major: " << major << endl;
+    ofs << "major: " << major << std::endl;
     ifs >> b;
     //    cerr << "read 0x";
     //    write_byte(cerr, b);
-    //    cerr << endl;
+    //    cerr << std::endl;
     minor = b;
-    ofs << "minor: " << major << endl;
+    ofs << "minor: " << major << std::endl;
     switch (major) {
         case 0:
-          ofs << "case 0" << endl;
+          ofs << "case 0" << std::endl;
           ifs >> b;
           _sfx = _music = (b != 0);
-          ofs << "_sfx: " << _sfx << endl;
+          ofs << "_sfx: " << _sfx << std::endl;
           ifs >> b;
           _driver = (DisplayDriver)b;
-          ofs << "_driver: " << _driver << endl;
+          ofs << "_driver: " << _driver << std::endl;
           ifs >> b;
           _res = (Resolution)b;
-          ofs << "_res: " << _res << endl;
+          ofs << "_res: " << _res << std::endl;
           ifs >> b;
           _stype = (ServerType)b;
-          ofs << "_stype: " << _stype << endl;
+          ofs << "_stype: " << _stype << std::endl;
           // things not covered in this version
           _sfx_vol = _music_vol = 1.0f;
-          ofs << "_sfx_vol: " << _sfx_vol << endl;
+          ofs << "_sfx_vol: " << _sfx_vol << std::endl;
           _chat = true;
           _custom_mousecursor_enabled = true;
 
           break;
         case 1:
-          ofs << "case 1" << endl;
+          ofs << "case 1" << std::endl;
           ifs >> b;
           //      cerr << "read 0x";
           //      write_byte(cerr, b);
-          //      cerr << endl;
+          //      cerr << std::endl;
           _sfx = (b != 0);
-          ofs << "_sfx: " << _sfx << endl;
+          ofs << "_sfx: " << _sfx << std::endl;
           ifs >> b;
           //      cerr << "read 0x";
           //      write_byte(cerr, b);
-          //      cerr << endl;
+          //      cerr << std::endl;
           _music = (b != 0);
-          ofs << "_music: " << _music << endl;
+          ofs << "_music: " << _music << std::endl;
           ifs >> b;
           //      cerr << "read 0x";
           //      write_byte(cerr, b);
-          //      cerr << endl;
+          //      cerr << std::endl;
           _chat = (b != 0);
-          ofs << "_chat: " << _chat << endl;
+          ofs << "_chat: " << _chat << std::endl;
           {
             float ftmp = 0.0f;
             unsigned int cnt = sizeof(float);
@@ -437,9 +437,9 @@ void Settings::read_file(Filename fname) {
               a += i;
               *a = b;
             }
-            //      cerr << endl;
+            //      cerr << std::endl;
             _sfx_vol = ftmp;
-            ofs << "_sfx_vol: " << _sfx_vol << endl;
+            ofs << "_sfx_vol: " << _sfx_vol << std::endl;
             ftmp = 0.0f;
             //      cerr << "read 0x";
             for (unsigned int j=0; j<cnt; ++j) {
@@ -449,73 +449,73 @@ void Settings::read_file(Filename fname) {
               a += j;
               *a = b;
             }
-            //      cerr << endl;
+            //      cerr << std::endl;
             _music_vol = ftmp;
-            ofs << "_music_vol: " << _music_vol << endl;
+            ofs << "_music_vol: " << _music_vol << std::endl;
           }
       ifs >> b;
       //      cerr << "read 0x";
       //      write_byte(cerr, b);
-      //      cerr << endl;
+      //      cerr << std::endl;
       _driver = (DisplayDriver)b;
-      ofs << "_driver: " << _driver << endl;
+      ofs << "_driver: " << _driver << std::endl;
       ifs >> b;
       //      cerr << "read 0x";
       //      write_byte(cerr, b);
-      //      cerr << endl;
+      //      cerr << std::endl;
       _res = (Resolution)b;
-      ofs << "_res: " << _res << endl;    
+      ofs << "_res: " << _res << std::endl;
       ifs >> b;
       //      cerr << "read 0x";
       //      write_byte(cerr, b);
-      //      cerr << endl;
+      //      cerr << std::endl;
       _stype = (ServerType)b;
-      ofs << "_stype: " << _stype << endl;    
+      ofs << "_stype: " << _stype << std::endl;
 
       if(minor>=1) {
           ifs >> b;
           _custom_mousecursor_enabled = (b!=false);
       } else _custom_mousecursor_enabled = true;
-      ofs << "_custom_mousecursor_enabled: " << _custom_mousecursor_enabled << endl;
+      ofs << "_custom_mousecursor_enabled: " << _custom_mousecursor_enabled << std::endl;
 
       if(minor>=2) {
           ifs >> b;
           _bUseWindowedMode = (b!=false);
       } else _bUseWindowedMode = false;
-      ofs << "_bUseWindowedMode: " << _bUseWindowedMode << endl;
+      ofs << "_bUseWindowedMode: " << _bUseWindowedMode << std::endl;
 
       if(minor>=3) {
           ifs >> b;
           _bShowFpsMeter = (b!=false);
       } else _bShowFpsMeter = false;
-      ofs << "_bShowFpsMeter: " << _bShowFpsMeter << endl;
+      ofs << "_bShowFpsMeter: " << _bShowFpsMeter << std::endl;
 
       if(minor>=4) {
           ifs >> b;
           _bForceSWMidi = (b!=false);
       } else _bForceSWMidi = true;
-      ofs << "_bForceSWMidi: " << _bForceSWMidi << endl;
+      ofs << "_bForceSWMidi: " << _bForceSWMidi << std::endl;
       if(minor>=5) {
           ifs >> b;
           _toon_chat_sounds = (b!=false);
       } else _toon_chat_sounds = true;
-      ofs << "_toon_chat_sounds: " << _toon_chat_sounds << endl;
+      ofs << "_toon_chat_sounds: " << _toon_chat_sounds << std::endl;
 
       if(minor>=6) {
           ifs >> b;
           _accepting_new_friends = (b!=false);
       } else _accepting_new_friends = true;
-      ofs << "_accepting_new_friends: " << _accepting_new_friends << endl;
+      ofs << "_accepting_new_friends: " << _accepting_new_friends << std::endl;
 
       if(minor>=7) {
           ifs >> b;
           _embedded_mode = (b!=false);
       } else _embedded_mode = false;
-      ofs << "_embedded_mode: " << _embedded_mode << endl;
+      ofs << "_embedded_mode: " << _embedded_mode << std::endl;
 
       break;
     default:
-      ofs << "default" << endl;
+      ofs << "default" << std::endl;
       // unknown major #, spit out some 'defaults'
       _sfx = _music = _chat = true;
       _custom_mousecursor_enabled = true;
@@ -533,7 +533,7 @@ void Settings::read_file(Filename fname) {
     ifs.close();
   }
     //  } else
-    //    cerr << "**** CANNOT READ FILE ****" << endl;
+    //    cerr << "**** CANNOT READ FILE ****" << std::endl;
 }
 
 // it would be simpler to just store the actual res sizes, but abstracting them makes
@@ -557,9 +557,8 @@ set_resolution_dimensions(unsigned int xsize,unsigned int ysize) {
   }
 
   if(r>=R_NONE) {
-      cerr << "set_res failed, Enum Resolution does not contain " << xsize << "x" << ysize << endl;
+      cerr << "set_res failed, Enum Resolution does not contain " << xsize << "x" << ysize << std::endl;
       return;
   }
   get_ptr()->ns_set_resolution((Resolution)r);
 }
-

@@ -36,7 +36,8 @@ PStatCollector Nametag2d::_adjust_pcollector("App:Show code:Nametags:2d:Adjust")
 //  Description:
 ////////////////////////////////////////////////////////////////////
 Nametag2d::
-Nametag2d() : Nametag(NametagGlobals::chat_2d_wordwrap) {
+Nametag2d() : Nametag(NametagGlobals::chat_2d_wordwrap),
+              MarginPopup() {
 #ifdef DO_MEMORY_USAGE
   MemoryUsage::update_type(this, this);
 #endif
@@ -302,7 +303,7 @@ consider_visible() {
 
   NametagGroup::ColorCode color_code = group->get_color_code();
   if (visible && (color_code == NametagGroup::CC_toon_building ||
-                  color_code == NametagGroup::CC_suit_building || 
+                  color_code == NametagGroup::CC_suit_building ||
                   color_code == NametagGroup::CC_house_building)) {
     // If it's a building-type nametag, it's only visible up to a
     // certain distance away.
@@ -361,8 +362,8 @@ generate_name() {
   const NametagGlobals::Colors &colors =
     NametagGlobals::get_colors(group->get_color_code(), Nametag::get_state());
 
-  Colorf text_color = colors._name_fg;
-  Colorf card_color = colors._name_bg;
+  LColorf text_color = colors._name_fg;
+  LColorf card_color = colors._name_bg;
   card_color[3] =
     max(min(card_color[3], NametagGlobals::get_max_2d_alpha()),
         NametagGlobals::get_min_2d_alpha());
@@ -379,7 +380,7 @@ generate_name() {
   // width exactly fits within the popup.
   float name_wordwrap = group->get_name_wordwrap();
   float scale = 2.0f * get_cell_width() / name_wordwrap;
-  
+
   LMatrix4f mat = LMatrix4f::scale_mat(scale);
 
   // Now compute the translation for the name vertically so it is
@@ -452,7 +453,7 @@ generate_name() {
     _arrow_center.set(0.0f, 0.0f, frame[2] - NametagGlobals::arrow_offset);
     _arrow_center = _arrow_center * mat;
 
-    Colorf arrow_color =
+    LColorf arrow_color =
       NametagGlobals::get_arrow_color(group->get_color_code());
     _arrow.set_color(arrow_color);
     if (arrow_color[3] != 1.0f) {
@@ -464,7 +465,7 @@ generate_name() {
 
   // Finally, set up the MouseWatcherRegion corresponding to the frame.
   CPT(TransformState) transform = _this_np.get_net_transform();
-  LMatrix4f rel_mat = transform->get_mat();   
+  LMatrix4f rel_mat = transform->get_mat();
 
   rel_mat = mat * rel_mat;
   LPoint3f ll(frame[0], 0.0f, frame[2]);
@@ -495,13 +496,13 @@ generate_chat(ChatBalloon *balloon) {
   const NametagGlobals::Colors &colors =
     NametagGlobals::get_colors(group->get_color_code(), Nametag::get_state());
 
-  Colorf text_color = colors._chat_fg;
-  Colorf balloon_color = colors._chat_bg;
+  LColorf text_color = colors._chat_fg;
+  LColorf balloon_color = colors._chat_bg;
 
   if ((group->get_chat_flags() & CF_quicktalker) != 0) {
     // It's a quicktalker message; therefore, modify it by the QT
     // background color.
-    const Colorf &qt = group->get_qt_color();
+    const LColorf &qt = group->get_qt_color();
     text_color.set(text_color[0] * qt[0],
                    text_color[1] * qt[1],
                    text_color[2] * qt[2],
@@ -511,8 +512,8 @@ generate_chat(ChatBalloon *balloon) {
                       balloon_color[2] * qt[2],
                       balloon_color[3] * qt[3]);
   }
-  
-  const Colorf &balloon_modulation_color = group->get_balloon_modulation_color();
+
+  const LColorf &balloon_modulation_color = group->get_balloon_modulation_color();
   balloon_color.set(balloon_color[0] * balloon_modulation_color [0],
                     balloon_color[1] * balloon_modulation_color [1],
                     balloon_color[2] * balloon_modulation_color [2],
@@ -592,7 +593,7 @@ generate_chat(ChatBalloon *balloon) {
   // Finally, set up the MouseWatcherRegion corresponding to the whole
   // cell.
   CPT(TransformState) transform = _this_np.get_net_transform();
-  const LMatrix4f &rel_mat = transform->get_mat();   
+  const LMatrix4f &rel_mat = transform->get_mat();
 
   half_height += 1.0f;
   LPoint3f ll(-half_width * scale, 0.0f, -half_height * scale);

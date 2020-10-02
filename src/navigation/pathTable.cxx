@@ -42,14 +42,14 @@ initTable(PyObject* pathData, PyObject* connections) {
   for(int i=0; i<len; ++i) {
     obj = PyList_GetItem(pathData,i);
 
-    if(!PyString_Check(obj)) {
+    if(!PyUnicode_Check(obj)) {
       PyErr_SetString(PyExc_TypeError, "pathData: Non-string encountered in list!");
       return;
     }
 
-    strlen = PyString_Size(obj);
+    strlen = PyUnicode_GET_LENGTH(obj);
 
-    str.assign((unsigned char*)PyString_AsString(obj),strlen);
+    str.assign((unsigned char*)PyUnicode_AsUTF8(obj),strlen);
 
     _pathData.push_back(str);
   }
@@ -59,7 +59,7 @@ initTable(PyObject* pathData, PyObject* connections) {
 
   if(!PyList_Check(connections)) {
     PyErr_SetString(PyExc_TypeError, "connections: Expected a list!");
-    return;    
+    return;
   }
 
   len = PyList_Size(connections);
@@ -79,7 +79,7 @@ initTable(PyObject* pathData, PyObject* connections) {
     for(int j=0; j<numNeighbors; ++j) {
       obj2 = PyList_GetItem(obj,j);
 
-      if(!PyInt_Check(obj2)) {
+      if(!PyLong_Check(obj2)) {
         if(obj2 != Py_None) {
           PyErr_SetString(PyExc_TypeError, "connections: Invalid sub-element encountered!");
           return;
@@ -87,7 +87,7 @@ initTable(PyObject* pathData, PyObject* connections) {
         num = 65535;
       }
       else {
-        num = (unsigned short)PyInt_AsUnsignedLongMask(obj2);
+        num = (unsigned short)PyLong_AsUnsignedLongMask(obj2);
       }
 
       neighbors.push_back(num);

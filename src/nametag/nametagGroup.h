@@ -71,9 +71,9 @@ PUBLISHED:
   void set_color_code(ColorCode code);
   INLINE ColorCode get_color_code() const;
 
-  INLINE void set_qt_color(const Colorf &color);
-  INLINE const Colorf &get_qt_color() const;
-  INLINE const Colorf &get_balloon_modulation_color() const;
+  INLINE void set_qt_color(const LColorf &color);
+  INLINE const LColorf &get_qt_color() const;
+  INLINE const LColorf &get_balloon_modulation_color() const;
 
   INLINE void set_shadow(float xoffset, float yoffset);
   INLINE void clear_shadow();
@@ -165,8 +165,8 @@ private:
 
   float _name_wordwrap;
   ColorCode _color_code;
-  Colorf _qt_color;
-  Colorf _balloon_modulation_color;
+  LColorf _qt_color;
+  LColorf _balloon_modulation_color;
   LVecBase2f _shadow_offset;
   bool _has_shadow;
 
@@ -177,13 +177,13 @@ private:
 
   double _chat_timeout;
   double _button_timeout;
-  
+
   string _chat_block_hold;
   int    _chat_flags_hold;
   double _chat_block_length;
   double _chat_timeblock;
   int _chat_stomp_accum;
-  
+
   int _page_number;
   bool _buttons_pending;
 
@@ -200,7 +200,7 @@ private:
   bool _master_visible;
 
   static int _unique_index;
-  
+
 };
 
 #include "nametagGroup.I"

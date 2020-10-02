@@ -12,7 +12,7 @@
 #include "configVariableBool.h"
 
 ConfigureDecl(config_nametag, EXPCL_OTP, EXPTP_OTP);
-NotifyCategoryDecl(nametag, EXPCL_OTP, EXPTP_OTP);
+NotifyCategoryDeclNoExport(nametag);
 
 extern ConfigVariableString nametag_fixed_bin;
 

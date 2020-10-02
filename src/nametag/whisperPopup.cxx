@@ -293,8 +293,8 @@ generate_text(ChatBalloon *balloon, const string &text, TextFont *font) {
   const NametagGlobals::Colors &colors =
     NametagGlobals::get_whisper_colors(_whisper_type, ClickablePopup::get_state());
 
-  Colorf text_color = colors._chat_fg;
-  Colorf balloon_color = colors._chat_bg;
+  LColorf text_color = colors._chat_fg;
+  LColorf balloon_color = colors._chat_bg;
   balloon_color[3] =
     max(min(balloon_color[3], NametagGlobals::get_max_2d_alpha()),
         NametagGlobals::get_min_2d_alpha());
