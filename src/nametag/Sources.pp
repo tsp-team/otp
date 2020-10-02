@@ -20,8 +20,6 @@
     #define OTHER_LIBS $[OTHER_LIBS] pnmtext:c
   #endif
 
-  #define COMBINED_SOURCES $[TARGET]_composite1.cxx $[TARGET]_composite2.cxx
-  
   #define SOURCES \
     chatBalloon.I chatBalloon.h \
     chatFlags.h \
@@ -37,8 +35,8 @@
     marginPopup.I marginPopup.h \
     marginManager.I marginManager.h \
     whisperPopup.I whisperPopup.h
-    
-  #define INCLUDED_SOURCES  \
+
+  #define COMPOSITE_SOURCES  \
     chatBalloon.cxx \
     clickablePopup.cxx \
     config_nametag.cxx \
