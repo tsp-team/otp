@@ -23,8 +23,6 @@ from otp.otpbase.OTPModules import GeomNode
 from otp.navigation.NavUtil import PriQueue
 from otp.navigation.NavUtil import FIFOCache
 
-from libotp import PathTable
-
 # Node locator collision stuff
 from otp.otpbase.OTPModules import BitMask32
 from otp.otpbase.OTPModules import CollisionSphere

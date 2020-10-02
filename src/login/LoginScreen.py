@@ -200,7 +200,7 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
             message = "",
             style = OTPDialog.Acknowledge,
             # make sure this dialog shows up over the email panel
-            sortOrder = NO_FADE_SORT_INDEX + 100,
+            sortOrder = DGG.NO_FADE_SORT_INDEX + 100,
             )
         self.dialog.hide()
 
@@ -214,7 +214,7 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
             text_pos = (0.0, 0.3),
             text_wordwrap = 15,
             # make this panel modal-able
-            sortOrder = NO_FADE_SORT_INDEX,
+            sortOrder = DGG.NO_FADE_SORT_INDEX,
             )
         linePos = -.05
         self.failTryAgainButton = DirectButton(
@@ -253,7 +253,7 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
             message = "",
             style = OTPDialog.Acknowledge,
             # make sure this dialog shows up over the email panel
-            sortOrder = NO_FADE_SORT_INDEX + 100,
+            sortOrder = DGG.NO_FADE_SORT_INDEX + 100,
             )
         self.connectionProblemDialog.hide()
 

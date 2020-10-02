@@ -1,5 +1,4 @@
 from otp.otpbase.OTPModules import *
-from libotp import CMoverGroup
 from otp.movement.Mover import Mover
 
 class MoverGroup(CMoverGroup):

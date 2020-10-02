@@ -196,7 +196,7 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
             message = "",
             style = OTPDialog.Acknowledge,
             # make sure this dialog shows up over other things
-            sortOrder = NO_FADE_SORT_INDEX + 100,
+            sortOrder = DGG.NO_FADE_SORT_INDEX + 100,
             )
         self.dialog.hide()
 

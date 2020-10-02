@@ -1,8 +1,6 @@
 """DistributedPlayer module: contains the DistributedPlayer class"""
 
 from otp.otpbase.OTPModules import *
-from libotp import WhisperPopup
-from libotp import CFQuicktalker, CFPageButton, CFQuitButton, CFSpeech, CFThought, CFTimeout
 from otp.chat import ChatGarbler
 import string
 from direct.task import Task

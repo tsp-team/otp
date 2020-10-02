@@ -52,14 +52,14 @@ ThoughtPrefix = '.'
 def isThought(message):
     """
     message is a string.
-    
+
     Return 1 if the given string contains the thought prefix,
     Return 0 otherwise
     """
     if (len(message) == 0):
         # empty string cannot be a thought
         return 0
-    elif (string.find(message, ThoughtPrefix, 0,
+    elif (message.find(ThoughtPrefix, 0,
                       len(ThoughtPrefix)) >= 0):
         return 1
     else:
@@ -68,7 +68,7 @@ def isThought(message):
 def removeThoughtPrefix(message):
     """
     message is a string.
-    
+
     Return the string with the thought prefix removed
     """
     if (isThought(message)):

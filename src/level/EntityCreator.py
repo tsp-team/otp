@@ -1,21 +1,21 @@
 """EntityCreator module: contains the EntityCreator class"""
 
-import CutScene
-import EntityCreatorBase
-import BasicEntities
+from . import CutScene
+from . import EntityCreatorBase
+from . import BasicEntities
 from direct.directnotify import DirectNotifyGlobal
-import EditMgr
-import EntrancePoint
-import LevelMgr
-import LogicGate
-import ZoneEntity
-import ModelEntity
-import PathEntity
-import VisibilityExtender
-import PropSpinner
-import AmbientSound
-import LocatorEntity
-import CollisionSolidEntity
+from . import EditMgr
+from . import EntrancePoint
+from . import LevelMgr
+from . import LogicGate
+from . import ZoneEntity
+from . import ModelEntity
+from . import PathEntity
+from . import VisibilityExtender
+from . import PropSpinner
+from . import AmbientSound
+from . import LocatorEntity
+from . import CollisionSolidEntity
 
 # some useful constructor functions
 # ctor functions must take (level, entId)
@@ -24,7 +24,7 @@ def nothing(*args):
     """For entities that don't exist on the client at all"""
     return 'nothing'
 
-def nonlocal(*args):
+def nonlocalEnt(*args):
     """For entities that don't need to be created by the client and will
     show up independently (they're distributed and created by the AI)"""
     return 'nonlocal'
@@ -34,7 +34,7 @@ class EntityCreator(EntityCreatorBase.EntityCreatorBase):
     This class is responsible for creating instances of Entities on the
     client. It can be subclassed to handle more Entity types.
     """
-    
+
     def __init__(self, level):
         EntityCreatorBase.EntityCreatorBase.__init__(self, level)
         self.level = level

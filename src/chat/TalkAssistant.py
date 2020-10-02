@@ -11,7 +11,6 @@ from otp.chat.TalkHandle import TalkHandle
 import time
 from otp.chat.TalkGlobals import *
 from otp.chat.ChatGlobals import *
-from libotp import CFSpeech, CFTimeout, CFThought
 
 
 """
@@ -314,7 +313,7 @@ class TalkAssistant(DirectObject.DirectObject):
         elif (len(message) == 0):
             # empty string cannot be a thought
             return 0
-        elif (string.find(message, ThoughtPrefix, 0,
+        elif (message.find(ThoughtPrefix, 0,
                           len(ThoughtPrefix)) >= 0):
             return 1
         else:
