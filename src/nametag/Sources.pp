@@ -5,19 +5,19 @@
   #define LOCAL_LIBS otpbase
   #define OTHER_LIBS \
     panda pandaexpress \
-    p3interval:c p3direct:m \
-    p3interrogatedb p3dtoolconfig:m \
-    p3dtoolutil:c p3dtoolbase:c p3dtool:m \
-    p3express:c p3prc p3event:c p3pgraph:c p3pgraphnodes:c p3linmath:c p3gobj:c \
-    p3char:c p3putil:c p3mathutil:c p3downloader:c p3mathutil:c p3chan:c \
-    p3pandabase:c p3recorder:c p3grutil:c p3chan:c p3collide:c p3device:c \
-    p3dgraph:c p3display:c p3gsgbase:c p3parametrics:c p3text:c p3pnmimage:c \
-    p3pipeline:c p3pstatclient:c p3cull:c p3pnmimagetypes:c p3tform:c \
-    p3audio:c p3pgui:c p3directbase:c p3movies:c \
-    $[if $[HAVE_NET],p3net:c] $[if $[WANT_NATIVE_NET],p3nativenet:c]
+    interval:c direct:m \
+    interrogatedb dtoolconfig:m \
+    dtoolutil:c dtoolbase:c dtool:m \
+    express:c prc event:c pgraph:c pgraphnodes:c linmath:c gobj:c \
+    char:c putil:c mathutil:c downloader:c mathutil:c chan:c \
+    pandabase:c recorder:c grutil:c chan:c collide:c device:c \
+    dgraph:c display:c gsgbase:c parametrics:c text:c pnmimage:c \
+    pipeline:c pstatclient:c cull:c pnmimagetypes:c tform:c \
+    audio:c pgui:c directbase:c movies:c \
+    $[if $[HAVE_NET],net:c] $[if $[WANT_NATIVE_NET],nativenet:c]
 
   #if $[HAVE_FREETYPE]
-    #define OTHER_LIBS $[OTHER_LIBS] p3pnmtext:c
+    #define OTHER_LIBS $[OTHER_LIBS] pnmtext:c
   #endif
 
   #define BUILDING_DLL BUILDING_OTP
