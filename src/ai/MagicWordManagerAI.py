@@ -6,7 +6,6 @@ from otp.otpbase import OTPGlobals
 from direct.showbase import PythonUtil, GarbageReport, ContainerReport, MessengerLeakDetector
 from direct.showbase import ContainerLeakDetector
 from direct.showbase.PythonUtil import Functor, DelayedCall, formatTimeCompact
-import fpformat
 import string
 import time
 import re
@@ -29,6 +28,7 @@ class MagicWordManagerAI(DistributedObjectAI.DistributedObjectAI):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
 
     def setMagicWord(self, word, avId, zoneId, signature):
+        print("setMagicWord", word, avId, zoneId, signature)
         senderId = self.air.getAvatarIdFromSender()
 
         sender = self.air.doId2do.get(senderId, None)

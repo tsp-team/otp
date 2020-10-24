@@ -1,5 +1,5 @@
-from direct.distributed.DistributedObjectGlobalAI import DistributedObjectGlobalAI
-from direct.directnotify.DirectNotifyGlobal import directNotify
+from direct.directnotify import DirectNotifyGlobal
+from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
-class SnapshotDispatcherAI(DistributedObjectGlobalAI):
-    pass
+class SnapshotDispatcherAI(DistributedObjectAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('SnapshotDispatcherAI')

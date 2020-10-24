@@ -734,7 +734,9 @@ class MagicWordManager(DistributedObject.DistributedObject):
                                          base.cr.userSignature])
 
     def b_setMagicWord(self, magicWord, avId = None, zoneId = None):
+        print("b_setMagicWord")
         if self.cr.wantMagicWords:
+            print("We want magic words")
             if avId == None:
                 avId = base.localAvatar.doId
 

@@ -45,7 +45,7 @@ class Avatar(Actor, ShadowCaster):
         """
         Create the toon, suit, or char specified by the dna array
         """
-        self.name = "" # name is used in debugPrint.
+        self._name = "" # name is used in debugPrint.
         assert self.debugPrint("Avatar()")
         try:
             self.Avatar_initialized
@@ -376,7 +376,8 @@ class Avatar(Actor, ShadowCaster):
         """
         Return the avatar's name
         """
-        return self.name
+        print("Called getName() on ", self.__class__.__name__, ":", self._name)
+        return self._name
 
     def getType(self):
         """
@@ -395,7 +396,7 @@ class Avatar(Actor, ShadowCaster):
             if self.isDisguised:
                 return
 
-        self.name = name
+        self._name = name
         if hasattr(self, "nametag"):
             self.nametag.setName(name)
 
@@ -1002,7 +1003,7 @@ class Avatar(Actor, ShadowCaster):
     if __debug__:
         def debugPrint(self, message):
             """for debugging"""
-            return self.notify.debug("%s %s %s"%(id(self), self.name, message))
+            return self.notify.debug("%s %s %s"%(id(self), self._name, message))
 
     def loop(self, animName, restart=1, partName=None,fromFrame=None, toFrame=None):
         return Actor.loop(self,animName,restart,partName,fromFrame,toFrame)

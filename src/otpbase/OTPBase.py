@@ -33,6 +33,8 @@ class OTPBase(ShowBase):
        self.fillShardsToIdealPop = self.config.GetBool(
             'fill-shards-to-ideal-pop', 1)
 
+       self.logPrivateInfo = self.config.GetBool('log-private-info', __dev__)
+
        # By default, we want to use dynamic shadows.  ToonBase.py
        # turns this off.
        self.wantDynamicShadows = 1

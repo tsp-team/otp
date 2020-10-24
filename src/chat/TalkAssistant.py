@@ -982,12 +982,14 @@ class TalkAssistant(DirectObject.DirectObject):
         error = None
         if (base.cr.wantMagicWords and
             (len(message) > 0) and (message[0] == "~")):
+            print("magicWord", message)
             messenger.send("magicWord", [message])
             self.receiveDeveloperMessage(message)
         else:
             chatFlags = CFSpeech | CFTimeout
             if self.isThought(message):
                 chatFlags = CFThought
+            print("setTalk", message)
             base.localAvatar.sendUpdate("setTalk", [0, 0, "", message, [], 0])
             messenger.send("chatUpdate", [message, chatFlags])
         return error

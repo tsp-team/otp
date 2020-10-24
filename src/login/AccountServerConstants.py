@@ -9,6 +9,7 @@ from . import HTTPUtil
 class AccountServerConstants(RemoteValueSet):
     notify = \
            DirectNotifyGlobal.directNotify.newCategory("AccountServerConstants")
+    notify.setDebug(True)
 
     def __init__(self, cr):
         """ might throw a TTAccountException """
@@ -47,6 +48,8 @@ class AccountServerConstants(RemoteValueSet):
                 pass
             else:
                 noquery = 0
+
+        print(noquery, cr.accountOldAuth, base.config.GetBool('default-server-constants', noquery))
 
         if (cr.accountOldAuth or
             base.config.GetBool('default-server-constants', noquery)):
