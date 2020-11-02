@@ -18,7 +18,7 @@ class LevelSpec:
     SystemEntIds = (LevelConstants.UberZoneEntId,
                     LevelConstants.LevelMgrEntId,
                     LevelConstants.EditMgrEntId)
-    
+
     def __init__(self, spec=None, scenario=0):
         """spec must be passed in as a python module or a dictionary.
         If not passed in, will create a new spec."""
@@ -253,7 +253,7 @@ class LevelSpec:
             for attribName, value in specCopy.items():
                 self.doSetAttrib(entId, attribName, value)
                 """
-            
+
         def removeEntity(self, entId):
             LevelSpec.notify.info('removing entity %s' % entId)
             assert entId in self.entId2specDict
@@ -355,7 +355,7 @@ class LevelSpec:
             """Returns a string that contains the spec data, nicely formatted.
             This should be used when writing the spec out to file."""
             import pprint
-            
+
             tabWidth = 4
             tab = ' ' * tabWidth
             # structure names
@@ -379,7 +379,7 @@ class LevelSpec:
                     elements.sort()
                     result.extend(elements)
                     return result
-   
+
                 firstTypes = ('levelMgr', 'editMgr', 'zone',)
                 firstAttribs = ('type', 'name', 'comment', 'parentEntId',
                                 'pos', 'x', 'y', 'z',
@@ -395,7 +395,7 @@ class LevelSpec:
                 # put types in order
                 types = sortList(list(entType2ids.keys()), firstTypes)
                 for type in types:
-                    str += t(1)+'# %s\n' % string.upper(type)
+                    str += t(1)+'# %s\n' % type.upper()
                     entIds = entType2ids[type]
                     entIds.sort()
                     for entId in entIds:
@@ -407,7 +407,7 @@ class LevelSpec:
                                                          repr(spec[attrib]))
                         # maybe this will help with CVS merges?
                         str += t(2)+'}, # end entity %s\n' % entId
-                        
+
                 str += t(1)+'}\n'
                 return str
             def getPrettyTopLevelDictStr(tabs=0):
@@ -421,7 +421,7 @@ class LevelSpec:
                 str += t(2)+'],\n'
                 str += t(1)+'}\n'
                 return str
-            
+
             str  = 'from %s import *\n' % self.getSpecImportsModuleName()
             str += '\n'
 
@@ -443,19 +443,19 @@ class LevelSpec:
             self.testPrettyString(prettyString=str)
 
             return str
-            
+
         def _recurKeyTest(self, dict1, dict2):
             # recursive key test for testPrettyString
             # cannot be sub function due to exec call in testPrettyString
             s = '' # error out string
             errorCount = 0 # number of non-matching keys; more or less
-            
+
             #if set of keys don't match than they are not the same
             if set(dict1.keys()) != set(dict2.keys()):
                 return 0
             for key in dict1:
                 #if they are both dicitonaries we must test the subkeys
-                #this is because dicts are unordered and we are using repr to dump the 
+                #this is because dicts are unordered and we are using repr to dump the
                 #values into strings for comparision
                 if type(dict1[key]) == type({}) and type(dict2[key]) == type({}):
                     if not self._recurKeyTest(dict1[key], dict2[key]):
@@ -476,7 +476,7 @@ class LevelSpec:
                 return 0
 
         def testPrettyString(self, prettyString=None):
-            # execute the pretty output in our local scope                    
+            # execute the pretty output in our local scope
             if prettyString is None:
                 prettyString=self.getPrettyString()
             exec(prettyString)

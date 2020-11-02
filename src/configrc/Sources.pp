@@ -1,7 +1,7 @@
 #define BUILD_DIRECTORY $[HAVE_OPENSSL]
 
 #define OTHER_LIBS \
-    p3dtoolutil:c p3dtoolbase:c p3dtool:m
+    dtoolutil:c dtoolbase:c dtool:m
 
 #define WIN_SYS_LIBS advapi32.lib user32.lib gdi32.lib
 #define USE_PACKAGES openssl

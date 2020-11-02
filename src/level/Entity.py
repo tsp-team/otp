@@ -39,7 +39,7 @@ class Entity(DirectObject):
             return '%s-%s' % (self.__class__.__name__, self.entId)
         else:
             return self.__class__.__name__
-            
+
     def destroy(self):
         """
         This is called when the level wants this entity to go away.
@@ -61,7 +61,7 @@ class Entity(DirectObject):
         self.ignoreAll()
         del self.level
         del self.entId
-        
+
     def getUniqueName(self, name, entId=None):
         """returns a name that is unique for a particular entity;
         defaults to this entity"""
@@ -95,7 +95,7 @@ class Entity(DirectObject):
         return self.getZoneEntity().getNodePath()
 
     def privGetSetter(self, attrib):
-        setFuncName = 'set%s%s' % (string.upper(attrib[0]), attrib[1:])
+        setFuncName = 'set%s%s' % (attrib[0].upper(), attrib[1:])
         if hasattr(self, setFuncName):
             return getattr(self, setFuncName)
         return None

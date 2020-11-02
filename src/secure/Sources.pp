@@ -5,9 +5,9 @@
   #define LOCAL_LIBS otpbase
   #define OTHER_LIBS \
     pandaexpress:m \
-    p3interrogatedb \
-    p3dtoolutil:c p3dtoolbase:c p3dtool:m \
-    p3prc:c
+    interrogatedb \
+    dtoolutil:c dtoolbase:c dtool:m \
+    prc:c
   #define WIN_SYS_LIBS Iphlpapi.lib
 
   #define USE_PACKAGES zlib net openssl
@@ -25,8 +25,8 @@
 
 #begin bin_target
   #define BUILD_TARGET $[HAVE_OPENSSL]
-  #define OTHER_LIBS p3dtool:m \
-    p3dtoolutil:c p3dtoolbase:c
+  #define OTHER_LIBS dtool:m \
+    dtoolutil:c dtoolbase:c
   #define WIN_SYS_LIBS shell32.lib
 
   #define USE_PACKAGES openssl
