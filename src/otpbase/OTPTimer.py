@@ -62,12 +62,15 @@ class OTPTimer(DirectFrame):
         return OTPTimer.ClockImage
 
     def posInTopRightCorner(self):
+        self.reparentTo(base.a2dTopRight)
         self.setPos(1.16, 0, 0.83)
 
     def posBelowTopRightCorner(self):
+        self.reparentTo(base.a2dTopRight)
         self.setPos(1.16, 0, 0.58)
 
     def posAboveShtikerBook(self):
+        self.reparentTo(base.a2dBottomRight)
         self.setPos(1.16, 0, -.63)
 
     def setTime(self, time):

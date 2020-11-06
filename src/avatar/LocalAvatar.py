@@ -1469,7 +1469,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         # Fov values often have floating point precision errors
         if (abs(fov - oldFov) > 0.1):
             def setCamFov(fov):
-                base.camLens.setFov(fov)
+                base.camLens.setMinFov(fov)
             self.camLerpInterval = LerpFunctionInterval(setCamFov,
                 fromData=oldFov, toData=fov, duration=time,
                 name='cam-fov-lerp')
@@ -1482,7 +1482,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
 
         self.fov = fov
         if not (self.isPageDown or self.isPageUp):
-            base.camLens.setFov(self.fov)
+            base.camLens.setMinFov(self.fov)
 
     def gotoNode(self, node, eyeHeight = 3):
         """gotoNode(self, NodePath node)
