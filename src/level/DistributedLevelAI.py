@@ -19,7 +19,7 @@ class DistributedLevelAI(DistributedObjectAI.DistributedObjectAI,
         # these are required fields
         self.zoneId = zoneId
         self.entranceId = entranceId
-                      
+
         if len(avIds) <= 0 or len(avIds) > 4:
             self.notify.warning('How do we have this many avIds? avIds: %s' %avIds)
         assert len(avIds) > 0 and len(avIds) <= 4
@@ -33,17 +33,17 @@ class DistributedLevelAI(DistributedObjectAI.DistributedObjectAI,
 
         if __dev__:
             self.modified = 0
-            
+
     def setLevelSpec(self, levelSpec):
         self.levelSpec = levelSpec
 
     def generate(self, levelSpec = None):
         self.notify.debug('generate')
         DistributedObjectAI.DistributedObjectAI.generate(self)
-        
+
         if levelSpec == None:
             levelSpec = self.levelSpec
-    
+
         self.initializeLevel(levelSpec)
 
         # self.zoneIds comes from LevelMgrAI
@@ -143,7 +143,7 @@ class DistributedLevelAI(DistributedObjectAI.DistributedObjectAI,
             if av.getHp() <= 0:
                 av.inventory.zeroInv()
                 av.d_setInventory(av.inventory.makeNetString())
-        
+
     def requestCurrentLevelSpec(self, specHash, entTypeRegHash):
         senderId = self.air.getAvatarIdFromSender()
 
@@ -188,6 +188,7 @@ class DistributedLevelAI(DistributedObjectAI.DistributedObjectAI,
                     DistributedLargeBlobSenderAI(
             self.air, self.zoneId, senderId, specStr,
             useDisk=useDisk)
+        print("Factory zoneid", self.zoneId)
         self.sendUpdateToAvatarId(senderId,
                                   'setSpecSenderDoId', [largeBlob.doId])
 

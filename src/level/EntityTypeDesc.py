@@ -59,23 +59,27 @@ class EntityTypeDesc:
         passed in. The attribute descriptors describe the properties of each
         of the Entity type's attributes"""
         # has someone already compiled the info?
-        if '_attribDescs' in entTypeClass.__dict__:
+        if ('_attribDescs' in entTypeClass.__dict__) or (entTypeClass.__name__ == 'object'):
             return
 
         c = entTypeClass
         EntityTypeDesc.notify.debug('compiling attrib descriptors for %s' %
                                     c.__name__)
 
+        bases = list(c.__bases__)
+        if object in bases:
+            print("Removing built-in `object` from base list")
+            bases.remove(object)
+
         # make sure all of our base classes have their complete list of
         # attribDescs
-        for base in c.__bases__:
+        for base in bases:
             EntityTypeDesc.privCompileAttribDescs(base)
 
         # aggregate the attribute descriptors from our direct base classes
         blockAttribs = c.__dict__.get('blockAttribs', [])
         baseADs = []
 
-        bases = list(c.__bases__)
         # make sure base-class attribs show up before derived-class attribs
         mostDerivedLast(bases)
 
@@ -84,7 +88,7 @@ class EntityTypeDesc:
                 # are we blocking this attribute?
                 if desc.getName() in blockAttribs:
                     continue
-                    
+
                 # make sure we haven't already picked up this attribute
                 # from an earlier base class
                 for d in baseADs:
@@ -102,7 +106,7 @@ class EntityTypeDesc:
         if 'attribs' in c.__dict__:
             for attrib in c.attribs:
                 desc = AttribDesc.AttribDesc(*attrib)
-                
+
                 if (desc.getName() == 'type' and
                     entTypeClass.__name__ != 'Entity'):
                     EntityTypeDesc.notify.error(
@@ -118,7 +122,7 @@ class EntityTypeDesc:
                         # this name from the base classes
                         assert ad not in baseADs
                         break
-                    
+
                 attribDescs.append(desc)
 
         c._attribDescs = baseADs + attribDescs
