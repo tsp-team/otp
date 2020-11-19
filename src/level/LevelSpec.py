@@ -395,7 +395,7 @@ class LevelSpec:
                 # put types in order
                 types = sortList(list(entType2ids.keys()), firstTypes)
                 for type in types:
-                    str += t(1)+'# %s\n' % string.upper(type)
+                    str += t(1)+'# %s\n' % type.upper()
                     entIds = entType2ids[type]
                     entIds.sort()
                     for entId in entIds:

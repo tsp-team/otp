@@ -59,23 +59,28 @@ class EntityTypeDesc:
         passed in. The attribute descriptors describe the properties of each
         of the Entity type's attributes"""
         # has someone already compiled the info?
-        if '_attribDescs' in entTypeClass.__dict__:
+        if ('_attribDescs' in entTypeClass.__dict__) or (entTypeClass.__name__ == 'object'):
             return
 
         c = entTypeClass
         EntityTypeDesc.notify.debug('compiling attrib descriptors for %s' %
                                     c.__name__)
 
+
+        bases = list(c.__bases__)
+        if object in bases:
+            print("Removing built-in `object` from base list")
+            bases.remove(object)
+
         # make sure all of our base classes have their complete list of
         # attribDescs
-        for base in c.__bases__:
+        for base in bases:
             EntityTypeDesc.privCompileAttribDescs(base)
 
         # aggregate the attribute descriptors from our direct base classes
         blockAttribs = c.__dict__.get('blockAttribs', [])
         baseADs = []
 
-        bases = list(c.__bases__)
         # make sure base-class attribs show up before derived-class attribs
         mostDerivedLast(bases)
 

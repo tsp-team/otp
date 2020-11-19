@@ -21,10 +21,10 @@ class DistributedAvatarAI(DistributedNodeAI.DistributedNodeAI):
         self.sendUpdate("setName", [name])
 
     def setName(self, name):
-        self.name = name
+        self._name = name
 
     def getName(self):
-        return self.name
+        return self._name
 
     def b_setMaxHp(self, maxHp):
         self.d_setMaxHp(maxHp)

@@ -7,6 +7,7 @@ from direct.distributed import DistributedNode
 from direct.actor.DistributedActor import DistributedActor
 from direct.task import Task
 from direct.showbase import PythonUtil
+from direct.interval.IntervalGlobal import *
 
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
@@ -49,6 +50,7 @@ class DistributedAvatar(DistributedActor, Avatar):
         self.hpText = None
         self.hp = None
         self.maxHp = None
+        self.hpTextSeq = None
 
 
     ### managing ActiveAvatars ###
@@ -328,20 +330,8 @@ class DistributedAvatar(DistributedActor, Avatar):
 
                 # Initial position ... Center of the body... the "tan tien"
                 self.hpText.setPos(0, 0, self.height/2)
-                seq = Task.sequence(
-                    # Fly the number out of the character
-                    self.hpText.lerpPos(Point3(0, 0, self.height + 1.5),
-                                            1.0,
-                                            blendType = 'easeOut'),
-                    # Wait 2 seconds
-                    Task.pause(0.85),
-                    # Fade the number
-                    self.hpText.lerpColor(Vec4(r, g, b, a),
-                                              Vec4(r, g, b, 0),
-                                              0.1),
-                    # Get rid of the number
-                    Task.Task(self.hideHpTextTask))
-                taskMgr.add(seq, self.uniqueName("hpText"))
+                self.hpTextSeq = Sequence(self.hpText.posInterval(1.0, Point3(0, 0, self.height + 1.5), blendType='easeOut'), Wait(0.85), self.hpText.colorInterval(0.1, Vec4(r, g, b, 0)), Func(self.hideHpText))
+                self.hpTextSeq.start()
         else:
             # Just play the sound effect.
             # TODO: Put in the sound effect!
@@ -382,32 +372,18 @@ class DistributedAvatar(DistributedActor, Avatar):
 
                 # Initial position ... Center of the body... the "tan tien"
                 self.hpText.setPos(0, 0, self.height/2)
-                seq = Task.sequence(
-                    # Fly the number out of the character
-                    self.hpText.lerpPos(Point3(0, 0, self.height + 1.5),
-                                            1.0,
-                                            blendType = 'easeOut'),
-                    # Wait 2 seconds
-                    Task.pause(duration),
-                    # Fade the number
-                    self.hpText.lerpColor(Vec4(r, g, b, a),
-                                              Vec4(r, g, b, 0),
-                                              0.1),
-                    # Get rid of the number
-                    Task.Task(self.hideHpTextTask))
-                taskMgr.add(seq, self.uniqueName("hpText"))
+                self.hpTextSeq = Sequence(self.hpText.posInterval(1.0, Point3(0, 0, self.height + 1.5), blendType='easeOut'), Wait(duration), self.hpText.colorInterval(0.1, Vec4(r, g, b, 0)), Func(self.hideHpText))
+                self.hpTextSeq.start()
         else:
             # Just play the sound effect.
             # TODO: Put in the sound effect!
             pass
 
-    def hideHpTextTask(self, task):
-        self.hideHpText()
-        return Task.done
-
     def hideHpText(self):
+        if self.hpTextSeq:
+            self.hpTextSeq.finish()
+            self.hpTextSeq = None
         if self.hpText:
-            taskMgr.remove(self.uniqueName("hpText"))
             self.hpText.removeNode()
             self.hpText = None
 

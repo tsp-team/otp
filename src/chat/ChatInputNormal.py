@@ -72,6 +72,8 @@ class ChatInputNormal(DirectObject.DirectObject):
             self.accept('arrow_up-up', self.getPrevHistory)
             self.accept('arrow_down-up', self.getNextHistory)
 
+        return True
+
     def deactivate(self):
         self.chatEntry.set("")
         self.chatEntry['focus'] = 0

@@ -180,7 +180,6 @@ generate(const string &text, TextFont *font, float wordwrap,
       text_parent_node = find_geom_node(root);
     }
     nassertr(text_parent_node != (PandaNode *)NULL, root);
-    text_parent_node->set_effect(DecalEffect::make());
 
   } else {
     text_parent_node = root;
@@ -198,6 +197,7 @@ generate(const string &text, TextFont *font, float wordwrap,
   if (text_color[3] != 1.0f) {
     text_geom.set_transparency(TransparencyAttrib::M_alpha);
   }
+  text_geom.set_depth_offset(1);  
 
   if (!page_button.is_empty()) {
     // Put the page button, if we have one, with the text.
