@@ -44,12 +44,18 @@ GhostBitmask = BitMask32(0x800)
 # Used for path finding between ray and mesh
 PathFindingBitmask = BitMask32.bit(29)
 
+
+# Multiply FOV values by this value.  The original FOV values were created for
+# a 4:3 aspect ratio.  Now that we're supporting widescreen, we must use
+# setMinFov() instead of setFov(), and multiply the original FOV values by this.
+OriginalAspectRatio = 3.0 / 4.0
+
 # Determined empirically
 # Do not change this one
-OriginalCameraFov = 52.0
+OriginalCameraFov = 52.0 * OriginalAspectRatio
 # Feel free to override this when you need to
 # But set it back to the original when you are done
-DefaultCameraFov = 52.0
+DefaultCameraFov = 52.0 * OriginalAspectRatio
 
 # This should actually be 280, but the sky does not fit inside
 # so I am temporarily cranking it up

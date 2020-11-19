@@ -336,9 +336,9 @@ generate_name() {
   // in the scene graph.
   if (_for_3d && !decal_node.is_empty()) {
     _name = group->copy_name_to(decal_node);
-    _name.set_depth_write(false);
+    _name.set_depth_offset(1);
 
-    decal_node.node()->set_effect(DecalEffect::make());
+    //decal_node.node()->set_effect(DecalEffect::make());
 
   } else {
     _name = group->copy_name_to(_top);
