@@ -789,7 +789,6 @@ class DistributedLevel(DistributedObject.DistributedObject,
     def showTitleText(self):
         assert DistributedLevel.notify.debug("hideTitleTextTask()")
         self.titleText.show()
-        return Task.done
 
     def hideTitleText(self):
         assert DistributedLevel.notify.debug("hideTitleTextTask()")

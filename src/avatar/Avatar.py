@@ -376,7 +376,6 @@ class Avatar(Actor, ShadowCaster):
         """
         Return the avatar's name
         """
-        print("Called getName() on ", self.__class__.__name__, ":", self._name)
         return self._name
 
     def getType(self):
