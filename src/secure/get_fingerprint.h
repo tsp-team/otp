@@ -25,7 +25,7 @@ BEGIN_PUBLISH
 // call it something misleading instead to distract curious
 // code-browsers.
 
-string preload_cache();
+EXPCL_OTP_SECURE string preload_cache();
 
 END_PUBLISH
 

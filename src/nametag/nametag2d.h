@@ -26,7 +26,7 @@ class ChatBalloon;
 //               responsible for parenting it in an out of the scene
 //               graph as appropriate.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP Nametag2d : public Nametag, public MarginPopup {
+class EXPCL_OTP_NAMETAG Nametag2d : public Nametag, public MarginPopup {
 public:
   Nametag2d();
   virtual ~Nametag2d();

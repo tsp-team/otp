@@ -27,7 +27,7 @@ class MarginManager;
 //               with a Nametag, but it occupies the same space in the
 //               screen that Nametag2d's occupy.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP WhisperPopup : public MarginPopup, public ClickablePopup {
+class EXPCL_OTP_NAMETAG WhisperPopup : public MarginPopup, public ClickablePopup {
 PUBLISHED:
   // Types of whisper messages.
   enum WhisperType {

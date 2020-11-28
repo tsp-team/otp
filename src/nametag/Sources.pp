@@ -18,7 +18,7 @@
     #define OTHER_LIBS $[OTHER_LIBS] pnmtext:c
   #endif
 
-  #define BUILDING_DLL BUILDING_OTP
+  #define BUILDING_DLL BUILDING_OTP_NAMETAG
 
   #define SOURCES \
     chatBalloon.I chatBalloon.h \

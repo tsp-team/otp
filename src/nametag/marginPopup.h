@@ -19,7 +19,7 @@
 //               screen during gameplay.  In particular, this will be
 //               a Nametag2d or a WhisperPopup message.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP MarginPopup : public PandaNode {
+class EXPCL_OTP_NAMETAG MarginPopup : public PandaNode {
 public:
   MarginPopup();
   virtual ~MarginPopup();

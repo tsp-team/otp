@@ -16,6 +16,8 @@
     #define OTHER_LIBS $[OTHER_LIBS] pnmtext:c
   #endif
 
+  #define BUILDING_DLL BUILDING_OTP_MOVEMENT
+
   #define SOURCES \
     config_movement.cxx config_movement.h \
     cMover.h cMover.I cMover.cxx cImpulse.h cImpulse.I cImpulse.cxx \

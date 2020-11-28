@@ -13,7 +13,7 @@
 
 class CMover;
 
-class EXPCL_OTP CImpulse : public TypedReferenceCount {
+class EXPCL_OTP_MOVEMENT CImpulse : public TypedReferenceCount {
 PUBLISHED:
   CImpulse();
   virtual ~CImpulse();

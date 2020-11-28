@@ -21,7 +21,7 @@ class ChatBalloon;
 // Description : This is a particular kind of Nametag that hovers over
 //               the avatar's head in the 3-d world.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP Nametag3d : public Nametag, public PandaNode {
+class EXPCL_OTP_NAMETAG Nametag3d : public Nametag, public PandaNode {
 public:
   Nametag3d();
   virtual ~Nametag3d();
