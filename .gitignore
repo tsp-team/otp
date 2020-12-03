@@ -8,3 +8,12 @@ built
 readlog.txt
 *.log
 *.bak
+
+# Python 3
+**/__pycache__
+
+# MSBuild related files
+*.sln
+*.vcxproj
+**/x64
+**/Win32
