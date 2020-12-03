@@ -26,7 +26,7 @@ class MarginManager;
 //               includes 2-d nametags, 3-d nametags, and margin
 //               messages like whispers.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP ClickablePopup {
+class EXPCL_OTP_NAMETAG ClickablePopup {
 public:
   ClickablePopup();
   virtual ~ClickablePopup();

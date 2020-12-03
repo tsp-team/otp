@@ -27,7 +27,7 @@ class Nametag3d;
 //               with a particular avatar.  The primary interface to
 //               all the nametags is through this Group object.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP NametagGroup {
+class EXPCL_OTP_NAMETAG NametagGroup {
 PUBLISHED:
   enum ColorCode {
     CC_normal,

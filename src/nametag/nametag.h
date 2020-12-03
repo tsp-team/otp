@@ -31,7 +31,7 @@ class MarginManager;
 //               name and/or his chat messages, and can be clicked on
 //               to select the avatar.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP Nametag : virtual public ReferenceCount, public ClickablePopup {
+class EXPCL_OTP_NAMETAG Nametag : virtual public ReferenceCount, public ClickablePopup {
 public:
   Nametag(float chat_wordwrap);
   virtual ~Nametag();

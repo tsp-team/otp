@@ -5,23 +5,65 @@
 #ifndef OTPSYMBOLS_H
 #define OTPSYMBOLS_H
 
+#include "pandasymbols.h"
+
 /* See dtoolsymbols.h for a rant on the purpose of this file.  */
 
-#if defined(WIN32_VC) && !defined(CPPPARSER)
-
 #ifdef BUILDING_OTP
-  #define EXPCL_OTP __declspec(dllexport)
-  #define EXPTP_OTP
-#else
-  #define EXPCL_OTP __declspec(dllimport)
-  #define EXPTP_OTP extern
+  #define BUILDING_OTP_OTPBASE
+  #define BUILDING_OTP_SETTINGS
+  #define BUILDING_OTP_NAMETAG
+  #define BUILDING_OTP_MOVEMENT
+  #define BUILDING_OTP_SECURE
+  #define BUILDING_OTP_NAVIGATION
 #endif
 
-#else   /* !WIN32_VC */
+#ifdef BUILDING_OTP_OTPBASE
+  #define EXPCL_OTP_OTPBASE EXPORT_CLASS
+  #define EXPTP_OTP_OTPBASE EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_OTPBASE IMPORT_CLASS
+  #define EXPTP_OTP_OTPBASE IMPORT_TEMPL
+#endif
 
-#define EXPCL_OTP
-#define EXPTP_OTP
+#ifdef BUILDING_OTP_SETTINGS
+  #define EXPCL_OTP_SETTINGS EXPORT_CLASS
+  #define EXPTP_OTP_SETTINGS EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_SETTINGS IMPORT_CLASS
+  #define EXPTP_OTP_SETTINGS IMPORT_TEMPL
+#endif
 
-#endif  /* WIN32_VC */
+#ifdef BUILDING_OTP_NAMETAG
+  #define EXPCL_OTP_NAMETAG EXPORT_CLASS
+  #define EXPTP_OTP_NAMETAG EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_NAMETAG IMPORT_CLASS
+  #define EXPTP_OTP_NAMETAG IMPORT_TEMPL
+#endif
+
+#ifdef BUILDING_OTP_MOVEMENT
+  #define EXPCL_OTP_MOVEMENT EXPORT_CLASS
+  #define EXPTP_OTP_MOVEMENT EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_MOVEMENT IMPORT_CLASS
+  #define EXPTP_OTP_MOVEMENT IMPORT_TEMPL
+#endif
+
+#ifdef BUILDING_OTP_SECURE
+  #define EXPCL_OTP_SECURE EXPORT_CLASS
+  #define EXPTP_OTP_SECURE EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_SECURE IMPORT_CLASS
+  #define EXPTP_OTP_SECURE IMPORT_TEMPL
+#endif
+
+#ifdef BUILDING_OTP_NAVIGATION
+  #define EXPCL_OTP_NAVIGATION EXPORT_CLASS
+  #define EXPTP_OTP_NAVIGATION EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_NAVIGATION IMPORT_CLASS
+  #define EXPTP_OTP_NAVIGATION IMPORT_TEMPL
+#endif
 
 #endif

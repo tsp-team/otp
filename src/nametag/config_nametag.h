@@ -14,8 +14,8 @@
 ConfigureDecl(config_nametag, EXPCL_OTP, EXPTP_OTP);
 NotifyCategoryDeclNoExport(nametag);
 
-extern ConfigVariableString nametag_fixed_bin;
+extern EXPCL_OTP_NAMETAG ConfigVariableString nametag_fixed_bin;
 
-extern EXPCL_OTP void init_libnametag();
+extern EXPCL_OTP_NAMETAG void init_libnametag();
 
 #endif

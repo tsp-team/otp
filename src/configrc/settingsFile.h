@@ -17,19 +17,19 @@ extern const char *configrc_settings_filename;
 // this is awful.  We can't include toontownbase.h because it will cause
 // a build circularity.  So we have to define EXPCL_TOONTOWN on our own.
 
-#if defined(WIN32_VC) && !defined(CPPPARSER)
+#ifdef BUILDING_OTP
+  #define BUILDING_OTP_SETTINGS
+#endif
 
-#define EXPCL_TOONTOWN __declspec(dllexport)
-#define EXPTP_TOONTOWN
+#ifdef BUILDING_OTP_SETTINGS
+  #define EXPCL_OTP_SETTINGS EXPORT_CLASS
+  #define EXPTP_OTP_SETTINGS EXPORT_TEMPL
+#else
+  #define EXPCL_OTP_SETTINGS IMPORT_CLASS
+  #define EXPCL_OTP_SETTINGS IMPORT_CLASS
+#endif
 
-#else   /* !WIN32_VC */
-
-#define EXPCL_TOONTOWN
-#define EXPTP_TOONTOWN
-
-#endif  /* PENV_WIN32 */
-
-class Settings {
+class EXPCL_OTP_SETTINGS Settings {
 PUBLISHED:
   // The DisplayDriver option is written to the useropt file by value.
   // Don't reorder or remove items from this list, and add all new

@@ -14,7 +14,7 @@
 #include "pmap.h"
 #include "cImpulse.h"
 
-class EXPCL_OTP CMover : public TypedReferenceCount {
+class EXPCL_OTP_MOVEMENT CMover : public TypedReferenceCount {
 PUBLISHED:
   CMover(NodePath &objNodePath, float fwd_speed = 1, float rot_speed = 1);
   ~CMover();

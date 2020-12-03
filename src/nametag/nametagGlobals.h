@@ -31,7 +31,7 @@ static const int max_button_states = 4;  // From PGButton::State.
 //               be!) defined at runtime by the Python code; others
 //               are compiled in.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP NametagGlobals {
+class EXPCL_OTP_NAMETAG NametagGlobals {
 PUBLISHED:
   INLINE static float get_name_wordwrap();
   INLINE static const LVecBase4f &get_card_pad();

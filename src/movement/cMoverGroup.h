@@ -21,7 +21,7 @@ MoverGroup.py derives from this and allows multiple Python Movers to
 be moved in one pass.
 */
 
-class EXPCL_OTP CMoverGroup : public TypedReferenceCount {
+class EXPCL_OTP_MOVEMENT CMoverGroup : public TypedReferenceCount {
 PUBLISHED:
   CMoverGroup();
   ~CMoverGroup();

@@ -12,6 +12,6 @@
 
 //NotifyCategoryDecl(movement, EXPCL_OTP, EXPTP_OTP);
 
-extern EXPCL_OTP void init_libmovement();
+extern EXPCL_OTP_MOVEMENT void init_libmovement();
 
 #endif

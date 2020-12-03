@@ -31,7 +31,7 @@ BEGIN_PUBLISH
 // hacker scanning the Python code, so we call it something
 // misleading just to make it a teeny bit harder to find.
 
-void prepare_avatar(HTTPClient *http);
+EXPCL_OTP_SECURE void prepare_avatar(HTTPClient *http);
 
 END_PUBLISH
 
