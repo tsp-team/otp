@@ -8,6 +8,9 @@ lDonaldsDock = 'Donalds Dock'
 lDonaldsDreamland = 'Donalds Traumland'
 lMinniesMelodyland = 'Minnies Melodienland'
 lToontownCentral = 'Toontown Mitte'
+lGoofySpeedway = 'Goofy-Rennplatz'
+lOutdoorZone = 'Chip und Chaps Eicheltal'
+lGolfZone = 'Chip und Chaps Minigolf'
 
 # common strings
 lCancel = 'Abbrechen'
@@ -26,6 +29,7 @@ DialogOK = lOK
 DialogCancel = lCancel
 DialogYes = lYes
 DialogNo = lNo
+DialogDoNotShowAgain = "Nicht mehr\nzeigen"
 
 # DistributedAvatar.py
 WhisperNoLongerFriend = "%s hat deine Freunde-Liste verlassen"
@@ -38,6 +42,13 @@ WhisperIgnored = "%s ignoriert dich!"
 TeleportGreeting = "Hi, %s."
 WhisperFriendComingOnline = "%s ist jetzt online!"
 WhisperFriendLoggedOut = "%s hat sich abgemeldet."
+WhisperPlayerOnline = "%s hat sich angemeldet in %s"
+WhisperPlayerOffline = "%s ist offline."
+WhisperUnavailable = "Dieser Spieler ist zur Zeit nicht erreichbar für Flüstern."
+
+DialogSpecial = "ooo"
+DialogExclamation = "!"
+DialogQuestion = "?"
 
 # ChatInputNormal.py
 ChatInputNormalSayIt = "Sag es"
@@ -49,6 +60,7 @@ ChatInputWhisperLabel = "Nach %s"
 SCEmoteNoAccessMsg = "Du hast noch keinen Zugriff\nauf dieses Gefühl."
 SCEmoteNoAccessOK = lOK
 
+ParentLogin = "Eltern-Login"
 ParentPassword = "Elternpasswort"
 
 # ChatGarbler.py
@@ -60,57 +72,112 @@ ChatManagerWhisperTo = "Flüstern mit:"
 ChatManagerWhisperToName = "Flüstern mit:\n%s"
 ChatManagerCancel = lCancel
 ChatManagerWhisperOffline = "%s ist offline."
-OpenChatWarning = 'Du hast noch keine "Geheimen Freunde"! Du kannst nicht mit anderen Toons chatten, bevor sie nicht deine Geheimen Freunde sind.\n\nWenn jemand dein Geheimer Freund werden soll, dann klicke ihn an und wähle "Geheimnisse" aus der Einzelheitenliste. Natürlich kannst du immer über den Schnell-Chat mit allen sprechen.'
+OpenChatWarning = 'Du hast noch keine "Wahren Freunde"! Du kannst nicht mit anderen Toons chatten, bevor sie nicht deine Wahren Freunde sind.\n\nWenn jemand dein Wahrer Freund werden soll, dann klicke ihn an und wähle "Wahre Freunde" aus der Einzelheitenliste.\n\nSpeed-Chat-Plus kann auch aktiviert werden, welches Benutzern erlaubt frei Wörter aus dem Disney Schnell-Chat-Plus-Verzeichnis zu verwenden\n\nUm diese Funktion zu aktivieren, beende Toontown und klicke auf Mitgliedschaft, und wählen Account-Verwalten aus. Melde dich an um die "Mitspieler-Einstellungen" zu verändern.\n\nSolltest du unter 18 sein, brauchst du den Eltern-Account für diese Einstellungen.'
 OpenChatWarningOK = lOK
 UnpaidChatWarning = 'Wenn du dich eingetragen hast, kannst du dich mit dieser Schaltfläche mit deinen Freunden per Tastatur unterhalten. Bis dahin solltest du über den Schnell-Chat mit anderen Toons chatten.'
-UnpaidChatWarningPay = "Jetzt eintragen!"
+UnpaidChatWarningPay = "Eintragen"
 UnpaidChatWarningContinue = "Kostenlosen Probelauf fortsetzen"
-PaidNoParentPasswordWarning = 'Wenn du dein Elternpasswort festgelegt hast, kannst du diese Schaltfläche aktivieren um dich per Tastatur mit deinen Freunden zu unterhalten. Bis dahin solltest du per Schnell-Chat mit anderen Toons chatten.'
-PaidNoParentPasswordWarningSet = "Elternpasswort jetzt festlegen!"
-PaidNoParentPasswordWarningContinue = "Weiter spielen"
+PaidNoParentPasswordWarning = 'Benutze diesen Button um mit deinen Freunden mit der Tastatur chatten zu können, aktiviere es über deine Account-verwaltung auf der Toontown-Webseite. Bis dahin kannst du den Schnell-Chat zum chatten verwenden.'
+UnpaidNoParentPasswordWarning = 'Dies ist für den Schnell-Chat-Plus, welches Benutzern erlaubt wörter aus dem Disney Schnell-Chat-Plus-Verzeichnis zu verwenden. Um diese Funktion zu aktivieren, beende Toontown und klicke auf Mitgliedschaft, und wählen Account-Verwalten aus. Melde dich an um die "Mitspieler-Einstellungen" zu verändern.\n\nSolltest du unter 18 sein, brauchst du den Eltern-Account für diese Einstellungen.'
+PaidNoParentPasswordWarningSet = "Mitspieler-Einstellung jetzt einstellen!"
+PaidNoParentPasswordWarningContinue = "Weiterspielen"
 PaidParentPasswordUKWarning = "Wenn der Chat aktiviert ist, kann dieser Button verwendet werden, um mit Freunden per Tastatur zu chatten. Bis dahin kannst du den Schnell-Chat nutzen, um mit anderen Toons zu chatten."
 PaidParentPasswordUKWarningSet = "Jetzt Chat aktivieren!"
 PaidParentPasswordUKWarningContinue = "Weiterspielen"
-NoSecretChatAtAllTitle = "Chat mit Geheimen Freunden"
-NoSecretChatAtAll = 'Damit du mit einem Freund chatten kannst, muss zuerst die Funktion Geheime Freunde aktiviert sein. Bei Geheime Freunde kann ein Mitglied mit einem anderen Mitglied nur über einen geheimen Code chatten, der außerhalb des Spieles vereinbart werden muss.\n\nUm diese Funktion zu aktivieren oder um mehr darüber zu erfahren, beende Toontown und klicke dann auf "Account-Optionen" auf der Toontown-Website.'
-NoSecretChatAtAllOK = lOK
 NoSecretChatWarningTitle = "Elterliche Kontrolle"
-NoSecretChatWarning = 'Damit du mit einem Freund chatten kannst, muss zuerst die Funktion Geheime Freunde aktiviert sein. Bittet eure Eltern, sich mit ihrem Elternpasswort einzuloggen, um sich über die Funktion Geheime Freunde zu informieren und auf Elterliche Kontrolle zuzugreifen.'
+NoSecretChatWarning = 'Damit du mit einem Freund chatten kannst, muss zuerst die Funktion Wahre Freunde aktiviert sein. Bittet eure Eltern, sich mit ihrem Elternpasswort einzuloggen, um sich über die Funktion Wahre Freunde zu informieren und auf Elterliche Kontrolle zuzugreifen.'
+RestrictedSecretChatWarning = 'Um einen Wahre Freunde Code zu erhalten, logge dich mit dem Eltern-Account ein. Diese Meldung kann im Mitgliederservicebereich auf der Toontown-Webseite deaktiviert werden.'
 NoSecretChatWarningOK = lOK
 NoSecretChatWarningCancel = lCancel
-NoSecretChatWarningWrongPassword = 'Das ist nicht das richtige Passwort. Bitte das Elternpasswort eingeben, das beim Bezahlen dieses Accounts festgelegt wurde. Es ist nicht dasselbe Passwort, das zum Spielen des Spiels verwendet wird.'
+NoSecretChatWarningWrongPassword = 'Das ist nicht der richtige Eltern-Account. Bitte loggen Sie sich mit dem Eltern-Account ein, der mit dem Account verknüpft ist.'
+NoSecretChatAtAllTitle = "Offener Chat mit Wahre Freunde"
+# not sure what this should do in the new world order
+NoSecretChatAtAll = 'Damit du mit einem Freund chatten kannst, muss zuerst die Funktion Wahre Freunde mit offenen-Chat aktiviert sein. Bei Wahre Freunde kann ein Mitglied mit einem anderen Mitglied nur über einen Wahre Freunde Code chatten, der außerhalb des Spieles vereinbart werden muss.\n\nUm diese Funktion zu aktivieren oder mehr zu erfahren, beende Toontown und klicke auf Mitgliedschaft, und wählen Account-Verwalten aus. Melde dich an um die "Mitspieler-Einstellungen" zu verändern.\n\nSolltest du unter 18 sein, brauchst du den Eltern-Account für diese Einstellungen.'
+NoSecretChatAtAllAndNoWhitelistTitle = "Chat-Schaltfläche"
+# not sure what this should do in the new world order
+NoSecretChatAtAllAndNoWhitelist = 'Du kannst diesen blauen Chat Button zum schreiben mit anderen Toons durch den Schnell-Chat-Plus oder Offener-Chat mit Wahren Freunden verwenden.\n\nSchnell-Chat-Plus ist eine Form des chat die es erlaubt frei zu kommunizieren durch benutzung des Disney Schnell-Chat-Plus-Verzeichnisses.\n\nBeim Offenen-Chat mit Wahre Freunde kann ein Mitglied mit einem anderen Mitglied nur über einen Wahre Freunde Code chatten, der außerhalb des Spieles vereinbart werden muss.\n\nUm diese Funktion zu aktivieren, beende Toontown und klicke auf Mitgliedschaft, und wählen Account-Verwalten aus. Melde dich an um die "Mitspieler-Einstellungen" zu verändern.\n\nSolltest du unter 18 sein, brauchst du den Eltern-Account für diese Einstellungen.'
+NoSecretChatAtAllOK = lOK
+ChangeSecretFriendsOptions = "Wahre-Freunde-Funktion bearbeiten"
+ChangeSecretFriendsOptionsWarning = '\nBitte das Elternpasswort eingeben um die Wahre-Freunde-Funktion zu bearbeiten.'
+ActivateChatTitle = "Wahre-Freunde-Funktion"
 
-ActivateChat = """Bei Geheime Freunde kann ein Mitglied mit einem anderen Mitglied nur über einen geheimen Code chatten, der außerhalb des Spieles vereinbart werden muss. Für eine vollständige Beschreibung hier klicken:
+WhisperToFormat = "Nach %s %s"
+WhisperToFormatName = "Mit %s"
+WhisperFromFormatName = "%s flüstert"
 
-Geheime Freunde wird nicht moderiert oder überwacht. Wenn Eltern ihrem Kind bzw. ihren Kindern erlauben, ihren Account mit der aktivierten Geheime-Freunde-Funktion zu nutzen, so empfehlen wir den Eltern, ihr Kind bzw. ihre Kinder zu beaufsichtigen, während sie spielen. Die Geheime-Freunde-Funktion kann jederzeit wieder deaktiviert werden.
+ThoughtOtherFormatName = "%s denkt"
+ThoughtSelfFormatName = "Du denkst"
 
-Durch die Aktivierung der Geheime-Freunde-Funktion erkennen Sie an, dass mit der Geheime-Freunde-Funktion einige Risiken verbunden sein können und dass Sie über diese Risiken informiert wurden und sie akzeptieren.."""
+from pandac.PandaModules import TextProperties
+from pandac.PandaModules import TextPropertiesManager
+
+shadow = TextProperties()
+shadow.setShadow(-0.025, -0.025)
+shadow.setShadowColor(0,0,0,1)
+TextPropertiesManager.getGlobalPtr().setProperties('schatten', shadow)
+
+red = TextProperties()
+red.setTextColor(1,0,0,1)
+TextPropertiesManager.getGlobalPtr().setProperties('rot', red)
+
+green = TextProperties()
+green.setTextColor(0,1,0,1)
+TextPropertiesManager.getGlobalPtr().setProperties('grün', green)
+
+yellow = TextProperties()
+yellow.setTextColor(1,1,0,1)
+TextPropertiesManager.getGlobalPtr().setProperties('gelb', yellow)
+
+midgreen = TextProperties()
+midgreen.setTextColor(0.2,1,0.2,1)
+TextPropertiesManager.getGlobalPtr().setProperties('mittelgrün', midgreen)
+
+blue = TextProperties()
+blue.setTextColor(0,0,1,1)
+TextPropertiesManager.getGlobalPtr().setProperties('blau', blue)
+
+white = TextProperties()
+white.setTextColor(1,1,1,1)
+TextPropertiesManager.getGlobalPtr().setProperties('wheiß', white)
+
+black = TextProperties()
+black.setTextColor(0,0,0,1)
+TextPropertiesManager.getGlobalPtr().setProperties('schwarz', black)
+
+grey = TextProperties()
+grey.setTextColor(0.5, 0.5, 0.5, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('grau', grey)
+
+ActivateChat = """Bei Wahre Freunde kann ein Mitglied mit einem anderen Mitglied nur über einen geheimen Code chatten, der außerhalb des Spieles vereinbart werden muss. Wahre Freunde wird nicht moderiert oder überwacht.
+
+Bitte wählen Sie eine der folgenden Toontown Wahre Freunde Einstellungen:
+
+      \1shadow\1Keine Wahre-Freunde-Funktion\2 - Die Funktion Wahre Freunde zu schließen ist deaktiviert.
+      Dies bietet die größte Kontrolle.
+
+      \1shadow\1Beschränkte Wahre-Freunde-Funktion\2 - Benötigt das Elternpasswort
+      um einen neuen Wahren-Freund hinzuzufügen.
+
+      \1shadow\1Unbeschränkte Wahre-Freunde-Funtkion\2 - Sobald es aktiviert wurde mit dem Elternpasswort,
+      wird es nicht benötigt bei einem Neuen Wahren-Freund das Passwort anzugeben. 
+      \1red\1Diese Option wird für Kinder unter 13\2 Jahren nicht empfohlen.
+
+
+
+
+
+
+Durch die Aktivierung der Wahre-Freunde-Funktion erkennen Sie an, dass mit der Wahre-Freunde-Funktion einige Risiken verbunden sein können und dass Sie über diese Risiken informiert wurden und sie akzeptieren.."""
 
 ActivateChatYes = "Aktivieren"
 ActivateChatNo = lCancel
 ActivateChatMoreInfo = "Mehr Infos"
 ActivateChatPrivacyPolicy = "Datenschutz"
 
-###
-
-PrivacyPolicyClose = lClose
-PrivacyPolicyText_Intro = [
-"""
-Es gibt vier verschiedene Versionen unserer Datenschutzrichtlinien.
-
-Die jeweils anzuwendende Version hängt davon ab, wann die betreffende Person die Datenschutzrichtlinien akzeptiert hat, sowie von ihrem Alter.
-
-Version 1 gilt für Personen, die vor dem 6.11.2003 akzeptiert haben.
-Version 2 gilt für Personen, die nach diesem Datum akzeptiert haben.
-
-Die Versionen "Für Kinder" gelten für Kinder unter 13 Jahren. Die Version "Für Nicht-Kinder" gilt für alle anderen.
-"""
-]
-
-ActivateChatPrivacyPolicy_Button1A = "Version 1 für Nicht-Kinder"
-ActivateChatPrivacyPolicy_Button1K = "Version 1 für Kinder"
-ActivateChatPrivacyPolicy_Button2A = "Version 2 für Nicht-Kinder"
-ActivateChatPrivacyPolicy_Button2K = "Version 2 für Kinder"
+ActivateChatPrivacyPolicy_Button1A = "Version 1"
+ActivateChatPrivacyPolicy_Button1K = "Version 1"
+ActivateChatPrivacyPolicy_Button2A = "Version 2"
+ActivateChatPrivacyPolicy_Button2K = "Version 2"
 
 PrivacyPolicyText_1A = [
 """
@@ -436,35 +503,44 @@ F6 Wenn Sie weitere Hilfe benötigen, schicken Sie bitte eine E-Mail mit Ihren F
 Die Walt Disney Internet Group ist Lizenznehmerin des TRUSTe Privacy Program. Wenn Sie der Meinung sind, dass WDIG auf Ihre Anfrage nicht oder nicht ausreichend geantwortet hat, wenden Sie sich bitte an TRUSTe unter http://www.truste.org/users/users_watchdog.html.
 """,
 ]
+PrivacyPolicyText_Intro = [""" """]
+PrivacyPolicyClose = lClose
 
 # SecretFriendsInfoPanel.py
 SecretFriendsInfoPanelOk = lOK
 SecretFriendsInfoPanelClose = lClose
 SecretFriendsInfoPanelText = ["""
-Die Funktion Geheime Freunde
+Die Offener-Chat und Wahre Freunde Funktion
 
-Durch die Funktion Geheime Freunde kann ein Mitglied direkt mit anderen Mitgliedern von Disneys Toontown Online (dem "Service") chatten, sobald die Mitglieder eine Geheime-Freunde-Verbindung eingerichtet haben. Wenn Ihr Kind versucht, die Funktion Geheime Freunde zu nutzen, werden wir Sie bitten Elternpasswort einzugeben, um damit Ihre Zustimmung zur Nutzung dieser Funktion durch Ihr Kind zu bestätigen. Im Folgenden eine ausführliche Beschreibung der Einrichtung einer Geheime-Freunde-Verbindung zwischen zwei Mitgliedern, die wir "Sally" und "Mike" nennen wollen.
-1. Ein Elternteil von Sally und ein Elternteil von Mike aktivieren jeweils die Funktion Geheime Freunde, indem sie ihr jeweiliges Elternpasswort eingeben, und zwar entweder (a) im Bereich Account-Optionen innerhalb des Service oder (b) auf Aufforderung während des Spiels durch ein Pop-Up Elterliche Kontrolle.
-2. Sally fordert innerhalb des Service ein Geheimnis an (wie unten beschrieben).
+Durch die Funktion Offener-Chat und Geheime Freunde kann ein Mitglied direkt mit anderen Mitgliedern von Disneys Toontown Online (dem "Service") chatten, sobald die Mitglieder eine Wahre-Freunde-Verbindung eingerichtet haben. Wenn Ihr Kind versucht, die Funktion Wahre Freunde und Offener-Chat zu nutzen, werden wir Sie bitten Elternpasswort einzugeben, um damit Ihre Zustimmung zur Nutzung dieser Funktion durch Ihr Kind zu bestätigen. Im Folgenden eine ausführliche Beschreibung der Einrichtung einer Wahre-Freunde-Verbindung zwischen zwei Mitgliedern, die wir "Sally" und "Mike" nennen wollen.
+1. Ein Elternteil von Sally und ein Elternteil von Mike aktivieren jeweils die Funktion Offener-Chat mit Wahren Freunden, indem sie ihr jeweiliges Elternpasswort eingeben, und zwar entweder (a) im Bereich Account-Optionen innerhalb des Service oder (b) auf Aufforderung während des Spiels durch ein Pop-Up Elterliche Kontrolle.
+2. Sally fordert innerhalb des Service ein Wahre Freunde Code an (wie unten beschrieben).
 ""","""
-3. Sallys Geheimnis wird Mike außerhalb des Service mitgeteilt (indem Sally das Geheimnis  entweder Mike selbst sagt oder an eine andere Person weitergibt.)
-4. Mike teilt Sallys Geheimnis dem Service mit, und zwar innerhalb von 48 Stunden nachdem Sally das Geheimnis beim Service angefordert hat.
-5. Dann benachrichtigt der Service Mike, dass Sally Mikes Geheime Freundin geworden ist. Ebenso benachrichtigt der Service Sally, dass Mike ihr Geheimer Freund geworden ist.
-6. Sally und Mike können nun direkt miteinander chatten, bis entweder einer von beiden die Geheime-Freunde-Verbindung löst oder bis die Funktion Geheime Freunde für Sally oder Mike durch den jeweiligen Elternteil deaktiviert wird. Die Geheime-Freunde-Verbindung kann also jederzeit deaktiviert werden, und zwar (a) indem eines der Mitglieder den Geheimen Freund aus seiner Freundesliste entfernt (wie im Service beschrieben) oder (b) indem ein Elternteil dieses Mitglieds die Funktion Geheime Freunde deaktiviert, indem es den Bereich Accout-Optionen aufruft und den dort beschriebenen Schritten folgt.
-""","""
-Ein Geheimnis ist ein computergenerierter Zufallscode, der einem bestimmten Mitglied zugeordnet wird. Das Geheimnis muss dazu verwendet werden, binnen 48 Stunden nach Anforderung des Geheimnisses eine Geheime-Freunde-Verbindung zu aktivieren, ansonsten ist die Zeit für das Geheimnis abgelaufen und es kann nicht mehr verwendet werden. Außerdem kann ein Geheimnis nur zur Einrichtung einer Geheime-Freunde-Verbindung verwendet werden. Um weitere Geheime-Freunde-Verbindungen herzustellen, muss ein Mitglied für jeden zusätzlichen Geheimen Freund ein eigenes Geheimnis anfordern.
+3. Sallys Wahre Freunde Code wird Mike außerhalb des Service mitgeteilt (indem Sally das Wahre Freunde Code entweder Mike selbst sagt oder an eine andere Person weitergibt.)
+4. Mike teilt Sallys Wahre Freunde Code dem Service mit, und zwar innerhalb von 48 Stunden nachdem Sally den Wahre Freunde Code beim Service angefordert hat.
+5. Dann benachrichtigt der Service Mike, dass Sally Mikes Wahre-Freundin geworden ist. Ebenso benachrichtigt der Service Sally, dass Mike ihr Wahrer-Freund geworden ist.
+6. Sally und Mike können nun direkt miteinander chatten, bis entweder einer von beiden die Geheime-Freunde-Verbindung löst oder bis die Funktion Wahre Freunde mit Offenen-Chat für Sally oder Mike durch den jeweiligen Elternteil deaktiviert wird. Die Wahre-Freunde-Verbindung kann also jederzeit deaktiviert werden, und zwar (a) indem eines der Mitglieder den Wahren-Freund aus seiner Freundesliste entfernt (wie im Service beschrieben) oder (b) indem ein Elternteil dieses Mitglieds die Funktion Offener-Chat mit""","""
+Wahren Freunden deaktiviert, indem es den Bereich Account-Optionen aufruft und den dort beschriebenen Schritten folgt.
 
-Geheime Freundschaften sind nicht übertragbar. Wenn zum Beispiel Sally Mikes Geheime Freundin wird und Mike der Geheime Freund von Jessica, wird Sally nicht automatisch auch Jessicas Geheime Freundin. Damit Sally und Jessica Geheime Freunde werden können, muss eine von ihnen ein neues Geheimnis vom Service anfordern und es der anderen mitteilen.
+Ein Wahre Freunde Code ist ein computergenerierter Zufallscode, der einem bestimmten Mitglied zugeordnet wird. Der Wahre Freunde Code muss dazu verwendet werden, binnen 48 Stunden nach Anforderung des Wahre Freunde Codes eine Wahre-Freunde-Verbindung zu aktivieren, ansonsten ist die Zeit für den Wahre Freunde Code abgelaufen und es kann nicht mehr verwendet werden. Außerdem kann ein Wahre Freunde Code nur zur Einrichtung einer Wahre-Freunde-Verbindung verwendet werden. Um weitere Wahre-Freunde-Verbindungen herzustellen, muss ein Mitglied für jeden zusätzlichen Wahren Freund ein eigenen Wahre Freunde Code anfordern.
+
+Geheime Freundschaften sind nicht übertragbar. Wenn zum Beispiel Sally Mikes Wahre Freundin wird und Mike der Wahre Freund von Jessica, wird Sally nicht automatisch auch Jessicas Wahre Freundin. Damit Sally und Jessica Wahre Freunde werden können,
 ""","""
-Geheime Freunde kommunizieren miteinander in einem freien interaktiven Chat. Der Inhalt dieses Chats wird direkt von den teilnehmenden Mitgliedern eingegeben und durch den Service verarbeitet, der von der Walt Disney Internet Group ("WDIG"), 506 2nd Avenue, Suite 2100, Seattle, WA 98104 (Telefon (509)-742-4698, E-Mail ms_support@help.go.com) betrieben wird. Wir raten unseren Mitgliedern zwar keine persönlichen Informationen auszutauschen, wie zum Beispiel Vor- und Nachnamen, E-Mail-Adressen, Postadressen oder Telefonnummern. Wir können jedoch nicht garantieren, dass ein solcher Austausch persönlicher Daten nicht erfolgt. Aus dem Geheime-Freunde-Chat werden die meisten unanständigen Redewendungen zwar automatisch herausgefiltert, doch erfolgt durch uns keine Moderation oder Beaufsichtigung. Wenn Eltern ihren Kindern die Nutzung ihres Accounts mit aktivierter Geheime-Freunde-Funktion erlauben, raten wir ihnen, ihre Kinder zu beaufsichtigen, während sie im Service spielen.
+muss eine von ihnen ein neues Geheimnis vom Service anfordern und es der anderen mitteilen.
+
+Geheime Freunde kommunizieren miteinander in einem freien interaktiven Chat. Der Inhalt dieses Chats wird direkt von den teilnehmenden Mitgliedern eingegeben und durch den Service verarbeitet, der von der Walt Disney Internet Group ("WDIG"), 506 2nd Avenue, Suite 2100, Seattle, WA 98104 (Telefon (509)-742-4698, E-Mail ms_support@help.go.com) betrieben wird. Wir raten unseren Mitgliedern zwar keine persönlichen Informationen auszutauschen, wie zum Beispiel Vor- und Nachnamen, E-Mail-Adressen, Postadressen oder Telefonnummern. Wir können jedoch nicht garantieren, dass ein solcher Austausch persönlicher Daten nicht erfolgt. Aus dem Wahre-Freunde-Chat werden die meisten unanständigen Redewendungen zwar automatisch herausgefiltert, doch erfolgt durch uns keine Moderation oder Beaufsichtigung.
 ""","""
-WDIG verwendet den Inhalt des Geheime-Freunde-Chats einzig und allein zur Übermittlung dieses Inhalts an den Geheimen Freund des Mitglieds und macht diesen Inhalt keinem Dritten bekannt, außer (1) dies ist gesetzlich erforderlich, zum Beispiel aufgrund einer gerichtlichen Verfügung; (2) um die für den Service geltenden Nutzungsbestimmungen durchzusetzen (die auf der Homepage des Service eingesehen werden können); oder (3) um die Sicherheit der Mitglieder des Service und des Service selbst zu schützen. Auf Verlangen kann ein Elternteil eines Kindes in jeden von diesem Kind beigesteuerten Inhalt des Geheime-Freunde-Chats Einsicht nehmen und diesen löschen, sofern ein solcher Chat-Inhalt nicht bereits durch WDIG aus ihren Dateien gelöscht wurde. Gemäß den gesetzlichen Bestimmungen über den Online-Datenschutz bei Kindern ist es uns nicht gestattet, die Teilnahme eines Kindes an irgendeiner Aktivität (einschließlich Geheime Freunde) von der Angabe persönlicher Daten des Kindes abhängig zu machen, sofern diese Daten nicht für die Teilnahme an einer solchen Aktivität unbedingt erforderlich sind.
+Wenn Eltern ihren Kindern die Nutzung ihres Accounts mit aktivierter Wahre Freunde mit Offenen-Chat Funktion erlauben, raten wir ihnen, ihre Kinder zu beaufsichtigen, während sie im Service spielen.
+ 
+WDIG verwendet den Inhalt des Geheime-Freunde-Chats einzig und allein zur Übermittlung dieses Inhalts an den Geheimen Freund des Mitglieds und macht diesen Inhalt keinem Dritten bekannt, außer (1) dies ist gesetzlich erforderlich, zum Beispiel aufgrund einer gerichtlichen Verfügung; (2) um die für den Service geltenden Nutzungsbestimmungen
 ""","""
-Außerdem erkennen wir wie bereits gesagt das Recht eines Elternteils an, die Zustimmung zu einer weiteren Nutzung der Funktion Geheime Freunde durch das Kind zurückzunehmen. Durch Aktivieren der Geheime-Freunde-Funktion erkennen Sie an, dass mit der Möglichkeit des Chattens der Mitglieder über die Funktion Geheime Freunde gewisse Risiken verbunden sind und dass Sie über solche Risiken informiert wurden und sie in Kauf nehmen.
+durchzusetzen (die auf der Homepage des Service eingesehen werden können); oder (3) um die Sicherheit der Mitglieder des Service und des Service selbst zu schützen. Auf Verlangen kann ein Elternteil eines Kindes in jeden von diesem Kind beigesteuerten Inhalt des Wahre-Freunde-Chats Einsicht nehmen und diesen löschen, sofern ein solcher Chat-Inhalt nicht bereits durch WDIG aus ihren Dateien gelöscht wurde. Gemäß den gesetzlichen Bestimmungen über den Online-Datenschutz bei Kindern ist es uns nicht gestattet, die Teilnahme eines Kindes an irgendeiner Aktivität (einschließlich Wahre Freunde) von der Angabe persönlicher Daten des Kindes abhängig zu machen, sofern diese Daten nicht für die Teilnahme an einer solchen Aktivität unbedingt erforderlich sind.
+
+Außerdem erkennen wir wie bereits gesagt das Recht eines Elternteils an, die Zustimmung zu einer weiteren Nutzung der Funktion Wahre Freunde mit offenen-Chat durch das Kind zurückzunehmen. Durch Aktivieren der Wahren-Freunde mit Offenen-Chat Funktion erkennen Sie an, dass mit der Möglichkeit des Chattens der Mitglieder über die Funktion Wahre Freunde mit Offenen-Chat gewisse Risiken verbunden sind und dass Sie über solche Risiken informiert wurden und sie in Kauf nehmen.
 """
 ]
 
-LeaveToPay = """Zum Bezahlen wird das Spiel beendet und die Seita www.Toontown-online.de aufgerufen."""
+LeaveToPay = """Zum Bezahlen wird das Spiel beendet und die Seite www.Toontown-online.de aufgerufen."""
 LeaveToPayYes = "Bezahlen"
 LeaveToPayNo = lCancel
 
@@ -477,9 +553,12 @@ LeaveToEnableChatUKYes = "Chat aktivieren"
 LeaveToEnableChatUKNo = lCancel
 
 ChatMoreInfoOK = lOK
-SecretChatActivated = 'Das System "Geheime Freunde" wurde aktiviert!\n\nSollten Sie es sich anders überlegen und diese Funktion später wieder deaktivieren wollen, klicken Sie auf "Account-Optionen" auf der Toontown-Website.'
+SecretChatDeactivated = 'Das System "Wahre Freunde" wurde deaktiviert!'
+RestrictedSecretChatActivated = 'Das System "Beschränkte Geheime Freunde" wurde aktiviert!'
+SecretChatActivated = 'Das System "Unbeschränkte Geheime Freunde" wurde aktiviert!'
 SecretChatActivatedOK = lOK
-ProblemActivatingChat = 'Hoppla! Wir konnten die Chatfunktion "Geheime Freunde" leider nicht aktivieren. \n\n%s\n\nBitte später wieder versuchen.'
+SecretChatActivatedChange = "Optionen bearbeiten"
+ProblemActivatingChat = 'Hoppla! Wir konnten die Chatfunktion "Wahre Freunde" leider nicht aktivieren. \n\n%s\n\nBitte später wieder versuchen.'
 ProblemActivatingChatOK = lOK
 
 # MultiPageTextFrame.py
@@ -488,7 +567,7 @@ MultiPageTextFramePrev = 'Zurück'
 MultiPageTextFramePage = 'Seite %s/%s'
 
 # GuiScreen.py
-GuiScreenToontownUnavailable = "Toontown scheint vorübergehend nicht erreichbar zu sein, weiterer Versuch ..."
+GuiScreenToontownUnavailable = "Toontown scheint vorübergehend nicht erreichbar zu sein, weiterer Versuch..."
 GuiScreenCancel = lCancel
 
 
@@ -508,11 +587,13 @@ CreateAccountScreenInvalidUserName = "Ungültiger Benutzername.\nBitte erneut ve
 CreateAccountScreenUserNameNotFound = "Benutzernamen nicht gefunden.\nBitte erneut versuchen oder neuen Account einrichten."
 
 # ToontownClientRepository.py
-CRConnecting = "Verbindung wird gesucht ..."
+CRConnecting = "Verbindung wird gesucht..."
 # host, port
 CRNoConnectTryAgain = "Keine Verbindung zu %s:%s. Nochmal versuchen?"
 CRNoConnectProxyNoPort = "Keine Verbindung zu %s:%s.\n\nDu gehst über einen Proxy ins Internet, dieser Proxy erlaubt aber keine Verbindungen an Port %s.\n\nDu musst diesen Port öffnen oder deinen Proxy deaktivieren, um Toontown zu spielen. Wenn dein Proxy von deinem ISP zur Verfügung gestellt wurde, musst du deinen ISP kontaktieren und ihn bitten, diesen Port zu öffnen."
+CRMissingGameRootObject = """Einige Haupt-Spiel-Objekte fehlen. (Vielleicht eine Fehlgeschlagene Internetverbindung).\n\nNochmal versuchen?"""
 CRNoDistrictsTryAgain = "Es sind keine Toontown-Bezirke erreichbar. Nochmal versuchen?"
+CRRejectRemoveAvatar = "Der Avatar konnte nicht gelöscht werden, versuche es wann anders nochmal."
 CRLostConnection = "Deine Internetverbindung zu Toontown ist getrennt worden."
 CRBootedReasons = {
     1: "Es ist ein unerwartetes Problem aufgetreten. Deine Verbindung wurde getrennt, aber du kannst erneut eine Verbindung herstellen und wieder in das Spiel einsteigen.",
@@ -521,7 +602,9 @@ CRBootedReasons = {
     122: "Bei deinem Versuch, dich in Toontown einzuloggen, ist ein unerwartetes Problem aufgetreten. Bitte wende dich an den Toontown-Kundendienst.",
     125: "Deine installierten Toontown-Dateien scheinen ungültig zu sein. Bitte benutze die Schaltfläche Spielen auf der offiziellen Toontown-Website, um Toontown zu starten.",
     126: "Du hast keine Administratorrechte.",
+    127: "Es ist ein Problem mit deinem Toon aufgetreten. Bitte den Mitgliederservice über Telefon, E-Mail oder Live-Chat kontaktieren und Fehlercode 127 nennen. Dankeschön.",
     151: "Du wurdest von einem Administrator ausgeloggt, der an den Toontown-Servern arbeitet.",
+    152: "Es wurde ein Verstoß gegen unsere Nutzungsbedingungen im Zusammenhang mit '%(Name)s' gemeldet. Für mehr Details, bitte überprüfe die Nachricht die per E-Mail geschickt wurde die mit '%(name)s' verknüpft ist.",
     153: "Der Toontown-Bezirk, in dem du spielst, wurde zurückgesetzt. Die Verbindungen aller Spieler, die sich gerade dort aufhielten wurden getrennt. Du kannst jedoch erneut eine Verbindung herstellen und wieder in das Spiel einsteigen.",
     288: "Deine Spielzeit in Toontown ist für diesen Monat abgelaufen.",
     349: "Deine Spielzeit in Toontown ist für diesen Monat abgelaufen.",
@@ -529,7 +612,7 @@ CRBootedReasons = {
 CRBootedReasonUnknownCode = "Es ist ein unerwartetes Problem aufgetreten (Fehlercode %s). Deine Verbindung wurde getrennt, aber du kannst erneut eine Verbindung herstellen und wieder in das Spiel einsteigen."
 CRTryConnectAgain = "\n\nErneut verbinden?"
 # avName
-CRToontownUnavailable = "Toontown scheint vorübergehend nicht erreichbar zu sein, Verbindung wird weiter versucht ..."
+CRToontownUnavailable = "Toontown scheint vorübergehend nicht erreichbar zu sein, Verbindung wird weiter versucht..."
 CRToontownUnavailableCancel = lCancel
 CRNameCongratulations = "GLÜCKWUNSCH!!"
 CRNameAccepted = "Dein Name wurde vom Toon-Rat\ngenehmigt.\n\nVon heute an heißt\ndu\n\"%s\" "
@@ -540,7 +623,12 @@ CRServerDateTryAgain = "Konnte keine Serverdaten von %s bekommen. Erneut versuch
 AfkForceAcknowledgeMessage = "Dein Toon ist müde geworden und ins Bett gegangen."
 PeriodTimerWarning = "Deine Spielzeit in Toontown ist für diesen Monat fast abgelaufen!"
 PeriodForceAcknowledgeMessage = "Deine Spielzeit in Toontown ist für diesen Monat abgelaufen. Komm doch nächsten Monat wieder zum Spielen!"
-CREnteringToontown = "Toontown betreten ..."
+CREnteringToontown = "Toontown betreten..."
+
+# DownloadWatcher.py
+# phase, percent
+DownloadWatcherUpdate = "%s wird heruntergeladen "
+DownloadWatcherInitializing = "Download wird vorbereitet..."
 
 # LoginScreen.py
 LoginScreenUserName = "Name des Accounts"
@@ -573,10 +661,11 @@ DialogLength3 = 20
 GlobalSpeedChatName = "Schnell-Chat"
 
 # Toontown Speedchat
-SCMenuPromotional = "WAHL"
+SCMenuPromotion = "WAHL"
 SCMenuElection  = "WAHL"
 SCMenuEmotions  = "EMOTIONEN"
 SCMenuCustom    = "MEINE REDEWENDUNGEN"
+SCMenuResistance = "VEREINEN!"
 SCMenuPets      = "HAUSTIERE"
 SCMenuPetTricks = "TRICKS"
 SCMenuCog       = "BOT-SPRACHE"
@@ -592,62 +681,165 @@ SCMenuToontasks = "TOON-AUFGABEN"
 SCMenuBattle    = "KAMPF"
 SCMenuGagShop   = "GAG-LADEN"
 SCMenuFactory   = "FABRIK"
+SCMenuKartRacing   = "RENNEN"
 SCMenuFactoryMeet = "TREFFEN"
+SCMenuCFOBattle = "FINANZDIREKTOR"
+SCMenuCFOBattleCranes = "KRÄNE"
+SCMenuCFOBattleGoons = "BOT-SCHLÄGER"
+SCMenuCJBattle = "OBESTER RICHTER"
+SCMenuCEOBattle = "GESCHÄFTSFÜHRER"
+SCMenuGolf   = "GOLF"
+SCMenuWhiteList = "WHITELIST"
 SCMenuPlacesPlayground           = "SPIELPLATZ"
 SCMenuPlacesEstate               = "GRUNDSTÜCK"
 SCMenuPlacesCogs                 = "BOTS"
 SCMenuPlacesWait                 = "WARTEN"
-SCMenuFriendlyYou                = "Du ..."
-SCMenuFriendlyILike              = "Ich mag ... "
+SCMenuFriendlyYou                = "Du..."
+SCMenuFriendlyILike              = "Ich mag... "
 SCMenuPlacesLetsGo               = "Lass uns ... gehen."
 SCMenuToontasksMyTasks           = "MEINE AUFGABEN"
 SCMenuToontasksYouShouldChoose   = "Ich glaube, du solltest ... wählen."
+SCMenuToontasksINeedMore         = "Ich brauche mehr..."
 SCMenuBattleGags                 = "GAGS"
 SCMenuBattleTaunts               = "SPOTT"
 SCMenuBattleStrategy             = "STRATEGIE"
+SCMenuBoardingGroup              = "BOARDING"
+SCMenuParties                    = "PARTYS"
+SCMenuAprilToons                 = "APRIL TOONS'"
+SCMenuSingingGroup               = "SINGING"
+SCMenuSillyHoliday                   = "SPAß-O-METER" #use ẞ (capital ß) if possible ~Bob
+SCMenuVictoryParties             = "SIEGESPARTYS"
+SCMenuSellbotNerf                = "STÜRMT SCHACHERMAT"
+SCMenuJellybeanJam               = "JELLY BEAN WOCHE"
+SCMenuHalloween                  = "HALLOWEEN"
+SCMenuWinter                     = "WINTER"
+SCMenuSellbotInvasion            = "SCHACHERMAT-INVASION"
+SCMenuFieldOffice                = "BÜROKOMPLEXE"
+SCMenuIdesOfMarch                = "GRÜN"
+SCMenuLawbotNerf                 = "RECHTOMATEN RAUS"
 
 # FriendSecret.py
 FriendSecretNeedsPasswordWarningTitle = "Kindersicherung"
-FriendSecretNeedsPasswordWarning = """Um ein Geheimnis zu erhalten oder einzugeben, muss das Elternpasswort angegeben werden. Diese Meldung kann im Mitgliederservicebereich auf der Toontown-Webseite deaktiviert werden."""
+FriendSecretNeedsParentLoginWarning = """Um ein Wahre Freunde Code zu erhalten oder einzugeben, muss der Eltern-Account angegeben werden. Diese Meldung kann im Mitgliederservicebereich auf der Toontown-Webseite deaktiviert werden."""
+FriendSecretNeedsPasswordWarning = """Um ein Wahre Freunde Code zu erhalten oder einzugeben, muss das Elternpasswort angegeben werden. Diese Meldung kann im Mitgliederservicebereich auf der Toontown-Webseite deaktiviert werden."""
 FriendSecretNeedsPasswordWarningOK = lOK
 FriendSecretNeedsPasswordWarningCancel = lCancel
+FriendSecretNeedsPasswordWarningWrongUsername = """Das ist nicht der richtige Benutzername. Bitte den Elternbenutzernamen eingeben, das beim Erwerb dieses Accounts erstellt wurde. Es ist nicht das Passwort, das zum Spielen benutzt wird."""
 FriendSecretNeedsPasswordWarningWrongPassword = """Das ist nicht das richtige Passwort. Bitte das Elternpasswort eingeben, das beim Erwerb dieses Accounts erstellt wurde. Es ist nicht das Passwort, das zum Spielen benutzt wird."""
-FriendSecretIntro = "Wenn du Disneys Toontown Online mit jemandem spielst, den du im richtigen Leben kennst, könnt ihr Geheime Freunde werden. Mit der Tastatur kannst du mit diesen Geheimen Freunden chatten. Andere Toons werden nicht verstehen, was ihr sagt.\n\nDazu musst du ein Geheimnis erwerben. Erzähle das Geheimnis deinem Freund (oder deiner Freundin), aber niemand anderem. Wenn er/sie das Geheimnis auf seinem/ihrem Bildschitrm eintippt, seid ihr Geheime Freunde in Toontown!"
-FriendSecretGetSecret = "Ein Geheimnis erwerben"
-FriendSecretEnterSecret = "Wenn du ein Geheimnis von jemandem mitgeteilt bekommen hast, den du kennst, tippe es hier ein. "
+FriendSecretIntro = "Wenn du Disneys Toontown Online mit jemandem spielst, den du im richtigen Leben kennst, könnt ihr Wahre Freunde werden. Mit der Tastatur kannst du mit diesen Wahren-Freunden chatten. Andere Toons werden nicht verstehen, was ihr sagt.\n\nDazu musst du einen Wahre Freunde Code erwerben. Erzähle den Wahre Freunde Code deinem Freund (oder deiner Freundin), aber niemand anderem. Wenn er/sie den Wahre Freunde Code auf seinem/ihrem Bildschirm eintippt, seid ihr Wahre Freunde in Toontown!"
+FriendSecretGetSecret = "Ein Wahre Freunde Code erwerben"
+FriendSecretEnterSecret = "Wenn du ein Wahre Freunde Code von jemandem mitgeteilt bekommen hast, den du kennst, tippe es hier ein. "
 FriendSecretOK = lOK
+FriendSecretEnter = "Wahre Freunde Code eingeben"
 FriendSecretCancel = lCancel
-FriendSecretGettingSecret = "Geheimnis erwerben ..."
-FriendSecretGotSecret = "Hier ist dein neues Geheimnis. Schreibe es dir auf jeden Fall auf!\n\nDu darfst dieses Geheimnis nur an eine Person weitergeben! Wenn einmal jemand dein Geheimnis eingetippt hat, funktioniert es für niemand anderen mehr. Wenn du mehr als einer Person ein Geheimnis geben möchtest, musst du dir noch ein Geheimnis holen.\n\nDas Geheimnis wirkt nur für die nächsten zwei Tage. Dein Freund muss es eintippen, bevor es verschwindet, sonst wirkt es nicht mehr.\n\nDein Geheimnis ist:"
-FriendSecretTooMany = "Entschuldige, du kannst heute leider keine Geheimnisse mehr bekommen. Du hattest schon mehr als dir zustehen!\n\nVersuch es morgen wieder."
-FriendSecretTryingSecret = "Geheimnis ausprobieren ..."
-FriendSecretEnteredSecretSuccess = "%s ist jetzt dein Geheimer Freund!"
-FriendSecretEnteredSecretUnknown = "Das ist kein gültiges Geheimnis. Bist du sicher, dass du es richtig geschrieben hast?\n\nWenn du es richtig geschrieben hast, dann ist es vielleicht abgelaufen. Bitte deinen Freund, ein neues Geheimnis für dich zu holen (oder hole selbst eins und gib es deinem Freund)."
+FriendSecretGettingSecret = "Wahre Freunde Code erwerben. . ."
+FriendSecretGotSecret = "Hier ist dein neuer Wahre Freunde Code. Schreibe es dir auf jeden Fall auf!\n\nDu darfst diesen Wahre Freunde Code nur an eine Person weitergeben! Wenn einmal jemand dein Wahre Freunde Code eingetippt hat, funktioniert es für niemand anderen mehr. Wenn du mehr als einer Person einen Wahre Freunde Code geben möchtest, musst du dir noch einen Wahre Freunde Code holen.\n\nDer Wahre Freunde Code wirkt nur für die nächsten zwei Tage. Dein Freund muss es eintippen, bevor es verschwindet, sonst wirkt es nicht mehr.\n\nDein Wahre Freunde Code ist:"
+FriendSecretTooMany = "Entschuldige, du kannst heute leider keine Wahre Freunde Codes mehr bekommen. Du hattest schon mehr als dir zustehen!\n\nVersuch es morgen wieder."
+FriendSecretTryingSecret = "Wahre Freunde Code ausprobieren. . ."
+FriendSecretEnteredSecretSuccess = "%s ist jetzt dein Wahrer-Freund!"
+FriendSecretTimeOut = "Entschuldige, Geheimnisse gehen gerade nicht."
+FriendSecretEnteredSecretUnknown = "Das ist kein gültiger Wahre Freunde Code. Bist du sicher, dass du es richtig geschrieben hast?\n\nWenn du es richtig geschrieben hast, dann ist es vielleicht abgelaufen. Bitte deinen Freund, einen neuen Wahre Freunde Code für dich zu holen (oder hole selbst eins und gib es deinem Freund)."
 FriendSecretEnteredSecretFull = "Du kannst mit %s keine Freundschaft schließen, weil einer von euch beiden schon zu viele Freunde auf seiner Liste hat."
 FriendSecretEnteredSecretFullNoName = "Ihr könnt keine Freundschaft schließen, weil einer von euch beiden schon zu viele Freunde auf seiner Liste hat."
-FriendSecretEnteredSecretSelf = "Du hast gerade dein eigenes Geheimnis eingetippt! Jetzt kann niemand anders dieses Geheimnis verwenden."
-FriendSecretNowFriends = "%s ist jetzt dein Geheimer Freund!"
-FriendSecretNowFriendsNoName = "Ihr seid jetzt Geheime Freunde!"
+FriendSecretEnteredSecretSelf = "Du hast gerade deinen eigenen Wahre Freunde Code eingetippt! Jetzt kann niemand anders diesen Wahre Freunde Code verwenden."
+FriendSecretEnteredSecretWrongProduct = "Du hast die falsche Art des Wahre Freunde Codes eingetippt.\nDieses Spiel benutzt Codes die mit '%s' beginnen."
+FriendSecretNowFriends = "%s ist jetzt dein Wahrer-Freund!"
+FriendSecretNowFriendsNoName = "Ihr seid jetzt Wahre Freunde!"
+FriendSecretDetermineSecret = "Welche Art von Wahren Freunden möchtest du gerne schließen?"
+FriendSecretDetermineSecretAvatar = "Avatar"
+FriendSecretDetermineSecretAvatarRollover = "Ein Freund nur in diesem Spiel"
+FriendSecretDetermineSecretAccount = "Account"
+FriendSecretDetermineSecretAccountRollover = "Ein Freund im Disney.com Netzwerk"
+
+# GuildMember.py
+GuildMemberTitle = "Mitglieder Einstellungen"
+GuildMemberPromote = "Zum Offizier machen"
+GuildMemberPromoteInvite = "Zum Veteran machen"
+GuildMemberDemoteInvite = "Abstufen zu Veteran"
+GuildMemberGM = "Zum Gildenmeister machen"
+GuildMemberGMConfirm = "Bestätigen"
+GuildMemberDemote = "Abstufen zu Mitglied"
+GuildMemberKick = "Mitglied entfernen"
+GuildMemberCancel = lCancel
+GuildMemberOnline = "hat sich angemeldet."
+GuildMemberOffline = "hat sich abgemeldet."
+GuildPrefix = "(G):"
+GuildNewMember = "Neues Gildenmitglied"
+GuildMemberUnknown = "Unbekannt"
+GuildMemberGMMessage = "Achtung! Möchtest du die Leitung deiner Gilden aufgeben, und %s zum Gildenmeister erklären?\n\nDu wirst ein Offizier werden"
+
+# GuildInvitee.py
+GuildInviteeOK = lOK
+GuildInviteeNo = lNo
+GuildInviteeInvitation = "%s hat dich eingeladen %s beizutreten."
+
+GuildRedeemErrorInvalidToken = "Entschuldige, dieser Code ist ungültig. Versuche es nochmal."
+GuildRedeemErrorGuildFull = "Entschuldige, diese Gilde hat die maximale Anzahl an Mitgliedern."
 
 # FriendInvitee.py
 FriendInviteeTooManyFriends = "%s möchte dein Freund sein, aber du hast schon zu viele Freunde auf deiner Liste!"
 FriendInviteeInvitation = "%s möchte dein Freund sein."
+FriendInviteeInvitationPlayer = "%ss Spieler möchte dein Freund sein."
+FriendNotifictation = "%s ist jetzt dein Freund."
 FriendInviteeOK = lOK
 FriendInviteeNo = lNo
+GuildInviterWentAway = "%s ist nicht mehr hier."
+GuildInviterAlready = "%s ist schon in einer Gilde."
+GuildInviterBusy = "%s ist gerade beschäftigt."
+GuildInviterNotYet = "%s zu deiner Gilde einladen?"
+GuildInviterCheckAvailability = "Lade %s zu deiner Gilde ein."
+GuildInviterOK = lOK
+GuildInviterNo = lNo
+GuildInviterCancel = lCancel
+GuildInviterYes = lYes
+GuildInviterTooFull = "Gilde hat die Maximale Anzahl an Mitgliern erreicht."
+GuildInviterNo = lNo
+GuildInviterClickToon = "Drücke auf den Piraten, den du einladen möchtest."
+GuildInviterTooMany = "Das ist ein Spielfehler"
+GuildInviterNotAvailable = "%s ist gerade beschäftigt; versuche es später nochmal."
+GuildInviterGuildSaidNo = "%s hat deine Gildeneinladung abgelehnt."
+GuildInviterAlreadyInvited = "%s wurde schon eingeladen."
+GuildInviterEndGuildship = "%s aus dieser Gilde entfernen?"
+GuildInviterFriendsNoMore = "%s hat die Gilde verlassen."
+GuildInviterSelf = "Du bist schon in der Gilde!"
+GuildInviterIgnored = "%s ignoriert dich."
+GuildInviterAsking = "Frage ob %s der Gilde beitreten möchte."
+GuildInviterGuildSaidYes = "%s ist der Gilde beigetreten!"
+GuildInviterFriendKickedOut = "%s hat %s aus der Gilde entfernt."
+GuildInviterFriendKickedOutP = "%s haben %s aus der Gilde entfernt."
+GuildInviterFriendInvited = "%s hat %s in die Gilde eingeladen."
+GuildInviterFriendInvitedP = "%s haben %s in die Gilde eingeladen."
+GuildInviterFriendPromoted = "%s hat %s befördert zum Rank %s."
+GuildInviterFriendPromotedP = "%s haben %s befördert zum Rank %s."
+GuildInviterFriendDemoted = "%s hat %s abgestuft zum Rank %s."
+GuildInviterFriendDemotedP = "%s haben %s abgestuft zum Rank %s."
+GuildInviterFriendPromotedGM = "%s hat %s als den neuen %s erklärt"
+GuildInviterFriendPromotedGMP = "%s haben %s als den neuen %s erklärt"
+GuildInviterFriendDemotedGM = "%s hat %s zum Gildenmeister erklärt und bekam den Rank %s"
+GuildInviterFriendDemotedGMP = "%s haben %s zum Gildenmeister erklärt und bekam den Rank %s"
 
 # FriendInviter.py
+FriendOnline = "hat sich angemeldet."
+FriendOffline = "hat sich abgemeldet."
 FriendInviterOK = lOK
 FriendInviterCancel = lCancel
 FriendInviterStopBeingFriends = "Freundschaft beenden"
+FriendInviterConfirmRemove = "Entfernen"
 FriendInviterYes = lYes
 FriendInviterNo = lNo
 FriendInviterClickToon = "Klicke auf den Toon, mit dem du Freunschaft schließen möchtest."
 FriendInviterTooMany = "Du hast schon zu viele Freunde auf deiner Liste und kannst jetzt keinen hinzufügen. Du musst ein paar Freunde entfernen, wenn du mit %s Freundschaft schließen möchtest."
+FriendInviterToonTooMany = "Du hast schon zu viele Freunde auf deiner Liste und kannst jetzt keinen hinzufügen. Du musst ein paar Freunde entfernen, wenn du mit %s Freundschaft schließen möchtest."
+FriendInviterPlayerTooMany = "Du hast schon zu viele Spieler Freunde auf deiner Liste und kannst jetzt keinen hinzufügen. Du musst ein paar Freunde entfernen, wenn du mit %s Freundschaft schließen möchtest."
 FriendInviterNotYet = "Möchtest du mit %s Freundschaft schließen?"
 FriendInviterCheckAvailability = "Sehe nach, ob %s erreichbar ist."
 FriendInviterNotAvailable = "%s ist zurzeit beschäftigt, versuche es später noch einmal."
+FriendInviterCantSee = "Das funktioniert nur wenn du %s siehst."
+FriendInviterNotOnline = "Das funktioniert nur wenn %s angemeldet ist"
+FriendInviterNotOpen = "%s hat nicht den Offenen-Chat, benutz Geheimnisse um Freundschaft zu schließen"
 FriendInviterWentAway = "%s ist weggegangen."
 FriendInviterAlready = "%s ist schon mit dir befreundet."
+FriendInviterAlreadyInvited = "%s wurde schon eingeladen."
 FriendInviterAskingCog = "Frage, ob %s mit dir befreundet sein möchte."
 FriendInviterAskingPet = "%s springt umher, rennt im Kreis herum und leckt dir das Gesicht ab."
 FriendInviterAskingMyPet = "%s ist schon dein BESTER Freund."
@@ -657,11 +849,32 @@ FriendInviterSelf = "Du bist schon mit dir selbst 'befreundet'!"
 FriendInviterIgnored = "%s ignoriert dich."
 FriendInviterAsking = "Frage, ob %s mit dir befreundet sein möchte. "
 FriendInviterFriendSaidYes = "%s hat ja gesagt!"
+FriendInviterPlayerFriendSaidYes = "Du bist jetzt befreundet mit %ss Spieler,%s!"
 FriendInviterFriendSaidNo = "%s hat nein, danke gesagt."
 FriendInviterFriendSaidNoNewFriends = "%s sucht gerade keine neuen Freunde."
-FriendInviterTooMany = "%s hat schon zu viele Freunde!"
+FriendInviterOtherTooMany = "%s hat schon zu viele Freunde!"
 FriendInviterMaybe = "%s konnte nicht antworten."
 FriendInviterDown = "Kann gerade keine Freundschaften schließen."
+
+#Talk Path Labels
+TalkGuild = "G"
+TalkParty = "P"
+TalkPVP = "SGS"
+
+#Spam Blocked Message
+AntiSpamInChat = "***Spamming***"
+
+#IgnoreConfirm.py
+IgnoreConfirmOK = lOK
+IgnoreConfirmCancel = lCancel
+IgnoreConfirmYes = lYes
+IgnoreConfirmNo = lNo
+IgnoreConfirmNotYet = "Möchtest du %s ignorieren?"
+IgnoreConfirmAlready = "Du ignorierst %s schon."
+IgnoreConfirmSelf = "Du kannst dich selbst nicht ignorieren!"
+IgnoreConfirmNewIgnore = "Du ignorierst %s."
+IgnoreConfirmEndIgnore = "Du ignorierst %s nicht mehr."
+IgnoreConfirmRemoveIgnore = "Aufhören %s zu ignorieren?"
 
 # Emote.py
 # List of emotes in the order they should appear in the SpeedChat.
@@ -681,12 +894,26 @@ EmoteList = [
     "Verwirrt",
     "Verspotten",
     "Verbeugen",
-    "Sehr traurig",
-    "Breites Grinsen",
+    "Bananenschale",
+    "Widerstandsgruß",
     "Lachen",
     lYes,
     lNo,
     lOK,
+    "Erstaunt",
+    "Weinen",
+    "Erfreut",
+    "Wütend",
+    "Lachen",
+##    "Note G1 Singen",
+##    "Note A Singen",
+##    "Note B Singen",
+##    "Note C Singen",
+##    "Note D Singen",
+##    "Note E Singen",
+##    "Note F Singen",
+##    "Note G2 Singen",
+##    "Note Pause Singen",
     ]
 
 EmoteWhispers = [
@@ -704,12 +931,18 @@ EmoteWhispers = [
     "%s ist verwirrt.",
     "%s macht sich über dich lustig.",
     "%s verbeugt sich vor dir.",
-    "%s ist sehr traurig.",
-    "%s grinst.",
+    "%s rutscht auf einer Bananenschale aus.",
+    "%s macht den Widerstandsgruß.",
     "%s lacht.",
     "%s sagt Ja.",
     "%s sagt Nein.",
     "%s sagt OK.",
+    "%s ist erstaunt.",
+    "%s weint.",
+    "%s ist erfreut.",
+    "%s ist wütend.",
+    "%s lacht.",
+    "%s singt Note G1"
     ]
 
 # Reverse lookup:  get the index from the name.
@@ -728,12 +961,25 @@ EmoteFuncDict = {
     "Verwirrt"  : 11,
     "Verspotten"  : 12,
     "Verbeugen"    : 13,
-    "Sehr traurig" : 14,
-    "Breites Grinsen" : 15,
+    "Bananenschale" : 14,
+    "Widerstandsgruß" : 15,
     "Lachen" : 16,
     lYes    : 17,
     lNo     : 18,
     lOK     : 19,
+    "Erstaunt" : 20,
+    "Weinen" : 21,
+    "Erfreut" : 22,
+    "Wütend" : 23,
+    "Lachen" : 24,
+    "Note G1 Singen" : 25,
+    "Note A Singen" : 26,
+    "Note B Singen" : 27,
+    "Note C Singen" : 28,
+    "Note D Singen" : 29,
+    "Note E Singen" : 30,
+    "Note F Singen" : 31,
+    "Note G2 Singen" : 32,
     }
 
 # SuitDialog.py
@@ -1110,7 +1356,7 @@ SuitFaceoffTaunts = {
            "Tja, dumm gelaufen, was?",
            "Gegen dummes Geschwätz ist kein Kraut gewachsen.",
            "Ich schwatz dich in Grund und Boden.",
-           "Die dümmsten Bauern haben díe größten Kartoffeln.",
+           "Die dümmsten Bauern haben die größten Kartoffeln.",
            "Du wirst nachher ziemlich dumm aus der Wäsche gucken.",
            "Mich kannst du nicht für dumm verkaufen.",
            "Die Dummen sterben eben nicht aus.",
@@ -1139,6 +1385,7 @@ SpeedChatStaticText = {
     1 : lYes,
     2 : lNo,
     3 : lOK,
+    4 : "SCHNELL-CHAT-PLUS",
 
     # Hello
     100 : "Hi!",
@@ -1213,13 +1460,13 @@ SpeedChatStaticText = {
     514 : "Kannst du mir helfen?",
     515 : "Warst du schon mal hier?",
 
-    # Friendly "Du ..."
+    # Friendly "Du..."
     600 : "Du siehst gut aus.",
     601 : "Du bist umwerfend!",
     602 : "Du fetzt!",
     603 : "Du bist ein Genie!",
 
-    # Friendly "Mir gefällt ..."
+    # Friendly "Mir gefällt..."
     700 : "Mir gefällt dein Name.",
     701 : "Mir gefällt, wie du aussiehst.",
     702 : "Mir gefällt dein Oberteil.",
@@ -1242,7 +1489,12 @@ SpeedChatStaticText = {
     811 : "Tut mir leid, ich bin grad voll mit Angeln beschäftigt!",
     812 : "Tut mir leid, ich bin grad in einem Gebäude!",
     813 : "Tut mir leid, ich helfe grad einem Freund!",
-
+    814 : "Tut mir leid, ich bin grad in einem Kart Rennen!",
+    815 : "Tut mir leid, ich bin grad mit Gartenarbeit beschäftigt!",
+    816 : "Ich kann grad nicht in den Aufzug.",
+    817 : "Tut mir leid, ich bin grad voll mit golfen beschäftigt",
+    818 : "Tut mir leid, meine Freundesliste ist voll.",
+    
     # Stinky
     900 : "Hey!",
     901 : "Bitte geh weg!",
@@ -1270,26 +1522,41 @@ SpeedChatStaticText = {
     1013 : "Kannst du zu mir nach Hause kommen?",
     1014 : "Warte nicht auf mich.",
     1015 : "Wart mal!",
+    1016 : "Komm, schau dir meinen Garten an.",
+    1017 : "Lass uns auf den nächsten warten.",
 
-    # Places "Komm ..."
+    # Places "Komm..."
     1100 : "Komm, wir fahren mit dem Toon-Express!",
     1101 : "Komm, wir gehen zum Spielplatz zurück!",
     1102 : "Komm, wir kämpfen gegen die %s!" % Cogs,
     1103 : "Komm, wir übernehmen ein %s-Gebäude!" % Cog,
     1104 : "Komm, wir fahren mit dem Aufzug!",
-    1105 : "Komm, wir gehen zu Toontown Mitte!",
-    1106 : "Komm, wir gehen zu Donalds Dock!",
-    1107 : "Komm, wir gehen zu Minnies Melodienland!",
-    1108 : "Komm, wir gehen zu Daisys Gärten!",
-    1109 : "Komm, wir gehen zu Das Brrr!",
-    1110 : "Komm, wir gehen zu Donalds Traumland!",
-    1111 : "Komm, wir gehen zu mir nach Hause!",
-    1112 : "Komm, lass uns zu dir nach Hause gehen!",
+    1105 : "Komm, wir gehen nach %s!" % lToontownCentral,
+    1106 : "Komm, wir gehen zu %s!" % lDonaldsDock,
+    1107 : "Komm, wir gehen zu %s!" % lMinniesMelodyland,
+    1108 : "Komm, wir gehen zu %s!" % lDaisyGardens,
+    1109 : "Komm, wir gehen zum Brrr!",
+    1110 : "Komm, wir gehen zu %s!" % lDonaldsDreamland,
+    1111 : "Komm, wir gehen zu %s!" % lGoofySpeedway,
+    1112 : "Komm, wir gehen zu mir nach Hause!",
+    1113 : "Komm, lass uns zu dir nach Hause gehen!",
     1113 : "Komm, lass uns zum Schachermaten-HQ gehen!",
     1114 : "Komm, lass uns gegen den VP kämpfen!",
     1115 : "Komm, lass uns in die Fabrik gehen!",
     1116 : "Komm, lass uns angeln gehen!",
     1117 : "Komm, lass uns bei meinem Haus angeln gehen!",
+    1119 : "Komm, lass uns zum Monetomaten-HQ gehen!",
+    1120 : "Komm, lass uns gegen den Finanzdirektor kämpfen!",
+    1121 : "Komm, lass uns in die Münzanstalt gehen!",
+    1122 : "Komm, lass uns zum Rechtomaten-HQ gehen!",
+    1123 : "Komm, lass uns gegen den Obersten Richter kämpfen!",
+    1124 : "Komm, lass uns in das Büro der Staatsanwaltschaft gehen!",
+    1125 : "Komm, wir gehen zu %s!" % lOutdoorZone,
+    1126 : "Komm, wir gehen zu %s!" % lGolfZone,
+    1127 : "Komm, lass uns zum Chefomaten-HQ gehen!",
+    1128 : "Komm, lass uns gegen den Geschäftsführer kämpfen!",
+    1129 : "Komm, lass uns in die Bot Golfplätze gehen!",
+    1130 : "Komm, wir übernehmen ein Bürokomplex!",
 
     # Toontasks
     1200 : "An welcher Toon-Aufgabe arbeitest du?",
@@ -1298,13 +1565,20 @@ SpeedChatStaticText = {
     1203 : "Ich werde danach suchen.",
     1204 : "Es ist nicht in dieser Straße.",
     1205 : "Ich habe es noch nicht gefunden.",
-    1206 : "Ich brauche mehr Bot-Verdienste.",
-    1207 : "Ich brauche mehr Bot-Anzugteile.",
+    1206 : "Ich brauche mehr Leistungsbeurteilungen.",
+    1207 : "Ich brauche mehr Schachermaten-Anzugteile.",
     1208 : "Das ist nicht das, was du brauchst.",
     1209 : "Ich habe gefunden, was du brauchst.",
+    1210 : "Ich brauche mehr Bot-Moneten.", # Thinking of making it say, Bot-Euro, like on TT France (d'euros Cog). ~Bob
+    1211 : "Ich brauche mehr Geschworenen-Bekanntmachungen.",
+    1212 : "Ich brauche mehr Aktien-Optionen.",
+    1213 : "Ich brauche mehr Monetomaten-Anzugteile.",
+    1214 : "Ich brauche mehr Rechtomaten-Anzugteile.",
+    1215 : "Ich brauche mehr Chefomaten-Anzugteile.",
+
     1299 : "Ich muss mir eine Toon-Aufgabe holen.",
 
-    # Toontasks "Wenn du mein Rat willst, wähle ...  "
+    # Toontasks "Wenn du mein Rat willst, wähle... "
     1300 : "Wenn du mein Rat willst, wähle Aufheitern.",
     1301 : "Wenn du mein Rat willst, wähle Volldröhnen.",
     1302 : "Wenn du mein Rat willst, wähle Fallen lassen.",
@@ -1330,7 +1604,7 @@ SpeedChatStaticText = {
     1415 : "Du solltest mal aussetzen.",
     1416 : "Wir kriegen das hin!",
 
-    # Battle "Nehmen wir..."
+    # Battle GAGS
     1500 : "Nehmen wir Aufheitern!",
     1501 : "Nehmen wir Fallen stellen!",
     1502 : "Nehmen wir Ködern!",
@@ -1467,6 +1741,275 @@ SpeedChatStaticText = {
     2008 : "Pink",
     2009 : "Braun",
 
+    # CFO battle
+    2100 : "Bitte bedient den Kran.",
+    2101 : "Darf ich den Kran bedienen?",
+    2102 : "Ich muss üben, wie man den Kran bedient.",
+    2103 : "Nimm einen außer gefecht gesetzten Bot-Schläger.",
+    2104 : "Wirf den Bot-Schläger auf den Finanzdirektor.",
+    2105 : "Wirft jetzt einen Safe!",
+    2106 : "Wirft jetzt keinen Safe!",
+    2107 : "Ein Safe haut seinen Helm weg.",
+    2108 : "Ein Safe wird sein neuer Helm.",
+    2109 : "Ich komme an keinen Safe ran.",
+    2110 : "Ich komme an keine Bot-Schläger ran.",
+
+    2120 : "Bitte setzt die Bot-Schläger außer gefecht.",
+    2121 : "Ich würde lieber Bot-Schläger außer gefecht setzen.",
+    2122 : "Ich muss üben, Bot-Schläger außer gefecht setzen.",
+    2123 : "Bitte bleib in der Nähe.",
+    2124 : "Bleib in Bewegung.",
+    2125 : "Ich muss in Bewegung bleiben.",
+    2126 : "Schau nach jemanden, der Hilfe braucht.",
+
+    2130 : "Bitte bewahrt die Tooning Schätze auf.",
+    2131 : "Nimm die Tooning Schätze.",
+    2132 : "Ich brauche Tooning Schätze!",
+    2133 : "Pass auf!",
+
+    # CJ battle
+    2200 : "Du musst die Waage treffen.",
+    2201 : "Ich werde auf die Waage werfen.",
+    2202 : "Ich brauche Hilfe mit der Waage!",
+    2203 : "Du musst die Bots betäuben.",
+    2204 : "Ich werde die Bots betäubt.",
+    2205 : "Ich brauch Hilfe mit den Bots!",
+    2206 : "Ich brauche mehr Beweise!",
+    2207 : "Ich ziehle, auf die Stühle in der oberen Reihe.",
+    2208 : "Ich ziehle, auf die Stühle in der unteren Reihe.",
+    2209 : "Aus dem Weg! Wir können den Balken nicht treffen.",
+    2210 : "Ich werde Toonings für uns machen.",
+    2211 : "Ich hab kein Bonusgewicht.",
+    2212 : "Ich habe ein Bonusgewicht von 1.",
+    2213 : "Ich habe ein Bonusgewicht von 2.",
+    2214 : "Ich habe ein Bonusgewicht von 3.",
+    2215 : "Ich habe ein Bonusgewicht von 4.",
+    2216 : "Ich habe ein Bonusgewicht von 5.",
+    2217 : "Ich habe ein Bonusgewicht von 6.",
+    2218 : "Ich habe ein Bonusgewicht von 7.",
+    2219 : "Ich habe ein Bonusgewicht von 8.",
+    2220 : "Ich habe ein Bonusgewicht von 9.",
+    2221 : "Ich habe ein Bonusgewicht von 10.",
+    2222 : "Ich habe ein Bonusgewicht von 11.",
+    2223 : "Ich habe ein Bonusgewicht von 12.",
+
+    # CEO battle
+    2300 : "Du bedienst die linken Bots.",
+    2301 : "Ich werde die linken Bots bedienen.",
+    2302 : "Du bedienst die rechten Bots.",
+    2303 : "Ich werde die rechten Bots bedienen.",
+    2304 : "Du bedienst die vorderen Bots.",
+    2305 : "Ich werde die vorderen Bots bedienen.",
+    2306 : "Du bedienst die hinteren Bots.",
+    2307 : "Ich werde die hinteren Bots bedienen.",
+    2308 : "Du benutzt die Seltersflasche.",
+    2309 : "Ich werde die Seltersflasche benutzen.",
+    2310 : "Du benutzt den Golf Tee.",
+    2311 : "Ich benutz den Golf Tee.",
+    2312 : "Ich werde diesen Tisch bedienen.",
+    2313 : "Kannst du diesen Tisch bedienen?",
+    2314 : "Bediene den gleichen Bot nochmal.",
+    2315 : "Beeilung, dein Bot ist hungrig!",
+    2316 : "Bitte bewahrt die Snacks für traurigere Toons auf.",
+    2317 : "Nimm die Snacks bevor sie fallen.",
+    
+    
+    #Kart Racing Phrases
+    #IMPORTANT: if you change numbers or add/subtract lines here than be
+    # sure to adjust the kart racing menu guid dict below
+    # Invites/Destinations
+    3010 : "Möchte jemand ein Rennen fahren?",
+    3020 : "Lass uns ein Rennen fahren!",
+    3030 : "Möchtest du ein Rennen fahren?",
+    3040 : "Lass uns, unsere Karts zur Show stellen!",
+    3050 : "Ich habe nicht genügend Tickets.",
+    3060 : "Lass uns noch ein Rennen fahren!",
+    3061 : "Möchtest du nochmal ein Rennen fahren?",
+
+
+    #Places
+    3150 : "Ich muss zum Kart-Laden gehen.",
+    3160 : "Gehen wir zu den Rennstrecken!",
+    3170 : "Gehen wir zur Boxengasse, um unsere Karts zu präsentieren!",
+    3180 : "Ich werde zur Boxengasse gehen, um mein Kart zu präsentieren!",
+    3190 : "Triff mich bei den Rennstrecken!",
+    3110 : "Treffen wir uns beim Kart-Laden!",
+    3130 : "Wo sollen wir uns treffen?",
+
+    #Races
+    3200 : "Wo willst du fahren?",
+    3201 : "Lass uns ein anderes rennen nehmen.",
+    3210 : "Lass uns ein Trainings rennen nehmen.",
+    3211 : "Lass uns ein Kampf rennen nehmen.",
+    3220 : "Ich mag das Spinnerei-Stadion rennen!",
+    3221 : "Ich mag das Rustikale Rennbahn rennen!",
+    3222 : "Ich mag das Stadtkreis rennen!",
+    3223 : "Ich mag das Korken-Kolosseum rennen!",
+    3224 : "Ich mag das Luftlands-Tal rennen!",
+    3225 : "Ich mag das Schnee-Boulevard rennen!",
+    3230 : "Lass uns ein rennen beim Spinnerei-Stadion fahren!",
+    3231 : "Lass uns ein rennen bei der Rustikalen Rennbahn fahren!",
+    3232 : "Lass uns ein rennen beim Stadtkreis fahren!",
+    3233 : "Lass uns ein rennen beim Korken-Kolosseum fahren!",
+    3234 : "Lass uns ein rennen beim Luftlands-Tal fahren!",
+    3235 : "Lass uns ein rennen beim Schnee-Boulevard fahren!",
+
+    #Tracks
+    3600 : "Auf welcher Strecke möchtest du fahren?",
+    3601 : "Wähle eine Strecke!",
+    3602 : "Können wir auf einer anderen Strecke fahren?",
+    3603 : "Lass uns eine andere Strecke wählen!",
+    3640 : "Ich möchte auf der ersten Strecke fahren!",
+    3641 : "Ich möchte auf der zweiten Strecke fahren!",
+    3642 : "Ich möchte auf der dritten Strecke fahren!",
+    3643 : "Ich möchte auf der vierten Strecke fahren!",
+    3660 : "Ich möchte nicht auf der ersten Strecke fahren!",
+    3661 : "Ich möchte nicht auf der zweiten Strecke fahren!",
+    3662 : "Ich möchte nicht auf der dritten Strecke fahren!",
+    3663 : "Ich möchte nicht auf der vierten Strecke fahren!",
+
+    #Compliments
+    3300 : "Wow! Du bist aber SCHNELL!",
+    3301 : "Du bist zu schnell für micht!",
+    3310 : "Gutes Rennen!",
+    3320 : "Ich mag dein Kart!",
+    3330 : "Tolle Fahrt!",
+    3340 : "Dein Kart ist cool!",
+    3350 : "Dein Kart ist fetzt!",
+    3360 : "Dein Kart ist sowas von großartig!",
+
+    #Taunts (commented out taunts are for possible purchase lines)
+    #3400 : 'Friss meinen Staub!',
+    3400 : "Zu ängstlich, um gegen mich anzutreten?",
+    3410 : "Wir sehen uns an der Ziellinie!",
+    #3420 : "Du bist so langsam wie eine Schildkröte!",
+    3430 : "Ich bin blitzschnell!",
+    #3440 : "Ich bin schneller als die Lichtgeschwindigkeit!",
+    3450 : "Du kriegst mich niemals!",
+    3451 : "Du wirst mich niemals besiegen!",
+    3452 : "Niemand kann meine Bestzeit schlagen!",
+    3453 : "Beeilt euch Trantüten!",
+    3460 : "Gib mir noch einen Versuch!",
+    3461 : "Das war pures Glück",
+    3462 : "Ooooh! Das war knapp!",
+    3470 : "Wow, Ich dachte du hättest mich fast besiegt!",
+    #3500 : "Schau dir mein Gefährt an!",
+    #3510 : "Schau dir meine Räder an!",
+    #3540 : "Vroom! Vroom!",
+    #3560 : "Ich hab Bots gesehen die schneller sind!",
+    #3600 : "Ich bin der Schnellste der Schnellen",
+
+
+    # Golf phrases
+
+    # Play
+    4000 : "Lass uns Minigolf spielen!",
+    4001 : "Lass uns nochmal spielen!",
+    4002 : "Möchtest du etwas Golf spielen?",
+
+    # Courses
+    4100 : "Komm, lass uns ein Aufwärmspiel spielen.",
+    4101 : "Komm, lass uns ein Trainingsspiel spielen.",
+    4102 : "Komm, lass uns ein spiel auf dem Erfahrenen Parkour spielen.",
+    4103 : "Dieser Parkour war zu einfach.",
+    4104 : "Dieser Parkour war zu schwer",
+    4105 : "Dieser Parkour war genau richtig.",
+
+    # Tips
+    4200 : "Versuche weiter links zu stehen.",
+    4201 : "Versuche weiter rechts zu stehen.",
+    4202 : "Versuche mehr bei der Mitte zu stellen.",
+    4203 : "Versuche stärker zu schlagen.",
+    4204 : "Versuche leichter zu schlagen.",
+    4205 : "Versuche mehr nach links zu zielen.",
+    4206 : "Versuche mehr nach rechts zu zielen.",
+    4207 : "Versuche in die Mitte zu zielen.",
+
+    # Comments
+    4300 : "So nah!",
+    4301 : "Was für ein toller Schuss!",
+    4302 : "Das war ein Glückstreffer.",
+    4303 : "Ich werde einen Mulligan nehmen...",
+    4304 : "Das ist ein verschenkter Putt.",
+    4305 : "Achtung!",
+    4306 : "Shhhh!",
+    4307 : "Gutes Spiel!",
+
+    # Boarding Group phrases
+
+    5000 : "Let's form a Boarding Group.",
+    5001 : "Join my Boarding Group.",
+    5002 : "Can you invite me to your Boarding Group?",
+    5003 : "I'm already in a Boarding Group.",
+    5004 : "Leave your Boarding Group.",
+    5005 : "We are boarding now.",
+    5006 : "Where are we going?",
+    5007 : "Are we ready?",    
+    5008 : "Let's Go!",
+    5009 : "Don't leave this area or you will leave the Boarding Group.",
+
+    # Let's Go to...
+    5100 : "Lass uns zu den Vorderen Drei gehen.",
+    5101 : "Lass uns zu den Mittleren Sechs gehen.",
+    5102 : "Lass uns zu den Hinteren Neun gehen.",
+    5103 : "Lass uns zum Geschäftsführer Kampf gehen.",
+    5104 : "Lass uns zum Vize Präsidenten Kampf gehen.",
+    5105 : "Lass uns zum Vordereingang gehen.",
+    5106 : "Lass uns zum Seiteneingang gehen.",
+    5107 : "Lass uns zur Münzanstalt gehen.",
+    5108 : "Lass uns zur Euroschein Druckerei gehen.",
+    5109 : "Lass uns zur Goldbarren Fabrik gehen.",
+    5110 : "Lass uns zum Finanzdirektor Kampf gehen.",
+    5111 : "Lass uns zum Oberstern Richter Kampf gehen.",
+    5112 : "Lass uns zum Rechtomaten Büro-A gehen.",
+    5113 : "Lass uns zum Rechtomaten Büro-B gehen.",
+    5114 : "Lass uns zum Rechtomaten Büro-C gehen.",
+    5115 : "Lass uns zum Rechtomaten Büro-D gehen.",
+
+    # We're going to...
+    5200 : "Wir werden zu den Vorderen Drei gehen.",
+    5201 : "Wir werden zu den Mittleren Sechs gehen.",
+    5202 : "Wir werden zu den Hinteren Neun gehen.",
+    5203 : "Wir werden zum Geschäftsführer Kampf gehen.",
+    5204 : "Wir werden zum Vize Präsidenten Kampf gehen.",
+    5205 : "Wir werden zum Vordereingang gehen.",
+    5206 : "Wir werden zum Seiteneingang gehen.",
+    5207 : "Wir werden zur Münzanstalt gehen.",
+    5208 : "Wir werden zur Euroschein Druckerei gehen.",
+    5209 : "Wir werden zur Goldbarren Fabrik gehen.",
+    5210 : "Wir werden zum Finanzdirektor Kampf gehen.",
+    5211 : "Wir werden zum Obersten Richter Kampf gehen.",
+    5212 : "Wir werden zum Rechtomaten Büro-A gehen.",
+    5213 : "Wir werden zum Rechtomaten Büro-B gehen.",
+    5214 : "Wir werden zum Rechtomaten Büro-C gehen.",
+    5215 : "Wir werden zum Rechtomaten Büro-D gehen.",
+
+    # Parties General Phrases
+    5300 : "Lass uns zu einer Party gehen.",
+    5301 : 'Wir sehen uns bei der Party!',
+    5302 : 'Meine Party hat angefangen!',
+    5303 : 'Komm zu meiner Party!',
+    # Parties Phrases when inside a party
+    5304 : "Willkommen zu meiner party!",
+    5305 : "Diese Party rockt!",
+    5306 : "Deine Party macht Spaß!",
+    5307 : "Es ist Party Zeit!",
+    5308 : "Die Zeit wird knapp!",
+    5309 : "Keine Bots erlaubt!",
+    5310 : "Ich mag dieses Lied",
+    5311 : "Dieses Lied ist großartig!",
+    5312 : "Kannonen sind ein explosiver Spaß!",
+    5313 : "Pass auf wie hoch ich springe!",
+    5314 : "Trampoline machen spaß!",
+    5315 : "Lass uns Fangen Spielen!",
+    5316 : "Lass uns tanzen!",
+    5317 : "Auf zur Tanzfläche!",
+    5318 : "Lass uns Tauziehen spielen!",
+    5319 : "Starte das Feuerwerk!",
+    5320 : "Dieses Feuerwerk ist wunderschön!",
+    5321 : "Schöne Dekorationen.",
+    5322 : "Ich wünschte, ich könnte diesen Kuchen essen!",    
+        
     # Promotional Considerations
     10000 : "Du hast die Wahl!",
     10001 : "Für wen stimmst du?",
@@ -1873,6 +2416,7 @@ SpeedChatStaticText = {
     21003: "Guter Junge!",
     21004: "Gutes Mädchen!",
     21005: "Braves Doodle.",
+    21006: 'Bitte, lass mich in Ruhe.',
 
     # Pet/Doodle Tricks
     21200: "Spring!",
@@ -1883,23 +2427,343 @@ SpeedChatStaticText = {
     21205: "Tanz!",
     21206: "Sprich!",
 
-    # PIRATES
-    50001 : "Jau",
-    50002 : "Nö",
-    50003 : "Arrr!",
+    # Phrases for April Toon's week
+    30100 : "Fröhliche April Toons' Woche!",
+    30101 : "Willkommen zu meiner April Toons' Woche Party!",
+    30102 : "Der Spaß-O-Meter ist wieder im Toon Rathaus!",
+    30110 : "Micky ist in Daisys Gärten.",
+    30111 : "Daisy ist in Toontown Mitte.",
+    30112 : "Minnie ist im Brrr.",
+    30113 : "Pluto ist im Melodienland.",
+    30114 : "Donald schlafwandelt beim Rennplatz.",
+    30115 : "Goofy ist im Traumland.",
+    
+    30120 : "Micky benimmt sich wie Daisy!",
+    30121 : "Daisy benimmt sich wie Micky!",
+    30122 : "Minnie benimmt sich wie Pluto!",
+    30123 : "Pluto benimmt sich wie Minnie!",
+    30124 : "Pluto spricht!",
+    30125 : "Goofy benimmt sich wie Donald!",
+    30126 : "Donald träumt er wäre Goofy!",
+    
+    30130 : "Schau wie hoch ich springen kann.",
+    30131 : "Wow, du bist echt weit gesprungen!",
+    30132 : "He, Doodles können sprechen!",
+    30133 : "Hat dein Doodle gerade gesprochen?",
+    30140 : "Hier ist schon einiges albern!",
+    30141 : "Wie alberner kann es noch werden?",
 
-    # Common Expressions
-    50100 : "Ahoi!",
-    50101 : "Ahoi, Kumpel!",
-    50102 : "Stillgestanden!",
-    50103 : "Entern!",
-    50104 : "Verdammich!",
-    50105 : "Das haut den stärksten Seemann um!",
-    50106 : "Yo-ho-ho!",
-    50107 : "Aye-aye, Käpt'n!",
-    50108 : "Kielholen!",
-    50109 : "Beidrehen!",
-    50110 : "Ein toter Mann quatscht nicht ...",
+    # Phrases for Sellbot Nerf Event
+    30150 : "Operation: Stürmt Schachermat ist hier!",
+    30151 : "Schachermat Towers hat seine Energie verloren, von den Doodles!",
+    30152 : "Der VP hatte seinen Strom verloren durch die Doodles!",
+    30153 : "Alle Toons können gerade den VP bekämpfen!",
+    30154 : "Du brauchst keine Schachermaten-Verkleidung um den VP zu bekämpfen!",
+    30155 : "Du bekommst einen Mietanzug wenn du in die Schachermat Towers gehst.",
+    30156 : "Magst du meinen Mietanzug? Verzeihung wegen den Sicherheitsnadeln!",
+    30157 : "Es ist das beste acht Toons zu haben wenn man den VP bekämpft.",
+    30158 : "Wirst du mir helfen den VP zu bekämpfen?",
+    30159 : "Willst du den VP mit mir bekämpfen?",
+    30160 : "Willst du gerne meiner Schachermat VP Gruppe beitreten?",
+    30161 : "Ich suche nach einem Toon mit einem Mietanzug um den VP zu bekämpfen.",
+    30162 : "Ich habe einen Mietanzug, und schaue danach den VP zu bekämpfen.",
+    30163 : "Geh einfach durch die Tür um deinen Mietanzug zu bekommen.",
+    30164 : "Spar deine Gags für die Bots drinnen!",
+    30165 : "Wir müssen als Erstes diese Bots besiegen!",
+    30166 : "Berühre die Fässer um ein Gag-Up zu bekommen.",
+    30167 : "Berühre das Fass um ein Tooning zu bekommen.",
+    30168 : "Jetzt müssen wir gegen ein paar Skeletobots kämpfen!",
+    30169 : "Spring hoch und berühre den Toon Käfig für Torten!",
+    30170 : "Jetzt kämpfen wir gegen den VP!",
+    30171 : "Ziele mit deinen Torten durch drücken der Entf-Taste.",
+    30172 : "Zwei Toons sollten Torten durch den offenen Antrieb des VPs werfen!",
+    30173 : "Ich werde den VP vorne außer Gefecht setzen.",
+    30174 : "Ich werde den VP hinten außer Gefecht setzen.",
+    30175 : "Spring wenn der VP auch springt!",
+
+    # Phrases for Jellybean Jam
+    30180 : "Ich hab doppelte Jelly Beans vom Toon-Express bekommen!",
+    30181 : "Ich hap doppelte Jelly Beans vom Angeln bekommen!",
+    30182 : "Ich hab doppelte Jelly Beans auf einer Party bekommen!",
+    30183 : "Jelly Beans Jelly Beans Jelly Beans!",
+    30184 : "Ich bin sehr kien um ein Bean zu kriegen!",
+    30185 : "Sei kein Gelee, hol Beans aus Jelly!",
+    30186 : "Ich werde einen Doodle aufnehmen mit all den Jelly Beans!",
+    30187 : "Wofür werde ich all diese Jelly Beans ausgeben?",
+    30188 : "Ich werde eine riesen Party veranstalten!",
+    30189 : "Ich werde mein ganzes Grundstück dekorieren!",
+    30190 : "Ich werde mir einen brand neuen Kleiderschrank kaufen!",
+    30191 : "Jelly Beans, bitte!",
+    30192 : "Sei nicht gemein, gib ein Bean!",
+    30193 : "Wer will Jelly Beans?",
+    30194 : "Tanzt für Jelly Beans!",
+    
+    # Phrases for caroling
+    30200 : "Deckt die Hallen...",
+    30201 : "Bring ein paar Torten...",
+    30202 : "Freudige Toons...",
+    30203 : "Schneemann Köpfche...",
+    30204 : "Fröhliches Toontown...",
+    30205 : "Ködert gute Laune...",
+    
+    30220 : "Deckt die Hallen mit Selters Spray!\nFrohe Winter Feiertage!",
+    30221 : "Bring ein paar Torten in deinen Schlitten!\nFrohe Winter Feiertage!",
+    30222 : "Freudige Toons bringen Bots ein Entsetzen!\nFrohe Winter Feiertage!",
+    30223 : "Schneemann Köpfe sind heute heißbegehrt!\nFrohe Winter Feiertage!",
+    30224 : "Fröhliches Toontown, komme was wolle!\nFrohe Winter Feiertage!",
+    30225 : "Ködert gute Laune im Toontown Style!\nFrohe Winter Feiertage!",
+
+    # Phrases for Halloween
+    30250 : "Boo!",
+    30251 : "Fröhliches Halloween!",
+    30252 : "Gespenstisch!",
+
+    # Phrases for Christmas
+    30275 : "Frohe Feiertage!",
+    30276 : "Die Grüße der Jahreszeit!",
+    30277 : "Hab einen Wunderbaren Winter!",
+    
+    # Phrases for Silly Story
+    30301 : "Hast du schon den Spaß-O-Meter gesehen?",
+    30302 : "Der Spaß-O-Meter ist im Toon Rathaus.",
+    30303 : "Hier ist es aber schon sehr albern!",
+    30304 : "Ich sah einen lebendigen Feuerhydranten!",
+    30305 : "Toontown wird lebendig!",
+    30306 : "Hast du schon Flippys neues Büro gesehen?",
+    30307 : "Ich hab für eine Spaß-Welle in einem Kampf gesort!",
+    30308 : "Lass uns ein paar Bots besiegen um Toontown spaßiger zu machen!",
+    
+    30309 : "Der Spaß-O-Meter ist größer und albener als je zuvor!",
+    30310 : "Sehr viele Hydranten sind zum Leben erwacht!",
+    30311 : "Ich sah wie ein Briefkasten sich bewegt hat!",
+    30312 : "Ich hab gesehen wie eine Mülltonne erwacht ist!",
+    30313 : "Wie lustig kanns denn werden?",
+    30314 : "Was passiert wohl als nächstes?",
+    30315 : "Etwas albernes, Wette ich!",
+    30316 : "Hast du schon für eine Spaß-Welle gesorgt?",
+    30317 : "Lass uns ein paar Bots besiegen um Toontown spaßiger zu machen!",
+    
+    30318 : "Bot-Invasion!",
+    30319 : "Da kommt's!",
+    30320 : "Lass uns diese Bots aufhalten!",
+    30321 : "Ich vermisse die Spaß-Wellen!",
+    30322 : "Lass uns eine Invasion stoppen!",
+    30323 : "Toontown ist jetzt alberner als jemals zuvor!",
+    30324 : "Hast du gesehen wie etwas zum Leben erwacht ist?",
+    30325 : "Mein Favorit sind die Feuerhydranten!",
+    30326 : "Mein Favorit sind die Briefkästen!",
+    30327 : "Mein Favorit sind die Mülltonnen!",
+    
+    30328 : "Hurra! Wir haben die Bot-Invasion gestoppt!",
+    30329 : "Ein Hydrant hat mir im Kampf geholfen!",
+    30330 : "Ein Hydrant hat meine Spritz Gags gesteigert!",
+    30331 : "Eine Mülltonne hat meine Aufheitern Gags gesteigert!",
+    30332 : "Ein Briefkasten hat mir mit meinen Werfen Gags geholfen!",
+    
+    # Phrases for Victory Parties (warning 60400 is in use)
+    30350 : "Willkommen zu meiner Sieges Party!",
+    30351 : "Das ist eine großartige Sieges Party!",
+    30352 : "Wir haben den Bots gezeigt wer hier der Ches ist!",
+    30353 : "Gute Arbeit beim beenden der Bot-Invasion!",
+    30354 : "Ich wette das macht die Bots verrückt!",
+    
+    30355 : "Komm, lass uns Bot-Tauziehen spielen!",
+    30356 : "Mein Team hat beim Bot-Tauziehen gewonnen!",
+    30357 : "Es ist schön die Feuerhydranten, Mülltonnen, und Briefkästen hier zu haben!",
+    30358 : "Ich mag den Ballon, wo der Doodle den Bot beißt!",
+    30359 : "Ich mag den Ballon, wo der Bot in Eis übersät ist!",
+    30360 : "Ich mag den wackel Bot der seine Arme fliegen lässt!",
+    30361 : "Ich bin auf einem Bot Gesicht gesprungen!",
+
+    # Phrases for Sellbot Field Offices
+    30400 : "Die Schachermaten fallen ein!",
+    30401 : "Der VP ist durchgedreht wegen Operation : Stürmt Schachermat...",
+    30402 : "Er schickt alle Schachermaten um Toontown einzunehmen!",
+    30403 : "Lass uns gegen ein paar Schachermaten Kämpfen!",
+    30404 : "Es gibt eine neue Art von Bot-Gebäuden in Toontown!",
+    30405 : "Hast du die Aufbauscher Büros gesehen?",
+    30406 : "Der VP erschuf sie als Belohnung für die Aufbauscher.",
+    30407 : "Lass uns ein Bürokomplex besiegen!",
+    30408 : "Ich habe eine SOS-Karte bekommen durch besiegen eines Bürokomplex!",
+    30409 : "Schalte die Karte frei durch erkunden des Büro-Labyrinth.",
+    30410 : "Zerstöre die Bots mit den Wasserballons!",
+    30411 : "Aufbauscher brauchen zwei Wasserballons um zerstört zu werden.",
+    30412 : "Vorsicht vor fallenden Objekten!",
+    30413 : "Vorsicht vor den Bots!",
+    30414 : "Sammle die Scherze, um am Ende ein Toonig zu bekommen!",
+    30415 : "Wenn der Raum bebt, ist ein Aufbauscher in der Nähe.",
+    30416 : "Besiege alle vier Aufbauscher um den Ausgang zu öffnen!",
+    30417 : "Der Ausgang ist offen!",
+    30418 : "Es ist der Chef!",
+
+    # Phrases for Ides Of March
+    30450 : "Es ist einfach grün zu sein!",
+    30451 : "Besuche Flotte-Biene-Jeans und du kannst auch grün werden!",
+    30452 : "Es befindet sich in der Eichenstraße in Daisys Gärten."
+
+    # Phrases for Lawbot Nerf Event
+    30460: "Operation: Rechtomaten Raus ist hier!",
+    30461: "Die Doodles haben es wieder getan!",
+    30462: "Der Oberste Richter verlor seinen Strom durch die Doodles!",
+    30463: "Alle Toons können gerade den Obersten Richter bekämpfen!",
+    30464: "Du brauchst keine Rechtomaten-Verkleidung um den Obersten Richter zu bekämpfen!",
+    30465: "Du bekommst einen Mietanzug wenn du in den Gerichtssaal im Rechtomaten-HQ gehst.",
+    30466: "Gefällt dir mein Mietanzug? Die Sicherheitsnadeln sind echt stylish!",
+    30467: "Es ist das beste acht Toons zu haben wenn man den Obersten Richter bekämpft.",
+    30468: "Wirst du mir helfen den Obersten Richter zu bekämpfen?",
+    30469: "Willst du gerne meiner Rechtomaten Oberster Richter Gruppe beitreten?",
+    30470: "Ich suche nach einem Toon mit einem Mietanzug um den Obersten Richter zu bekämpfen.",
+    30471: "Ich habe einen Mietanzug, und möchte den Obersten Richter bekämpfen!",
+    30472: "Geh einfach durch die Tür um deinen Mietanzug zu bekommen.",
+    30473: "Spar deine Gags für die Bots drinnen!",
+    30474: "Wir müssen als erstes diese Bots besiegen!",
+    30475: "Berühre das Fass um ein Tooning zu bekommen.",
+    30476: "Benutze die Oberster Richter Schnell-Chat-Schaltfläche!",
+    30477: "Jetzt müssen wir die Geschworenen Stühle mit Toons füllen!",
+    30478: "Je mehr Toons wir reinkriegen, desto leichter wird es den Obersten Richter zu besiegen!",
+    30479: "Jetzt bekämpfen wir den Obersten Richter!",
+    30480: "Berühre den Zeugenstand um Beweise zu bekommen.",
+    30481: "Pass auf die Hämmer auf!",
+    30482: "Wenn du die Waage triffst, wird der Oberste Richter rot!",
+    30483: "Wenn die Bots Beweise in die Waage werfen, wird der Oberste Richter grün!",
+    30484: "Etwas cooles passiert wenn wir alle Bots zur gleichen Zeit außer gefecht setzen!",
+    30485: "Werft Beweise auf die Toons um denen ein Tooning zu geben!"
+    }
+
+SpeedChatStaticTextPirates = {
+    # PIRATES ROOT - TOP LEVEL
+    50001 : "Jau",
+    50002 : "Nö",    
+    50003 : 'Ja',
+    50004 : 'Nein',
+    50005 : 'Ok',
+
+    # EXPRESSIONS
+    50100 : "Entern!",
+    50101 : "Verdammich!",
+    50102 : "Das haut den stärksten Seemann um!",
+    50103 : "Kielholen!",
+    50104 : "Ein toter Mann quatscht nicht...",    
+    50105 : "Donnerwetter!",
+    50106 : "Salzig, wie der Kuss eines Krankens.",
+    50107 : "Der Schatz ist nur die vorfreude unserer Freude!",
+    50108 : "Ich fürchte den Tod nicht - Ich bestimme ihn.",
+    
+
+    # EXPRESSIONS - GREETINGS
+    50700 : "Ahoi!",
+    50701 : "Ahoi, Kumpel!",
+    50702 : "Yo-ho-ho",
+    50703 : "Stillgestanden!",
+    50704 : "Hey, Kamerad.",
+
+    # EXPRESSIONS - GOODBYES
+    50800 : "Bis zum nächsten Mal.",
+    50801 : "Mögen gute Winde euch finden.",
+    50802 : "Gute Reise.",
+
+
+    # EXPRESSIONS - FRIENDLY
+    50900 : "Wie geht's so, Kumpel?",
+    50901 : "",
+
+    # EXPRESSIONS - HAPPY
+    51000 : "Es ist, als würde der Himmel goldene Dublonen regnen!",
+    51001 : "May a stiff wind be at our backs, the sun on our faces and our cannons fire true!",
+
+    # EXPRESSIONS - SAD
+    51100 : "I be sailing some rough waters today.",
+
+    # EXPRESSIONS - SORRY
+    51200 : "Mein Beileid, Kumpel.",
+    51201 : "Entschuldige.",
+    51202 : "Entschuldige, ich war grad beschäftigt.",
+    51203 : "Entschuldige, ich hab schon was vor.",
+    51204 : "Entschuldige, ich muss das nicht machen.",
+
+    # COMBAT
+    51300 : "Greif den schwächsten an!",
+    51301 : "Greif den stärksten an!",
+    51302 : "Greif das Ziel an!",
+    51303 : "Ich brauch hilfe!",
+    51304 : "Ich kann keinen Schaden zufügen!",
+    51305 : "Ich glaube, wir sitzen in der Klemme.",
+    51306 : "Umzingelt den stärksten.",
+    51307 : "Wir sollten uns zurückziehen.",
+    51308 : "Dann hol's dir!",
+
+    # SEA COMBAT
+    51400 : "Fire a Broadside!",
+    #
+    51401 : "Backbord! (links)",
+    51402 : "Steuerbord! (rechts)",
+    #
+    51403 : "Incoming!",
+    51404 : "Come about!",
+    51405 : "Breitseite! In Deckung gehen!",
+    #
+    51406 : "Zu den Kanonen!",
+    51407 : "Eröffnet das Feuer!",
+    51408 : "Feuer zurückhalten!",
+    51409 : "Ziel auf die Mäste!",
+    51410 : "Ziel auf den Rumpf!",    
+    51411 : "Bereitmachen zu Entern",
+    #
+    51412 : "She's coming about.",
+    #
+    51413 : "Rammgeschwindigkeit!",
+    #
+    51414 : "We've got her on the run.",
+    51415 : "Wir nehmen Wasser auf!",
+    51416 : "Wir können nicht mehr viel abwehren!",
+    51417 : "Ich habe keine Munition mehr!",
+    51418 : "Lass uns einen Hafen zum reparieren finden.",
+    51419 : "Mann über Bord!",
+    51420 : "Feind entdeckt.",
+    #
+    51421 : "Handsomely now, mates!",
+
+    # PLACES
+    50400 : "Lass uns die Segel setzen.",
+    50401 : "Lass uns von hier verschwinden.",
+
+
+    # PLACES - LETS SAIL...
+    51500 : "Lass uns nach Port Royal segeln.",
+    51501 : "Lass uns nach Tortuga segeln.",
+    51502 : "Lass uns nach Padres Del Fuego segeln.",
+    51503 : "Lass uns nach Devil's Anvil segeln.",
+    51504 : "Lass uns nach Kingshead segeln.",
+    51505 : "Lass uns nach Isla Perdida segeln.",
+    51506 : "Lass uns nach Cuba segeln.",
+    51507 : "Lass uns nach Tormenta segeln.",
+    51508 : "Lass uns nach Outcast Isle segeln.",
+    51509 : "Lass uns nach Driftwood segeln.",
+    51510 : "Lass uns nach Cutthroat segeln.",
+    51511 : "Lass uns nach Rumrunner's Isle segeln.",
+    51512 : "Lass uns nach Isla Cangrejos segeln.",
+    
+    # PLACES - LETS HEAD TO...
+    51600 : "Lass uns in die Stadt gehen.",
+    51601 : "Lass uns zu den Docks gehen.",
+    51602 : "Lass uns in die Bar gehen.",    
+
+    # PLACES - LETS HEAD TO... - PORT ROYAL
+    51800 : "Komm, wir gehen zum Fort Charles.",
+    51801 : "Komm, wir gehen zur Gouverneursvilla.",
+
+    # PLACES - WHERE IS ..?
+    52500 : "Wo bin ich, Kumpel?",
+
+    # DIRECTIONS
+    51700 : "Du bist schon da.",
+    51701 : "Ich hab keine Ahnung.",
+    51702 : "Du bist auf der falschen Insel.",
+    51703 : "Das ist in der Stadt.",
+    51704 : "Schau einfach außerhalb der Stadt.",
+    51705 : "Du musst den Dschungel durchsuchen.",
+    51706 : "Tiefer im Landesinneren.",
+    51707 : "Oh, das ist bei der Küste.",
 
     # Insults
     50200 : "Kielratte!",
@@ -1907,13 +2771,132 @@ SpeedChatStaticText = {
     50202 : "Du gehst gleich über die Planke!",
     50203 : "Deckschrubber!",
     50204 : "Landratte!",
+    #
+    50205 : "Addle-minded fool!",
+    50206 : "You need a sharp sword and sharper wits.",
+    50207 : "Ye be one doubloon short of a full hull mate!",
+    50208 : "Watch yer tongue or I'll pickle it with sea salt!",
+    50209 : "Touch me loot and you get the boot!",
+    50210 : "The horizon be as empty as yer head.",
+    50211 : "You're a canvas shy of a full sail, aren't ye mate?",
 
-    # Places
-    50300 : "Wo biste denn?",
-    50301 : "Lass uns in die Stadt gehen.",
-    50302 : "Lass uns zu den Docks gehen.",
-    50303 : "Lass uns die Segel setzen.",
-    50304 : "Lass uns in die Bar gehen.",
+    # Compliments
+    50300 : "Fine shooting mate!",
+    50301 : "A well placed blow!",
+    50302 : "Nice shot!",
+    50303 : "Well met!",
+    50304 : "We showed them!",
+    50305 : "Yer not so bad yerself!",
+    50306 : "A fine plunder haul!",
+
+    # Card Games
+    52400 : "May luck be my lady.",
+    52401 : "I glaube diese Karten sind gezinkt!",
+    52402 : "Verdammter Betrüger!",
+
+    # Card Games - Poker
+    51900 : "Das ist ein schrecklicher Flop!",
+    51901 : "Trying to buy the hand, are ye?",
+    51902 : "Du bluffst.",
+    51903 : "Ich glaube nicht, dass du es hattest.",
+    51904 : "Vom Meer gerettet.",
+
+    # Card Games - Blackjack
+    52600 : "Hit me.",
+    52601 : "Can I get another dealer?",
+
+    # Minigames
+    # Minigames - Fishing
+    53101 : "Ich habe einen Fisch gefangen!",
+    53102 : "Ich habe einen legendären Fisch gesehen!",
+    53103 : "Was hast du gefangen?",
+    53104 : "Dies wird einen Wal aus einer Geschichte machen!",
+    53105 : "Das war eine Schönheit!",
+    53106 : "Arr, das Meer ist heute tückisch.",
+    53107 : "Was für ein reichlicher Fischfang!",
+    53110 : "Hast du den legendären Köder?",
+    53111 : "Hast du jemals einen legendären Fisch gefangen?",
+    53112 : "Kann man auf einem Fischerboot segeln?",
+    53113 : "Wo ist der Angelmeister?",
+    53114 : "Hast du deine Fischsammlung vervollständigt?",
+    # Minigames - Cannon Defense
+    53120 : "Fire at my target!",
+    53121 : "Fire at the ship closest to the shore!",
+    53122 : "There's a ship getting away!",
+    53123 : "Fire at the big ships!",
+    53124 : "Fire at the small ships!",
+    53125 : "More are coming!",
+    53126 : "We're not going to last much longer!",
+    53127 : "Shoot the barrels!",
+    53128 : "We've got new ammo!",
+    53129 : "Sturdy defense, mates!",
+    # Minigames - Potion Brewing
+    53141 : "Schau dir den Trank an, den ich gebraut habe!",
+    53142 : "Hast du deine Tranksammlung vervollständigt?",
+    53143 : "Wo ist Gypsy?",
+    53144 : "Was für ein Trank ist das?",
+    53145 : "Dieser Trank war leicht genug.",
+    53146 : "Dieser Trank war schwer zu brauen, sage ich dir!",
+    # Minigames - Repair
+    53160 : "We need someone to bilge pump!",
+    53161 : "Wir brauchen jemanden zum Schrubben!",
+    53162 : "Wir brauchen jemanden zum Sägen!",
+    53163 : "Wir brauchen jemanden zum festhalen!",
+    53164 : "Wir brauchen jemanden zum Hämmern!",
+    53165 : "Wir brauchen jemaden zum Flicken!",
+    53166 : "Ich mach das!",
+    53167 : "Weitermachen, dieses Schiff repariert sich nicht von selbst!",
+    53168 : "Gute Arbeit bei der Reparatur des Schiffes!",
+    
+    # Invitations
+    52100 : "Willst du dich zusammenschließen?",
+    52101 : "tritt meiner Crew bei?",
+
+    # Invitations - Hunting
+    52200 : "Einige Skelette bekämpfen?",
+    52201 : "Einige Krabben bekämpfen?",
+
+    # Invitations - Versus
+    52300 : "How 'bout a game of Mayhem?",
+    52301 : "Join me Mayhem game.",
+    52302 : "Want to start a Mayhem game?",
+    52303 : "Want to start a team battle game?",
+    52304 : "Join me team battle game.",
+
+    # Invitations - Minigames
+    52350 : "Tritt meiner Kanonenverteidigung bei.",
+    52351 : "Willst du die Kanonenverteidigung starten?",
+    52352 : "Kannst du mir beim reparieren helfen?",
+    52353 : "Wir müssen das Schiff jetzt reparieren!",
+    52354 : "Möchtest du ein paar Fische fangen?",
+    52355 : "Möchtest du mit mir angeln gehen?",
+    52356 : "Möchtest mit meiner Crew etwas angeln?",
+    52357 : "Zeit, ein paar Tränke zu brauen!",
+    52358 : "Du solltest versuchen, Tränke zu brauen.",
+
+    # PLACES - WHERE IS..? - PORT ROYAL (LEGACY)
+    52000 : "",
+
+    # PLACES - WHERE IS..? - PORT ROYAL (Legacy)
+    52000 : "",
+
+    # PLACES - WHERE IS..? - TORTUGA (Legacy)
+    52700 : "",
+
+    # PLACES - WHERE IS..? - PADRES DEL FUEGO (Legacy)
+    53000 : "",
+
+    # PLACES - WHERE IS..? - PADRES DEL FUEGO - LOS PADRES (Legacy)
+    52800 : "",
+
+    # PLACES  - WHERE IS..? - PADRES DEL FUEGO - LAS PULGAS (Legacy)
+    52900 : "",
+
+    # Adventures (LEGACY)
+    50500 : "",
+
+    # Ships (LEGACY)
+    50600 : "",
 
     # Greetings
     60100 : "Hi!",
@@ -1956,8 +2939,97 @@ SpeedChatStaticText = {
     60502 : "Gehen wir zur Disco.",
     60503 : "Gehen wir nach Toontown.",
     60504 : "Lass uns zu den Piraten der Karibik gehen.",
+
+    # Animated Emotes
+    60505 : "Münze werfen",
+    60506 : "Tanzen",
+    60507 : "Gesang 1",
+    60508 : "Gesang 2",
+    60509 : "Matrosentanz",
+    60510 : "Schlafen",
+    60511 : "Strecken",
+    60512 : "Laute spielen",
+    60513 : "Flöte spielen",
+    60514 : "Frustriert",
+    60515 : "Suchen",
+    60516 : "Gähnen",
+    60517 : "Knien",
+    60518 : "Fägen",
+    60519 : "Kümmern",
+    60520 : "Gähnen",
+    60521 : "Tanzen",
+    60522 : "Nein",
+    60523 : "Ja",
+    60524 : "Lachen",
+    60525 : "Applaudieren",
+    60526 : "Grinsen",
+    60527 : "Wut",
+    60528 : "Angst",
+    60529 : "Traurig",
+    60530 : "Feiern",
+    60668 : "Feiern",
+    60669 : "Schlafen",
+    60602 : "Sauer",
+    60614 : "Applaudieren",
+    60622 : "Erschreckt",
+    60640 : "Lachen",
+    60652 : "Traurig",
+    60657 : "Grinsen",
+    60664 : "Winken",
+    60665 : "Zwinkern",
+    60666 : "Gähnen",
+    60669 : "Schlafen",
+    60670 : "Tanzen",
+    60676 : "Flirten",
+    60677 : "Zombietanz",
+    60678 : "Krachmachen",
+
+    # Valentines day emote string options
+    60671 : "Hallo, Ich bin ein Pirat, und ich bin here um dein Herz zu stehlen.",
+    60672 : "Ich habe gerade den Schatz gefunden nach dem ich gesucht habe.",
+    60673 : "If you were a booger, I'd pick you first.",
+    60674 : "Oft in Tortuga?",
+    60675 : "Hast du eine Karte? Ich verlaufe mich einfach ständig in deinen Augen.",
+
+    65000 : "Ja",
+    65001 : "Nein",
+    60909 : "Händeschütteln",    
+    
+    # Phrases for Singing
+##    9000 : 'Mittlere ' + 'G1',
+##    9001 : 'Mittleres ' + 'A',
+##    9002 : 'Mittleres ' + 'B',
+##    9003 : 'Mittleres ' + 'C',
+##    9004 : 'Mittleres ' + 'D',
+##    9005 : 'Mittleres ' + 'E',
+##    9006 : 'Mittleres ' + 'F',
+##    9007 : 'Mittlere ' + 'G2'
     }
 
+# Emote IDs - These are used in SC to determine if a msg is a animated emote
+Emotes_Root = "EMOTIONEN"
+Emotes_Dances = "Tänze"
+Emotes_General = "Allgemein"
+Emotes_Music = "Musik"
+Emotes_Expressions = "Emotionen"
+Emote_ShipDenied = "Keine Emotionen beim segeln."
+Emote_MoveDenied = "Keine Emotionen beim bewegen." 
+Emote_CombatDenied = "Keine Emotionen im Kampf."
+Emote_CannonDenied = "Keine Emotionen bei Kanonen nutzung."
+Emote_SwimDenied = "Keine Emotionen beim schwimmen."
+Emote_ParlorGameDenied = "Keine Emotionen während eines Gesellschaftsspieles."
+Emotes = (60505, 60506, 60509, 60510, 60511, 60516, 60519, 60520, 60521, 60522, 60523, 60524, 60525, 60526, 60527, 60528, 60529, 60530, 60602, 60607, 60611, 60614, 60615, 60622, 60627, 60629, 60632, 60636, 60638, 60640, 60644, 60652, 60654, 60657, 60658, 60663, 60664, 60665, 60666, 60668, 60669, 60612, 60661, 60645, 60629, 60641, 60654, 60630, 60670, 60633,
+          # Valentines Day Emote
+          60676,
+          # Halloween Emote
+          60677,
+          # Yes/No
+          65000, 65001,
+          # Kneel
+          60517,
+          # New Years Emote
+          60678,
+          )
 
 # These indexes, defined above, will construct a submenu in the FACTORY menu
 # to allow the user to describe all the places he might want to meet
@@ -2291,7 +3363,7 @@ CustomSCStrings = {
     6250 : "Das geht ja wie’s Brezelbacken!",
     6260 : "Das ist ja allererste Sahne!",
     6270 : "Wir wollen mal nicht um den heißen Brei herumreden.",
-    6280 : "Poch-poch ...",
+    6280 : "Poch-poch...",
     6290 : "Herein, wenn’s kein Schneider ist!",
     # Series 7
     7000 : "Führ doch hier keinen Affentanz auf!",
@@ -2339,7 +3411,7 @@ CustomSCStrings = {
     10014 : "Du hast mich erschreckt!",
     10015 : "Das ist gespenstisch!",
     10016 : "Das ist verrückt!",
-    10017 : "Das war seltsam ...",
+    10017 : "Das war seltsam...",
     10018 : "Leichen im Keller?",
     10019 : "Hab ich dich erschreckt?",
 
@@ -2364,25 +3436,32 @@ CustomSCStrings = {
     11017 : "Wie wär’s mit einer Schlittenfahrt?",
     11018 : "Ohne Schnee und Eis kein Preis!",
     11019 : "Es weihnachtet schwer!",
+    -
+    11020 : "Hab einen wunderbaren Winter!",
 
     # Valentines
     12000 : "Sei mein!",
     12001 : "Sei mein Schatz!",
-    12002 : "Glückwunsch zum Valentinstag!",
+    12002 : "Glückwunsch zum ValenToonstag!",
     12003 : "Oh, wie niedlich.",
     12004 : "Ich steh auf dich.",
     12005 : "Das ist jugendliche Schwärmerei.",
     12006 : "Hab dich lieb!",
-    12007 : "Willst du mein Valentine sein?",
+    12007 : "Willst du mein ValenToon sein?",
     12008 : "Du bist ein Schatz.",
     12009 : "Du bist süß wie Honig.",
     12010 : "Du bist niedlich.",
     12011 : "Lass dich umarmen.",
     12012 : "Hübsch!",
     12013 : "Das ist goldig!",
-    12014 : "Nicht wie Rosen ...",
-    12015 : "Nicht wie Nelken ...",
+    12014 : "Nicht wie Rosen...",
+    12015 : "Nicht wie Nelken...",
     12016 : "Das ist lieb!",
+    12050 : "Ich LIEBE es Bots zu zerstören!!",
+    12051 : "Du bist Bombe!",
+    12052 : "Ich habe nur Hypno-Augen für dich!",
+    12053 : "Du bist süßer als ein Jelly Bean!",
+    12054 : "Ich würd's LIEBEN, wenn du zu meiner ValenToons Party kommst!",
 
     # St. Patricks Day
     13000 : "Einen wunderschönen Morgen, wünsch ich dir!",
@@ -2393,7 +3472,28 @@ CustomSCStrings = {
     13005 : "Du Glückspilz!",
     13006 : "Du bist mein Glückskleeblatt!",
     13007 : "Du bringst mir Glück!",
+
+    # Summer Estate Party phrases (seasonal catalog)
+    14000 : "Lass uns eine Sommer Grundstücks Party haben!",
+    14001 : "Es ist Partyzeit!",
+    14002 : "Der Letzte beim Teich ist ein rostiger Bot!",
+    14003 : "Gruppen Doodle-Training Zeit!",
+    14004 : "Doodle-Training Zeit!",
+    14005 : "Dein Doodle ist cool!",
+    14006 : "Was fü Tricks kann dein Doodle so?",
+    14007 : "Zeit fü ein bisschen Kanonenflipper!",
+    14008 : "Kanonenflipper rockt!",
+    14009 : "Dein Grundstück fetzt!",
+    14010 : "Dein Garten ist cool!",
+    14011 : "Dein Grundstück ist cool!"
+
+
+
+
+    #Potential racing phrases for purchase
+
     }
+
 
 # indices into cog phrase arrays
 SCMenuCommonCogIndices = (20000, 20004)
@@ -2435,8 +3535,48 @@ SCMenuCustomCogIndices = {
 
 # Pirates Speedchat
 PSCMenuExpressions  = "AUSDRÜCKE"
-PSCMenuInsults    = "SCHIMPFWORTE"
+
+PSCMenuGreetings = "BEGRÜßUNGEN" #use ẞ (capital ß) if possible ~Bob
+PSCMenuGoodbyes = "AUF WIEDERSEHEN"
+PSCMenuFriendly = "FREUNDLICH"
+PSCMenuHappy = "GLÜCKLICH"
+PSCMenuSad = "TRAURIG"
+PSCMenuSorry = "BEDAUERND"
+PSCMenuCombat = "KAMPF"
+PSCMenuSeaCombat     = "SEE-KAMPF"
 PSCMenuPlaces     = "ORTE"
+PSCMenuLetsSail = "SEGEL SETZEN..."
+PSCMenuLetsHeadTo = "LASS UNS... GEHEN"
+PSCMenuHeadToPortRoyal = "PORT ROYAL"
+PSCMenuWhereIs = "WO IST...?"
+PSCMenuWhereIsPortRoyal = "PORT ROYAL"
+PSCMenuWhereIsTortuga = "TORTUGA"
+PSCMenuWhereIsPadresDelFuego = "PADRES DEL FUEGO"
+PSCMenuWhereIsLasPulgas = "LAS PULGAS"
+PSCMenuWhereIsLosPadres = "LOS PADRES"
+PSCMenuDirections = "RICHTUNGEN"
+PSCMenuInsults    = "SCHIMPFWORTE"
+PSCMenuCompliments = "KOMPLIMENTE"
+PSCMenuCardGames  = "KARTENSPIELE"
+PSCMenuPoker = "POKER"
+PSCMenuBlackjack = "BLACKJACK"
+PSCMenuMinigames = "MINISPIELE"
+PSCMenuFishing = "ANGELN"
+PSCMenuCannonDefense = "KANONEN VERTEIDIGUNG"
+PSCMenuPotions = "TRANKBRAUEN"
+PSCMenuRepair = "REPARIEREN"
+PSCMenuInvitations = "EINLADUNGEN"
+PSCMenuVersusPlayer = "GEGEN"
+PSCMenuHunting = "JAGEN"
+PSCMenuQuests = "AUFGABEN"
+PSCMenuGM = "GM"
+
+
+
+# Grandfathered Speedchat Headers
+PSCMenuShips      = "SCHIFFE"
+PSCMenuAdventures = "ABENTEUER"
+
 
 # Gateway Speedchat
 GWSCMenuHello     = "BEGRÜSSUNG"
@@ -2451,7 +3591,7 @@ TypeANameButton = "Namenseingabe"
 PickANameButton = "Namenwahl"
 NameShopSubmitButton = "Absenden"
 RejectNameText = "Dieser Name ist nicht zulässig. Versuch's bitte noch einmal."
-WaitingForNameSubmission = "Namen absenden ..."
+WaitingForNameSubmission = "Namen absenden..."
 
 NameShopNameMaster = "NameMaster_german.txt"
 NameShopPay = "Jetzt abonnieren!"
@@ -2462,6 +3602,7 @@ NameShopChooseAnother = "Anderen Namen wählen"
 NameShopToonCouncil = "Der Rat von Toontown\nwird deinen\nNamen prüfen. "+ \
                       "Die Prüfung kann\nein paar Tage dauern.\nInzwischen bekommst\ndu folgenden Namen zugeteilt:\n "
 PleaseTypeName = "Bitte gib deinen Namen ein:"
+ToonAlreadyExists = "%s gibt es schon."
 AllNewNames = "Alle neuen Namen\nbedürfen der Genehmigung\ndurch den Rat von Toontown."
 NameShopNameRejected = "Der Name, den du\nbeantragt hast,\nwurde abgelehnt."
 NameShopNameAccepted = "Glückwunsch!\nDer Name, den du\nbeantragt hast,\nwurde angenommen!"
@@ -2492,6 +3633,7 @@ NCNeedVowels = 'Jedes Wort in deinem Namen muss einige Vokale (Selbstlaute) enth
 NCAllCaps = 'Dein Name darf nicht nur aus Großbuchstaben bestehen.'
 NCMixedCase = 'Dieser Name hat zu viele Großbuchstaben.'
 NCBadCharacter = "Dein Name darf das Zeichen '%s' nicht enthalten."
+NCRepeatedChar = "Dein Name hat zu viele Zeichen von '%s'."
 NCGeneric = 'Dieser Name geht leider nicht.'
 NCTooManyWords = 'Dein Name darf nicht mehr als vier Wörter lang sein.'
 NCDashUsage = ("Bindestriche dürfen nur verwendet werden, um zwei Wörter zu verbinden"
@@ -2511,7 +3653,8 @@ AvatarDetailPanelCancel = lCancel
 AvatarDetailPanelClose = lClose
 AvatarDetailPanelLookup = "Details zu %s werden gesucht."
 AvatarDetailPanelFailedLookup = "Kann keine Deteils zu %s finden."
-AvatarDetailPanelOnline = "Bezirk: %(district)s\nLocation: %(location)s"
+AvatarDetailPanelPlayer = "Spieler: %(player)s\nWelt: %(world)s\nOrt: %(location)s"
+AvatarDetailPanelOnline = "Bezirk: %(district)s\nOrt: %(location)s"
 AvatarDetailPanelOffline = "Bezirk: offline\nOrt: offline"
 
 # AvatarPanel.py
@@ -2520,6 +3663,10 @@ AvatarPanelWhisper = "Flüstern"
 AvatarPanelSecrets = "Geheimnisse"
 AvatarPanelGoTo = "Gehe zu"
 AvatarPanelIgnore = "Ignorieren"
+-
+AvatarPanelStopIgnore = "Stop Ignoring"
+AvatarPanelEndIgnore = "End Ignore"
+AvatarPanelTrade = "Handeln"
 #AvatarPanelCogDetail = "Dept: %s\nLevel: %s\n"
 AvatarPanelCogLevel = "Level: %s"
 AvatarPanelCogDetailClose = lClose
@@ -2538,3 +3685,128 @@ TeleportPanelUnknownHood = "Du weißt nicht, wie du zu %s kommst! "
 TeleportPanelUnavailableHood = "%s ist zur Zeit nicht erreichbar, versuche es später noch einmal."
 TeleportPanelDenySelf = "Du kannst nicht zu dir selbst gehen!"
 TeleportPanelOtherShard = "%(avName)s ist im Bezirk %(shardName)s, und du bist im Bezirk %(myShardName)s. Möchtest du nach %(shardName)s wechseln?"
+
+KartRacingMenuSections = [
+ -1,
+ "ORTE",
+ "RENNEN",
+ "TRECKEN",
+ "KOMPLIMENTE",
+ "SPOTT"
+]
+
+AprilToonsMenuSections = [
+ -1,
+ "BEGRÜßUNGEN", # Use capital ß if possible
+ "SPIELPLÄTZE",
+ "FIGUREN",
+ "GRUNDSTÜCKE"
+]
+
+SillyHolidayMenuSections = [
+-1,
+"WELT",
+"KAMPF",
+]
+
+CarolMenuSections = [
+-1,
+]
+
+VictoryPartiesMenuSections = [
+ -1,
+ "PARTY",
+ "GEGENSTÄNDE",
+]
+
+GolfMenuSections = [
+ -1,
+ "PARKOURE",
+ "TIPPS",
+ "KOMMENTARE",
+]
+
+BoardingMenuSections = [
+"GRUPPE",
+"Lass uns zum... gehen",
+"Wir werden zum... gehen",
+-1,
+]
+
+SellbotNerfMenuSections = [
+-1,
+"GRUPPE",
+"SCHACHERMAT TOWERS/VP",
+]
+
+JellybeanJamMenuSections = [
+"HOLT JELLY BEANS",
+"GEBT JELLY BEANS",
+]
+
+WinterMenuSections = [
+"SINGEN",
+-1
+]
+
+HalloweenMenuSections = [
+-1
+]
+
+SingingMenuSections = [
+-1
+]
+
+WhiteListMenu = [
+-1,
+"WHITELIST"
+]
+
+SellbotInvasionMenuSections = [
+-1
+]
+
+SellbotFieldOfficeMenuSections = [
+-1,
+"STRATEGIE"
+]
+
+IdesOfMarchMenuSections = [
+-1
+]
+
+LawbotNerfMenuSections = [
+-1,
+"GRUPPE",
+"GERICHTSSAAL/RICHTER",
+]
+
+# TTAccount.py
+# Fill in %s with phone number from account server
+TTAccountCallCustomerService = "Bitte Kundendienst anrufen unter %s."
+# Fill in %s with phone number from account server
+TTAccountCustomerServiceHelp = "\nWenn du Hilfe brauchst, ruf bitte den Kundendienst an unter %s."
+TTAccountIntractibleError = "Es ist ein Fehler aufgetreten."
+
+
+def timeElapsedString(timeDelta):
+    timeDelta = abs(timeDelta)
+    if timeDelta.days > 0:
+        if timeDelta.days == 1:
+            return "Vor einem Tag"
+        else:
+            return "Vor %s Tagen" % timeDelta.days
+
+    elif timeDelta.seconds / 3600 > 0:
+        if timeDelta.seconds / 3600 == 1:
+            return "Vor einer Stunde"
+        else:
+            return "Vor %s Stunden" % (timeDelta.seconds / 3600)
+
+    else:
+        if timeDelta.seconds / 60 < 2:
+            return "Vor einer Minute"
+        else:
+            return "Vor %s Minuten" % (timeDelta.seconds / 60)
+
+

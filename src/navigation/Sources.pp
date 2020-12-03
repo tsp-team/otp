@@ -8,6 +8,8 @@
 #begin lib_target
   #define TARGET navigation
 
+#define BUILDING_DLL BUILDING_OTP_NAVIGATION
+
   #define INSTALL_HEADERS \
     pathTable.h pathTable.I
 

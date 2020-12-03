@@ -23,7 +23,7 @@
 //               parenting them and setting their initial transforms
 //               to place them properly margin.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP MarginManager : public PandaNode {
+class EXPCL_OTP_NAMETAG MarginManager : public PandaNode {
 PUBLISHED:
   MarginManager();
   virtual ~MarginManager();

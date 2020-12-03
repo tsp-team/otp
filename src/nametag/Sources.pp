@@ -4,7 +4,7 @@
   #define OTHER_LIBS \
     panda pandaexpress \
     interval:c direct:m \
-    interrogatedb dtoolconfig:m \
+    interrogatedb \
     dtoolutil:c dtoolbase:c dtool:m \
     express:c prc event:c pgraph:c pgraphnodes:c linmath:c gobj:c \
     char:c putil:c mathutil:c downloader:c mathutil:c chan:c \
@@ -18,7 +18,7 @@
     #define OTHER_LIBS $[OTHER_LIBS] pnmtext:c
   #endif
 
-  #define BUILDING_DLL BUILDING_OTP
+  #define BUILDING_DLL BUILDING_OTP_NAMETAG
 
   #define SOURCES \
     chatBalloon.I chatBalloon.h \

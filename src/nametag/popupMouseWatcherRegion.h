@@ -17,7 +17,7 @@ class ClickablePopup;
 // Description : This is a specialization on MouseWatcherRegion, to
 //               tie it back to its associated ClickablePopup.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP PopupMouseWatcherRegion : public MouseWatcherRegion {
+class EXPCL_OTP_NAMETAG PopupMouseWatcherRegion : public MouseWatcherRegion {
 public:
   PopupMouseWatcherRegion(ClickablePopup *popup, const string &name,
                           const LVecBase4f &frame);

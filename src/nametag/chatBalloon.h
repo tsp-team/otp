@@ -31,7 +31,7 @@ class NodePath;
 //               These nodes will be sized and translated
 //               appropriately to frame the text as generated.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP ChatBalloon : public ReferenceCount {
+class EXPCL_OTP_NAMETAG ChatBalloon : public ReferenceCount {
 PUBLISHED:
   ChatBalloon(PandaNode *root_node);
   ~ChatBalloon();

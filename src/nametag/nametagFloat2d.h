@@ -16,7 +16,7 @@
 //               to some object, not necessarily the avatar, in the
 //               3-d scene graph.
 ////////////////////////////////////////////////////////////////////
-class EXPCL_OTP NametagFloat2d : public Nametag3d {
+class EXPCL_OTP_NAMETAG NametagFloat2d : public Nametag3d {
 PUBLISHED:
   NametagFloat2d();
   virtual ~NametagFloat2d();
