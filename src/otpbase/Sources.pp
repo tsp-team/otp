@@ -2,6 +2,8 @@
   #define TARGET otpbase
 
   #define BUILDING_DLL BUILDING_OTP_OTPBASE
+
+ #define USE_PACKAGES eigen
   
   #define SOURCES \
     otpbase.cxx otpbase.h otpsymbols.h \
