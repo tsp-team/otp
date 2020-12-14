@@ -82,7 +82,11 @@ class Avatar(Actor, ShadowCaster):
 
         self.nametag3d = self.attachNewNode('nametag3d')
         self.nametag3d.setTag('cam', 'nametag')
-        self.nametag3d.setLightOff()
+
+        # Make the 3D nametag self-illuminating, so it is always bright.
+        params = ShaderParamAttrib.make("VertexLitGeneric")
+        params = params.setParam("selfillum", "1")
+        self.nametag3d.setAttrib(params)
 
         #Accept ambient lighting changes
         if self.ManagesNametagAmbientLightChanged:
