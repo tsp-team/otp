@@ -35,6 +35,9 @@ class OTPBase(ShowBase):
 
        self.logPrivateInfo = self.config.GetBool('log-private-info', __dev__)
 
+       from direct.showbase.LightingScene import LightingScene
+       LightingScene.ShadowBitmask = OTPRender.ShadowCameraBitmask
+
        # By default, we want to use dynamic shadows.  ToonBase.py
        # turns this off.
        self.wantDynamicShadows = 1

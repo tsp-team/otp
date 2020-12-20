@@ -1,10 +1,8 @@
 
 from otp.otpbase.OTPModules import *
 
-# global bitmasks for cameras
-MainCameraBitmask = BitMask32.bit(0)
-ReflectionCameraBitmask = BitMask32.bit(1)
-ShadowCameraBitmask = BitMask32.bit(2)
+from direct.directbase.DirectRender import *
+
 SkyReflectionCameraBitmask = BitMask32.bit(3)
 GlowCameraBitmask = BitMask32.bit(4)
 EnviroCameraBitmask = BitMask32.bit(5)
