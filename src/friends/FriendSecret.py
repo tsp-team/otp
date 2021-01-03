@@ -805,7 +805,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
         # Empty the entry for next time.
         self.enterSecret.set("")
 
-        secret = string.strip(secret)
+        secret = secret.strip()
         if not secret:
             # If the secret is empty, it just means to close down
             # the dialog.
