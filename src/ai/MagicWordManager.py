@@ -187,7 +187,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
             self.setMagicWordResponse(str(localAvatar.doId))
 
         elif wordIs("~doId"):
-            name = string.strip(word[6:])
+            name = str.strip(word[6:])
 
             objs = self.identifyDistributedObjects(name)
             if (len(objs) == 0):
@@ -260,7 +260,7 @@ class MagicWordManager(DistributedObject.DistributedObject):
                 self.setMagicWordResponse(response)
             else:
                 tm.extraSkew = 0.0
-                skew = string.strip(word[5:])
+                skew = str.strip(word[5:])
                 if skew != "":
                     tm.extraSkew = float(skew)
                 globalClockDelta.clear()

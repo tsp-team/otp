@@ -68,7 +68,7 @@ class MagicWordManagerAI(DistributedObjectAI.DistributedObjectAI):
             if (not self.supportRename):
                 self.notify.warning("Rename is not supported for %s, requested by %d" % (av.name, senderId))
             else:
-                name = string.strip(word[8:])
+                name = word[8:].strip()
                 if name == "":
                     response = "No name."
                 else:
@@ -197,7 +197,7 @@ class MagicWordManagerAI(DistributedObjectAI.DistributedObjectAI):
 
         elif wordIs('~ai'):
             # Execute an arbitrary Python command on the AI.
-            command = string.strip(word[3:])
+            command = word[3:].strip()
             self.notify.warning("Executing command '%s' from %s" % (command, senderId))
             text = self.__execMessage(command)[:simbase.config.GetInt("ai-debug-length",300)]
             self.down_setMagicWordResponse(
